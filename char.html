@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>인물 상세 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#0B0D10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+<header class="hd">
+  <a class="logo" href="characters.html">검과 마나의 경계</a>
+  <nav aria-label="주 메뉴"><a href="characters.html" aria-current="page">인물</a></nav>
+  <span class="sp"></span>
+  <a class="back" href="characters.html">← 인물 목록</a>
+</header>
+<main id="main">
+<section class="detail" data-detail>
+  <div class="d-stage">
+    <div class="viewer stage" data-n="1">
+      <img alt="" decoding="async" fetchpriority="high"><img alt="" decoding="async">
+      <button type="button" class="arrow prev" aria-label="이전 컷">‹</button>
+      <button type="button" class="arrow next" aria-label="다음 컷">›</button>
+      <button type="button" class="zoom">전체 보기</button>
+    </div>
+    <div class="scenes">
+      <div class="sc-row">
+        <div class="sc-cats" role="tablist" aria-label="장면 분류"></div>
+      </div>
+      <div class="sc-row">
+        <div class="sc-cuts" aria-label="컷 선택"></div>
+        <span class="sc-cnt"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-read">
+    <div class="d-head">
+      <p class="alias"></p>
+      <h1 class="name"></h1>
+      <p class="meta"></p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="원고 탭">
+      <button type="button" role="tab" aria-selected="true" aria-controls="p-story">원고</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="p-info">설정</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="p-rel">관계</button>
+    </div>
+    <div class="panel" id="p-story"><p class="slot">슬롯 · 인물 상세 원고</p></div>
+    <div class="panel" id="p-info" hidden><dl class="kv"></dl></div>
+    <div class="panel" id="p-rel" hidden><p class="slot">슬롯 · 인물 관계</p></div>
+    <button type="button" class="card-btn">등장 카드 전체 감상</button>
+    <nav class="d-nav" aria-label="인물 이동">
+      <a class="p" href="#"><small>이전 인물</small><b></b></a>
+      <a class="n" href="#"><small>다음 인물</small><b></b></a>
+    </nav>
+  </div>
+</section>
+</main>
+<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="전체 감상">
+  <img alt="">
+  <button type="button" class="x">닫기 <kbd>Esc</kbd></button>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
