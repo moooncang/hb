@@ -102,7 +102,7 @@ h1, h2, h3, p { margin: 0; }
 .viewer .zoom { position: absolute; right: 12px; top: 12px; font-size: 12px; font-weight: 700; letter-spacing: .12em; padding: 8px 12px;
   background: rgba(11, 13, 16, .7); border: 1px solid var(--edge); color: var(--fg2); }
 .viewer .zoom:hover { color: var(--fg); border-color: var(--edge2); }
-.scenes { padding: 12px var(--gutter) 16px; border-top: 1px solid var(--edge); display: grid; gap: 10px; background: var(--bg); }
+.scenes { padding: 12px var(--gutter) 16px; border-top: 1px solid var(--edge); display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; background: var(--bg); }
 .sc-row { display: flex; align-items: center; gap: 14px; }
 .sc-cats { display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }
 .sc-cats button { padding: 7px 11px; font-size: 13px; font-weight: 700; color: var(--fg2); border: 1px solid transparent; letter-spacing: -0.01em; }
