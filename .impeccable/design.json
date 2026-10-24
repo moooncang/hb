@@ -1,0 +1,18 @@
+{
+  "name": "검과 마나의 경계 — 두 재질의 맞물림",
+  "colors": {
+    "ink": "#141A22", "ink-2": "#1D2430", "paper": "#ECE9E2", "paper-2": "#E2DED5", "stone": "#D9D6CE",
+    "fg-dark": "#F1EFEA", "fg2-dark": "#B9BCC4", "fg-light": "#15171A", "fg2-light": "#5E626A",
+    "east": "#C0392B", "west": "#1F2F4E", "west-gold": "#9C8449", "silver": "#B8BCC4", "gray": "#8A8E95"
+  },
+  "typography": {
+    "title": { "fontFamily": "Nanum Brush Script, Noto Serif KR, serif", "fontWeight": 400, "lineHeight": 1 },
+    "heading": { "fontFamily": "Noto Serif KR, serif", "fontSize": "clamp(30px, 3.4vw, 46px)", "fontWeight": 700, "letterSpacing": "-0.02em" },
+    "body": { "fontFamily": "Pretendard Variable, Pretendard, sans-serif", "fontSize": "15px", "lineHeight": 1.7 },
+    "label": { "fontSize": "12px", "fontWeight": 700, "letterSpacing": ".06em" }
+  },
+  "spacing": { "gutter": "clamp(20px, 5vw, 72px)", "top": "64px", "section-top": "72px", "section-bottom": "96px" },
+  "rounded": { "none": "0px" },
+  "motion": { "pick": "220ms", "image": "280ms", "space": "560ms", "ease": "cubic-bezier(.2,.7,.15,1)" },
+  "assets": { "skin": "assets/skin", "order": "design/ui-asset-order.md", "incoming": "design/incoming" }
+}

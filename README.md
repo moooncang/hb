@@ -12,6 +12,16 @@
 
 지리: 동대륙 서쪽 끝과 서대륙 동쪽 끝이 맞붙었으므로 지도·장면·인물 모두 **서방 왼쪽, 동방 오른쪽**.
 
+## 그림 자산
+- 납품 원본 (주문서 , GPT 이미지 생성) →  → (불투명 배경은 JPEG, 투명 부품은 PNG). 자산을 다시 받으면 스크립트만 다시 돌린다
+- 부품은 CSS border-image 9분할로 늘려 쓰고 글자는 사이트가 얹는다. 규칙은 
+- 도해 좌표(경지 선 마디, 기둥 x, 지도 표식 %)는 와 에 있다. 그림이 바뀌면 로 다시 잰다
+
+## 그림 자산
+- 납품 원본 `design/incoming/`(주문서 `design/ui-asset-order.md`, GPT 이미지 생성) → `tools/build-skin.ps1` → `assets/skin/`(불투명 배경은 JPEG, 투명 부품은 PNG). 자산을 다시 받으면 스크립트만 다시 돌린다
+- 부품은 CSS border-image 9분할로 늘려 쓰고 글자는 사이트가 얹는다. 규칙은 `DESIGN.md`
+- 도해 좌표(경지 선 마디, 기둥 x, 지도 표식 %)는 `assets/main.js`와 `style.css`에 있다. 그림이 바뀌면 `tools/measure.ps1`로 다시 잰다
+
 ## 파일
 - `assets/data.js` 17인 / `assets/world.js` 세력·전선·체계·시작 모드 (설정집 문장 그대로, 원고는 슬롯)
 - `assets/style.css`, `assets/main.js`

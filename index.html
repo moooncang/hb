@@ -6,46 +6,58 @@
 <title>검과 마나의 경계</title>
 <meta name="theme-color" content="#141A22">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="preload" as="image" href="assets/skin/key-visual.jpg" media="(min-width: 901px)">
+<link rel="preload" as="image" href="assets/skin/key-visual-tall.jpg" media="(max-width: 900px)">
 </head>
 <body>
 <a class="skip" href="#cast">인물로</a>
 <header class="top">
   <a class="brand" href="#scene">검과 마나의 경계</a>
   <nav aria-label="구간 이동"><a href="#scene">장면</a><a href="#cast">인물</a><a href="#fronts">전선</a><a href="#order">세력·체계</a><a href="#start">시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
 </header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a class="mi west" href="#scene">장면</a></li>
+    <li><a class="mi east" href="#cast">인물</a></li>
+    <li><a class="mi west" href="#fronts">전선</a></li>
+    <li><a class="mi east" href="#order">세력 · 체계</a></li>
+    <li><a class="mi west" href="#start">시작</a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+</div>
 <main>
 
-<!-- 1. 대표 장면: 분리 자산이 없으므로 원본 컷을 독립된 면으로 쓴다 -->
+<!-- 1. 대표 장면 -->
 <section id="scene" class="hero" data-pick="">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-fig" data-side="west"><span class="framed west"><img src="img/l/G_1.jpg" alt="" decoding="async" loading="lazy"><i class="frame"></i></span></div>
+  <div class="hero-fig" data-side="east"><span class="framed east"><img src="img/l/A_1.jpg" alt="" decoding="async" loading="lazy"><i class="frame"></i></span></div>
+  <div class="hero-info panel west" data-side="west"></div>
+  <div class="hero-info panel east" data-side="east"></div>
   <div class="hero-title">
-    <h1>검과<br>마나의<br>경계</h1>
-    <p class="hero-slot slot">슬롯 · 홈 보조 원고</p>
+    <div class="plate"><h1>검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div>
     <div class="hero-pick" role="group" aria-label="진영 선택">
-      <button type="button" data-pick="west" aria-pressed="false">서방</button>
-      <button type="button" data-pick="east" aria-pressed="false">동방</button>
+      <button type="button" class="btn west" data-pick="west" aria-pressed="false">서방</button>
+      <button type="button" class="btn east" data-pick="east" aria-pressed="false">동방</button>
+      <p class="hero-slot slot">슬롯 · 홈 보조 원고</p>
     </div>
-  </div>
-  <div class="hero-scene">
-    <button type="button" class="plane west" data-pick="west" aria-label="서방 영역 선택"><img src="img/l/G_1.jpg" alt="" decoding="async" fetchpriority="high"></button>
-    <div class="band" aria-hidden="true"></div>
-    <button type="button" class="plane east" data-pick="east" aria-label="동방 영역 선택"><img src="img/l/A_1.jpg" alt="" decoding="async" fetchpriority="high"></button>
-    <div class="hero-info" data-side="west"></div>
-    <div class="hero-info" data-side="east"></div>
   </div>
 </section>
 
 <!-- 2. 인물 군상 -->
 <section id="cast" class="cast" data-f="all">
+  <div class="seam" aria-hidden="true"></div>
   <div class="cast-head">
-    <h2>인물</h2>
+    <h2>인물<i class="rule east"></i></h2>
     <div class="filters" role="group" aria-label="탐색 범위">
-      <button type="button" data-f="all" aria-pressed="true">전체</button>
-      <button type="button" data-f="west" aria-pressed="false">서방</button>
-      <button type="button" data-f="east" aria-pressed="false">동방</button>
-      <button type="button" data-f="neutral" aria-pressed="false">중립</button>
+      <button type="button" class="chip gray" data-f="all" aria-pressed="true">전체</button>
+      <button type="button" class="chip west" data-f="west" aria-pressed="false">서방</button>
+      <button type="button" class="chip east" data-f="east" aria-pressed="false">동방</button>
+      <button type="button" class="chip gray" data-f="neutral" aria-pressed="false">중립</button>
     </div>
   </div>
   <div class="cast-grid">
@@ -57,72 +69,46 @@
 
 <!-- 3. 전선 개념도 -->
 <section id="fronts" class="fronts" data-front="">
-  <div class="fr-head"><h2>전선</h2><p class="fr-note">개념도 · 상대 위치만 표시 · 시작 시점(격동 3년 늦봄)</p></div>
+  <div class="fr-head"><h2>전선<i class="rule east"></i></h2><p class="fr-note">개념도 · 상대 위치만 표시 · 시작 시점(격동 3년 늦봄)</p></div>
   <div class="fr-body">
     <div class="map-wrap">
-    <svg class="map" viewBox="0 0 640 820" role="group" aria-label="전선 개념도">
-      <defs>
-        <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="6" stroke="#F1EFEA" stroke-opacity=".16" stroke-width="1"/></pattern>
-      </defs>
-      <g class="map-world">
-        <rect x="0" y="0" width="640" height="820" fill="#1D2027"/>
-        <path class="land-east" d="M330 0 C300 80 360 140 320 200 S290 300 340 360 S300 480 330 560 S360 700 320 820 L640 820 L640 0 Z" fill="#171E2A"/>
-        <path class="gray" d="M330 0 C300 80 360 140 320 200 S290 300 340 360 S300 480 330 560 S360 700 320 820" fill="none" stroke="url(#hatch)" stroke-width="72"/>
-        <path class="seam" d="M330 0 C300 80 360 140 320 200 S290 300 340 360 S300 480 330 560 S360 700 320 820" fill="none" stroke="#F1EFEA" stroke-opacity=".35" stroke-width="1" stroke-dasharray="3 5"/>
-        <!-- 북부: 천흑산(동) · 이스벨 숲(서) -->
-        <g class="mtn" fill="none" stroke="#F1EFEA" stroke-opacity=".5" stroke-width="1.2"><path d="M420 120 l22 -28 l22 28"/><path d="M455 140 l18 -22 l18 22"/><path d="M400 150 l16 -20 l16 20"/><path d="M475 108 l14 -18 l14 18"/></g>
-        <g class="forest" fill="#F1EFEA" fill-opacity=".35"><circle cx="190" cy="130" r="4"/><circle cx="208" cy="150" r="5"/><circle cx="175" cy="160" r="3.5"/><circle cx="225" cy="124" r="3.5"/><circle cx="240" cy="162" r="4"/><circle cx="200" cy="184" r="3"/></g>
-        <text x="430" y="178" class="mt">천흑산</text><text x="170" y="210" class="mt">이스벨 숲</text>
-        <!-- 단층곡 -->
-        <g fill="none" stroke="#F1EFEA" stroke-opacity=".55" stroke-width="1.2"><path d="M262 262 l14 12 l-6 14 l16 10 l-4 16 l14 10"/><path d="M296 258 l14 12 l-6 14 l16 10 l-4 16 l14 10"/></g>
-        <text x="236" y="252" class="mt">단층곡</text>
-        <!-- 중앙: 천문관(동) · 발트로크(서) -->
-        <g fill="none" stroke="#F1EFEA" stroke-opacity=".7" stroke-width="1.4"><rect x="214" y="392" width="26" height="22"/><path d="M214 392 l13 -12 l13 12"/><path d="M416 414 v-22 M444 414 v-22 M410 392 h40 M412 386 h36"/></g>
-        <text x="200" y="432" class="mt">발트로크 성채</text><text x="412" y="432" class="mt">천문관</text>
-        <!-- 남부: 역류하 -->
-        <path d="M160 700 C230 690 280 640 330 650 S430 660 480 620" fill="none" stroke="#8FA3BF" stroke-opacity=".55" stroke-width="2"/>
-        <text x="420" y="606" class="mt">역류하</text>
-        <!-- 전선 표식 -->
-        <g class="mk" data-front="north" tabindex="0" role="button" aria-label="북부 전선" transform="translate(330 150)"><circle r="16" class="ring"/><circle r="5" class="dot"/><text x="26" y="5" class="ml">북부</text></g>
-        <g class="mk" data-front="fault" tabindex="0" role="button" aria-label="단층곡" transform="translate(300 290)"><circle r="16" class="ring"/><circle r="5" class="dot"/><text x="26" y="5" class="ml">단층곡</text></g>
-        <g class="mk" data-front="center" tabindex="0" role="button" aria-label="중앙 전선" transform="translate(330 400)"><circle r="16" class="ring"/><circle r="5" class="dot"/><text x="26" y="5" class="ml">중앙</text></g>
-        <g class="mk" data-front="south" tabindex="0" role="button" aria-label="남부 전선" transform="translate(330 650)"><circle r="16" class="ring"/><circle r="5" class="dot"/><text x="26" y="5" class="ml">남부</text></g>
-        <text x="40" y="60" class="mt big">서방 · 에르세아</text><text x="500" y="60" class="mt big">동방 · 중원</text>
-      </g>
-    </svg>
+      <div class="map-world">
+        <img class="map" src="assets/skin/front-map.jpg" alt="전선 개념도. 왼쪽 서방, 오른쪽 동방, 가운데 회색지대" width="1800" height="2250" decoding="async" loading="lazy">
+        <div class="pins"></div>
+      </div>
     </div>
     <div class="fr-side">
       <div class="fr-list" role="group" aria-label="전선 선택"></div>
-      <div class="fr-info"><p class="fr-empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div>
+      <div class="fr-info panel front"><p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 4. 세력·힘의 체계 -->
+<!-- 4. 세력 · 힘의 체계 -->
 <section id="order" class="order">
   <div class="fa">
-    <h2>세력</h2>
+    <h2>세력<i class="rule west"></i></h2>
     <div class="fa-cols">
       <div class="fa-col" data-side="west"><h3>서방 · 성약군</h3><div class="fa-list"></div></div>
       <div class="fa-col" data-side="neutral"><h3>회색지대</h3><div class="fa-list"></div></div>
       <div class="fa-col" data-side="east"><h3>동방 · 중원</h3><div class="fa-list"></div></div>
     </div>
-    <div class="fa-info"><p class="fa-empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
+    <div class="fa-info panel gray"><p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
   </div>
   <div class="pw">
-    <h2>힘의 체계</h2>
+    <h2>힘의 체계<i class="rule west"></i></h2>
     <p class="pw-map"></p>
     <div class="pw-grid">
-      <div class="pw-east"><h3>동방 · 경지</h3><ol class="pw-rows"></ol><p class="pw-note"></p></div>
-      <div class="pw-west"><h3>서방 · 오러 · 마법 · 신성력</h3><div class="pw-cols"></div><div class="pw-free"></div><p class="pw-note"></p></div>
+      <div class="pw-east"><h3>동방 · 경지</h3><div class="pw-line"></div><p class="pw-note"></p></div>
+      <div class="pw-west"><h3>서방 · 오러 · 마법 · 신성력</h3><div class="pw-pillars"></div><div class="pw-stack"></div><p class="pw-note"></p></div>
     </div>
-    <div class="pw-info"><p class="pw-empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
+    <div class="pw-info panel gray"><p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
   </div>
 </section>
 
 <!-- 5. 시작 -->
 <section id="start" class="start" data-mode="">
-  <h2>시작</h2>
+  <h2>시작<i class="rule east"></i></h2>
   <div class="modes" role="group" aria-label="시작 모드"></div>
   <div class="mode-info"></div>
 </section>
@@ -132,28 +118,29 @@
 <!-- 인물 확장 감상 -->
 <div class="viewer" hidden role="dialog" aria-modal="true" aria-label="인물 상세">
   <div class="v-bar">
-    <button type="button" class="v-close">닫기 <kbd>Esc</kbd></button>
+    <button type="button" class="rb east ic-close v-close" aria-label="닫기 (Esc)"></button>
     <span class="v-pos"></span>
     <span class="v-nav"><button type="button" class="v-prev"></button><button type="button" class="v-next"></button></span>
   </div>
   <div class="v-stage">
     <div class="v-img"><img alt="" decoding="async"><img alt="" decoding="async"></div>
-    <button type="button" class="v-arrow prev" aria-label="이전 컷">‹</button>
-    <button type="button" class="v-arrow next" aria-label="다음 컷">›</button>
+    <button type="button" class="rb west ic-left v-arrow prev" aria-label="이전 컷"></button>
+    <button type="button" class="rb west ic-right v-arrow next" aria-label="다음 컷"></button>
   </div>
   <div class="v-scenes">
     <div class="sc-cats" role="tablist" aria-label="상태 분류"></div>
-    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="v-full">원본 전체</button><button type="button" class="v-card">등장 카드</button></div>
+    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="btn gray sm v-full">원본 전체</button><button type="button" class="btn gray sm v-card">등장 카드</button></div>
   </div>
   <div class="v-id">
-    <p class="alias"></p><h2 class="name"></h2><p class="meta"></p>
+    <div class="nameplate"><p class="alias"></p><h2 class="name"></h2></div>
+    <p class="meta"></p>
   </div>
   <div class="v-body">
-    <dl class="kv"></dl>
-    <div class="slot">슬롯 · 인물 상세 원고</div>
+    <dl class="kv sheet"></dl>
+    <div class="sheet slot">슬롯 · 인물 상세 원고</div>
   </div>
 </div>
-<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="x">닫기 <kbd>Esc</kbd></button></div>
+<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="rb east ic-close x" aria-label="닫기 (Esc)"></button></div>
 
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
