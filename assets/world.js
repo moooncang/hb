@@ -23,19 +23,19 @@ window.HB.fronts = [
 window.HB.power = {
   east: [
     { name: '삼류', row: 0 }, { name: '이류', row: 1, chars: ['D', 'F'] }, { name: '일류', row: 2 },
-    { name: '절정', row: 3, note: '검기', chars: ['C', 'N'] }, { name: '초절정', row: 4, note: '검강', chars: ['A', 'B', 'O'] },
-    { name: '화경', row: 5, note: '이기어검' }, { name: '현경', row: 6, chars: ['E'] }
+    { name: '절정', row: 3, note: '검기', chars: ['C', 'N'] }, { name: '초절정', row: 4, note: '검강', chars: ['O'] },
+    { name: '화경', row: 5, note: '이기어검', chars: ['A', 'B'] }, { name: '현경', row: 6, chars: ['E'] }
   ],
   eastNote: '내공은 갑자(60년 수련분) 단위로 센다. 호흡으로 자연의 기를 단전에 축적하고, 경맥으로 돌려 몸 강화·검기·장력을 낸다',
   west: [
-    { name: '기사 · 오러', steps: [{ name: '오러 유저' }, { name: '익스퍼트 초급', row: 2 }, { name: '익스퍼트 중급', row: 3, chars: ['P', 'Q'] }, { name: '익스퍼트 상급', row: 4, note: '오러 블레이드', chars: ['G'] }, { name: '소드 마스터', row: 5, chars: ['L'] }] },
+    { name: '기사 · 오러', steps: [{ name: '오러 유저' }, { name: '익스퍼트 초급', row: 2 }, { name: '익스퍼트 중급', row: 3, chars: ['P', 'Q'] }, { name: '익스퍼트 상급', row: 4, note: '오러 블레이드' }, { name: '소드 마스터', row: 5, chars: ['G'] }, { name: '그랜드 소드 마스터', row: 6, chars: ['L'] }] },
     { name: '마법사 · 서클', steps: [{ name: '1~4서클' }, { name: '5서클', row: 3 }, { name: '6서클', row: 4, chars: ['H'] }, { name: '7~8서클', row: 5 }, { name: '9서클', row: 6 }] },
     { name: '사제 · 신성력', steps: [{ name: '사제' }, { name: '주교', chars: ['I'] }, { name: '대주교' }, { name: '성좌' }] },
     { name: '엘프 · 정령 계약', steps: [{ name: '하급' }, { name: '중급' }, { name: '상급', chars: ['J'] }] },
     { name: '드워프 · 룬 각인', steps: [{ name: '룬 각인사', chars: ['K'] }] }
   ],
   westNote: '오러는 마나를 몸 안에 축적해 인간의 힘으로, 마법은 마나를 몸 밖으로 방출해 현상으로 개변, 신성력은 기도로 받은 마나',
-  map: '대략 절정 ≈ 익스퍼트 중급 ≈ 5서클, 초절정 ≈ 익스퍼트 상급 ≈ 6서클, 화경 ≈ 소드 마스터 ≈ 7~8서클, 현경 ≈ 9서클'
+  map: '대략 절정 ≈ 익스퍼트 중급 ≈ 5서클, 초절정 ≈ 익스퍼트 상급 ≈ 6서클, 화경 ≈ 소드 마스터 ≈ 7~8서클, 현경 ≈ 그랜드 소드 마스터 ≈ 9서클'
 };
 window.HB.modes = [
   { id: 'east', name: '무림 측', note: 'ⓤ는 징무령으로 서부전선에 온 동방인이다. 문파·경지·무공·내력은 ⓤ가 정한다. 시작 장소는 천문관, 안내역 후보는 노칠', img: 'B' },
