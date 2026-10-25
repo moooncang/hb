@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>전선 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#0F1216">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="p-fronts">
+<a class="skip" href="#fronts">본문으로</a>
+<header class="top">
+  <a class="brand" href="index.html">검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html">장면</a><a href="characters.html">인물</a><a href="fronts.html" aria-current="page">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a class="mi west" href="index.html">장면</a></li>
+    <li><a class="mi east" href="characters.html">인물</a></li>
+    <li><a class="mi west" href="fronts.html">전선</a></li>
+    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
+    <li><a class="mi west" href="start.html">시작</a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+</div>
+<main>
+
+<section id="fronts" class="fronts" data-front="">
+  <div class="fr-head"><h2>전선<i class="rule east"></i></h2><p class="fr-note">개념도 · 상대 위치만 표시 · 시작 시점(격동 3년 늦봄)</p></div>
+  <div class="fr-body">
+    <div class="map-wrap">
+      <div class="map-world">
+        <img class="map" src="assets/skin/front-map.jpg" alt="전선 개념도. 왼쪽 서방, 오른쪽 동방, 가운데 회색지대" width="1800" height="2250" decoding="async">
+        <div class="pins"></div>
+      </div>
+    </div>
+    <div class="fr-side">
+      <div class="fr-list" role="group" aria-label="전선 선택"></div>
+      <div class="fr-info panel front"><p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script src="assets/data.js"></script>
+<script src="assets/world.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

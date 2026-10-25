@@ -12,26 +12,25 @@
 <link rel="preload" as="image" href="assets/skin/key-visual.jpg" media="(min-width: 901px)">
 <link rel="preload" as="image" href="assets/skin/key-visual-tall.jpg" media="(max-width: 900px)">
 </head>
-<body>
-<a class="skip" href="#cast">인물로</a>
+<body class="p-scene">
+<a class="skip" href="#doors">문으로</a>
 <header class="top">
-  <a class="brand" href="#scene">검과 마나의 경계</a>
-  <nav aria-label="구간 이동"><a href="#scene">장면</a><a href="#cast">인물</a><a href="#fronts">전선</a><a href="#order">세력·체계</a><a href="#start">시작</a></nav>
+  <a class="brand" href="index.html">검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html" aria-current="page">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav>
   <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
-    <li><a class="mi west" href="#scene">장면</a></li>
-    <li><a class="mi east" href="#cast">인물</a></li>
-    <li><a class="mi west" href="#fronts">전선</a></li>
-    <li><a class="mi east" href="#order">세력 · 체계</a></li>
-    <li><a class="mi west" href="#start">시작</a></li>
+    <li><a class="mi west" href="index.html">장면</a></li>
+    <li><a class="mi east" href="characters.html">인물</a></li>
+    <li><a class="mi west" href="fronts.html">전선</a></li>
+    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
+    <li><a class="mi west" href="start.html">시작</a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
 </div>
 <main>
 
-<!-- 1. 대표 장면 -->
 <section id="scene" class="hero" data-pick="">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-fig" data-side="west"><span class="framed west"><img src="img/l/G_1.jpg" alt="" decoding="async" loading="lazy"><i class="frame"></i></span></div>
@@ -43,105 +42,23 @@
     <div class="hero-pick" role="group" aria-label="진영 선택">
       <button type="button" class="btn west" data-pick="west" aria-pressed="false">서방</button>
       <button type="button" class="btn east" data-pick="east" aria-pressed="false">동방</button>
-      <p class="hero-slot slot">슬롯 · 홈 보조 원고</p>
     </div>
   </div>
 </section>
 
-<!-- 2. 인물 군상 -->
-<section id="cast" class="cast" data-f="all">
+<!-- 각 페이지로 가는 문. 문구는 설정의 구성 요소만 -->
+<section id="doors" class="doors">
   <div class="seam" aria-hidden="true"></div>
-  <div class="cast-head">
-    <h2>인물<i class="rule east"></i></h2>
-    <div class="filters" role="group" aria-label="탐색 범위">
-      <button type="button" class="chip gray" data-f="all" aria-pressed="true">전체</button>
-      <button type="button" class="chip west" data-f="west" aria-pressed="false">서방</button>
-      <button type="button" class="chip east" data-f="east" aria-pressed="false">동방</button>
-      <button type="button" class="chip gray" data-f="neutral" aria-pressed="false">중립</button>
-    </div>
+  <div class="door-grid">
+    <a class="door" href="characters.html" style="background-image:url(img/l/B_1.jpg)"><span class="nameplate east"><span class="alias">동방 8 · 서방 8 · 중립 1</span><span class="name">인물</span></span></a>
+    <a class="door" href="fronts.html" style="background-image:url(assets/skin/front-map.jpg);background-position:50% 42%"><span class="nameplate gray"><span class="alias">북부 · 중앙 · 단층곡 · 남부</span><span class="name">전선</span></span></a>
+    <a class="door" href="order.html" style="background-image:url(img/l/L_1.jpg)"><span class="nameplate west"><span class="alias">세력 12 · 경지 7단 · 다섯 체계</span><span class="name">세력 · 체계</span></span></a>
+    <a class="door" href="start.html" style="background-image:url(assets/skin/mode-free-idle.jpg)"><span class="nameplate gray"><span class="alias">무림 측 · 서방 측 · 자유모드</span><span class="name">시작</span></span></a>
   </div>
-  <div class="cast-grid">
-    <div class="cast-col west" data-side="west"></div>
-    <div class="cast-col east" data-side="east"></div>
-    <div class="cast-col neutral" data-side="neutral"></div>
-  </div>
-</section>
-
-<!-- 3. 전선 개념도 -->
-<section id="fronts" class="fronts" data-front="">
-  <div class="fr-head"><h2>전선<i class="rule east"></i></h2><p class="fr-note">개념도 · 상대 위치만 표시 · 시작 시점(격동 3년 늦봄)</p></div>
-  <div class="fr-body">
-    <div class="map-wrap">
-      <div class="map-world">
-        <img class="map" src="assets/skin/front-map.jpg" alt="전선 개념도. 왼쪽 서방, 오른쪽 동방, 가운데 회색지대" width="1800" height="2250" decoding="async" loading="lazy">
-        <div class="pins"></div>
-      </div>
-    </div>
-    <div class="fr-side">
-      <div class="fr-list" role="group" aria-label="전선 선택"></div>
-      <div class="fr-info panel front"><p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. 세력 · 힘의 체계 -->
-<section id="order" class="order">
-  <div class="fa">
-    <h2>세력<i class="rule west"></i></h2>
-    <div class="fa-cols">
-      <div class="fa-col" data-side="west"><h3>서방 · 성약군</h3><div class="fa-list"></div></div>
-      <div class="fa-col" data-side="neutral"><h3>회색지대</h3><div class="fa-list"></div></div>
-      <div class="fa-col" data-side="east"><h3>동방 · 중원</h3><div class="fa-list"></div></div>
-    </div>
-    <div class="fa-info panel gray"><p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
-  </div>
-  <div class="pw">
-    <h2>힘의 체계<i class="rule west"></i></h2>
-    <p class="pw-map"></p>
-    <div class="pw-grid">
-      <div class="pw-east"><h3>동방 · 경지</h3><div class="pw-line"></div><p class="pw-note"></p></div>
-      <div class="pw-west"><h3>서방 · 오러 · 마법 · 신성력</h3><div class="pw-pillars"></div><div class="pw-stack"></div><p class="pw-note"></p></div>
-    </div>
-    <div class="pw-info panel gray"><p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
-  </div>
-</section>
-
-<!-- 5. 시작 -->
-<section id="start" class="start" data-mode="">
-  <h2>시작<i class="rule east"></i></h2>
-  <div class="modes" role="group" aria-label="시작 모드"></div>
-  <div class="mode-info"></div>
+  <p class="slot hero-slot">슬롯 · 홈 보조 원고</p>
 </section>
 
 </main>
-
-<!-- 인물 확장 감상 -->
-<div class="viewer" hidden role="dialog" aria-modal="true" aria-label="인물 상세">
-  <div class="v-bar">
-    <button type="button" class="rb east ic-close v-close" aria-label="닫기 (Esc)"></button>
-    <span class="v-pos"></span>
-    <span class="v-nav"><button type="button" class="v-prev"></button><button type="button" class="v-next"></button></span>
-  </div>
-  <div class="v-stage">
-    <div class="v-img"><img alt="" decoding="async"><img alt="" decoding="async"></div>
-    <button type="button" class="rb west ic-left v-arrow prev" aria-label="이전 컷"></button>
-    <button type="button" class="rb west ic-right v-arrow next" aria-label="다음 컷"></button>
-  </div>
-  <div class="v-scenes">
-    <div class="sc-cats" role="tablist" aria-label="상태 분류"></div>
-    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="btn gray sm v-full">원본 전체</button><button type="button" class="btn gray sm v-card">등장 카드</button></div>
-  </div>
-  <div class="v-id">
-    <div class="nameplate"><p class="alias"></p><h2 class="name"></h2></div>
-    <p class="meta"></p>
-  </div>
-  <div class="v-body">
-    <dl class="kv sheet"></dl>
-    <div class="sheet slot">슬롯 · 인물 상세 원고</div>
-  </div>
-</div>
-<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="rb east ic-close x" aria-label="닫기 (Esc)"></button></div>
-
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
 <script src="assets/main.js"></script>

@@ -36,20 +36,21 @@
 
   // ===== 1. 대표 장면 =====
   var hero = $('.hero');
-  $$('.hero-info', hero).forEach(function (box) {
+  if (hero) $$('.hero-info', hero).forEach(function (box) {
     var side = box.dataset.side, fs = HB.factions.filter(function (f) { return f.side === side; });
     var lead = [].concat.apply([], fs.map(function (f) { return f.chars; })).filter(function (c) { return !byCode(c).noImage; }).slice(0, 4);
     box.innerHTML = '<p class="lbl">' + HB.sides[side] + '</p><div class="fl">' + fs.map(function (f) { return fname(f.id); }).join('') + '</div>' + chips(lead);
   });
   function pick(side) {
+    if (!hero) return;
     hero.dataset.pick = hero.dataset.pick === side ? '' : side;
     $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === hero.dataset.pick); });
   }
-  $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+  if (hero) $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
 
   // ===== 2. 인물 군상 =====
   var cast = $('.cast');
-  $$('.cast-col', cast).forEach(function (col) {
+  if (cast) $$('.cast-col', cast).forEach(function (col) {
     var side = col.dataset.side;
     col.innerHTML = C.filter(function (c) { return c.side === side; }).map(function (c) {
       var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
@@ -61,7 +62,7 @@
         '<span class="cap">' + cap + '</span><span class="sub">' + esc(c.org) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span></button>';
     }).join('');
   });
-  $$('.filters button', cast).forEach(function (b) {
+  if (cast) $$('.filters button', cast).forEach(function (b) {
     b.addEventListener('click', function () {
       cast.dataset.f = b.dataset.f;
       $$('.filters button', cast).forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
@@ -69,7 +70,7 @@
   });
 
   // ===== 인물 확장 감상 (FLIP: 선택한 이미지가 제자리에서 중앙으로 펼쳐진다) =====
-  var V = $('.viewer'), vImg = $('.v-img', V), layers = $$('img', vImg), lb = $('.lightbox');
+  var V = $('.viewer'), vImg = V && $('.v-img', V), layers = V ? $$('img', vImg) : [], lb = $('.lightbox');
   var cur = { code: null, n: 1, from: null, pushed: false }, layer = 0, token = 0;
   function catOf(n) { return HB.scenes.findIndex(function (s) { return s[1].indexOf(n) >= 0; }); }
   function ar(n) { var dm = HB.dim(n); return dm[0] / dm[1]; }
@@ -114,7 +115,7 @@
     $('.v-stage', V).hidden = !has; $('.v-scenes', V).hidden = !has;
     [p, nx].forEach(function (x) { if (!x.noImage) prefetch(large(x.code, 1)); });
   }
-  function figOf(code) { var f = $('[data-fig="' + code + '"]', cast); return f && f.offsetParent ? f : null; }
+  function figOf(code) { var f = cast && $('[data-fig="' + code + '"]', cast); return f && f.offsetParent ? f : null; }
   function flip(fromRect, toEl, reverse, done) {
     if (reduce || !fromRect) { if (done) done(); return; }
     var to = toEl.getBoundingClientRect(), dx = fromRect.left - to.left, dy = fromRect.top - to.top, sx = fromRect.width / to.width, sy = fromRect.height / to.height;
@@ -152,7 +153,7 @@
     cur.pushed = false; setHash('');
   }
   d.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-open]'); if (t) { open(t.dataset.open, 1, t.closest('.fig') || null, true); return; }
+    var t = e.target.closest('[data-open]'); if (t) { if (V) open(t.dataset.open, 1, t.closest('.fig') || null, true); else location.href = 'characters.html#' + t.dataset.open; return; }
     if (e.target.closest('.v-close')) { if (cur.pushed) history.back(); else close(); return; }
     var nv = e.target.closest('.v-prev, .v-next'); if (nv) { open(nv.dataset.code, 1, null, false); return; }
     var k = e.target.closest('.sc-cats button'); if (k) { showCut(HB.scenes[+k.dataset.k][1][0]); return; }
@@ -168,16 +169,16 @@
   function closeLb() { lb.hidden = true; $('img', lb).removeAttribute('src'); if (lbFrom) lbFrom.focus(); }
   d.addEventListener('keydown', function (e) {
     if (/INPUT|TEXTAREA|SELECT/.test(d.activeElement.tagName)) return;
-    if (e.key === 'Escape') { if (!lb.hidden) closeLb(); else if (!menu.hidden) openMenu(false); else if (!V.hidden) { if (cur.pushed) history.back(); else close(); } return; }
-    if (V.hidden || !lb.hidden) return;
+    if (e.key === 'Escape') { if (lb && !lb.hidden) closeLb(); else if (!menu.hidden) openMenu(false); else if (V && !V.hidden) { if (cur.pushed) history.back(); else close(); } return; }
+    if (!V || V.hidden || !lb.hidden) return;
     if (e.key === 'ArrowLeft') showCut(cur.n - 1); else if (e.key === 'ArrowRight') showCut(cur.n + 1);
   });
 
   // ===== 3. 전선: 표식 선택 → 지도 확대 + 대치 세력·인물 =====
-  var FR = $('.fronts'), wrap = $('.map-wrap', FR), world = $('.map-world', FR);
+  var FR = $('.fronts'), wrap = FR && $('.map-wrap', FR), world = FR && $('.map-world', FR);
   var pos = { north: [53, 12], fault: [56, 28], center: [52, 44], south: [51, 79] };   // 지도 그림 기준 %
-  $('.pins', FR).innerHTML = HB.fronts.map(function (f) { var p = pos[f.id]; return '<button type="button" class="pin" data-front="' + f.id + '" aria-pressed="false" style="left:' + p[0] + '%;top:' + p[1] + '%" aria-label="' + f.name + ' ' + esc(f.place) + '"><span>' + f.name + '</span></button>'; }).join('');
-  $('.fr-list', FR).innerHTML = HB.fronts.map(function (f) { return '<button type="button" class="btn gray" data-front="' + f.id + '" aria-pressed="false"><b>' + f.name + '</b><small>' + esc(f.place) + '</small></button>'; }).join('');
+  if (FR) $('.pins', FR).innerHTML = HB.fronts.map(function (f) { var p = pos[f.id]; return '<button type="button" class="pin" data-front="' + f.id + '" aria-pressed="false" style="left:' + p[0] + '%;top:' + p[1] + '%" aria-label="' + f.name + ' ' + esc(f.place) + '"><span>' + f.name + '</span></button>'; }).join('');
+  if (FR) $('.fr-list', FR).innerHTML = HB.fronts.map(function (f) { return '<button type="button" class="btn gray" data-front="' + f.id + '" aria-pressed="false"><b>' + f.name + '</b><small>' + esc(f.place) + '</small></button>'; }).join('');
   function names(ids) { return ids.length ? ids.map(fname).join('') : '<span>—</span>'; }
   function pickFront(id, keepHash) {
     id = FR.dataset.front === id ? '' : id; FR.dataset.front = id;
@@ -188,18 +189,18 @@
     $('.fr-info', FR).innerHTML = f ? '<div><p class="place">' + esc(f.place) + '</p><h4>' + f.name + '</h4></div><p class="note">' + esc(f.note) + '</p>' +
       '<div class="vs"><div class="w">' + names(f.west) + '</div><i>대치</i><div class="e">' + names(f.east) + '</div></div>' +
       (f.chars.length ? chips(f.chars) : '<p class="empty">설정에 지정된 인물 없음</p>') : '<p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p>';
-    if (!keepHash) setHash(id ? 'f-' + id : '');
+    if (!keepHash) setHash(id || '');
   }
-  FR.addEventListener('click', function (e) { var b = e.target.closest('[data-front]'); if (b && b !== FR) pickFront(b.dataset.front); });
+  if (FR) FR.addEventListener('click', function (e) { var b = e.target.closest('[data-front]'); if (b && b !== FR) pickFront(b.dataset.front); });
 
   // ===== 4. 세력 =====
   var FA = $('.fa');
-  $$('.fa-col', FA).forEach(function (col) {
+  if (FA) $$('.fa-col', FA).forEach(function (col) {
     $('.fa-list', col).innerHTML = HB.factions.filter(function (f) { return f.side === col.dataset.side; }).map(function (f) {
       return '<button type="button" data-fa="' + f.id + '" aria-pressed="false">' + emb(EMB[f.id]) + '<span>' + esc(f.name) + (f.hanja ? '<small>' + f.hanja + '</small>' : '') + '</span></button>';
     }).join('');
   });
-  FA.addEventListener('click', function (e) {
+  if (FA) FA.addEventListener('click', function (e) {
     var b = e.target.closest('[data-fa]'); if (!b) return;
     var id = FA.dataset.pick === b.dataset.fa ? '' : b.dataset.fa;
     if (id) FA.dataset.pick = id; else delete FA.dataset.pick;
@@ -213,6 +214,7 @@
 
   // ===== 4. 힘의 체계: 동방 선 위 마디 7개, 서방 기둥 5개. 같은 행 = 설정집 「대응 감각」 =====
   var PW = $('.pw'), P = HB.power, PILLAR_X = [11.2, 30.7, 50, 69.4, 88.8];
+  if (PW) {
   function rowY(r) { return 90 - r * 10.5; }
   $('.pw-map', PW).textContent = P.map;
   $$('.pw-note', PW)[0].textContent = P.eastNote; $$('.pw-note', PW)[1].textContent = P.westNote;
@@ -238,9 +240,11 @@
       (s.note ? '<p class="note">' + esc(s.note) + '</p>' : '') + (s.chars ? chips(s.chars) : '<p class="empty">이 단계에 해당하는 등록 인물 없음</p>')
       : '<p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p>';
   });
+  }
 
   // ===== 5. 시작 모드 =====
   var ST = $('.start');
+  if (ST) {
   $('.modes', ST).innerHTML = HB.modes.map(function (m) {
     return '<button type="button" class="mode" data-mode="' + m.id + '" aria-pressed="false" style="background-image:url(assets/skin/mode-' + m.id + '-idle.jpg)">' +
       '<small>' + (m.id === 'free' ? '소속 · 위치 자유' : '시작 장소 ' + (m.id === 'east' ? '천문관' : '발트로크 성채')) + '</small><b>' + esc(m.name) + '</b></button>';
@@ -253,13 +257,13 @@
     var m = HB.modes.filter(function (x) { return x.id === id; })[0];
     $('.mode-info', ST).innerHTML = m ? '<p class="note">' + esc(m.note) + '</p><div class="pro ' + m.id + '"><div class="slot">슬롯 · ' + esc(m.name) + ' 프롤로그</div></div><div class="links"><button type="button" class="btn gray" aria-disabled="true">작품으로 이동 · 미연결</button></div>' : '';
   });
+  }
 
   // ===== 주소 상태: #A/16 인물, #f-north 전선 =====
   function route(push) {
     var h = decodeURIComponent(location.hash.slice(1)), m = /^([A-Q])(?:\/(\d+))?$/.exec(h);
-    if (m && byCode(m[1])) { open(m[1], +m[2] || 1, null, false); cur.pushed = push; return; }
-    if (!V.hidden) close();
-    if (/^f-/.test(h) && front(h.slice(2)) && FR.dataset.front !== h.slice(2)) { pickFront(h.slice(2), true); $('#fronts').scrollIntoView(); }
+    if (V) { if (m && byCode(m[1])) { open(m[1], +m[2] || 1, null, false); cur.pushed = push; return; } if (!V.hidden) close(); }
+    if (FR) { var fid = h.replace(/^f-/, ''); if (front(fid) && FR.dataset.front !== fid) pickFront(fid, true); }
   }
   addEventListener('popstate', function () { route(false); });
   route(false);

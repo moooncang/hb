@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>인물 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#ECE9E2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="p-cast">
+<a class="skip" href="#cast">본문으로</a>
+<header class="top dark-on-light">
+  <a class="brand" href="index.html">검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html">장면</a><a href="characters.html" aria-current="page">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a class="mi west" href="index.html">장면</a></li>
+    <li><a class="mi east" href="characters.html">인물</a></li>
+    <li><a class="mi west" href="fronts.html">전선</a></li>
+    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
+    <li><a class="mi west" href="start.html">시작</a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+</div>
+<main>
+
+<section id="cast" class="cast" data-f="all">
+  <div class="cast-head">
+    <h2>인물<i class="rule east"></i></h2>
+    <div class="filters" role="group" aria-label="탐색 범위">
+      <button type="button" class="chip gray" data-f="all" aria-pressed="true">전체</button>
+      <button type="button" class="chip west" data-f="west" aria-pressed="false">서방</button>
+      <button type="button" class="chip east" data-f="east" aria-pressed="false">동방</button>
+      <button type="button" class="chip gray" data-f="neutral" aria-pressed="false">중립</button>
+    </div>
+  </div>
+  <div class="cast-grid">
+    <div class="cast-col west" data-side="west"></div>
+    <div class="cast-col east" data-side="east"></div>
+    <div class="cast-col neutral" data-side="neutral"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="viewer" hidden role="dialog" aria-modal="true" aria-label="인물 상세">
+  <div class="v-bar">
+    <button type="button" class="rb east ic-close v-close" aria-label="닫기 (Esc)"></button>
+    <span class="v-pos"></span>
+    <span class="v-nav"><button type="button" class="v-prev"></button><button type="button" class="v-next"></button></span>
+  </div>
+  <div class="v-stage">
+    <div class="v-img"><img alt="" decoding="async"><img alt="" decoding="async"></div>
+    <button type="button" class="rb west ic-left v-arrow prev" aria-label="이전 컷"></button>
+    <button type="button" class="rb west ic-right v-arrow next" aria-label="다음 컷"></button>
+  </div>
+  <div class="v-scenes">
+    <div class="sc-cats" role="tablist" aria-label="상태 분류"></div>
+    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="btn gray sm v-full">원본 전체</button><button type="button" class="btn gray sm v-card">등장 카드</button></div>
+  </div>
+  <div class="v-id">
+    <div class="nameplate"><p class="alias"></p><h2 class="name"></h2></div>
+    <p class="meta"></p>
+  </div>
+  <div class="v-body">
+    <dl class="kv sheet"></dl>
+    <div class="sheet slot">슬롯 · 인물 상세 원고</div>
+  </div>
+</div>
+<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="rb east ic-close x" aria-label="닫기 (Esc)"></button></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/world.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

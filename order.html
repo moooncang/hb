@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>세력 · 체계 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#D9D6CE">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="p-order">
+<a class="skip" href="#order">본문으로</a>
+<header class="top dark-on-light">
+  <a class="brand" href="index.html">검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html" aria-current="page">세력·체계</a><a href="start.html">시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a class="mi west" href="index.html">장면</a></li>
+    <li><a class="mi east" href="characters.html">인물</a></li>
+    <li><a class="mi west" href="fronts.html">전선</a></li>
+    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
+    <li><a class="mi west" href="start.html">시작</a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+</div>
+<main>
+
+<section id="order" class="order">
+  <div class="fa">
+    <h2>세력<i class="rule west"></i></h2>
+    <div class="fa-cols">
+      <div class="fa-col" data-side="west"><h3>서방 · 성약군</h3><div class="fa-list"></div></div>
+      <div class="fa-col" data-side="neutral"><h3>회색지대</h3><div class="fa-list"></div></div>
+      <div class="fa-col" data-side="east"><h3>동방 · 중원</h3><div class="fa-list"></div></div>
+    </div>
+    <div class="fa-info panel gray"><p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
+  </div>
+  <div class="pw">
+    <h2>힘의 체계<i class="rule west"></i></h2>
+    <p class="pw-map"></p>
+    <div class="pw-grid">
+      <div class="pw-east"><h3>동방 · 경지</h3><div class="pw-line"></div><p class="pw-note"></p></div>
+      <div class="pw-west"><h3>서방 · 오러 · 마법 · 신성력</h3><div class="pw-pillars"></div><div class="pw-stack"></div><p class="pw-note"></p></div>
+    </div>
+    <div class="pw-info panel gray"><p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
+  </div>
+</section>
+
+</main>
+<script src="assets/data.js"></script>
+<script src="assets/world.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
