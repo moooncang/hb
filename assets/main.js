@@ -99,6 +99,9 @@
   var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
+  var ART = { title: false, crack: false, slash: false };   // v3 그림(design/ui-asset-order-v3.md)이 assets/skin3 에 들어오면 켠다
+  if (hero) { hero.classList.toggle('has-title', ART.title); hero.classList.toggle('has-crack', ART.crack); }
+  if (cover) cover.classList.toggle('art', ART.slash);
   $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
   function showHero() { if (hero) requestAnimationFrame(function () { hero.classList.add('in'); }); }
   if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
@@ -120,22 +123,25 @@
       var poly = function (s) { return 'polygon(' + [P(cx - dx * R, cy - dy * R), P(cx + dx * R, cy + dy * R), P(cx + dx * R + s * nx * R, cy + dy * R + s * ny * R), P(cx - dx * R + s * nx * R, cy - dy * R + s * ny * R)].join(',') + ')'; };
       $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });
       var body = $('.cv-body', cover), fx = $('.cv-fx', cover), clone = body.cloneNode(true);
-      [[body, -1], [clone, 1]].forEach(function (p) {
+      [[body, -1, 'a'], [clone, 1, 'b']].forEach(function (p) {
         var half = d.createElement('div'); half.className = 'cv-half';
         half.style.clipPath = half.style.webkitClipPath = poly(p[1]);
-        half.style.setProperty('--tx', (p[1] * nx * D) + 'px'); half.style.setProperty('--ty', (p[1] * ny * D) + 'px');
-        half.appendChild(p[0]); cover.insertBefore(half, fx);
+        half.style.setProperty('--tx', (p[1] * nx * D) + 'px'); half.style.setProperty('--ty', (p[1] * ny * D) + 'px'); half.style.setProperty('--rot', (p[1] * 1.4) + 'deg');
+        var edge = d.createElement('i'); edge.className = 'cv-edge ' + p[2];   // 절단면(v3 그림이 있을 때만 보인다)
+        half.appendChild(p[0]); half.appendChild(edge); cover.insertBefore(half, fx);
       });
       cover.getBoundingClientRect();
     };
     var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); };
+    // 시각표(ms, 누른 뒤): 0 숨 고르기 → 450 검격 긋기 700 → 830 섬광 → 1450 두 조각이 1.5초 동안 밀려남 → 2000 장면 등장 → 3100 표지 제거
     var enterNow = function () {
       if (!ready || going) return; going = true;
       try { sessionStorage.setItem('hb-in', '1'); } catch (e) { }
       if (reduce) { finish(); showHero(); return; }
-      split(); cover.classList.add('go');
-      setTimeout(showHero, 520);
-      setTimeout(finish, 1500);
+      cover.classList.add('arm'); split();
+      setTimeout(function () { cover.classList.add('go'); }, 450);
+      setTimeout(showHero, 2000);
+      setTimeout(finish, 3100);
     };
     setTimeout(arm, 15000);   // 느린 회선: 15초 뒤에는 열어 준다
     d.addEventListener('keydown', function (e) { if (cover && !e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
@@ -153,11 +159,20 @@
     };
     var layout = function () {
       horizontal = matchMedia('(max-width: 760px)').matches;
-      var s = hero.dataset.pick === 'east' ? -13 : hero.dataset.pick === 'west' ? 13 : 0;
+      var s = hero.dataset.pick === 'east' ? -6 : hero.dataset.pick === 'west' ? 6 : 0;   // 조금만 넓어진다(기획서 §4). 균열(.crack)도 같이 옮겨 가고 제목은 제자리
       east.style.clipPath = poly(s, 0); light.style.clipPath = poly(s, -0.28); shade.style.clipPath = poly(s, -1.6);
+      hero.style.setProperty('--seam', s + '%');
       var below = $('#hero-below'), narrow = matchMedia('(max-width: 1100px)').matches;
+      below.dataset.pick = hero.dataset.pick;
       $$('.finfo', d).forEach(function (f) { var want = narrow ? below : hero; if (f.parentNode !== want) want.appendChild(f); });
     };
+    // 마우스 시차: 작은 보조 효과(±1 → 서방 10px, 동방 14px). 터치·모션 감소에서는 없다
+    if (!reduce && matchMedia('(hover: hover)').matches) {
+      var px = 0, py = 0, tx = 0, ty = 0, raf = null;
+      var tickP = function () { tx += (px - tx) * .08; ty += (py - ty) * .08; hero.style.setProperty('--px', tx.toFixed(3)); hero.style.setProperty('--py', ty.toFixed(3)); raf = (Math.abs(px - tx) > .002 || Math.abs(py - ty) > .002) ? requestAnimationFrame(tickP) : null; };
+      hero.addEventListener('mousemove', function (e) { var r = hero.getBoundingClientRect(); px = ((e.clientX - r.left) / r.width - .5) * 2; py = ((e.clientY - r.top) / r.height - .5) * 2; if (!raf) raf = requestAnimationFrame(tickP); });
+      hero.addEventListener('mouseleave', function () { px = 0; py = 0; if (!raf) raf = requestAnimationFrame(tickP); });
+    }
     $$('.finfo', hero).forEach(function (box) {
       var side = box.dataset.side, fs = HB.factions.filter(function (f) { return f.side === side; });
       var lead = [].concat.apply([], fs.map(function (f) { return f.chars; })).filter(function (c) { return !byCode(c).noImage; }).slice(0, 6);

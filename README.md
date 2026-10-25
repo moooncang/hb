@@ -15,6 +15,7 @@
 지리: 동대륙 서쪽 끝과 서대륙 동쪽 끝이 맞붙었으므로 지도·장면·인물 모두 **서방 왼쪽, 동방 오른쪽**.
 
 ## 그림 자산
+- v3 주문서 `design/ui-asset-order-v3.md`(장면 세로·가로·먹 제목, 균열 띠, 검격 8층) → 납품 `design/incoming-v3/` → `tools/build-skin3.ps1` → `assets/skin3/` → `assets/main.js`의 `ART` 표시를 켜면 제목·균열·검격 층이 그림으로 바뀐다(그 전까지는 글꼴 제목·빛선·v2 검격)
 - v2 납품 원본 `design/incoming-v2/`(주문서 `design/ui-asset-order-v2.md`, 자리별 고정 크기 + 입장 연출, GPT 이미지 생성) → `tools/build-skin2.ps1`(불투명 판은 JPEG, 커버 안개·검격·섬광·달만 축소) → `assets/skin2/`
 - v1 납품 원본 `design/incoming/`(주문서 `design/ui-asset-order.md`) → `tools/build-skin.ps1` → `tools/diet.ps1` → `tools/diet-panels.ps1` → `assets/skin/`. v2로 대체된 v1 부품(버튼·칩·이름패·목록 띠·판·키 비주얼)은 지웠다
 - 부품은 늘리지 않는다: 그림 px의 정확히 1/2 크기 상자에 `background-size: 100% 100%`, 글자는 주문서의 글자 영역에만. 그림 부품은 버튼·칩·토글·대표 이름표·얼굴 액자·무대 틀·입장 연출에만 쓰고, 판·명패·목록 띠 종류는 쓰지 않는다(편집과 글자가 뼈대, `DESIGN.md`). 상태 그림은 `::before`에 겹쳐 두고 투명도로 바꾼다

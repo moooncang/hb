@@ -161,33 +161,70 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cv-log li b { font-family: var(--serif); font-weight: 600; color: var(--fg-d); min-width: 3.2em; }
 .cv-log li::before { content: ''; width: 5px; height: 5px; background: var(--east); flex: none; transform: rotate(45deg); opacity: .8; }
 .cv-log li.on { opacity: 1; transform: none; }
-/* 검격(오른쪽 위→왼쪽 아래, 35°) → 섬광 → 두 조각이 그 선을 따라 화면 밖으로 밀려나며 장면이 드러난다 */
+/* 검격 연출(누른 뒤 약 3.1초, 시각표는 design/ui-asset-order-v3.md §2):
+   .arm 450ms 숨 고르기 → .go: 검격이 오른쪽 위에서 왼쪽 아래로 붓처럼 그어진다(마스크 드러내기 700ms) → 중심을 지날 때 섬광 → 멈춤 →
+   1000ms부터 두 조각이 선과 수직으로 1.5초 동안 천천히 밀려나며(느리게 시작해 빨라짐) 아래의 장면이 드러난다. 그림이 납품되면 .cover.art 로 층이 바뀐다 */
 .cv-fx { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
-.cv-slash, .cv-cut { position: absolute; left: 50%; top: 50%; width: 160vmax; background: center / 100% 100% no-repeat; opacity: 0; }
-.cv-slash { height: 64vmax; margin: -32vmax 0 0 -80vmax; background-image: url(skin2/cover-slash.png); transform: rotate(-35deg) translateX(120%) scaleX(-1); }
-.cv-cut { height: 8.53vmax; margin: -4.27vmax 0 0 -80vmax; background-image: url(skin2/cover-cut.png); transform: rotate(-35deg); }
-.cv-flash { position: absolute; left: 50%; top: 50%; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; background: url(skin2/cover-flash.png) center / contain no-repeat; opacity: 0; transform: scale(.4); }
+.cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: 160vmax; background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
+.cv-slash, .cv-cut { -webkit-mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; }
+.cv-slash { height: 64vmax; margin: -32vmax 0 0 -80vmax; background-image: url(skin2/cover-slash.png); }
+.cv-cut { height: 8.53vmax; margin: -4.27vmax 0 0 -80vmax; background-image: url(skin2/cover-cut.png); }
+.cv-haze { height: 85.3vmax; margin: -42.7vmax 0 0 -80vmax; display: none; }
+.cv-dust { height: 53.3vmax; margin: -26.7vmax 0 0 -80vmax; display: none; }
+.cv-flash, .cv-ring { position: absolute; left: 50%; top: 50%; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; background: center / contain no-repeat; opacity: 0; transform: scale(.4); }
+.cv-flash { background-image: url(skin2/cover-flash.png); }
+.cv-ring { display: none; }
+.cover.arm .orb { transform: scale(1.04); filter: brightness(1.22); transition: transform 450ms var(--ease), filter 450ms var(--ease); }
+.cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar, .cover.arm .cv-log { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
 .cover.go { background: transparent; }
-.cover.go .cv-slash { animation: slash 380ms cubic-bezier(.3, .8, .4, 1) forwards; }
-.cover.go .cv-flash { animation: flash 560ms 140ms var(--ease) forwards; }
-.cover.go .cv-cut { animation: cut 1300ms 200ms var(--ease) forwards; }
-.cover.go .cv-half { transform: translate(var(--tx), var(--ty)); transition: transform 1000ms cubic-bezier(.65, 0, .35, 1) 340ms; }
-@keyframes slash { 0% { opacity: 1; transform: rotate(-35deg) translateX(120%) scaleX(-1); } 100% { opacity: 1; transform: rotate(-35deg) translateX(-120%) scaleX(-1); } }
-@keyframes flash { 0% { opacity: 0; transform: scale(.4); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.8); } }
-@keyframes cut { 0% { opacity: 0; } 20% { opacity: 1; } 55% { opacity: .9; } 100% { opacity: 0; } }
+.cover.go .cv-slash { opacity: 1; animation: draw 700ms cubic-bezier(.25, .7, .3, 1) both, fadeout 500ms 950ms var(--ease) forwards; }
+.cover.go .cv-cut { opacity: 1; animation: draw 700ms 60ms cubic-bezier(.25, .7, .3, 1) both, fadeout 1400ms 1300ms linear forwards; }
+.cover.go .cv-flash { animation: flash 900ms 380ms var(--ease) forwards; }
+.cover.go .cv-half { transform: translate(var(--tx), var(--ty)) rotate(var(--rot, 0deg)); transition: transform 1500ms cubic-bezier(.7, 0, .3, 1) 1000ms; }
+@keyframes draw { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
+@keyframes fadeout { to { opacity: 0; } }
+@keyframes flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.7); } }
+/* v3 그림(assets/skin3)이 오면: 핵·오러·잔광·섬광·충격파·절단면·파편 층 */
+.cover.art .cv-slash { background-image: url(skin3/slash-aura.png); height: 64vmax; margin-top: -32vmax; }
+.cover.art .cv-cut { background-image: url(skin3/slash-core.png); height: 21.3vmax; margin-top: -10.7vmax; }
+.cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.png); }
+.cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.png); }
+.cover.art .cv-flash { background-image: url(skin3/flash-burst.png); transform: scale(.5) rotate(-35deg); }
+.cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.png); }
+.cover.art.go .cv-haze { animation: fadein 600ms 700ms var(--ease) both, fadeout 1400ms 1500ms var(--ease) forwards; }
+.cover.art.go .cv-ring { animation: ring 1100ms 380ms cubic-bezier(.2, .7, .3, 1) forwards; }
+.cover.art.go .cv-dust { animation: dust 1900ms 1000ms var(--ease) forwards; }
+.cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: 160vmax; height: 12.8vmax; margin: -6.4vmax 0 0 -80vmax; background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
+.cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.png); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.png); transform: rotate(-35deg) translateY(50%); }
+.cover.art.go .cv-edge { animation: fadein 300ms 900ms var(--ease) both; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ring { 0% { opacity: 0; transform: scale(.2); } 20% { opacity: .9; } 100% { opacity: 0; transform: scale(2.5); } }
+@keyframes dust { 0% { opacity: 0; transform: rotate(-35deg) scale(.9); } 25% { opacity: 1; } 100% { opacity: 0; transform: rotate(-35deg) scale(1.25); } }
 
 /* ===== 장면: 두 면이 맞물린 화면. 서방 왼쪽, 동방 오른쪽, 세로 제목이 이음새 위에 선다 ===== */
 .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: var(--ink); color: var(--fg-d); }
 .plane { position: absolute; inset: 0; cursor: pointer; }
-.plane .art { position: absolute; top: 0; height: 100%; width: 64%; object-fit: cover; transition: transform var(--t-space) var(--ease), filter var(--t-space) var(--ease); filter: brightness(.8) saturate(.92); will-change: transform; }
-.plane.west .art { left: 0; object-position: 90% 22%; transform-origin: 30% 40%; }
-.plane.east .art { right: 0; object-position: 27% 28%; transform-origin: 70% 40%; }
+/* .cam: 고르기(다가옴·밝기)와 마우스 시차. .art: 아주 느린 드리프트(숨). 두 변형을 나눠 서로 덮어쓰지 않게 */
+.plane .cam { position: absolute; inset: 0; transition: transform var(--t-space) var(--ease), filter var(--t-space) var(--ease); filter: brightness(.8) saturate(.92); will-change: transform; }
+.plane.west .cam { transform: translate(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 6px)); transform-origin: 30% 40%; }
+.plane.east .cam { transform: translate(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 8px)); transform-origin: 70% 40%; }
+.plane .art { position: absolute; top: 0; height: 100%; width: 64%; object-fit: cover; }
+.plane.west .art { left: 0; object-position: 90% 22%; transform-origin: 30% 40%; animation: driftW 24s ease-in-out infinite alternate; }
+.plane.east .art { right: 0; object-position: 27% 28%; transform-origin: 70% 40%; animation: driftE 28s ease-in-out infinite alternate; }
+@keyframes driftW { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.035) translate(-.6%, .5%); } }
+@keyframes driftE { from { transform: scale(1.03) translate(.4%, -.4%); } to { transform: scale(1) translate(0, 0); } }
 .plane.east, .seam-shade, .seam-light { transition: clip-path var(--t-space) var(--ease); }
 .seam-shade, .seam-light { position: absolute; inset: 0; pointer-events: none; }
 .seam-shade { background: #05070A; opacity: .5; }
 .seam-light { background: var(--paper); opacity: .5; }
-.hero[data-pick="east"] .plane.east .art, .hero[data-pick="west"] .plane.west .art { transform: scale(1.05); filter: brightness(1) saturate(1); }
-.hero[data-pick="east"] .plane.west .art, .hero[data-pick="west"] .plane.east .art { filter: brightness(.38) saturate(.6); }
+.hero[data-pick="east"] .plane.east .cam { transform: translate(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 8px)) scale(1.05); filter: brightness(1) saturate(1); }
+.hero[data-pick="west"] .plane.west .cam { transform: translate(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 6px)) scale(1.05); filter: brightness(1) saturate(1); }
+.hero[data-pick="east"] .plane.west .cam, .hero[data-pick="west"] .plane.east .cam { filter: brightness(.38) saturate(.6); }
+/* 균열(T-04/T-05)이 오면 이음새 위에 선다. 고르기의 이동(--seam)을 따라간다 */
+.crack { position: absolute; top: 0; left: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateX(-50%); background: center / auto 100% no-repeat; pointer-events: none; display: none; transition: left var(--t-space) var(--ease), top var(--t-space) var(--ease); z-index: 2; }
+.hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.png); }
+.hero.has-title .vt { font-size: 0; width: 280px; height: min(1100px, 78svh); background: url(skin3/title-v.png) center / contain no-repeat; text-shadow: none; }
+.hero.has-title .vt .seal { position: absolute; left: 50%; bottom: -64px; margin: 0; font-size: 44px; transform: translateX(-50%); }
 .hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 24%), linear-gradient(to top, rgba(15, 20, 25, .9) 0%, rgba(15, 20, 25, .55) 18%, rgba(15, 20, 25, 0) 42%); }
 .hero-ui { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .hero-ui > * { pointer-events: auto; }
@@ -609,6 +646,11 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   .plane .art { width: 100%; height: 64%; }
   .plane.west .art { top: 0; object-position: 58% 22%; transform-origin: 50% 30%; }
   .plane.east .art { top: auto; bottom: 0; object-position: 50% 28%; transform-origin: 50% 70%; }
+  .plane.west .cam { transform-origin: 50% 30%; } .plane.east .cam { transform-origin: 50% 70%; }
+  .crack { left: 0; top: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateY(-50%); background-size: 100% auto; }
+  .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.png); }
+  .hero.has-title .vt { width: min(1100px, 86vw); height: calc(min(1100px, 86vw) * 0.2545); background-image: url(skin3/title-h.png); }
+  .hero.has-title .vt .seal { left: auto; right: -52px; bottom: auto; top: 50%; transform: translateY(-50%); font-size: 36px; }
   .hero .vt { writing-mode: horizontal-tb; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(30px, 8.6vw, 40px); letter-spacing: .04em; word-spacing: normal; }
   .big { font-size: 34px; }
   .hero .vt .seal { display: inline-block; margin: 0 0 0 .3em; }
@@ -630,5 +672,5 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
   .reveal { opacity: 1; transform: none; }
-  .orb > i { animation: none !important; }
+  .orb > i, .plane .art { animation: none !important; }
 }
