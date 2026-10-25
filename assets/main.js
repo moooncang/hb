@@ -88,12 +88,14 @@
   if (cover) {
     var list = SKINS.map(function (n) { return 'assets/skin/' + n + '.png'; }).concat(JPGS.map(function (n) { return 'assets/skin/' + n + '.jpg'; }))
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
-    var done = 0, total = list.length, bar = $('.load .bar i', cover), txt = $('.load .txt', cover), btn = $('.enter .btn', cover), ready = false;
-    var tick = function () { done++; bar.style.width = Math.round(done / total * 100) + '%'; txt.textContent = (done < total ? '그림을 불러오는 중 · ' : '준비 완료 · ') + done + ' / ' + total; if (done >= total) arm(); };
-    var arm = function () { if (ready) return; ready = true; btn.removeAttribute('aria-disabled'); btn.focus({ preventScroll: true }); };
+    var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false;
+    var tick = function () { done++; var r = done / total; bar.style.width = Math.round(r * 100) + '%'; pct.textContent = done + ' / ' + total; logs.forEach(function (li, i) { if (r >= (i + 1) / (logs.length + 1)) li.classList.add('on'); }); if (done >= total) arm(); };
+    var arm = function () { if (ready) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
+    var enterNow = function () { if (!ready || going) return; going = true; cover.classList.add('go'); setTimeout(function () { location.href = 'home.html'; }, reduce ? 0 : 420); };
     list.forEach(function (src) { var i = new Image(); i.onload = i.onerror = tick; i.src = src; });
     setTimeout(arm, 12000);   // 느린 회선: 12초 뒤에는 열어 준다
-    d.addEventListener('keydown', function (e) { if (e.key === 'Enter' && ready) go('home.html'); });
+    d.addEventListener('keydown', function (e) { if (!e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
+    cover.addEventListener('click', function (e) { e.preventDefault(); enterNow(); });
   }
 
   // ===== 홈: 대표 장면 =====
@@ -108,7 +110,7 @@
       hero.dataset.pick = hero.dataset.pick === side ? '' : side;
       $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === hero.dataset.pick); });
     };
-    $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+    $$('[data-pick]', hero).forEach(function (b) { if (b !== hero) b.addEventListener('click', function () { pick(b.dataset.pick); }); });
   }
   // 홈·공통: 설정 문장 슬롯
   $$('[data-season]').forEach(function (el) { el.textContent = W.season; });
