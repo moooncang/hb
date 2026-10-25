@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="preload" as="image" href="assets/skin/key-visual.jpg" media="(min-width: 901px)">
-<link rel="preload" as="image" href="assets/skin/key-visual-tall.jpg" media="(max-width: 900px)">
+<link rel="preload" as="image" href="img/l/A_1.jpg">
+<link rel="preload" as="image" href="assets/skin/title-plate.png">
 </head>
 <body class="p-home">
 <a class="skip" href="#status">본문으로</a>
@@ -21,11 +21,11 @@
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
-    <li><a class="mi west" href="home.html"><span>장면</span><small>1</small></a></li>
-    <li><a class="mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
-    <li><a class="mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
-    <li><a class="mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
-    <li><a class="mi west" href="start.html"><span>시작</span><small>5</small></a></li>
+    <li><a class="sk mi west" href="home.html"><span>장면</span><small>1</small></a></li>
+    <li><a class="sk mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
+    <li><a class="sk mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
+    <li><a class="sk mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
+    <li><a class="sk mi west" href="start.html"><span>시작</span><small>5</small></a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
   <p class="credit">검과 마나의 경계 · 문창놈</p>
@@ -36,26 +36,26 @@
   <div class="hero-art" aria-hidden="true">
     <img class="art" data-side="west" src="img/l/G_1.jpg" alt="" decoding="async">
     <img class="art on" data-side="east" src="img/l/A_1.jpg" alt="" decoding="async" fetchpriority="high">
-    <div class="art-tag" data-side="west"><span class="alias"></span><span class="nameplate west">아르델 레인홀트</span><span class="sub"></span></div>
-    <div class="art-tag on" data-side="east"><span class="alias"></span><span class="nameplate east">위지란</span><span class="sub"></span></div>
+    <div class="art-tag" data-side="west"><span class="alias"></span><button type="button" class="sk hname west" tabindex="-1"><span class="fit" data-base="26">아르델 레인홀트</span></button><span class="sub"></span></div>
+    <div class="art-tag on" data-side="east"><span class="alias"></span><button type="button" class="sk hname east" tabindex="-1"><span class="fit" data-base="26">위지란</span></button><span class="sub"></span></div>
   </div>
   <div class="wrap hero-grid">
     <div class="hero-left">
       <div class="plate"><div class="in"><h1 class="fit">검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div></div>
       <p class="season"><i class="age">19+</i><span>시작 시점</span><b data-season></b></p>
       <nav class="tmenu" aria-label="타이틀 메뉴">
-        <a class="mi east" href="characters.html"><kbd>2</kbd><span>인물</span></a>
-        <a class="mi west" href="fronts.html"><kbd>3</kbd><span>전선</span></a>
-        <a class="mi east" href="order.html"><kbd>4</kbd><span>세력 · 체계</span></a>
-        <a class="mi west" href="start.html"><kbd>5</kbd><span>시작</span></a>
+        <a class="sk tplate east" href="characters.html"><kbd>2</kbd><span>인물</span></a>
+        <a class="sk tplate west" href="fronts.html"><kbd>3</kbd><span>전선</span></a>
+        <a class="sk tplate east" href="order.html"><kbd>4</kbd><span>세력 · 체계</span></a>
+        <a class="sk tplate west" href="start.html"><kbd>5</kbd><span>시작</span></a>
       </nav>
       <div class="hero-pick" role="group" aria-label="진영 선택">
-        <button type="button" class="btn west" data-pick="west" aria-pressed="false"><span>서방</span></button>
-        <button type="button" class="btn east" data-pick="east" aria-pressed="true"><span>동방</span></button>
-        <span class="hint">진영을 고르면 그 진영의 대표 인물과 세력이 바뀝니다</span>
+        <button type="button" class="sk toggle west" data-pick="west" aria-pressed="false"><span>서방</span></button>
+        <button type="button" class="sk toggle east" data-pick="east" aria-pressed="true"><span>동방</span></button>
+        <span class="hint">진영을 고르면 대표 인물과 세력이 바뀝니다</span>
       </div>
-      <div class="hero-info" data-side="west"></div>
-      <div class="hero-info" data-side="east"></div>
+      <div class="hero-info p2 hp west" data-side="west"></div>
+      <div class="hero-info p2 hp east" data-side="east"></div>
     </div>
   </div>
 </section>
@@ -81,9 +81,9 @@
 
 <section class="band paper reveal" style="padding-top: 0">
   <div class="wrap world">
-    <div class="sheet east"><p class="ph">격동 <small>천붕 · 대봉합</small></p><div class="lines serif" data-lines="upheaval"></div></div>
-    <div class="sheet west"><p class="ph">회색지대 <small>전선은 전부 이 안에</small></p><div class="lines serif" data-lines="grayzone"></div></div>
-    <div class="panel front full"><p class="ph">전쟁의 이유 <small>어느 쪽도 틀리지 않았다</small></p><div class="lines" data-lines="why"></div></div>
+    <div class="p2 sheet east"><p class="ph">격동 <small>천붕 · 대봉합</small></p><div class="bd lines serif" data-lines="upheaval"></div></div>
+    <div class="p2 sheet west"><p class="ph">회색지대 <small>전선은 전부 이 안에</small></p><div class="bd lines serif" data-lines="grayzone"></div></div>
+    <div class="p2 front-wide full"><p class="ph">전쟁의 이유 <small>어느 쪽도 틀리지 않았다</small></p><div class="bd lines" data-lines="why"></div></div>
   </div>
 </section>
 

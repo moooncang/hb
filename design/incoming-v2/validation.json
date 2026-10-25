@@ -1,0 +1,1158 @@
+[
+  {
+    "name": "cover-moon.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 781841,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      102,
+      104,
+      1097,
+      1095
+    ]
+  },
+  {
+    "name": "cover-glow.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 252,
+    "visiblePixels": 1507692,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      68,
+      113,
+      1518,
+      1514
+    ]
+  },
+  {
+    "name": "cover-sparks.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 76373,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      69,
+      39,
+      1548,
+      1531
+    ]
+  },
+  {
+    "name": "cover-slash.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1127832,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      28,
+      227,
+      2972,
+      964
+    ]
+  },
+  {
+    "name": "cover-flash.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 347658,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      102,
+      67,
+      1311,
+      1333
+    ]
+  },
+  {
+    "name": "cover-cut.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 253,
+    "visiblePixels": 246811,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      216,
+      8,
+      2788,
+      152
+    ]
+  },
+  {
+    "name": "cover-ring-outer.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 514621,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      15,
+      32,
+      1585,
+      1572
+    ]
+  },
+  {
+    "name": "cover-ring-inner.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 219369,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      184,
+      186,
+      1416,
+      1414
+    ]
+  },
+  {
+    "name": "tmenu-west-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 78184,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      44,
+      3,
+      754,
+      116
+    ]
+  },
+  {
+    "name": "tmenu-west-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 78184,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      44,
+      3,
+      754,
+      116
+    ]
+  },
+  {
+    "name": "tmenu-east-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 56357,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      5,
+      21,
+      793,
+      99
+    ]
+  },
+  {
+    "name": "tmenu-east-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 56357,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      5,
+      21,
+      793,
+      99
+    ]
+  },
+  {
+    "name": "hero-name-east.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 51849,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      62,
+      4,
+      654,
+      154
+    ]
+  },
+  {
+    "name": "hero-name-west.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 69724,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      15,
+      716,
+      144
+    ]
+  },
+  {
+    "name": "toggle-west-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 26006,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      15,
+      317,
+      97
+    ]
+  },
+  {
+    "name": "toggle-west-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 26006,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      15,
+      317,
+      97
+    ]
+  },
+  {
+    "name": "toggle-east-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 28646,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      10,
+      316,
+      101
+    ]
+  },
+  {
+    "name": "toggle-east-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 28646,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      10,
+      316,
+      101
+    ]
+  },
+  {
+    "name": "hero-panel-east.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 425600,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      759,
+      559
+    ]
+  },
+  {
+    "name": "hero-panel-west.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 425600,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      759,
+      559
+    ]
+  },
+  {
+    "name": "status-cell.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 120000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      599,
+      199
+    ]
+  },
+  {
+    "name": "face-frame-east.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 2834,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      6,
+      7,
+      234,
+      233
+    ]
+  },
+  {
+    "name": "btn2-east-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47003,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      14,
+      477,
+      117
+    ]
+  },
+  {
+    "name": "btn2-east-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47003,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      14,
+      477,
+      117
+    ]
+  },
+  {
+    "name": "btn2-east-press.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47003,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      14,
+      477,
+      117
+    ]
+  },
+  {
+    "name": "btn2-west-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47367,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      14,
+      476,
+      117
+    ]
+  },
+  {
+    "name": "btn2-west-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47367,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      14,
+      476,
+      117
+    ]
+  },
+  {
+    "name": "btn2-west-press.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 47367,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      14,
+      476,
+      117
+    ]
+  },
+  {
+    "name": "btn2-gray-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 50837,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      8,
+      476,
+      123
+    ]
+  },
+  {
+    "name": "btn2-gray-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 50837,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      8,
+      476,
+      123
+    ]
+  },
+  {
+    "name": "btn2-gray-press.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 50837,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      8,
+      476,
+      123
+    ]
+  },
+  {
+    "name": "btn2-sm-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 18054,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      15,
+      316,
+      76
+    ]
+  },
+  {
+    "name": "btn2-sm-hover.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 18054,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      15,
+      316,
+      76
+    ]
+  },
+  {
+    "name": "chip2-east-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 12417,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      10,
+      236,
+      62
+    ]
+  },
+  {
+    "name": "chip2-east-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 12417,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      10,
+      236,
+      62
+    ]
+  },
+  {
+    "name": "chip2-west-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 10029,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      14,
+      237,
+      57
+    ]
+  },
+  {
+    "name": "chip2-west-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 10029,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      14,
+      237,
+      57
+    ]
+  },
+  {
+    "name": "chip2-gray-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 11675,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      12,
+      237,
+      59
+    ]
+  },
+  {
+    "name": "chip2-gray-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 11675,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      12,
+      237,
+      59
+    ]
+  },
+  {
+    "name": "name2-west.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 123457,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      10,
+      896,
+      161
+    ]
+  },
+  {
+    "name": "name2-east.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 90614,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      33,
+      896,
+      139
+    ]
+  },
+  {
+    "name": "list2-east-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 53496,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      4,
+      21,
+      756,
+      90
+    ]
+  },
+  {
+    "name": "list2-east-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 53496,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      4,
+      21,
+      756,
+      90
+    ]
+  },
+  {
+    "name": "list2-west-idle.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 80115,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      4,
+      756,
+      108
+    ]
+  },
+  {
+    "name": "list2-west-active.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 80115,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      3,
+      4,
+      756,
+      108
+    ]
+  },
+  {
+    "name": "panel2-front-tall.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1056000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      879,
+      1199
+    ]
+  },
+  {
+    "name": "panel2-east-wide.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1024000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1599,
+      639
+    ]
+  },
+  {
+    "name": "panel2-west-wide.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1024000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1599,
+      639
+    ]
+  },
+  {
+    "name": "panel2-gray-wide.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1024000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1599,
+      639
+    ]
+  },
+  {
+    "name": "sheet2-east.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 912000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      759
+    ]
+  },
+  {
+    "name": "sheet2-west.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 912000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      759
+    ]
+  },
+  {
+    "name": "paper2-east.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1680000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      1399
+    ]
+  },
+  {
+    "name": "slab2-west.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1680000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      1399
+    ]
+  },
+  {
+    "name": "panel2-east-mid.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 668800,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      879,
+      759
+    ]
+  },
+  {
+    "name": "panel2-west-mid.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 668800,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      879,
+      759
+    ]
+  },
+  {
+    "name": "panel2-front-mid.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 668800,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      879,
+      759
+    ]
+  },
+  {
+    "name": "panel2-front-box.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 672000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      559
+    ]
+  },
+  {
+    "name": "panel2-east-box.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 672000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      559
+    ]
+  },
+  {
+    "name": "wipe-ink-1.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1373683,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      64,
+      78,
+      1554,
+      1541
+    ]
+  },
+  {
+    "name": "wipe-ink-2.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1024079,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      50,
+      69,
+      1552,
+      1534
+    ]
+  },
+  {
+    "name": "wipe-ink-3.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1515616,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      44,
+      88,
+      1584,
+      1532
+    ]
+  },
+  {
+    "name": "wipe-aura.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 182400,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      18,
+      23,
+      1571,
+      1580
+    ]
+  },
+  {
+    "name": "panel2-front-wide.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 1331200,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      2559,
+      519
+    ]
+  },
+  {
+    "name": "stage-frame-east.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 232524,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      6,
+      6,
+      2377,
+      1034
+    ]
+  },
+  {
+    "name": "stage-frame-west.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 189355,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      4,
+      2,
+      2379,
+      1037
+    ]
+  },
+  {
+    "name": "face-frame-west.png",
+    "size": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 9900,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      2,
+      2,
+      237,
+      237
+    ]
+  },
+  {
+    "name": "panel2-east-short.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 432000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      359
+    ]
+  },
+  {
+    "name": "panel2-west-short.png",
+    "size": true,
+    "minAlpha": 255,
+    "maxAlpha": 255,
+    "visiblePixels": 432000,
+    "windowViolations": 0,
+    "radialViolations": 0,
+    "maskViolations": 0,
+    "stateAlphaDiff": 0,
+    "bounds": [
+      0,
+      0,
+      1199,
+      359
+    ]
+  }
+]

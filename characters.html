@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="preload" as="image" href="assets/skin/name-east.png"><link rel="preload" as="image" href="assets/skin/name-west.png">
+<link rel="preload" as="image" href="assets/skin2/name2-east.png"><link rel="preload" as="image" href="assets/skin2/name2-west.png">
 </head>
 <body class="p-cast band paper">
 <a class="skip" href="#cast">본문으로</a>
@@ -20,11 +20,11 @@
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
-    <li><a class="mi west" href="home.html"><span>장면</span><small>1</small></a></li>
-    <li><a class="mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
-    <li><a class="mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
-    <li><a class="mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
-    <li><a class="mi west" href="start.html"><span>시작</span><small>5</small></a></li>
+    <li><a class="sk mi west" href="home.html"><span>장면</span><small>1</small></a></li>
+    <li><a class="sk mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
+    <li><a class="sk mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
+    <li><a class="sk mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
+    <li><a class="sk mi west" href="start.html"><span>시작</span><small>5</small></a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
   <p class="credit">검과 마나의 경계 · 문창놈</p>
@@ -35,10 +35,10 @@
   <div class="cast-head">
     <h2 class="t">인물 <i class="rule east"></i></h2>
     <div class="filters" role="group" aria-label="탐색 범위">
-      <button type="button" class="chip gray" data-f="all" aria-pressed="true"><span>전체 17</span></button>
-      <button type="button" class="chip west" data-f="west" aria-pressed="false"><span>서방 8</span></button>
-      <button type="button" class="chip east" data-f="east" aria-pressed="false"><span>동방 8</span></button>
-      <button type="button" class="chip gray" data-f="neutral" aria-pressed="false"><span>중립 1</span></button>
+      <button type="button" class="sk chip2 gray" data-f="all" aria-pressed="true"><span>전체 17</span></button>
+      <button type="button" class="sk chip2 west" data-f="west" aria-pressed="false"><span>서방 8</span></button>
+      <button type="button" class="sk chip2 east" data-f="east" aria-pressed="false"><span>동방 8</span></button>
+      <button type="button" class="sk chip2 gray" data-f="neutral" aria-pressed="false"><span>중립 1</span></button>
     </div>
   </div>
   <div class="jump" aria-label="바로 가기"></div>
@@ -58,21 +58,21 @@
     <span class="v-nav"><button type="button" class="v-prev"></button><button type="button" class="v-next"></button></span>
   </div>
   <div class="v-stage">
-    <div class="v-img"><img alt="" decoding="async"><img alt="" decoding="async"></div>
+    <div class="v-img first"><img alt="" decoding="async"><img alt="" decoding="async"><i class="sframe" aria-hidden="true"></i></div>
     <button type="button" class="rb west ic-left v-arrow prev" aria-label="이전 컷"></button>
     <button type="button" class="rb west ic-right v-arrow next" aria-label="다음 컷"></button>
   </div>
   <div class="v-scenes">
     <div class="sc-cats" role="tablist" aria-label="상태 분류"></div>
-    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="btn gray sm v-full"><span>원본 전체</span></button><button type="button" class="btn gray sm v-card"><span>등장 카드</span></button></div>
+    <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="sk btn2 sm v-full"><span>원본 전체</span></button><button type="button" class="sk btn2 sm v-card"><span>등장 카드</span></button></div>
   </div>
   <div class="v-id">
-    <div class="np"><p class="alias"></p><h2 class="nameplate fit"></h2></div>
+    <div class="npw"></div>
     <p class="meta"></p>
   </div>
   <div class="v-body">
-    <div class="sheet"><p class="ph">설정</p><dl class="kv"></dl></div>
-    <div class="sheet"><p class="ph">관계 <small data-stages></small></p><ul class="rel"></ul><div class="slot" style="margin-top:16px">슬롯 · 인물 상세 원고</div></div>
+    <div class="p2 paper"><p class="ph">설정</p><div class="bd"><dl class="kv"></dl></div></div>
+    <div class="p2 paper"><p class="ph">관계 <small data-stages></small></p><div class="bd"><ul class="rel"></ul><div class="slot" style="margin-top:16px">슬롯 · 인물 상세 원고</div></div></div>
   </div>
 </div>
 <div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="rb east ic-close x" aria-label="닫기 (Esc)"></button></div>

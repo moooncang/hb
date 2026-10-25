@@ -1,0 +1,16 @@
+tmenu-west-hover.png: 외곽 투명도는 tmenu-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+tmenu-east-hover.png: 외곽 투명도는 tmenu-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+toggle-west-active.png: 외곽 투명도는 toggle-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+toggle-east-active.png: 외곽 투명도는 toggle-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-east-hover.png: 외곽 투명도는 btn2-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-east-press.png: 외곽 투명도는 btn2-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-west-hover.png: 외곽 투명도는 btn2-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-west-press.png: 외곽 투명도는 btn2-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-gray-hover.png: 외곽 투명도는 btn2-gray-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-gray-press.png: 외곽 투명도는 btn2-gray-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+btn2-sm-hover.png: 외곽 투명도는 btn2-sm-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+chip2-east-active.png: 외곽 투명도는 chip2-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+chip2-west-active.png: 외곽 투명도는 chip2-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+chip2-gray-active.png: 외곽 투명도는 chip2-gray-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+list2-east-active.png: 외곽 투명도는 list2-east-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.
+list2-west-active.png: 외곽 투명도는 list2-west-idle.png와 동일하게 정렬했으며, 내부 붓결·테두리 채색에는 생성 변형에 따른 미세 차이가 남아 있습니다.

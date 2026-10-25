@@ -1,0 +1,21 @@
+{
+  "order": "ui-asset-order-v2.md",
+  "assets": 68,
+  "format": "PNG RGBA",
+  "generator": "built-in image_gen",
+  "requestedFilenameAndCanvasDimensions": "68/68 matched",
+  "transparentWindows": "0 violating pixels",
+  "radialConstraints": "0 violating pixels (1px antialias tolerance)",
+  "binaryMasks": "4/4 pure black and 0/255 alpha",
+  "stateAlpha": "16/16 match their idle alpha exactly",
+  "opaquePanels": "19/19 fully opaque",
+  "sourceScaling": "Uniform scaling only; no nine-slice/nonuniform stretch",
+  "notes": "See NOTES.txt for residual internal texture differences in generated state variants.",
+  "contactSheets": [
+    "review/overview-0.png",
+    "review/overview-1.png",
+    "review/overview-2.png",
+    "review/overview-3.png"
+  ],
+  "prompts": "production-log.json"
+}
