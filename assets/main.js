@@ -10,6 +10,13 @@
   function front(id) { return HB.fronts.filter(function (f) { return f.id === id; })[0]; }
   function large(c, n) { return 'img/l/' + c + '_' + n + '.jpg'; }
   function thumb(c, n) { return 'img/t/' + c + '_' + n + '.jpg'; }
+  // 좁은 화면에서는 고른 결과(설명 칸)가 목록 아래에 쌓여 화면 밖에 뜬다 → 보이지 않을 때만 그쪽으로 데려간다
+  function bring(el, block) {
+    if (!el || !matchMedia('(max-width: 1100px)').matches) return;
+    var r = el.getBoundingClientRect();
+    if (r.top >= 56 && r.top < innerHeight * .7) return;
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: block || 'start' });
+  }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]; }); }
   function prefetch(src) { var i = new Image(); i.src = src; return i; }
   function aliasHtml(c) { return c.alias ? esc(c.alias) + (c.aliasHanja ? '<span class="hj">' + c.aliasHanja + '</span>' : '') : HB.sides[c.side]; }
@@ -81,6 +88,8 @@
   }
 
   // ===== 메뉴 · 단축키 =====
+  var topBar = $('.top');
+  if (topBar) { var solid = function () { topBar.classList.toggle('solid', scrollY > 8); }; addEventListener('scroll', solid, { passive: true }); solid(); }
   var menu = $('#menu'), menuBtn = $('.menu-btn'), menuFrom = null;
   function openMenu(on) {
     if (!menu) return;
@@ -203,6 +212,7 @@
       side = hero.dataset.pick === side ? '' : side; hero.dataset.pick = side;
       $$('.pick .toggle', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === side); });
       layout();
+      if (side) bring($('#hero-below'));   // 좁은 화면: 세력·인물 칸은 장면 아래에 있다
     };
     $$('.pick .toggle', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
     $$('.plane', hero).forEach(function (p) {
@@ -449,7 +459,7 @@
   if (FR) {
     $('.pins', FR).innerHTML = HB.fronts.map(function (f) { var p = pos[f.id]; return '<button type="button" class="pin" data-front="' + f.id + '" aria-pressed="false" style="left:' + p[0] + '%;top:' + p[1] + '%" aria-label="' + f.name + ' ' + esc(f.place) + '"><span>' + f.name + '</span></button>'; }).join('');
     $('.fr-list', FR).innerHTML = HB.fronts.map(function (f, i) { return '<button type="button" data-front="' + f.id + '" aria-pressed="false"><span><small>0' + (i + 1) + ' · ' + esc(f.place) + '</small><b>' + f.name + '<i>' + FRONT_HJ[f.id] + '</i></b></span><span class="vs">' + f.west.map(emb).join('') + '<i>대치</i>' + f.east.map(emb).join('') + '</span></button>'; }).join('');
-    FR.addEventListener('click', function (e) { var b = e.target.closest('[data-front]'); if (b && b !== FR) pickFront(b.dataset.front); });
+    FR.addEventListener('click', function (e) { var b = e.target.closest('[data-front]'); if (b && b !== FR) { pickFront(b.dataset.front); if (FR.dataset.front) bring($('.fr-info', FR)); } });
   }
   function names(ids) { return ids.length ? ids.map(fname).join('') : '<span>—</span>'; }
   function pickFront(id, keepHash) {
@@ -472,7 +482,7 @@
         return '<button type="button" data-fa="' + f.id + '" aria-pressed="false">' + emb(f.id) + '<span>' + esc(f.name) + (f.hanja ? '<small class="hj">' + f.hanja + '</small>' : '') + '</span></button>';
       }).join('');
     });
-    FA.addEventListener('click', function (e) { var b = e.target.closest('[data-fa]'); if (b) pickFaction(b.dataset.fa); });
+    FA.addEventListener('click', function (e) { var b = e.target.closest('[data-fa]'); if (b) { pickFaction(b.dataset.fa); if (FA.dataset.pick) bring($('.fa-info', FA)); } });
   }
   function pickFaction(id0) {
     var id = FA.dataset.pick === id0 ? '' : id0;
@@ -507,6 +517,7 @@
       info.innerHTML = s ? '<h4>' + esc(s.name) + '<small>' + esc(sys) + '</small></h4>' +
         (s.note ? '<p class="note">' + esc(s.note) + '</p>' : '') + (s.chars ? chips(s.chars) : '<p class="empty">이 단계에 해당하는 등록 인물 없음</p>')
         : '<p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p>';
+      if (on) bring(info);
     });
   }
 
@@ -518,7 +529,7 @@
         '<small>' + (m.id === 'free' ? '소속 · 위치 자유' : '시작 장소 ' + (m.id === 'east' ? '천문관' : '발트로크 성채')) + '</small><b>' + esc(m.name) + '</b></button>';
     }).join('');
     HB.modes.forEach(function (m) { prefetch('assets/skin/mode-' + m.id + '-selected.jpg'); });
-    ST.addEventListener('click', function (e) { var b = e.target.closest('.mode[data-mode]'); if (b) pickMode(b.dataset.mode); });
+    ST.addEventListener('click', function (e) { var b = e.target.closest('.mode[data-mode]'); if (b) { pickMode(b.dataset.mode); if (ST.dataset.mode) bring($('.mode-info', ST)); } });
   }
   function pickMode(id0, keepHash) {
     var id = ST.dataset.mode === id0 ? '' : id0; ST.dataset.mode = id;
