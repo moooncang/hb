@@ -1,0 +1,345 @@
+{
+  "order": "ui-asset-order-v3.md",
+  "generator": "built-in image_gen for 9 illustrated material/effect assets; native Noto Serif KR 800 outlines for 3 flat titles after user correction; native analytic alpha for the textureless haze",
+  "export": "Uniform scale and canvas placement; specified clear/opaque regions normalized in alpha, no nonuniform stretch.",
+  "completed": [
+    {
+      "name": "title-h.png",
+      "w": 2200,
+      "h": 560,
+      "allowed": [
+        100,
+        120,
+        2000,
+        320
+      ],
+      "method": "Native typography, Noto Serif KR 800 outlines, solid fill only; user correction overrides illustrated lettering. No stroke, shadow, gradient, texture or bevel.",
+      "color": "#EEEAE1",
+      "text": "검과 마나의 경계",
+      "fontSource": "C:/Windows/Fonts/NotoSerifKR-VF.ttf",
+      "exporter": "C:/Users/ccjji/.codex/generated_images/01a16eb3-c5ac-7763-894c-bc81f8feaef7/v3-production/render-flat-titles.ps1"
+    },
+    {
+      "name": "title-v.png",
+      "w": 560,
+      "h": 2200,
+      "allowed": [
+        120,
+        100,
+        320,
+        2000
+      ],
+      "method": "Native typography, Noto Serif KR 800 outlines, solid fill only; user correction overrides illustrated lettering. No stroke, shadow, gradient, texture or bevel.",
+      "color": "#EEEAE1",
+      "text": "검과 마나의 경계",
+      "fontSource": "C:/Windows/Fonts/NotoSerifKR-VF.ttf",
+      "exporter": "C:/Users/ccjji/.codex/generated_images/01a16eb3-c5ac-7763-894c-bc81f8feaef7/v3-production/render-flat-titles.ps1"
+    },
+    {
+      "name": "title-ink.png",
+      "w": 1400,
+      "h": 320,
+      "method": "Native typography, Noto Serif KR 800 outlines, solid fill only; user correction overrides illustrated lettering. No stroke, shadow, gradient, texture or bevel.",
+      "color": "#15171A",
+      "text": "검과 마나의 경계",
+      "fontSource": "C:/Windows/Fonts/NotoSerifKR-VF.ttf",
+      "exporter": "C:/Users/ccjji/.codex/generated_images/01a16eb3-c5ac-7763-894c-bc81f8feaef7/v3-production/render-flat-titles.ps1"
+    },
+    {
+      "name": "seam-crack.png",
+      "w": 800,
+      "h": 2400,
+      "mode": "cover",
+      "allowed": [
+        80,
+        0,
+        640,
+        2400
+      ],
+      "solid": [
+        160,
+        0,
+        480,
+        2400
+      ],
+      "desc": "A tall vertical material SEAM, exact3:1 tall portrait canvas. Full-height illustration from TOP EDGE to BOTTOM EDGE, no margins at top or bottom. LEFT half is fractured matte grey limestone cross-section, thin ink-hatched cracks and tiny silver grains; RIGHT half is layered torn greywhite PAPER with fine ink bleed and silk fibers. These two materials INTERLOCK LIKE FINGERS along a jagged dark chasm through middle. The dark jagged seam stays within x340..460 on800width; repeated irregular teeth, not a large cave. Faint almost invisible warm depth inside, NO glowing line. The entire central band x160..640 fully opaque material including black-filled chasm. Outer edges torn and eroded, fade to alpha across x80..160 and640..720. Beyond80/720 fully clear. Stone occupiesleft, paper occupiesright. No big rubble blocks and no realistic photo collage. Subtle handpainted anime ink rendering. Only limestonegrey, inkblack, paperwhite, almost no red or gold. NO text, characters, landscape, symbols.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-bf7812b3-93f7-4200-aa95-b8f31b24c09f.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/A_1.png",
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset seam-crack.png, target canvas 800x2400. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nA tall vertical material SEAM, exact3:1 tall portrait canvas. Full-height illustration from TOP EDGE to BOTTOM EDGE, no margins at top or bottom. LEFT half is fractured matte grey limestone cross-section, thin ink-hatched cracks and tiny silver grains; RIGHT half is layered torn greywhite PAPER with fine ink bleed and silk fibers. These two materials INTERLOCK LIKE FINGERS along a jagged dark chasm through middle. The dark jagged seam stays within x340..460 on800width; repeated irregular teeth, not a large cave. Faint almost invisible warm depth inside, NO glowing line. The entire central band x160..640 fully opaque material including black-filled chasm. Outer edges torn and eroded, fade to alpha across x80..160 and640..720. Beyond80/720 fully clear. Stone occupiesleft, paper occupiesright. No big rubble blocks and no realistic photo collage. Subtle handpainted anime ink rendering. Only limestonegrey, inkblack, paperwhite, almost no red or gold. NO text, characters, landscape, symbols.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 725,
+        "sourceHeight": 2170,
+        "width": 800,
+        "height": 2400,
+        "uniformScale": 1.1059907674789429,
+        "drawWidth": 801.8433,
+        "drawHeight": 2400
+      }
+    },
+    {
+      "name": "slash-core.png",
+      "w": 3000,
+      "h": 400,
+      "region": [
+        0,
+        180,
+        3000,
+        40
+      ],
+      "allowed": [
+        0,
+        180,
+        3000,
+        40
+      ],
+      "world": "west",
+      "desc": "ONE SINGLE extremely thin straight HORIZONTAL line of cold dawn-gold LIGHT. It spans entire imagewidth, rightend thinnest and razor-sharp, leftend slightlysoft. At intended3000wide the nearwhite #F3E6B0 core is ONLY2..6pxthick, with faint palegold #9C8449 falloff within20px above/below. Actual visible artwork has aspect ratio at least75:1, verylong and needlethin, centered horizontally. Keep canvas mostlyempty aboveandbelow. NO feather, dust, rays, starburst, flames, curves, whitefilledbanner, metalobject, sword or people. Cleancontinuouslightstreak onalpha. Pale coldgold, no orange.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-b2e54566-bd8d-46f2-8118-a06582b61608.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset slash-core.png, target canvas 3000x400. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nONE SINGLE extremely thin straight HORIZONTAL line of cold dawn-gold LIGHT. It spans entire imagewidth, rightend thinnest and razor-sharp, leftend slightlysoft. At intended3000wide the nearwhite #F3E6B0 core is ONLY2..6pxthick, with faint palegold #9C8449 falloff within20px above/below. Actual visible artwork has aspect ratio at least75:1, verylong and needlethin, centered horizontally. Keep canvas mostlyempty aboveandbelow. NO feather, dust, rays, starburst, flames, curves, whitefilledbanner, metalobject, sword or people. Cleancontinuouslightstreak onalpha. Pale coldgold, no orange.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 2146,
+        "sourceHeight": 733,
+        "width": 3000,
+        "height": 400,
+        "uniformScale": 1.4111006259918213,
+        "drawWidth": 3000,
+        "drawHeight": 47.97742
+      },
+      "mode": "wide"
+    },
+    {
+      "name": "slash-aura.png",
+      "w": 3000,
+      "h": 1200,
+      "mode": "canvas",
+      "world": "west",
+      "desc": "Only the FEATHERED AURA around an invisible straight HORIZONTAL slash centerline y600 on3000x1200. No core line. A sparse elegant arrangement of long cold palegold drybrush streaks fanning gently both above and below the centerline; elongated split ends like flying-white brushwork, trailing long and fading towardLEFT, short sharp pointedfront onRIGHT. These are calm directional light ribbons, NOT fire, NOT lightning, NOT birdfeathers or a physicalwing. Low saturation gold #9C8449 with pale ivory #F3E6B0. Keep middle core line absent so another layer can be overlaid. Transparent space between the delicate streaks. Clearly horizontal axis, no arc or diagonal. No frame, particles, sword, character, text. Refined soft anime-painted luminous brushmarks.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-068c5605-3cee-4f12-91bb-5ebef1c98073.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset slash-aura.png, target canvas 3000x1200. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nOnly the FEATHERED AURA around an invisible straight HORIZONTAL slash centerline y600 on3000x1200. No core line. A sparse elegant arrangement of long cold palegold drybrush streaks fanning gently both above and below the centerline; elongated split ends like flying-white brushwork, trailing long and fading towardLEFT, short sharp pointedfront onRIGHT. These are calm directional light ribbons, NOT fire, NOT lightning, NOT birdfeathers or a physicalwing. Low saturation gold #9C8449 with pale ivory #F3E6B0. Keep middle core line absent so another layer can be overlaid. Transparent space between the delicate streaks. Clearly horizontal axis, no arc or diagonal. No frame, particles, sword, character, text. Refined soft anime-painted luminous brushmarks.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 1983,
+        "sourceHeight": 793,
+        "width": 3000,
+        "height": 1200,
+        "uniformScale": 1.5128593444824219,
+        "drawWidth": 3000,
+        "drawHeight": 1199.6975
+      }
+    },
+    {
+      "name": "flash-burst.png",
+      "w": 1600,
+      "h": 1600,
+      "mode": "canvas",
+      "world": "west",
+      "desc": "A restrained centered burst of cold ivorygold light. Smallbrightwhitegold center, SIX TO EIGHT verythin long radial rays of varied lengths, plus ONE LONG PERFECTLY HORIZONTAL lensstreak through exactcenter800,800. Rays taper and fade softly towardtransparent edges; all cornersclear. Light gold #F3E6B0 and muted #9C8449, NO orangefire, no star-shapedsolidobject, no physicalsword. Delicateanime highlight effect, tinycenter notlargeopaquedisc. Realalpha, no text.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-abe28e67-1aab-4f19-85b4-183b4b1feebb.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset flash-burst.png, target canvas 1600x1600. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nA restrained centered burst of cold ivorygold light. Smallbrightwhitegold center, SIX TO EIGHT verythin long radial rays of varied lengths, plus ONE LONG PERFECTLY HORIZONTAL lensstreak through exactcenter800,800. Rays taper and fade softly towardtransparent edges; all cornersclear. Light gold #F3E6B0 and muted #9C8449, NO orangefire, no star-shapedsolidobject, no physicalsword. Delicateanime highlight effect, tinycenter notlargeopaquedisc. Realalpha, no text.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 1536,
+        "sourceHeight": 1024,
+        "width": 1600,
+        "height": 1600,
+        "uniformScale": 1.0364583730697632,
+        "drawWidth": 1592,
+        "drawHeight": 1061.3334
+      },
+      "region": [
+        4,
+        4,
+        1592,
+        1592
+      ]
+    },
+    {
+      "name": "shock-ring.png",
+      "w": 1600,
+      "h": 1600,
+      "mode": "canvas",
+      "rMin": 700,
+      "rMax": 780,
+      "world": "west",
+      "desc": "ONE THIN circular shockwave light ring, centered exactly800,800 on1600square canvas. Art ONLY in annular band radius700..780. Largeemptytransparentcenter, emptyoutside780. Smoothclean INNER edge, irregular fine drybrush splashing on OUTER edge. Coldpalegold #F3E6B0 with mutedgold #9C8449, low saturation, no orange. Radiallybalanced around allangles, no focalblob, no flame. Oneclosedthin ring, no inner glowdisk, no multiplecircles, no symbols, no text, no centralobject.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-cb9af82e-187f-4f54-8d65-8e6309f603e2.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset shock-ring.png, target canvas 1600x1600. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nONE THIN circular shockwave light ring, centered exactly800,800 on1600square canvas. Art ONLY in annular band radius700..780. Largeemptytransparentcenter, emptyoutside780. Smoothclean INNER edge, irregular fine drybrush splashing on OUTER edge. Coldpalegold #F3E6B0 with mutedgold #9C8449, low saturation, no orange. Radiallybalanced around allangles, no focalblob, no flame. Oneclosedthin ring, no inner glowdisk, no multiplecircles, no symbols, no text, no centralobject.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "width": 1600,
+        "height": 1600,
+        "uniformScale": 1.2759170532226562,
+        "drawWidth": 1600,
+        "drawHeight": 1600
+      }
+    },
+    {
+      "name": "cut-edge-a.png",
+      "w": 3000,
+      "h": 240,
+      "region": [
+        0,
+        120,
+        3000,
+        120
+      ],
+      "allowed": [
+        0,
+        120,
+        3000,
+        120
+      ],
+      "world": "east",
+      "desc": "A VERY LONG VERY NARROW HORIZONTAL torn paper edge, painted object aspect25:1 or longer. Across entirewidth, a fine continuous cold paleGOLD LIGHT rim along the straight BOTTOM edge. Immediately ABOVE the golden rim a thin fringe of torn greywhite paperfibers and veryfaint blackink bleed, fading upward torealalpha. Object heightONLY4percentofitswidth. No materialbelow the goldrim. No floatingchunks. No solidrectangle, no largepaperpanel, no sideedges, no outlinebox, no flames, no texturebackground, no sword, no figure, no text. Single horizonallongstrip, fine restrained detail, transparentoutside. Width should run edge-to-edge, no pointedtail. Goldrim andpaper are one coherentcutface.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-6e6ab4cc-672e-49dc-b2bc-3ba53c7b7759.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/A_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset cut-edge-a.png, target canvas 3000x240. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nA VERY LONG VERY NARROW HORIZONTAL torn paper edge, painted object aspect25:1 or longer. Across entirewidth, a fine continuous cold paleGOLD LIGHT rim along the straight BOTTOM edge. Immediately ABOVE the golden rim a thin fringe of torn greywhite paperfibers and veryfaint blackink bleed, fading upward torealalpha. Object heightONLY4percentofitswidth. No materialbelow the goldrim. No floatingchunks. No solidrectangle, no largepaperpanel, no sideedges, no outlinebox, no flames, no texturebackground, no sword, no figure, no text. Single horizonallongstrip, fine restrained detail, transparentoutside. Width should run edge-to-edge, no pointedtail. Goldrim andpaper are one coherentcutface.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 1402,
+        "sourceHeight": 1122,
+        "width": 3000,
+        "height": 240,
+        "uniformScale": 2.1398003101348877,
+        "drawWidth": 3000,
+        "drawHeight": 100.57062
+      }
+    },
+    {
+      "name": "cut-edge-b.png",
+      "w": 3000,
+      "h": 240,
+      "region": [
+        0,
+        0,
+        3000,
+        120
+      ],
+      "allowed": [
+        0,
+        0,
+        3000,
+        120
+      ],
+      "world": "west",
+      "desc": "A VERY LONG VERY NARROW HORIZONTAL stone cut face, painted object aspect25:1 or longer. Across entirewidth, a fine continuous cold paleGOLD LIGHT rim along the straight TOP edge. Immediately BELOW the golden rim a narrow fringe of crumbly grey limestone and a few smallsilvergrains, fading downward torealalpha. Object heightONLY4percentofitswidth. No materialabove the goldrim. No largeboulders, no solidrectangle, no largeslabpanel, no sideedges, no outlinebox, no fire, no texturebackground, no sword, no figure, no text. Single horizonallongstrip, fine understated inkshading. Widthrunsedge-to-edge, no pointedtail.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-b6450a5b-b156-4e18-8d26-529aa833abdc.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset cut-edge-b.png, target canvas 3000x240. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nA VERY LONG VERY NARROW HORIZONTAL stone cut face, painted object aspect25:1 or longer. Across entirewidth, a fine continuous cold paleGOLD LIGHT rim along the straight TOP edge. Immediately BELOW the golden rim a narrow fringe of crumbly grey limestone and a few smallsilvergrains, fading downward torealalpha. Object heightONLY4percentofitswidth. No materialabove the goldrim. No largeboulders, no solidrectangle, no largeslabpanel, no sideedges, no outlinebox, no fire, no texturebackground, no sword, no figure, no text. Single horizonallongstrip, fine understated inkshading. Widthrunsedge-to-edge, no pointedtail.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 1402,
+        "sourceHeight": 1122,
+        "width": 3000,
+        "height": 240,
+        "uniformScale": 2.1398003101348877,
+        "drawWidth": 3000,
+        "drawHeight": 154.06563
+      },
+      "mode": "wide",
+      "align": "top"
+    },
+    {
+      "name": "cut-dust.png",
+      "w": 3000,
+      "h": 1000,
+      "mode": "canvas",
+      "allowed": [
+        0,
+        200,
+        3000,
+        600
+      ],
+      "world": "west",
+      "desc": "A sparse field of tiny detached particles on a transparent3:1 horizontalcanvas. EXACTLY ABOUT50 smallcoldgold dustspecks and angular tinygoldchips plus20 darkink dots. Scatteredbetweeny200andy800aroundcenterline500, relativelyevenacrosswholewidthwithirregularspacing. Variedsmallsizes, much emptyspace. No trails, no connectinglines, no central lightband, no arcs, no glowcloud, no starburst, no physicalobjects. Palegraygold #9C8449 to #F3E6B0, neverorange. Isolated dots/crispshards only. No text.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-7173997f-d3c4-44fa-bf83-6f9c5c25c9ed.png",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Production asset cut-dust.png, target canvas 3000x1000. Reference images show ONLY drawing style, linework and material shading. Do not copy their figures, objects, scenery, clothing, symbols or wording.\nA sparse field of tiny detached particles on a transparent3:1 horizontalcanvas. EXACTLY ABOUT50 smallcoldgold dustspecks and angular tinygoldchips plus20 darkink dots. Scatteredbetweeny200andy800aroundcenterline500, relativelyevenacrosswholewidthwithirregularspacing. Variedsmallsizes, much emptyspace. No trails, no connectinglines, no central lightband, no arcs, no glowcloud, no starburst, no physicalobjects. Palegraygold #9C8449 to #F3E6B0, neverorange. Isolated dots/crispshards only. No text.\nOutput ONE isolated PNG asset on genuine alpha transparency. No backdrop and no checkerboard. No extra objects, frames, boxes, signatures or watermarks. All unpainted areas transparent.",
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 3000,
+        "height": 1000,
+        "uniformScale": 1.3812154531478882,
+        "drawWidth": 3000,
+        "drawHeight": 1000
+      }
+    },
+    {
+      "name": "seam-crack-h.png",
+      "w": 2400,
+      "h": 800,
+      "mode": "cover",
+      "allowed": [
+        0,
+        80,
+        2400,
+        640
+      ],
+      "solid": [
+        0,
+        160,
+        2400,
+        480
+      ],
+      "desc": "Same interlocking MATERIAL SEAM as reference, recompose HORIZONTALLY in a verywide3:1 landscape canvas. Top half matte fractured grey STONE, bottom half torn pale PAPER and fine ink. Jagged black-filled chasm runs LEFT to RIGHT through y340..460, with fingers of material interlocking. All center band y160..640 fully opaque, softly eroded transition to transparency across y80..160 and640..720. Outside80..720 clear. Image continues to LEFT AND RIGHT imageedges without transparent margins. No lightline, no glowingribbon, no characters, no text. Delicate anime painted linework and mutedmaterials.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-bf7812b3-93f7-4200-aa95-b8f31b24c09f.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Image1 is a material reference. Create a HORIZONTAL opaque material seam with transparent top and bottom margins. 2400x800 canvas. Stone bank ABOVE, torn paper bank BELOW. A jagged black-filled interlocking chasm runs along horizontal middle y400, deviations at most60px. CRITICAL: both banks are broad solid CONTINUOUS strips. Stone outer upper edge stays near y100, slight small ragged deviations ONLY within y80..140; no deep notches. Paper outer lower edge stays near y700, slight torn variations ONLY within y660..720. Thus EVERY SINGLE PIXEL in band y160..640 is fully opaque stone, paper or black chasm. Do not make large scallops on outer edges. No transparent holes in this middle band. Opaque artwork continues all the way to left and right image edges. Alpha outside top/bottom. Restrained black ink hatch rendering, small silver mineral flecks, no text, people, scenery, neon or goldframe.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-a219ad7a-6880-4cf3-85c6-1835e5937e46.png",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-bf7812b3-93f7-4200-aa95-b8f31b24c09f.png"
+      ],
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Image1 is a material reference. Create a HORIZONTAL opaque material seam with transparent top and bottom margins. 2400x800 canvas. Stone bank ABOVE, torn paper bank BELOW. A jagged black-filled interlocking chasm runs along horizontal middle y400, deviations at most60px. CRITICAL: both banks are broad solid CONTINUOUS strips. Stone outer upper edge stays near y100, slight small ragged deviations ONLY within y80..140; no deep notches. Paper outer lower edge stays near y700, slight torn variations ONLY within y660..720. Thus EVERY SINGLE PIXEL in band y160..640 is fully opaque stone, paper or black chasm. Do not make large scallops on outer edges. No transparent holes in this middle band. Opaque artwork continues all the way to left and right image edges. Alpha outside top/bottom. Restrained black ink hatch rendering, small silver mineral flecks, no text, people, scenery, neon or goldframe.",
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 800,
+        "uniformScale": 1.3535912036895752,
+        "drawWidth": 2940,
+        "drawHeight": 980.00006
+      },
+      "region": [
+        -270,
+        -90,
+        2940,
+        980
+      ]
+    },
+    {
+      "name": "slash-haze.png",
+      "w": 3000,
+      "h": 1600,
+      "allowed": [
+        0,
+        400,
+        3000,
+        800
+      ],
+      "color": "#F3E6B0",
+      "method": "Native analytic alpha gradient, required textureless effect; no image editing or texture. Center [1500,800], maxAlpha180, vertical support y400..1200. Soft horizontal fade to clear edges.",
+      "exporter": "C:/Users/ccjji/.codex/generated_images/01a16eb3-c5ac-7763-894c-bc81f8feaef7/v3-production/render-haze.ps1",
+      "discardedGeneratedSource": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-f587444e-a57e-4345-97c1-3ea9d8bed88b.png"
+    }
+  ]
+}

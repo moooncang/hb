@@ -1,0 +1,18 @@
+{
+  "order": "ui-asset-order-v3.md",
+  "count": 13,
+  "format": "PNG RGBA",
+  "titleCorrection": "Single-color flat type; no outlines, shadows, depth, gradients or texture; same Noto Serif KR 800 outlines across all 3 versions.",
+  "rendering": {
+    "imagegen": 9,
+    "nativeTypography": 3,
+    "nativeTexturelessGradient": 1
+  },
+  "validation": "13/13 filename and dimensions; clear regions, solid seam bands and ring radius verified. See validation.json.",
+  "previews": [
+    "review/titles.png",
+    "review/overview.png"
+  ],
+  "productionRecord": "production-log.json",
+  "notes": "NOTES.txt"
+}

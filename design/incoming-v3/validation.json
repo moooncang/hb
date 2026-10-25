@@ -1,0 +1,249 @@
+[
+  {
+    "name": "title-h.png",
+    "width": 2200,
+    "height": 560,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 134309,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      108,
+      157,
+      2091,
+      402
+    ]
+  },
+  {
+    "name": "title-v.png",
+    "width": 560,
+    "height": 2200,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 126430,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      164,
+      108,
+      396,
+      2091
+    ]
+  },
+  {
+    "name": "title-ink.png",
+    "width": 1400,
+    "height": 320,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 57028,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      60,
+      81,
+      1339,
+      239
+    ]
+  },
+  {
+    "name": "seam-crack.png",
+    "width": 800,
+    "height": 2400,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1318541,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      80,
+      0,
+      719,
+      2399
+    ]
+  },
+  {
+    "name": "slash-core.png",
+    "width": 3000,
+    "height": 400,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 82512,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      0,
+      180,
+      2999,
+      219
+    ]
+  },
+  {
+    "name": "slash-aura.png",
+    "width": 3000,
+    "height": 1200,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 876552,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      0,
+      41,
+      2945,
+      1199
+    ]
+  },
+  {
+    "name": "flash-burst.png",
+    "width": 1600,
+    "height": 1600,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 253,
+    "visiblePixels": 217699,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      4,
+      271,
+      1594,
+      1330
+    ]
+  },
+  {
+    "name": "shock-ring.png",
+    "width": 1600,
+    "height": 1600,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 327071,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      20,
+      36,
+      1579,
+      1561
+    ]
+  },
+  {
+    "name": "cut-edge-a.png",
+    "width": 3000,
+    "height": 240,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 226533,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      0,
+      130,
+      2999,
+      229
+    ]
+  },
+  {
+    "name": "cut-edge-b.png",
+    "width": 3000,
+    "height": 240,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 305783,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      0,
+      0,
+      2999,
+      119
+    ]
+  },
+  {
+    "name": "cut-dust.png",
+    "width": 3000,
+    "height": 1000,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 141573,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      65,
+      200,
+      2969,
+      799
+    ]
+  },
+  {
+    "name": "seam-crack-h.png",
+    "width": 2400,
+    "height": 800,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "visiblePixels": 1490938,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      0,
+      80,
+      2399,
+      719
+    ]
+  },
+  {
+    "name": "slash-haze.png",
+    "width": 3000,
+    "height": 1600,
+    "sizePass": true,
+    "minAlpha": 0,
+    "maxAlpha": 180,
+    "visiblePixels": 2266636,
+    "clearViolations": 0,
+    "solidViolations": 0,
+    "ringViolations": 0,
+    "titleColorViolations": 0,
+    "bounds": [
+      5,
+      406,
+      2994,
+      1193
+    ]
+  }
+]

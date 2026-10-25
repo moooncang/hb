@@ -165,36 +165,39 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
    .arm 450ms 숨 고르기 → .go: 검격이 오른쪽 위에서 왼쪽 아래로 붓처럼 그어진다(마스크 드러내기 700ms) → 중심을 지날 때 섬광 → 멈춤 →
    1000ms부터 두 조각이 선과 수직으로 1.5초 동안 천천히 밀려나며(느리게 시작해 빨라짐) 아래의 장면이 드러난다. 그림이 납품되면 .cover.art 로 층이 바뀐다 */
 .cv-fx { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
-.cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: 160vmax; background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
+/* 검격 층의 길이는 125vmax(어느 비율의 화면이든 대각선을 덮는 최소). 높이는 그림 비율 그대로(2.5:1 → 50vmax 등) */
+.cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: 125vmax; background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
 .cv-slash, .cv-cut { -webkit-mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; }
-.cv-slash { height: 64vmax; margin: -32vmax 0 0 -80vmax; background-image: url(skin2/cover-slash.png); }
-.cv-cut { height: 8.53vmax; margin: -4.27vmax 0 0 -80vmax; background-image: url(skin2/cover-cut.png); }
-.cv-haze { height: 85.3vmax; margin: -42.7vmax 0 0 -80vmax; display: none; }
-.cv-dust { height: 53.3vmax; margin: -26.7vmax 0 0 -80vmax; display: none; }
+.cv-slash { height: 50vmax; margin: -25vmax 0 0 -62.5vmax; background-image: url(skin2/cover-slash.png); }
+.cv-cut { height: 6.67vmax; margin: -3.33vmax 0 0 -62.5vmax; background-image: url(skin2/cover-cut.png); }
+.cv-haze { height: 66.7vmax; margin: -33.3vmax 0 0 -62.5vmax; display: none; }
+.cv-dust { height: 41.7vmax; margin: -20.8vmax 0 0 -62.5vmax; display: none; }
 .cv-flash, .cv-ring { position: absolute; left: 50%; top: 50%; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; background: center / contain no-repeat; opacity: 0; transform: scale(.4); }
 .cv-flash { background-image: url(skin2/cover-flash.png); }
 .cv-ring { display: none; }
 .cover.arm .orb { transform: scale(1.04); filter: brightness(1.22); transition: transform 450ms var(--ease), filter 450ms var(--ease); }
 .cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar, .cover.arm .cv-log { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
 .cover.go { background: transparent; }
-.cover.go .cv-slash { opacity: 1; animation: draw 700ms cubic-bezier(.25, .7, .3, 1) both, fadeout 500ms 950ms var(--ease) forwards; }
-.cover.go .cv-cut { opacity: 1; animation: draw 700ms 60ms cubic-bezier(.25, .7, .3, 1) both, fadeout 1400ms 1300ms linear forwards; }
+.cover.go .cv-slash { opacity: 1; animation: draw 800ms cubic-bezier(.45, .05, .25, 1) both, fadeout 500ms 1000ms var(--ease) forwards; }
+.cover.go .cv-cut { opacity: 1; animation: draw 800ms 60ms cubic-bezier(.45, .05, .25, 1) both, fadeout 1400ms 1300ms linear forwards; }
 .cover.go .cv-flash { animation: flash 900ms 380ms var(--ease) forwards; }
 .cover.go .cv-half { transform: translate(var(--tx), var(--ty)) rotate(var(--rot, 0deg)); transition: transform 1500ms cubic-bezier(.7, 0, .3, 1) 1000ms; }
 @keyframes draw { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
 @keyframes fadeout { to { opacity: 0; } }
 @keyframes flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.7); } }
 /* v3 그림(assets/skin3)이 오면: 핵·오러·잔광·섬광·충격파·절단면·파편 층 */
-.cover.art .cv-slash { background-image: url(skin3/slash-aura.png); height: 64vmax; margin-top: -32vmax; }
-.cover.art .cv-cut { background-image: url(skin3/slash-core.png); height: 21.3vmax; margin-top: -10.7vmax; }
+.cover.art .cv-slash { background-image: url(skin3/slash-aura.png); height: 50vmax; margin-top: -25vmax; }
+.cover.art .cv-cut { background-image: url(skin3/slash-core.png); height: 16.67vmax; margin-top: -8.33vmax; }
 .cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.png); }
 .cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.png); }
 .cover.art .cv-flash { background-image: url(skin3/flash-burst.png); transform: scale(.5) rotate(-35deg); }
+.cover.art.go .cv-flash { animation-name: flashArt; }
+@keyframes flashArt { 0% { opacity: 0; transform: scale(.5) rotate(-35deg); } 30% { opacity: 1; transform: scale(1.1) rotate(-35deg); } 100% { opacity: 0; transform: scale(1.7) rotate(-35deg); } }
 .cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.png); }
 .cover.art.go .cv-haze { animation: fadein 600ms 700ms var(--ease) both, fadeout 1400ms 1500ms var(--ease) forwards; }
 .cover.art.go .cv-ring { animation: ring 1100ms 380ms cubic-bezier(.2, .7, .3, 1) forwards; }
 .cover.art.go .cv-dust { animation: dust 1900ms 1000ms var(--ease) forwards; }
-.cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: 160vmax; height: 12.8vmax; margin: -6.4vmax 0 0 -80vmax; background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
+.cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: 125vmax; height: 10vmax; margin: -5vmax 0 0 -62.5vmax; background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
 .cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.png); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.png); transform: rotate(-35deg) translateY(50%); }
 .cover.art.go .cv-edge { animation: fadein 300ms 900ms var(--ease) both; }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
@@ -221,10 +224,17 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .hero[data-pick="west"] .plane.west .cam { transform: translate(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 6px)) scale(1.05); filter: brightness(1) saturate(1); }
 .hero[data-pick="east"] .plane.west .cam, .hero[data-pick="west"] .plane.east .cam { filter: brightness(.38) saturate(.6); }
 /* 균열(T-04/T-05)이 오면 이음새 위에 선다. 고르기의 이동(--seam)을 따라간다 */
-.crack { position: absolute; top: 0; left: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateX(-50%); background: center / auto 100% no-repeat; pointer-events: none; display: none; transition: left var(--t-space) var(--ease), top var(--t-space) var(--ease); z-index: 2; }
+.crack { position: absolute; top: 0; left: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateX(-50%); background: center / auto 100% no-repeat; pointer-events: none; display: none; transition: left var(--t-space) var(--ease), top var(--t-space) var(--ease); }
+/* 균열 그림이 있을 때 구간 메뉴는 균열 양옆으로 갈라선다(띠 폭 = 화면 높이 ÷ 3) */
+.hero.has-crack .smenu .gap { width: calc(33.4svh + 32px); flex: none; }
+.hero .smenu .gap { width: 0; }
 .hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.png); }
-.hero.has-title .vt { font-size: 0; width: 280px; height: min(1100px, 78svh); background: url(skin3/title-v.png) center / contain no-repeat; text-shadow: none; }
-.hero.has-title .vt .seal { position: absolute; left: 50%; bottom: -64px; margin: 0; font-size: 44px; transform: translateX(-50%); }
+/* 제목 그림(T-01): 글자 기둥이 캔버스의 44%이므로 상자 높이 60svh면 글자 폭 ≈ 72px(1080p). 균열의 밝은 종이 면 위에서도 읽히도록 그림자와 어두운 번짐을 둔다 */
+.hero.has-title .vt { font-size: 0; width: 280px; height: min(700px, 60svh); top: 13%; background: url(skin3/title-v.png) center / contain no-repeat; text-shadow: none; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .95)) drop-shadow(0 0 22px rgba(0, 0, 0, .8)); }
+.hero.has-title .vt::before { left: -70%; right: -70%; top: -10%; bottom: -14%; background: radial-gradient(ellipse at 50% 50%, rgba(10, 13, 18, .72), rgba(10, 13, 18, 0) 68%); }
+.hero.has-title .vt .seal { position: absolute; left: 50%; bottom: -58px; margin: 0; font-size: 42px; transform: translateX(-50%); }
+.cover.art .orb h1 { font-size: 0; left: 18%; right: 18%; top: 46.5%; height: 14.6%; background: url(skin3/title-ink.png) center / contain no-repeat; }
+.cover.art .orb h1 .seal { position: absolute; left: 97.5%; top: 50%; margin: 0; font-size: calc(var(--ring) * .046); transform: translateY(-50%); }
 .hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 24%), linear-gradient(to top, rgba(15, 20, 25, .9) 0%, rgba(15, 20, 25, .55) 18%, rgba(15, 20, 25, 0) 42%); }
 .hero-ui { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .hero-ui > * { pointer-events: auto; }
@@ -254,8 +264,8 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .hero .finfo .chipc { font-size: 12px; padding: 2px 8px 2px 2px; } .hero .finfo .chipc img { width: 24px; height: 24px; }
 .hero .finfo .stroke { margin: 0 0 12px; width: 300px; } .hero .finfo.east .stroke { margin-left: auto; }
 .hero .finfo.west { padding: 16px 18px; background: rgba(15, 20, 25, .62); border: 1px solid rgba(184, 188, 196, .35); box-shadow: inset 0 0 0 1px rgba(15, 20, 25, .6), inset 0 0 0 2px rgba(184, 188, 196, .14); backdrop-filter: blur(6px); }
-.hero .smenu { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); display: flex; gap: clamp(24px, 4vw, 56px); align-items: flex-end; }
-.hero .smenu a { display: grid; gap: 4px; justify-items: center; text-shadow: 0 1px 4px rgba(0, 0, 0, .8); padding: 4px 2px; position: relative; }
+.hero .smenu { position: absolute; left: 0; right: 0; bottom: 36px; display: flex; justify-content: center; gap: clamp(24px, 4vw, 56px); align-items: flex-end; pointer-events: none; }
+.hero .smenu a { display: grid; gap: 4px; justify-items: center; text-shadow: 0 1px 4px rgba(0, 0, 0, .8); padding: 4px 2px; position: relative; pointer-events: auto; white-space: nowrap; }
 .hero .smenu a i { font: 500 12px/1 var(--serif); letter-spacing: .3em; opacity: .55; font-style: normal; }
 .hero .smenu a b { font: 700 20px/1 var(--serif); letter-spacing: -0.01em; }
 .hero .smenu a::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 0; height: 2px; background: var(--east-l); transition: width var(--t-pick), left var(--t-pick); }
@@ -647,10 +657,11 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   .plane.west .art { top: 0; object-position: 58% 22%; transform-origin: 50% 30%; }
   .plane.east .art { top: auto; bottom: 0; object-position: 50% 28%; transform-origin: 50% 70%; }
   .plane.west .cam { transform-origin: 50% 30%; } .plane.east .cam { transform-origin: 50% 70%; }
-  .crack { left: 0; top: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateY(-50%); background-size: 100% auto; }
+  .crack { left: 0; top: calc(50% + var(--seam, 0%)); width: 100%; height: 100%; transform: translateY(-50%); background-size: 150% auto; }
   .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.png); }
-  .hero.has-title .vt { width: min(1100px, 86vw); height: calc(min(1100px, 86vw) * 0.2545); background-image: url(skin3/title-h.png); }
-  .hero.has-title .vt .seal { left: auto; right: -52px; bottom: auto; top: 50%; transform: translateY(-50%); font-size: 36px; }
+  .hero.has-title .vt { width: min(1100px, 84vw); height: calc(min(1100px, 84vw) * 0.2545); top: 50%; transform: translate(-50%, -50%); background-image: url(skin3/title-h.png); }
+  .hero.has-title .vt::before { left: -12%; right: -12%; top: -90%; bottom: -90%; }
+  .hero.has-title .vt .seal { left: auto; right: -44px; bottom: auto; top: 50%; transform: translateY(-50%); font-size: 32px; }
   .hero .vt { writing-mode: horizontal-tb; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(30px, 8.6vw, 40px); letter-spacing: .04em; word-spacing: normal; }
   .big { font-size: 34px; }
   .hero .vt .seal { display: inline-block; margin: 0 0 0 .3em; }
@@ -662,7 +673,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   .hero .tag.east { bottom: 150px; }
   .hero .tag .hname { width: 240px; height: 53px; font-size: 18px; } .hero .tag .hname.east { padding: 0 20px 0 50px; } .hero .tag .hname.west { padding: 0 67px 0 20px; }
   .hero .pick { bottom: 90px; } .hero .pick .toggle { width: 120px; height: 42px; font-size: 12px; padding: 0 26px; }
-  .hero .smenu { gap: 14px; width: calc(100% - 32px); justify-content: space-between; } .hero .smenu a b { font-size: 16px; } .hero .smenu a i { font-size: 10px; letter-spacing: .2em; }
+  .hero .smenu { left: 16px; right: 16px; gap: 14px; justify-content: space-between; } .hero .smenu a b { font-size: 16px; } .hero .smenu a i { font-size: 10px; letter-spacing: .2em; }
+  .hero.has-crack .smenu .gap { width: 0; }
+  .hero .tag.west { bottom: calc(50% + 110px); }
   .fronts-row { grid-template-columns: 1fr; } .fronts-row li { border-right: 1px solid var(--hair-d); }
   .fronts-row a { padding: 12px 16px; }
   .embs .side { grid-template-columns: repeat(3, 1fr); }

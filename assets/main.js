@@ -99,7 +99,7 @@
   var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
-  var ART = { title: false, crack: false, slash: false };   // v3 그림(design/ui-asset-order-v3.md)이 assets/skin3 에 들어오면 켠다
+  var ART = { title: true, crack: true, slash: true };   // v3 그림(design/ui-asset-order-v3.md, assets/skin3). 끄면 글꼴 제목·빛선·v2 검격으로 돌아간다
   if (hero) { hero.classList.toggle('has-title', ART.title); hero.classList.toggle('has-crack', ART.crack); }
   if (cover) cover.classList.toggle('art', ART.slash);
   $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
@@ -107,7 +107,8 @@
   if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
   else if (cover) {
     d.body.classList.add('lock');
-    var list = COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; })
+    var SKIN3 = ['title-ink', 'slash-core', 'slash-aura', 'slash-haze', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'seam-crack', 'seam-crack-h', 'title-v', 'title-h'];
+    var list = SKIN3.map(function (n) { return 'assets/skin3/' + n + '.png'; }).concat(COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; }))
       .concat(SKINS.map(function (n) { return 'assets/skin/' + n + '.png'; })).concat(JPGS.map(function (n) { return 'assets/skin/' + n + '.jpg'; }))
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
     var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0;
@@ -118,7 +119,8 @@
     setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
     // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
     var split = function () {
-      var w = innerWidth, h = innerHeight, a = 35 * Math.PI / 180, dx = Math.cos(a), dy = -Math.sin(a), nx = Math.sin(a), ny = Math.cos(a), R = Math.max(w, h) * 2, cx = w / 2, cy = h / 2, D = Math.max(w, h) * 1.15;
+      var w = innerWidth, h = innerHeight, a = 35 * Math.PI / 180, dx = Math.cos(a), dy = -Math.sin(a), nx = Math.sin(a), ny = Math.cos(a), R = Math.max(w, h) * 2, cx = w / 2, cy = h / 2;
+      var D = (w / 2) * nx + (h / 2) * ny + Math.max(w, h) * 0.08;   // 가장 먼 모서리가 선에서 떨어진 거리 + 절단면 두께: 딱 화면을 벗어날 만큼만 밀어 1.5초를 다 쓴다
       var P = function (x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; };
       var poly = function (s) { return 'polygon(' + [P(cx - dx * R, cy - dy * R), P(cx + dx * R, cy + dy * R), P(cx + dx * R + s * nx * R, cy + dy * R + s * ny * R), P(cx - dx * R + s * nx * R, cy - dy * R + s * ny * R)].join(',') + ')'; };
       $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });
