@@ -145,11 +145,11 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .orb { position: relative; width: var(--ring); height: var(--ring); opacity: 0; transition: opacity 900ms var(--ease); }
 .cover.orb-on .orb { opacity: 1; }
 .orb > i { position: absolute; inset: 0; background: center / contain no-repeat; display: block; will-change: transform; }
-.orb .glow { background-image: url(skin2/cover-glow.png); animation: breathe 6s ease-in-out infinite; }
-.orb .ring-o { background-image: url(skin2/cover-ring-outer.png); animation: spin 60s linear infinite; }
-.orb .ring-i { background-image: url(skin2/cover-ring-inner.png); animation: spin 40s linear infinite reverse; }
-.orb .sparks { background-image: url(skin2/cover-sparks.png); animation: spin 90s linear infinite; }
-.orb .moon { inset: 12.5%; background-image: url(skin2/cover-moon.png); filter: drop-shadow(0 0 40px rgba(228, 89, 74, .2)); }
+.orb .glow { background-image: url(skin2/cover-glow.webp); animation: breathe 6s ease-in-out infinite; }
+.orb .ring-o { background-image: url(skin2/cover-ring-outer.webp); animation: spin 60s linear infinite; }
+.orb .ring-i { background-image: url(skin2/cover-ring-inner.webp); animation: spin 40s linear infinite reverse; }
+.orb .sparks { background-image: url(skin2/cover-sparks.webp); animation: spin 90s linear infinite; }
+.orb .moon { inset: 12.5%; background-image: url(skin2/cover-moon.webp); filter: drop-shadow(0 0 40px rgba(228, 89, 74, .2)); }
 .orb h1 { position: absolute; left: 0; right: 0; top: 53%; text-align: center; font-family: var(--serif); font-weight: 900; font-size: calc(var(--ring) * .072); letter-spacing: -0.02em; line-height: 1; color: #15171A; white-space: nowrap; }
 .orb h1 .seal { font-size: .6em; margin-left: .3em; vertical-align: .05em; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -202,19 +202,19 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 @keyframes fadeout { to { opacity: 0; } }
 @keyframes flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.7); } }
 /* v3 그림(assets/skin3)이 오면: 핵·오러·잔광·섬광·충격파·절단면·파편 층 */
-.cover.art .cv-slash { height: calc(var(--L) * .4); margin-top: calc(var(--L) * -.2); } .cover.art .cv-slash s { background-image: url(skin3/slash-aura.png); }
-.cover.art .cv-cut { height: calc(var(--L) * .1334); margin-top: calc(var(--L) * -.0667); } .cover.art .cv-cut s { background-image: url(skin3/slash-core.png); }
-.cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.png); }
-.cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.png); }
-.cover.art .cv-flash { background-image: url(skin3/flash-burst.png); transform: scale(.5) rotate(-35deg); }
+.cover.art .cv-slash { height: calc(var(--L) * .4); margin-top: calc(var(--L) * -.2); } .cover.art .cv-slash s { background-image: url(skin3/slash-aura.webp); }
+.cover.art .cv-cut { height: calc(var(--L) * .1334); margin-top: calc(var(--L) * -.0667); } .cover.art .cv-cut s { background-image: url(skin3/slash-core.webp); }
+.cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.webp); }
+.cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.webp); }
+.cover.art .cv-flash { background-image: url(skin3/flash-burst.webp); transform: scale(.5) rotate(-35deg); }
 .cover.art.go .cv-flash { animation-name: flashArt; }
 @keyframes flashArt { 0% { opacity: 0; transform: scale(.5) rotate(-35deg); } 30% { opacity: 1; transform: scale(1.1) rotate(-35deg); } 100% { opacity: 0; transform: scale(1.7) rotate(-35deg); } }
-.cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.png); }
+.cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.webp); }
 .cover.art.go .cv-haze { animation: fadein 500ms 550ms var(--ease) both, fadeout 1100ms 1150ms var(--ease) forwards; }
 .cover.art.go .cv-ring { animation: ring 1000ms 300ms cubic-bezier(.2, .7, .3, 1) forwards; }
 .cover.art.go .cv-dust { animation: dust 1500ms 780ms var(--ease) forwards; }
 .cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: var(--L); height: calc(var(--L) * .08); margin: calc(var(--L) * -.04) 0 0 calc(var(--L) * -.5); background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
-.cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.png); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.png); transform: rotate(-35deg) translateY(50%); }
+.cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.webp); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.webp); transform: rotate(-35deg) translateY(50%); }
 .cover.art.go .cv-edge { animation: fadein 300ms 700ms var(--ease) both; }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ring { 0% { opacity: 0; transform: scale(.2); } 20% { opacity: .9; } 100% { opacity: 0; transform: scale(2.5); } }
@@ -246,7 +246,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 /* 균열 그림이 있을 때 구간 메뉴는 균열 양옆으로 갈라선다(띠 폭 = 화면 높이 ÷ 3) */
 .hero.has-crack .smenu .gap { width: calc(33.4svh + 32px); flex: none; }
 .hero .smenu .gap { width: 0; }
-.hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.png); }
+.hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.webp); }
 /* 제목 그림(T-01): 글자 기둥이 캔버스의 44%이므로 상자 높이 60svh면 글자 폭 ≈ 72px(1080p). 균열의 밝은 종이 면 위에서도 읽히도록 그림자와 어두운 번짐을 둔다 */
 .hero.has-title .vt { font-size: 0; width: 280px; height: min(700px, 60svh); top: 13%; background: none; text-shadow: none; }
 .hero.has-title .vt::after { content: ''; position: absolute; inset: 0; background: url(skin3/title-v.png) center / contain no-repeat; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .95)) drop-shadow(0 0 22px rgba(0, 0, 0, .8)); }   /* 글자는 ::after(앞), 어둠 번짐은 ::before(뒤). 글자를 배경 그림으로 두면 ::before 가 글자 위에 덮인다 */
@@ -774,7 +774,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .plane.east .art { top: auto; bottom: 0; object-position: 50% 28%; transform-origin: 50% 70%; }
   .plane.west .cam { transform-origin: 50% 30%; } .plane.east .cam { transform-origin: 50% 70%; }
   .crack { left: 0; top: 50%; width: 100%; height: 100%; transform: translateY(calc(-50% + var(--seam, 0%))); background-size: 150% auto; }
-  .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.png); }
+  .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.webp); }
   .hero.has-title .vt { width: min(1100px, 84vw); height: calc(min(1100px, 84vw) * 0.2545); top: 50%; transform: translate(-50%, -50%); }
   .hero.has-title .vt::after { background-image: url(skin3/title-h.png); }
   .hero.has-title .vt::before { left: -12%; right: -12%; top: -90%; bottom: -90%; }

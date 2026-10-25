@@ -109,6 +109,8 @@
   });
 
   // ===== 입장: 공통 그림을 실제로 불러온 뒤, 검격으로 갈라 들어간다. 갈라진 두 조각이 화면 밖으로 밀려나면 아래의 장면이 드러난다 =====
+  var WEBP = /^(seam-crack-h|seam-crack|slash-aura|slash-haze|slash-core|flash-burst|shock-ring|cut-edge-a|cut-edge-b|cut-dust|cover-moon|cover-ring-outer|cover-ring-inner|cover-glow|cover-sparks)$/;   // WebP 파생본이 있는 무거운 그림(tools/README 참고). 나머지는 PNG
+  function skinSrc(dir, n) { return 'assets/' + dir + '/' + n + (WEBP.test(n) ? '.webp' : '.png'); }
   var COVER = ['cover-moon', 'cover-ring-outer', 'cover-ring-inner', 'cover-glow', 'cover-sparks', 'cover-slash', 'cover-flash', 'cover-cut'];
   var SKIN2P = ['btn2-east-idle', 'btn2-east-hover', 'btn2-east-press', 'btn2-west-idle', 'btn2-west-hover', 'btn2-west-press', 'btn2-gray-idle', 'btn2-gray-hover', 'btn2-gray-press', 'btn2-sm-idle', 'btn2-sm-hover',
     'chip2-east-idle', 'chip2-east-active', 'chip2-west-idle', 'chip2-west-active', 'chip2-gray-idle', 'chip2-gray-active', 'toggle-west-idle', 'toggle-west-active', 'toggle-east-idle', 'toggle-east-active',
@@ -130,18 +132,18 @@
   else if (cover) {
     d.body.classList.add('lock');
     var SKIN3 = ['title-ink', 'slash-core', 'slash-aura', 'slash-haze', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'seam-crack', 'seam-crack-h', 'title-v', 'title-h'];
-    var all = SKIN3.map(function (n) { return 'assets/skin3/' + n + '.png'; }).concat(COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; }))
+    var all = SKIN3.map(function (n) { return skinSrc('skin3', n); }).concat(COVER.concat(SKIN2P).map(function (n) { return skinSrc('skin2', n); }))
       .concat(SKINS.map(function (n) { return 'assets/skin/' + n + '.png'; })).concat(JPGS.map(function (n) { return 'assets/skin/' + n + '.jpg'; }))
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
     // 입장 전에는 입장 연출과 첫 장면에 쓰는 그림만 기다린다(전부 22MB를 기다리면 폰 회선에선 10초 넘게 걸리고, 갈라지는 동안 내려받기·해독이 겹쳐 버벅인다).
     // 나머지는 장면이 열린 뒤 천천히 받는다
     var narrowNow = matchMedia('(max-width: 760px)').matches;
-    var need = ['slash-core', 'slash-aura', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'title-ink', narrowNow ? 'seam-crack-h' : 'seam-crack', narrowNow ? 'title-h' : 'title-v'].concat(narrowNow ? [] : ['slash-haze']).map(function (n) { return 'assets/skin3/' + n + '.png'; })
+    var need = ['slash-core', 'slash-aura', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'title-ink', narrowNow ? 'seam-crack-h' : 'seam-crack', narrowNow ? 'title-h' : 'title-v'].concat(narrowNow ? [] : ['slash-haze']).map(function (n) { return skinSrc('skin3', n); })
       .concat(['hero-name-east', 'hero-name-west', 'toggle-west-idle', 'toggle-east-idle', 'toggle-west-active', 'toggle-east-active'].map(function (n) { return 'assets/skin2/' + n + '.png'; }))
       .concat(['seal-east', 'emblem-west', 'btn-round-west-idle', 'icon-menu', 'fa-gardeon', 'fa-mugan'].map(function (n) { return 'assets/skin/' + n + '.png'; }))
       .concat(['assets/skin/tex-ink-night.jpg', large('A', 1), large('G', 1)]);
     if (!ART.slash) need = need.concat(['cover-slash', 'cover-flash', 'cover-cut'].map(function (n) { return 'assets/skin2/' + n + '.png'; }));
-    var orbSrc = COVER.slice(0, 5).map(function (n) { return 'assets/skin2/' + n + '.png'; });
+    var orbSrc = COVER.slice(0, 5).map(function (n) { return skinSrc('skin2', n); });
     var list = need, rest = all.filter(function (src) { return need.indexOf(src) < 0 && orbSrc.indexOf(src) < 0; }), keep = [];
     var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0;
     var tick = function () { done++; var r = done / total; bar.style.width = Math.round(r * 100) + '%'; pct.textContent = done + ' / ' + total; logs.forEach(function (li, i) { if (r >= (i + 1) / (logs.length + 1)) li.classList.add('on'); }); if (done >= total) arm(); };
@@ -149,7 +151,7 @@
     // 받은 뒤 해독까지 끝내 둔다(갈라지는 순간 큰 PNG를 처음 해독하면 그 자리에서 멈칫한다). 참조를 쥐고 있어 캐시에서 빠지지 않게
     var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); keep.push(i); i.onerror = tick; i.onload = function () { if (i.decode) i.decode().then(tick, tick); else tick(); }; i.src = src; }); };
     $$('.cv-slash, .cv-cut', cover).forEach(function (el) { el.innerHTML = '<b><s></s></b>'; });   // 합성기만 쓰는 드러내기용 창(style.css 검격 층)
-    COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = 'assets/skin2/' + n + '.png'; });
+    COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = skinSrc('skin2', n); });
     setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
     // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
     var split = function () {
