@@ -617,7 +617,10 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .pw-line, .pw-pillars { position: relative; height: 620px; margin-top: 16px; }
 .pw-line { background: url(skin/power-east.png) center 16.2% / auto 82.8% no-repeat; }
 .pw-pillars { background: url(skin/power-west.png) center top / 100% auto no-repeat; }
-.pw-st { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 15px; font-weight: 600; padding: 4px 8px; white-space: nowrap; color: var(--fg-l); transition: background var(--t-pick), color var(--t-pick); }
+.pw-st { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 15px; font-weight: 600; padding: 4px 8px; white-space: nowrap; color: var(--fg-l); transition: color var(--t-pick); }
+/* 고른 단계: 먹 덩어리 대신 세력색 밑줄(같은 페이지 세력 목록과 같은 표시) + 켜진 점 */
+.pw-st::after { content: ''; position: absolute; left: 28px; right: 8px; bottom: 1px; height: 2px; background: var(--east); opacity: 0; transition: opacity var(--t-pick); }
+.pw-pillars .pw-st::after { left: 4px; right: 4px; background: var(--west); } .pw-stack .pw-st::after { left: 36px; background: var(--west); }
 .pw-st::before { content: ''; width: 24px; height: 24px; flex: none; background: center / contain no-repeat; }
 .pw-line .pw-st { left: 50%; transform: translate(-6px, -50%); }
 .pw-line .pw-st::before { background-image: url(skin/step-east-off.png); margin-left: -12px; }
@@ -626,7 +629,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .pw-pillars .pw-st::before { background-image: url(skin/step-west-off.png); width: 20px; height: 20px; }
 .pw-pillars .pw-st[aria-pressed="true"]::before { background-image: url(skin/step-west-on.png); }
 .pw-st small { font-family: var(--sans); font-size: 11px; opacity: .6; }
-.pw-st[aria-pressed="true"] { background: var(--fg-l); color: var(--stone); }
+.pw-st[aria-pressed="true"] { font-weight: 800; } .pw-st[aria-pressed="true"]::after { opacity: 1; }
 .pw-st[aria-pressed="true"] small { opacity: .8; }
 .pw-stack { display: none; }
 .pw-note { font-size: 13px; color: var(--fg2-l); margin-top: 18px; word-break: keep-all; line-height: 1.6; }
@@ -734,7 +737,8 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .pw-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
   .pw-stack .colm { display: grid; gap: 4px; align-content: start; }
   .pw-stack .ct { font-size: 12px; font-weight: 700; letter-spacing: .12em; opacity: .7; margin-bottom: 6px; }
-  .pw-stack .pw-st { position: static; transform: none; white-space: normal; }
+  .pw-stack .pw-st { position: relative; transform: none; white-space: normal; }
+  .pw-stack .pw-st::before { background-image: url(skin/step-west-off.png); width: 20px; height: 20px; } .pw-stack .pw-st[aria-pressed="true"]::before { background-image: url(skin/step-west-on.png); }
   .viewer { padding: 0 16px 80px; }
   .v-bar { gap: 12px; } .v-pos { display: none; }
   .v-nav { margin-left: auto; gap: 12px; }
