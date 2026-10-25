@@ -403,7 +403,13 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .rec.art .doc { display: block; width: 1100px; height: 520px; padding: 0; background: center / 100% 100% no-repeat; border: 0; box-shadow: none; }
 .rec.art .doc.east { background-image: url(skin4/scroll-card.png); } .rec.art .doc.west { background-image: url(skin4/dossier-card.png); }
 .rec.art .doc .pic { position: absolute; left: 110px; top: 80px; width: 430px; height: 297px; }
-.rec.art .doc .tx { position: absolute; left: 580px; top: 75px; width: 410px; height: 375px; overflow: hidden; }
+.rec.art .doc .tx { position: absolute; left: 580px; top: 75px; width: 410px; height: 375px; overflow: hidden; gap: 8px; }
+.rec.art .doc .call { font-size: 30px; }
+.rec.art .doc .nm { font-size: 16px; }
+.rec.art .doc .rows { font-size: 12.5px; gap: 4px 10px; }
+.rec.art .doc .open { margin-top: 2px; }
+.rec.art .doc:hover { transform: translateY(-4px); }
+.rec.art .docs { gap: 52px; }
 
 /* ===== 기록 펼치기(상세): 어두운 방 위에 긴 두루마리 / 서류 한 장 ===== */
 .viewer { position: fixed; inset: 0; z-index: 60; background: rgba(10, 13, 18, .88); color: var(--fg-l); overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--gutter) 80px; opacity: 0; transition: opacity var(--t-img); }
@@ -418,9 +424,19 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .v-paper { padding: 40px 5% 48px; background: linear-gradient(rgba(238, 234, 225, .5), rgba(238, 234, 225, .5)), var(--paper) url(skin/tex-paper.jpg) top center / 640px repeat; border: 1px solid rgba(20, 22, 25, .5); }
 .viewer.west .v-paper { background: linear-gradient(rgba(215, 212, 204, .55), rgba(215, 212, 204, .55)), var(--stone) url(skin/tex-stone.jpg) top center / 640px repeat; border-color: var(--silver); }
 .viewer.art .v-top, .viewer.art .v-bottom { height: auto; aspect-ratio: 2400 / 400; }
-.viewer.art .v-paper { border: 0; padding: 0 10% 20px; background: url(skin4/scroll-paper.png) top center / 100% auto repeat-y; }
+.viewer.art .v-top { margin-bottom: -1px; } .viewer.art .v-bottom { margin-top: -1px; }   /* 축척 반올림 틈 방지 */
+/* 위·아래 끝 조각의 종이 톤이 띠와 미세하게 달라서, 띠 질감을 조각의 종이 면(아래쪽/위쪽 절반) 위에 서서히 겹쳐 이음을 녹인다 */
+.viewer.art .v-top, .viewer.art .v-bottom { position: relative; }
+.viewer.art .v-top::after, .viewer.art .v-bottom::after { content: ''; position: absolute; left: 0; right: 0; height: 50%; background: url(skin4/scroll-paper.jpg) left bottom / 100% auto repeat-y; pointer-events: none; }
+.viewer.art .v-top::after { bottom: 0; -webkit-mask: linear-gradient(to bottom, transparent, #000 75%); mask: linear-gradient(to bottom, transparent, #000 75%); }
+.viewer.art .v-bottom::after { top: 0; background-position: left top; -webkit-mask: linear-gradient(to bottom, #000 25%, transparent); mask: linear-gradient(to bottom, #000 25%, transparent); }
+.viewer.art.west .v-top::after, .viewer.art.west .v-bottom::after { background-image: url(skin4/dossier-paper.jpg); }
+.viewer.art .v-col { filter: drop-shadow(0 40px 80px rgba(0, 0, 0, .7)); }
+.viewer.art .v-head { margin-top: -40px; }
+.viewer.art.west .v-head { margin-top: -30px; }
+.viewer.art .v-paper { border: 0; padding: 0 10% 20px; background: url(skin4/scroll-paper.jpg) top center / 100% auto repeat-y; }
 .viewer.art.east .v-top { background-image: url(skin4/scroll-top.png); } .viewer.art.east .v-bottom { background-image: url(skin4/scroll-bottom.png); }
-.viewer.art.west .v-top { background-image: url(skin4/dossier-top.png); } .viewer.art.west .v-bottom { background-image: url(skin4/dossier-bottom.png); } .viewer.art.west .v-paper { background-image: url(skin4/dossier-paper.png); }
+.viewer.art.west .v-top { background-image: url(skin4/dossier-top.png); } .viewer.art.west .v-bottom { background-image: url(skin4/dossier-bottom.png); } .viewer.art.west .v-paper { background-image: url(skin4/dossier-paper.jpg); }
 .v-head { display: grid; grid-template-columns: 1fr auto; gap: 8px 32px; align-items: end; margin-bottom: 28px; }
 .v-head .lbl { margin-bottom: 12px; }
 .v-head .call { font-family: var(--serif); font-size: clamp(36px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.03em; font-weight: 900; }
@@ -632,7 +648,10 @@ html[data-wipe].wiped body::before { animation: wipeOut 640ms cubic-bezier(.2, .
   .rec.art .doc { display: block; width: 100%; max-width: 500px; height: auto; aspect-ratio: 1000 / 1800; margin: 0 auto; }
   .rec.art .doc.east { background-image: url(skin4/scroll-card-v.png); } .rec.art .doc.west { background-image: url(skin4/dossier-card-v.png); }
   .rec.art .doc .pic { left: 10%; top: 11.1%; width: 80%; height: 30.7%; }
-  .rec.art .doc .tx { left: 11%; top: 45.6%; width: 78%; height: 44.4%; }
+  .rec.art .doc .tx { left: 11%; top: 45.6%; width: 78%; height: 44.4%; gap: 6px; }
+  .rec.art .doc .call { font-size: 25px; } .rec.art .doc .nm { font-size: 15px; }
+  .rec.art .doc .rows { font-size: 12px; gap: 3px 8px; grid-template-columns: 54px 1fr; }
+  .rec.art .doc .rows .r-sig { display: none; }   /* 세로 카드엔 표식 줄이 안 들어간다 — 긴 기록에 있다 */
   .viewer { padding: 0 12px 60px; }
   .v-bar { gap: 12px; } .v-pos { display: none; }
   .v-nav { margin-left: auto; gap: 12px; }

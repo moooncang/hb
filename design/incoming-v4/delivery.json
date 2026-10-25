@@ -1,0 +1,148 @@
+{
+  "version": 4,
+  "order": "../ui-asset-order-v4.md",
+  "date": "2026-10-26",
+  "type": "PNG asset delivery",
+  "assets": [
+    {
+      "file": "scroll-paper.png",
+      "width": 2400,
+      "height": 800,
+      "usage": "서방 인물 페이지 · 동방이 작성한 기록",
+      "placementZones": [],
+      "repeat": "vertical"
+    },
+    {
+      "file": "dossier-paper.png",
+      "width": 2400,
+      "height": 800,
+      "usage": "동방 인물 페이지 · 서방이 작성한 기록",
+      "placementZones": [],
+      "repeat": "vertical"
+    },
+    {
+      "file": "scroll-card.png",
+      "width": 2200,
+      "height": 1040,
+      "usage": "서방 인물 페이지 · 동방이 작성한 기록",
+      "placementZones": [
+        [
+          220,
+          160,
+          860,
+          594
+        ],
+        [
+          1160,
+          150,
+          820,
+          750
+        ]
+      ],
+      "repeat": false
+    },
+    {
+      "file": "scroll-card-v.png",
+      "width": 1000,
+      "height": 1800,
+      "usage": "서방 인물 페이지 · 동방이 작성한 기록",
+      "placementZones": [
+        [
+          100,
+          200,
+          800,
+          552
+        ],
+        [
+          110,
+          820,
+          780,
+          800
+        ]
+      ],
+      "repeat": false
+    },
+    {
+      "file": "dossier-card.png",
+      "width": 2200,
+      "height": 1040,
+      "usage": "동방 인물 페이지 · 서방이 작성한 기록",
+      "placementZones": [
+        [
+          220,
+          160,
+          860,
+          594
+        ],
+        [
+          1160,
+          150,
+          820,
+          750
+        ]
+      ],
+      "repeat": false
+    },
+    {
+      "file": "dossier-card-v.png",
+      "width": 1000,
+      "height": 1800,
+      "usage": "동방 인물 페이지 · 서방이 작성한 기록",
+      "placementZones": [
+        [
+          100,
+          200,
+          800,
+          552
+        ],
+        [
+          110,
+          820,
+          780,
+          800
+        ]
+      ],
+      "repeat": false
+    },
+    {
+      "file": "scroll-top.png",
+      "width": 2400,
+      "height": 400,
+      "usage": "서방 인물 페이지 · 동방이 작성한 기록",
+      "placementZones": [],
+      "repeat": false
+    },
+    {
+      "file": "scroll-bottom.png",
+      "width": 2400,
+      "height": 400,
+      "usage": "서방 인물 페이지 · 동방이 작성한 기록",
+      "placementZones": [],
+      "repeat": false
+    },
+    {
+      "file": "dossier-top.png",
+      "width": 2400,
+      "height": 400,
+      "usage": "동방 인물 페이지 · 서방이 작성한 기록",
+      "placementZones": [],
+      "repeat": false
+    },
+    {
+      "file": "dossier-bottom.png",
+      "width": 2400,
+      "height": 400,
+      "usage": "동방 인물 페이지 · 서방이 작성한 기록",
+      "placementZones": [],
+      "repeat": false
+    }
+  ],
+  "previews": [
+    "review/overview.png",
+    "review/placement-check.png",
+    "review/assembled.png"
+  ],
+  "validation": "validation.json",
+  "productionLog": "production-log.json",
+  "websiteIntegration": "납품서의 사이트 쪽 처리 단계에서 연결: tools/build-skin4.ps1 → assets/skin4/, ART.doc 활성화. 이번 납품 범위에는 사이트 코드 변경이 포함되지 않음."
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "bytes": 1584514,
+    "file": "dossier-bottom.png",
+    "sha256": "7967452C2D3318B610CB377DE9F864E4C21FD4337F0B678F5AE035B4A9349FCE"
+  },
+  {
+    "bytes": 2639984,
+    "file": "dossier-card-v.png",
+    "sha256": "25093DEAF029A96020D74A6039CECE16BB90025C2CEFF8A2EBEDD7EDE325D4ED"
+  },
+  {
+    "bytes": 3528331,
+    "file": "dossier-card.png",
+    "sha256": "3822832FCDAC8283BE39264BAA6183A20F558424B9DF04D3FFCA51CAB3DF360C"
+  },
+  {
+    "bytes": 2513265,
+    "file": "dossier-paper.png",
+    "sha256": "FA9CD4735F36B5D9040054635BF4327BE2C62E3F8A1E6FF9B586BFB3E1D6B206"
+  },
+  {
+    "bytes": 1578589,
+    "file": "dossier-top.png",
+    "sha256": "FBEFBDD1E4B5DE4AE91FE6BA5E4D9F724F41ED5BF5773EC124A8B6BD6161220A"
+  },
+  {
+    "bytes": 1194878,
+    "file": "scroll-bottom.png",
+    "sha256": "E42FA877C3C2FF68D877ACD3F8F499B422538B6629D2037847B7CE3FE495EA25"
+  },
+  {
+    "bytes": 2288885,
+    "file": "scroll-card-v.png",
+    "sha256": "61585CE83A74D575F61BC664EE7743C9336862AE420820172179CC7431569123"
+  },
+  {
+    "bytes": 2832562,
+    "file": "scroll-card.png",
+    "sha256": "BAB82CC62726994C3D915542183F8011E26C0924EF1341347CA673261765AC7E"
+  },
+  {
+    "bytes": 2421169,
+    "file": "scroll-paper.png",
+    "sha256": "13C9BB2915513C1FF09F44020541A335BD734CE68C5E63AC445DFB0F53D78E1A"
+  },
+  {
+    "bytes": 1097067,
+    "file": "scroll-top.png",
+    "sha256": "71E681D13BDB2C7CCBB0B0E8B4CA6FDF0A79014E9157B13569156EA34C011499"
+  }
+]

@@ -1,0 +1,248 @@
+{
+  "order": "ui-asset-order-v4.md",
+  "date": "2026-10-26",
+  "fileCount": 10,
+  "expectedCount": 10,
+  "checks": [
+    {
+      "width": 2200,
+      "height": 1040,
+      "minAlpha": 0,
+      "transparentPixels": 318731,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        },
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "scroll-card.png",
+      "expectedWidth": 2200,
+      "expectedHeight": 1040,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2200,
+      "height": 1040,
+      "minAlpha": 0,
+      "transparentPixels": 78305,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        },
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "dossier-card.png",
+      "expectedWidth": 2200,
+      "expectedHeight": 1040,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 1000,
+      "height": 1800,
+      "minAlpha": 0,
+      "transparentPixels": 96578,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        },
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "scroll-card-v.png",
+      "expectedWidth": 1000,
+      "expectedHeight": 1800,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 1000,
+      "height": 1800,
+      "minAlpha": 0,
+      "transparentPixels": 20227,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        },
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "dossier-card-v.png",
+      "expectedWidth": 1000,
+      "expectedHeight": 1800,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 400,
+      "minAlpha": 0,
+      "transparentPixels": 35925,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "scroll-top.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 400,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 400,
+      "minAlpha": 0,
+      "transparentPixels": 13545,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "dossier-top.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 400,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 800,
+      "minAlpha": 255,
+      "transparentPixels": 0,
+      "zones": [],
+      "name": "scroll-paper.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 800,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 800,
+      "minAlpha": 255,
+      "transparentPixels": 0,
+      "zones": [],
+      "name": "dossier-paper.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 800,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 400,
+      "minAlpha": 0,
+      "transparentPixels": 28068,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "scroll-bottom.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 400,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    },
+    {
+      "width": 2400,
+      "height": 400,
+      "minAlpha": 0,
+      "transparentPixels": 8939,
+      "zones": [
+        {
+          "minAlpha": 255,
+          "darkPixels": 0,
+          "redPixels": 0
+        }
+      ],
+      "name": "dossier-bottom.png",
+      "expectedWidth": 2400,
+      "expectedHeight": 400,
+      "dimensionsPass": true,
+      "alphaPass": true,
+      "placementPass": true
+    }
+  ],
+  "joins": [
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "scroll-top -> scroll-paper"
+    },
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "scroll-paper -> scroll-paper"
+    },
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "scroll-paper -> scroll-bottom"
+    },
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "dossier-top -> dossier-paper"
+    },
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "dossier-paper -> dossier-paper"
+    },
+    {
+      "differentChannels": 0,
+      "maxChannelDelta": 0,
+      "pair": "dossier-paper -> dossier-bottom"
+    }
+  ],
+  "allTechnicalChecksPass": true,
+  "visualReview": {
+    "inspected": [
+      "review/overview.png",
+      "review/placement-check.png",
+      "review/assembled.png"
+    ],
+    "blankPaper": "No baked-in words, characters, illustrations or seals with emblems.",
+    "scope": "Placement zones and assembled appearance visually inspected. Pixel tests cover sizes, alpha, dark/red intrusion and exact joining rows; they do not certify all decorative contour coordinates."
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "order": "ui-asset-order-v4.md",
+  "generator": "built-in image_gen",
+  "scope": "Ten PNG assets. Existing website and prior deliveries untouched.",
+  "export": "Uniform scaling and cropping. No nonuniform stretch. Generated source originals retained. Final alpha values >=245 snapped to255 and <=3 snapped to0. Shared joining rows derived from strip texture with16px strip /32px endcap boundary blends, with no spatial warp.",
+  "completed": [
+    {
+      "name": "scroll-paper.png",
+      "w": 2400,
+      "h": 800,
+      "world": "east",
+      "opaque": true,
+      "mode": "canvas",
+      "desc": "Full-bleed rectangular 3:1 LANDSCAPE material strip of a vertical Chinese handscroll. Canvas2400x800. LEFT band x0..120 and RIGHT band x2280..2400 are solid very dark INDIGO SILK #1F2A36, each exactly5% of totalwidth, with extremely faint fine cloth grain. Center x120..2280 is a continuous flat PALE GREY-WHITE PAPER surface #E8E3D8. Paper has ONLY nearly invisible fine fibers. ENTIRE surface has uniform illumination and color, no mottled stains, gradients, wrinkles, creases, shadows, vignetting, handwriting or symbols. No horizontal border anywhere. The TOP and BOTTOM edges are straight crop boundaries and should match seamlessly for vertical repetition. No rods, cords, seal or decorative motifs. All three vertical material bands continue fully to top and bottom image edges.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-78c6dd6d-24e7-435d-9629-0c9375ee0d87.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Asset: scroll-paper.png. Image1 is drawing style reference only. Do not reproduce its characters, scenery, objects, clothing, crests or text.\nFull-bleed rectangular 3:1 LANDSCAPE material strip of a vertical Chinese handscroll. Canvas2400x800. LEFT band x0..120 and RIGHT band x2280..2400 are solid very dark INDIGO SILK #1F2A36, each exactly5% of totalwidth, with extremely faint fine cloth grain. Center x120..2280 is a continuous flat PALE GREY-WHITE PAPER surface #E8E3D8. Paper has ONLY nearly invisible fine fibers. ENTIRE surface has uniform illumination and color, no mottled stains, gradients, wrinkles, creases, shadows, vignetting, handwriting or symbols. No horizontal border anywhere. The TOP and BOTTOM edges are straight crop boundaries and should match seamlessly for vertical repetition. No rods, cords, seal or decorative motifs. All three vertical material bands continue fully to top and bottom image edges.\nFront-on flat orthographic view, perfectly straight alignment, no perspective or tilt. This is finished artwork, not a photographed real object. Avoid photorealistic texture, extreme aged stains, ornate gold trims or decorative lettering. No letters, numbers, seals with emblems, drawings on the paper, stamps with patterns, or watermarks. Keep writing and image-placement zones wholly blank, smooth and uniform. Canvas entirely occupied by the material, opaque full bleed.",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/A_1.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 800,
+        "uniformScale": 1.1049723625183105,
+        "drawWidth": 2400,
+        "drawHeight": 800
+      }
+    },
+    {
+      "name": "dossier-paper.png",
+      "w": 2400,
+      "h": 800,
+      "world": "west",
+      "opaque": true,
+      "mode": "canvas",
+      "desc": "Full-bleed rectangular3:1 LANDSCAPE material strip from a medieval document. Canvas2400x800. LEFT band x0..120 and RIGHT band x2280..2400 are very dark MATTE BROWN LEATHER #342820, each exactly5% of totalwidth, with extremely faint fine leather grain. Center x120..2280 is UNIFORM warm pale aged PARCHMENT #E6D8B7. Only almost invisible tinygrain; no mottled stains, burned patches, cracks, creases, gradient lighting, shadows or vignetting inside. There is NO horizontal border at top or bottom. All vertical bands continue straight to both imageedges. Top and bottom should match seamlessly for vertical repetition. No seal, no ribbon, no symbols, no metal corner ornaments. Entirecanvas is material, no backdrop.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-77ec8fd4-5402-4e6d-b4c0-c922d0a42b50.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: stylized-concept. Asset: dossier-paper.png. Image1 is drawing style reference only. Do not reproduce its characters, scenery, objects, clothing, crests or text.\nFull-bleed rectangular3:1 LANDSCAPE material strip from a medieval document. Canvas2400x800. LEFT band x0..120 and RIGHT band x2280..2400 are very dark MATTE BROWN LEATHER #342820, each exactly5% of totalwidth, with extremely faint fine leather grain. Center x120..2280 is UNIFORM warm pale aged PARCHMENT #E6D8B7. Only almost invisible tinygrain; no mottled stains, burned patches, cracks, creases, gradient lighting, shadows or vignetting inside. There is NO horizontal border at top or bottom. All vertical bands continue straight to both imageedges. Top and bottom should match seamlessly for vertical repetition. No seal, no ribbon, no symbols, no metal corner ornaments. Entirecanvas is material, no backdrop.\nFront-on flat orthographic view, perfectly straight alignment, no perspective or tilt. This is finished artwork, not a photographed real object. Avoid photorealistic texture, extreme aged stains, ornate gold trims or decorative lettering. No letters, numbers, seals with emblems, drawings on the paper, stamps with patterns, or watermarks. Keep writing and image-placement zones wholly blank, smooth and uniform. Canvas entirely occupied by the material, opaque full bleed.",
+      "references": [
+        "D:/크랙/무협 vs 중판/인물 컷/L_1.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 800,
+        "uniformScale": 1.1049723625183105,
+        "drawWidth": 2400,
+        "drawHeight": 800
+      }
+    },
+    {
+      "name": "scroll-card-v.png",
+      "w": 1000,
+      "h": 1800,
+      "world": "east",
+      "base": "scroll-paper.png",
+      "mode": "fit",
+      "zones": [
+        [
+          100,
+          200,
+          800,
+          552
+        ],
+        [
+          110,
+          820,
+          780,
+          800
+        ]
+      ],
+      "desc": "Create a NEW VERTICAL hanging Chinese handscroll card, exact object ratio1000:1800, tallnarrow. Object fillscanvas almostedge-to-edge. Upper horizontal black lacquer wooden roller, tiny redcord and small hangingloop all confined to y0..120. Lower roller confinedy1680..1800. Thin dark INDIGO SILK side borders atx0..50and950..1000. Paper face x50..950,y120..1680, pale uniform greywhite same asreference. Faint cloudweave ONLY inblueborders. Broad imagezone x100..900,y200..752 and textzone x110..890,y820..1620 are uninterrupted blank uniformpaper. Do not draw internalbox, pictureborder, writing or symbols. No perspective, no curl shadow, no table. Onlytiny naturalcloth and wood shading atouteredges, transparentoutsidecorners.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-f36e4461-8ae4-4a04-afa2-63b684e936e4.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: precise-object-edit. Image1 is the edit target. Keep the same vertical1000x1800 canvas. Expand the PAPER FACE HORIZONTALLY to fill90% of the ENTIRE CANVAS WIDTH: leftpaperedge at x50, rightpaperedge atx950. Move left silk border to x0..50 and right silkborder tox950..1000, FLUSH with image edges, NO transparent side margins. The current paper is much too narrow; make it visibly wider, and the navy sidebars much thinner. Leave no space to the left or right of the silk. The top and bottom lacquered rods span imagewidth, ends may meet/crop at canvasedges. Keep top rod wholly above y120, bottom below1680. Confine redknots to outeredges. Remove alldangling sidecords that cross thepaper. Keep papercolor and lineart exactlysame, no text, no pictures, no stamps. Blank zones x100..900,y200..752 andx110..890,y820..1620 must be entirely cream PAPER. Outside only the few rounded top/bottomcorner gaps transparent. No frame withinpaper.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-dc321b6d-e0be-4fea-aea1-fb319fac97e7.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: precise-object-edit. Image1 is the edit target. Keep the same vertical1000x1800 canvas. Expand the PAPER FACE HORIZONTALLY to fill90% of the ENTIRE CANVAS WIDTH: leftpaperedge at x50, rightpaperedge atx950. Move left silk border to x0..50 and right silkborder tox950..1000, FLUSH with image edges, NO transparent side margins. The current paper is much too narrow; make it visibly wider, and the navy sidebars much thinner. Leave no space to the left or right of the silk. The top and bottom lacquered rods span imagewidth, ends may meet/crop at canvasedges. Keep top rod wholly above y120, bottom below1680. Confine redknots to outeredges. Remove alldangling sidecords that cross thepaper. Keep papercolor and lineart exactlysame, no text, no pictures, no stamps. Blank zones x100..900,y200..752 andx110..890,y820..1620 must be entirely cream PAPER. Outside only the few rounded top/bottomcorner gaps transparent. No frame withinpaper.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-f36e4461-8ae4-4a04-afa2-63b684e936e4.png"
+      ],
+      "exported": {
+        "sourceWidth": 936,
+        "sourceHeight": 1681,
+        "width": 1000,
+        "height": 1800,
+        "uniformScale": 1.068376064300537,
+        "drawWidth": 1000,
+        "drawHeight": 1758.547
+      }
+    },
+    {
+      "name": "dossier-card.png",
+      "w": 2200,
+      "h": 1040,
+      "world": "west",
+      "base": "dossier-paper.png",
+      "mode": "fit",
+      "zones": [
+        [
+          220,
+          160,
+          860,
+          594
+        ],
+        [
+          1160,
+          150,
+          820,
+          750
+        ]
+      ],
+      "desc": "Create a NEW HORIZONTAL medieval record card, object ratio2200:1040. A darkbrown matte leather folder fillsalmostentirecanvas with worn roundedcorners and a very restrained matte SILVER hairline at its perimeter. On it lies one flat PALE AGED YELLOW PARCHMENT sheet x120..2080,y60..980. Use referenceparchmentcolor and faintgrain. Scorched/torn details confined to outer20px ofpaper edge; slightly curled corners but NO castshadow intointerior. One SMALL SMOOTH RED WAX SEAL and shortredribbon near upperLEFT. Keep both inside x130..210,y70..195 so they avoid liveimagezone. Sealface is plain smoothwax, absolutely NO emblem or symbol. Fullpaperface otherwisecompletelyuniformblank. Imagezone x220..1080,y160..754 and textzone x1160..1980,y150..900 totallyclear. No internalbox, no decorativegold, no objects. Genuinealphaoutsidefoldercorners.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-5f729803-74ce-4289-93a6-525968a8900a.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT of Image1. Keep the same horizontal card, every leather and parchment boundary and canvas ratio unchanged. ONLY shrink the red wax seal AND ribbon to 38 PERCENT of their present size. Move the tiny seal-and-ribbon assembly into the very upper-left paper margin. On the 2200x1040 output its entire bounding rectangle must be x150..210,y85..190. No red pixels below y190, no red pixels right of x210. Tiny blank smooth wax disk, tiny short ribbon tips. Restore original uniform blank parchment where the large seal was. Absolutely no text, letters, stamps or new decoration. Preserve true transparent outside-corners. The paper must be empty from x220 onward, including former seal area.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-5c230af8-0e99-4695-9024-0fb2ff978315.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT of Image1. Keep the same horizontal card, every leather and parchment boundary and canvas ratio unchanged. ONLY shrink the red wax seal AND ribbon to 38 PERCENT of their present size. Move the tiny seal-and-ribbon assembly into the very upper-left paper margin. On the 2200x1040 output its entire bounding rectangle must be x150..210,y85..190. No red pixels below y190, no red pixels right of x210. Tiny blank smooth wax disk, tiny short ribbon tips. Restore original uniform blank parchment where the large seal was. Absolutely no text, letters, stamps or new decoration. Preserve true transparent outside-corners. The paper must be empty from x220 onward, including former seal area.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-5f729803-74ce-4289-93a6-525968a8900a.png"
+      ],
+      "exported": {
+        "sourceWidth": 1823,
+        "sourceHeight": 863,
+        "width": 2200,
+        "height": 1040,
+        "uniformScale": 1.2235817909240723,
+        "drawWidth": 2200,
+        "drawHeight": 1015.5729
+      }
+    },
+    {
+      "name": "dossier-bottom.png",
+      "w": 2400,
+      "h": 400,
+      "world": "west",
+      "base": "dossier-paper.png",
+      "mode": "wide",
+      "desc": "Create a single ultra-wide, VERY SHALLOW BOTTOM STRIP for a long parchment document. The OBJECT itself is6:1 width:height ratio, target2400x400. Place with transparent space above/below if needed. The TOP HALF is a completely plain, opaque parchment rectangle bounded only by darkbrown leather sidebands, x0..120 and2280..2400. Parchment continues upward straight off the top of the object; absolutely NO TOP horizontal leather edge or TOP parchment tear. In BOTTOM HALF, a subtly scorched/torn parchment LOWERedge at y200..340, then thin darkbrown leather folder bottomedge with worn rounded BOTTOMcorners and tiny matte silver perimeterline. No seal,no ribbon,no writing. Flatpaper opaque, matchreference. The upperedge is a fullwidth straight crop through continuing parchment and leather sides. The loweredge is the end of the folder, alpha outside its roundedcorners. Precise6:1shallowstripe.",
+      "align": "bottom",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-11c2007f-3081-4292-b27f-26f43f8592f2.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: precise-object-edit. Asset: dossier-bottom.png. Image1 is the MATERIAL AND GEOMETRY reference. Preserve paper color, fine grain, side-strip width and illustration rendering.\nCreate a single ultra-wide, VERY SHALLOW BOTTOM STRIP for a long parchment document. The OBJECT itself is6:1 width:height ratio, target2400x400. Place with transparent space above/below if needed. The TOP HALF is a completely plain, opaque parchment rectangle bounded only by darkbrown leather sidebands, x0..120 and2280..2400. Parchment continues upward straight off the top of the object; absolutely NO TOP horizontal leather edge or TOP parchment tear. In BOTTOM HALF, a subtly scorched/torn parchment LOWERedge at y200..340, then thin darkbrown leather folder bottomedge with worn rounded BOTTOMcorners and tiny matte silver perimeterline. No seal,no ribbon,no writing. Flatpaper opaque, matchreference. The upperedge is a fullwidth straight crop through continuing parchment and leather sides. The loweredge is the end of the folder, alpha outside its roundedcorners. Precise6:1shallowstripe.\nFront-on flat orthographic view, perfectly straight alignment, no perspective or tilt. This is finished artwork, not a photographed real object. Avoid photorealistic texture, extreme aged stains, ornate gold trims or decorative lettering. No letters, numbers, seals with emblems, drawings on the paper, stamps with patterns, or watermarks. Keep writing and image-placement zones wholly blank, smooth and uniform. Genuine alpha transparency outside the object, no background, no desk, no backdrop or cast shadow.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-77ec8fd4-5402-4e6d-b4c0-c922d0a42b50.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 400,
+        "uniformScale": 1.1183596849441528,
+        "drawWidth": 2400,
+        "drawHeight": 554.7064
+      }
+    },
+    {
+      "name": "scroll-card.png",
+      "w": 2200,
+      "h": 1040,
+      "world": "east",
+      "base": "scroll-paper.png",
+      "mode": "fit",
+      "zones": [
+        [
+          220,
+          160,
+          860,
+          594
+        ],
+        [
+          1160,
+          150,
+          820,
+          750
+        ]
+      ],
+      "desc": "Create a NEW fully unrolled HORIZONTAL Chinese handscroll card, exact object ratio2200:1040 (2.1154:1). Fill almost the entirecanvas with this object, NO broad transparent margins. At farLEFT x0..150 and farRIGHT x2050..2200 are slender BLACK LACQUERED WOOD ROLLERS with very small redcordknots confined to these side strips. The broad perfectly flat pale paper face occupies x150..2050,y60..980. Dark indigo silk top border y0..60 and bottom border y980..1040, faint cloud weave ONLY inside these borders, extremely low contrast. Insidepaper perfectly uniform as reference, NO outlines or picture placeholder drawn. Imagezone x220..1080,y160..754 and textzone x1160..1980,y150..900 must stay entirely unobstructed blank paper. No centerfold, curl shadows or rolls coveringpaper. Viewed straighton, restrained anime ink contours, veryfine2tone celshade only onrollers. Outsidecorners alpha, no desk.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-fa67b197-0b2a-4a8c-8580-99da0b4e254e.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT. Preserve Image1 horizontal handscroll, left/right black rollers, redcords and flat perspective unchanged. Enlarge ONLY the empty pale paper face vertically by making the top and bottom indigo silk bands half their current height. Paper extends further UP and DOWN; the navy bands become extremely thin strips at outer edges. Do not enlarge rollers. The final2200x1040 canvas must have blank pale opaque PAPER from y135 to y925 at all x200..2000. The y900 row must be blank PAPER, not navy, so give generous additional paper below it. Keep empty flat uniform paper color and faintgrain, no graphics or outlines. True alpha outside the whole scroll; paper itself fully opaque. No letters or text.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-f3f21efd-05b9-43ae-9a61-b525ca113e8a.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT. Preserve Image1 horizontal handscroll, left/right black rollers, redcords and flat perspective unchanged. Enlarge ONLY the empty pale paper face vertically by making the top and bottom indigo silk bands half their current height. Paper extends further UP and DOWN; the navy bands become extremely thin strips at outer edges. Do not enlarge rollers. The final2200x1040 canvas must have blank pale opaque PAPER from y135 to y925 at all x200..2000. The y900 row must be blank PAPER, not navy, so give generous additional paper below it. Keep empty flat uniform paper color and faintgrain, no graphics or outlines. True alpha outside the whole scroll; paper itself fully opaque. No letters or text.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-fa67b197-0b2a-4a8c-8580-99da0b4e254e.png"
+      ],
+      "exported": {
+        "sourceWidth": 1823,
+        "sourceHeight": 863,
+        "width": 2200,
+        "height": 1040,
+        "uniformScale": 1.214128017425537,
+        "drawWidth": 2200,
+        "drawHeight": 1027.1523
+      }
+    },
+    {
+      "name": "dossier-card-v.png",
+      "w": 1000,
+      "h": 1800,
+      "world": "west",
+      "base": "dossier-paper.png",
+      "mode": "fit",
+      "zones": [
+        [
+          100,
+          200,
+          800,
+          552
+        ],
+        [
+          110,
+          820,
+          780,
+          800
+        ]
+      ],
+      "desc": "Create a NEW TALL VERTICAL medieval record card, exact1000:1800 objectratio. Darkbrown matte leatherfolder fillscanvas with gently worn roundedcorners, very thin muted SILVER perimeter detail, no gold. Single pale warm agedparchmentsheet x50..950,y60..1740. Faintuniformgrain sameasreference. Scorched/torn edges confined to outer20px; interiors flatlight, no stains or shadow. At upperLEFT x60..190,y70..195 one SMALL SMOOTH RED WAX SEAL with short redribbon, nothing dangling below195. Sealblank, no emblem or text. Imagezone x100..900,y200..752 and textzone x110..890,y820..1620 completelyclear blank uniformpaper. Do not draw boxes or pictureplaceholders. No backdrop, straighton, alpha outsidefoldercorners.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-38fd5828-3845-44f8-9369-0417886ce843.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nOne tiny precise change to Image1: make the small red seal AND ribbon even smaller, 60% of their present size, holding the TOP LEFT corner of the assembly in the same place. Thus the ribbon ends move UP and RIGHT, leaving a wider band of totally blank parchment below them. The entire red assembly must fit above 9% of the full image height. Restore blank parchment where the old ribbon ends were. All other pixels/artwork composition, paper, leather border, colors and proportions unchanged. No text or symbols. Keep transparent exterior, opaque paper interior.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-ab8edde6-e1f5-40a7-9115-367d766fcfb4.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nOne tiny precise change to Image1: make the small red seal AND ribbon even smaller, 60% of their present size, holding the TOP LEFT corner of the assembly in the same place. Thus the ribbon ends move UP and RIGHT, leaving a wider band of totally blank parchment below them. The entire red assembly must fit above 9% of the full image height. Restore blank parchment where the old ribbon ends were. All other pixels/artwork composition, paper, leather border, colors and proportions unchanged. No text or symbols. Keep transparent exterior, opaque paper interior.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-38fd5828-3845-44f8-9369-0417886ce843.png"
+      ],
+      "exported": {
+        "sourceWidth": 936,
+        "sourceHeight": 1681,
+        "width": 1000,
+        "height": 1800,
+        "uniformScale": 1.1111111640930176,
+        "drawWidth": 1000.00006,
+        "drawHeight": 1793.3334
+      }
+    },
+    {
+      "name": "scroll-top.png",
+      "w": 2400,
+      "h": 400,
+      "world": "east",
+      "base": "scroll-paper.png",
+      "mode": "wide",
+      "desc": "Make a VERY SHALLOW ULTRAWIDE top-end strip of a Chinese hanging-scroll. The OBJECT width is SIX TIMES its HEIGHT, target2400x400. If canvas is taller, leave clear transparent space above/below the SHALLOW object. Upper quarter of OBJECT is a slim black lacquer wood roller with tiny redcord loops at eitherend. Next one eighth is a very THIN navy silk header, no folds or shading. The remaining LOWER TWO THIRDS of the SHALLOW OBJECT is FULLY OPAQUE PALE GREY WHITE PAPER, with narrow fullheight indigo SILK sideborders x0..120 and2280..2400. The whole body is as wide as rod, NO transparent side gaps. Paper and sideborders run alltheway to the very bottomedge of theobject, where they terminate in a STRAIGHTCROP that continues offpicture. NO bottomrod, no bottom navy border, NO transparent hole in paper. Color matchesreference. Paper completely flat and evenly lit. This is not a full scroll: only a short shallow TOP CAP with upperroller and below it an opaque plain rectangular slice of paper. No gold or text.",
+      "align": "top",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-3478cfc5-966a-49b3-8709-5b9738a8c2db.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPrecise minimal edit of Image1: Fill the two empty vertical gaps outside the left and right navy silk sidebands with the SAME navy silk, so the navy silk body now extends horizontally all the way to the left and right edges of the image. ONLY extend those two sidebands outward. Keep the big pale paper center exactly opaque and unchanged. Do not resize, crop, move or reshape the pale paper. Do not change the top roller, color, lighting, canvas proportions or any other detail. The bottom is still a straight crop. Keep transparent space ABOVE the top roller. No text.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-ab9a1670-3261-495e-95d0-569f6f51e51c.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 400,
+        "uniformScale": 1.151631474494934,
+        "drawWidth": 2400,
+        "drawHeight": 400.76776
+      },
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPrecise minimal edit of Image1: Fill the two empty vertical gaps outside the left and right navy silk sidebands with the SAME navy silk, so the navy silk body now extends horizontally all the way to the left and right edges of the image. ONLY extend those two sidebands outward. Keep the big pale paper center exactly opaque and unchanged. Do not resize, crop, move or reshape the pale paper. Do not change the top roller, color, lighting, canvas proportions or any other detail. The bottom is still a straight crop. Keep transparent space ABOVE the top roller. No text.",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-ab9a1670-3261-495e-95d0-569f6f51e51c.png"
+      ],
+      "crop": [
+        44,
+        98,
+        2084,
+        348
+      ]
+    },
+    {
+      "name": "scroll-bottom.png",
+      "w": 2400,
+      "h": 400,
+      "world": "east",
+      "base": "scroll-paper.png",
+      "mode": "wide",
+      "desc": "Use Image1 as MATERIAL reference to create a matching BOTTOM END of this long scroll. Very shallow ultrawide 6:1 object target2400x400. It has a slim horizontal BLACK LACQUER WOOD ROLLER along the BOTTOM, with tiny RED CORD wraps at both ends, no gold. Above the bottomroller is a very THIN navy silk horizontal band. Above that is a generous blank pale grey-white paper slice taking up TWO THIRDS of objectheight. Navy silk sides go all theway to left and right canvas edges, no transparent vertical gaps. Paper x120..2280 target, silk sidebands each120wide. Paper continues upward OFF the topedge (straight crop); no topbar, no topborder, no topwoodroller. The only roller is at the bottom. Total bottomroller plus thin horizontal silk band occupies only bottom THIRD ofobject. No long dangling redtassels. Whitepaper fullyopaque and uniformlylit. Exterior below roller can bealpha. No words or symbols. The result is just the shallow bottomend, NOT a full scroll.",
+      "align": "bottom",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-3478cfc5-966a-49b3-8709-5b9738a8c2db.png"
+      ],
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-23d308f0-b907-4e36-97c0-5dd14da54500.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nUse case: precise-object-edit. Asset: scroll-bottom.png. Image1 is the MATERIAL AND GEOMETRY reference. Preserve paper color, fine grain, side-strip width and illustration rendering.\nUse Image1 as MATERIAL reference to create a matching BOTTOM END of this long scroll. Very shallow ultrawide 6:1 object target2400x400. It has a slim horizontal BLACK LACQUER WOOD ROLLER along the BOTTOM, with tiny RED CORD wraps at both ends, no gold. Above the bottomroller is a very THIN navy silk horizontal band. Above that is a generous blank pale grey-white paper slice taking up TWO THIRDS of objectheight. Navy silk sides go all theway to left and right canvas edges, no transparent vertical gaps. Paper x120..2280 target, silk sidebands each120wide. Paper continues upward OFF the topedge (straight crop); no topbar, no topborder, no topwoodroller. The only roller is at the bottom. Total bottomroller plus thin horizontal silk band occupies only bottom THIRD ofobject. No long dangling redtassels. Whitepaper fullyopaque and uniformlylit. Exterior below roller can bealpha. No words or symbols. The result is just the shallow bottomend, NOT a full scroll.\nFront-on flat orthographic view, perfectly straight alignment, no perspective or tilt. This is finished artwork, not a photographed real object. Avoid photorealistic texture, extreme aged stains, ornate gold trims or decorative lettering. No letters, numbers, seals with emblems, drawings on the paper, stamps with patterns, or watermarks. Keep writing and image-placement zones wholly blank, smooth and uniform. Genuine alpha transparency outside the object, no background, no desk, no backdrop or cast shadow.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-3478cfc5-966a-49b3-8709-5b9738a8c2db.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 400,
+        "uniformScale": 1.2024048566818237,
+        "drawWidth": 2400,
+        "drawHeight": 401.6032
+      },
+      "crop": [
+        88,
+        273,
+        1996,
+        334
+      ]
+    },
+    {
+      "name": "dossier-top.png",
+      "w": 2400,
+      "h": 400,
+      "world": "west",
+      "base": "dossier-paper.png",
+      "mode": "wide",
+      "desc": "Create a single ultra-wide, VERY SHALLOW HEADER STRIP for a vertical parchment document. The OBJECT itself has precise6:1 width:height ratio, target2400x400. Arrange in a wide canvas with transparent space above/below if needed. The OBJECT is a shallow full-width dark-brown leather strip with rounded TOP corners only, lower edge a straight full-bleed cut. Matte silver thin upperedge trim. The upper half of this object (y0..200) has leather topedge and torn/scorched parchment TOPedge. The entire LOWER HALF (y200..400) is uninterrupted uniform parchment between x120..2280, leather atx0..120and2280..2400; loweredge continues vertically offobject and is NOT bounded by any horizontal leather edge or border. A tiny blank red wax seal with tiny short ribbon wholly within x150..300,y80..220. No design in seal. NO bottom edge of a folder, NO bottomparchmenttear, NO bottomoutline, just a straight crop through ongoing parchment and leather sides. Center paper solid opaque. Same material as reference. Wide flat orthographic strip, no perspective. Object must be very shallow, no taller than one-sixth its width.",
+      "source": "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-a8075fbe-4d72-4d6f-9a6b-6279d9ba1490.png",
+      "prompt": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT of Image1: only shrink the red wax seal AND its ribbon to 50% of their current size, keeping their TOP LEFT anchor at the same point. The seal gets much tinier; ribbon tips become very short. Restore perfectly blank parchment beneath the old ribbon. Everything else, canvasratio, folder boundaries, tornpaperedge, dimensions, paperand leathershading remain exactlyunchanged. No new decoration, no text. Preserve transparent exterior.",
+      "references": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-c6ec35e1-d0b9-439e-8578-0be46b634413.png"
+      ],
+      "exported": {
+        "sourceWidth": 2172,
+        "sourceHeight": 724,
+        "width": 2400,
+        "height": 400,
+        "uniformScale": 1.1049723625183105,
+        "drawWidth": 2400,
+        "drawHeight": 465.19336
+      },
+      "align": "top",
+      "refs": [
+        "C:\\Users\\ccjji\\.codex\\generated_images\\01a16eb3-c5ac-7763-894c-bc81f8feaef7\\exec-c6ec35e1-d0b9-439e-8578-0be46b634413.png"
+      ],
+      "promptOverride": "Match the attached reference illustrations exactly in drawing style: Japanese anime illustration, confident dark ink lineart with varied line weight, 2-3 tone cel shading with soft airbrushed gradients, glossy highlights on metal and glass, hand-painted retro anime background texture with fine ink hatching. Two material worlds: EAST (wuxia) = ink wash gradients, faint paper grain, silk color fields, brush-tip line endings, open asymmetric composition, palette ink #15171A, ink-blue #1F2A36, grey-white paper #E8E3D8, cinnabar #C0392B, silk red #8A1C1C, gold thread #B89A5A. WEST (medieval fantasy) = stone shading, matte metal, deep fabric, arch proportions, vertical structure, heraldic marks, ordered symmetry, palette limestone #C9C5BB, dark stone #4A4D55, deep blue #1F2F4E, silver #B8BCC4, muted gold #9C8449. NOT photorealistic, NOT 3D render, NOT glossy plastic game UI, NOT flat vector icon, NO neon glow, NO sci-fi HUD. No watermark, no signature, no people, no text or letters of any language.\nPRECISE MINIMAL EDIT of Image1: only shrink the red wax seal AND its ribbon to 50% of their current size, keeping their TOP LEFT anchor at the same point. The seal gets much tinier; ribbon tips become very short. Restore perfectly blank parchment beneath the old ribbon. Everything else, canvasratio, folder boundaries, tornpaperedge, dimensions, paperand leathershading remain exactlyunchanged. No new decoration, no text. Preserve transparent exterior."
+    }
+  ]
+}

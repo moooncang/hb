@@ -107,7 +107,7 @@
   var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
-  var ART = { title: true, crack: true, slash: true, doc: false };   // v3 그림(assets/skin3)과 v4 기록 그림(assets/skin4, design/ui-asset-order-v4.md). 끄면 글꼴 제목·빛선·v2 검격·질감 판으로 돌아간다
+  var ART = { title: true, crack: true, slash: true, doc: true };   // v3 그림(assets/skin3)과 v4 기록 그림(assets/skin4, design/ui-asset-order-v4.md). 끄면 글꼴 제목·빛선·v2 검격·질감 판으로 돌아간다
   if (hero) { hero.classList.toggle('has-title', ART.title); hero.classList.toggle('has-crack', ART.crack); }
   if (cover) cover.classList.toggle('art', ART.slash);
   $$('.rec, .viewer').forEach(function (el) { el.classList.toggle('art', ART.doc); });
@@ -268,13 +268,13 @@
   function rowsOf(c, full) {
     var by = BY || (c.side === 'west' ? 'east' : 'west'), r = [['소속', esc(c.org)], ['직책', esc(c.role)]], cr = corr(c);
     if (c.rank) r.push(['등급', esc(c.rank) + (cr ? '<small>' + (by === 'east' ? '동방 감각 · ' : '서방 감각 · ') + esc(cr) + ' (설정집 대응)</small>' : '')]);
-    r.push(['표식', esc(c.sig)]);
+    r.push(['표식', esc(c.sig), 'r-sig']);   // 세로 카드(모바일)에서는 숨기고 긴 기록에서만 보인다
     if (c.alias) r.push([c.side === 'east' ? '동방 별호' : '서방 이명', aliasHtml(c)]);
     if (full) { r.push(['나이', c.sex + ' · ' + c.age]); r.push(['말', esc(c.lang)]); }
     return r;
   }
   function recLabel(c) { var by = BY || (c.side === 'west' ? 'east' : 'west'); return '<i>' + (by === 'east' ? '東方記錄' : '西方記錄') + '</i>' + (c.side === 'neutral' ? '회색지대 · ' + (by === 'east' ? '동방의 기록' : '서방의 기록') : (by === 'east' ? '동방이 부르는 이름' : '서방이 부르는 이름')); }
-  function dl(rows, cls) { return '<dl class="' + cls + '">' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>'; }
+  function dl(rows, cls) { return '<dl class="' + cls + '">' + rows.map(function (r) { var k = r[2] ? ' class="' + r[2] + '"' : ''; return '<dt' + k + '>' + r[0] + '</dt><dd' + k + '>' + r[1] + '</dd>'; }).join('') + '</dl>'; }
   if (REC) {
     var jb = function (c) { return '<button type="button" data-open="' + c.code + '" aria-label="' + esc(c.name) + '"><img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '"></button>'; };
     $('.rec-jump', REC).innerHTML = '<span class="lbl ' + (BY === 'west' ? 'west' : '') + '">' + (BY === 'east' ? '<i>記</i>' : '<i class="shield"></i>') + '차례</span>' + LIST.filter(function (c) { return !c.noImage; }).map(jb).join('');
