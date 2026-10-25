@@ -173,29 +173,37 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
    .arm 450ms 숨 고르기 → .go: 검격이 오른쪽 위에서 왼쪽 아래로 붓처럼 그어진다(마스크 드러내기 700ms) → 중심을 지날 때 섬광 → 멈춤 →
    1000ms부터 두 조각이 선과 수직으로 1.5초 동안 천천히 밀려나며(느리게 시작해 빨라짐) 아래의 장면이 드러난다. 그림이 납품되면 .cover.art 로 층이 바뀐다 */
 .cv-fx { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
+/* --L: 검격 층 길이. 35° 선이 화면 안에 있는 길이(가로 ÷ cos35°, 세로 ÷ sin35° 중 짧은 쪽)의 1.2배, 최대 125vmax(넓은 화면은 예전 그대로) */
+.cover { --L: min(125vmax, 147vw, 210vh); }
 /* 검격 층의 길이는 125vmax(어느 비율의 화면이든 대각선을 덮는 최소). 높이는 그림 비율 그대로(2.5:1 → 50vmax 등) */
-.cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: 125vmax; background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
-.cv-slash, .cv-cut { -webkit-mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; }
-.cv-slash { height: 50vmax; margin: -25vmax 0 0 -62.5vmax; background-image: url(skin2/cover-slash.png); }
-.cv-cut { height: 6.67vmax; margin: -3.33vmax 0 0 -62.5vmax; background-image: url(skin2/cover-cut.png); }
-.cv-haze { height: 66.7vmax; margin: -33.3vmax 0 0 -62.5vmax; display: none; }
-.cv-dust { height: 41.7vmax; margin: -20.8vmax 0 0 -62.5vmax; display: none; }
+.cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: var(--L); background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
+/* 그어지는 검격: 마스크 위치를 움직이면 폰은 큰 층을 매 프레임 다시 그린다(버벅임의 원인).
+   창(b)이 오른쪽에서 밀려 들어오고 그림(s)은 같은 만큼 반대로 움직여 제자리에 있다 — 둘 다 transform이라 합성기만 쓴다. 창의 앞 0.6배 폭은 부드러운 끝 */
+.cv-slash > b, .cv-cut > b { position: absolute; top: 0; bottom: 0; left: -60%; width: 160%; overflow: hidden; transform: translateX(100%); -webkit-mask: linear-gradient(90deg, transparent, #000 37.5%); mask: linear-gradient(90deg, transparent, #000 37.5%); will-change: transform; }
+.cv-slash s, .cv-cut s { position: absolute; top: 0; bottom: 0; left: 37.5%; width: 62.5%; background: center / 100% 100% no-repeat; transform: translateX(-160%); will-change: transform; }
+.cv-slash { height: calc(var(--L) * .4); margin: calc(var(--L) * -.2) 0 0 calc(var(--L) * -.5); background: none; } .cv-slash s { background-image: url(skin2/cover-slash.png); }
+.cv-cut { height: calc(var(--L) * .0534); margin: calc(var(--L) * -.0267) 0 0 calc(var(--L) * -.5); background: none; } .cv-cut s { background-image: url(skin2/cover-cut.png); }
+.cv-haze { height: calc(var(--L) * .5336); margin: calc(var(--L) * -.2668) 0 0 calc(var(--L) * -.5); display: none; }
+.cv-dust { height: calc(var(--L) * .3336); margin: calc(var(--L) * -.1668) 0 0 calc(var(--L) * -.5); display: none; }
 .cv-flash, .cv-ring { position: absolute; left: 50%; top: 50%; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; background: center / contain no-repeat; opacity: 0; transform: scale(.4); }
 .cv-flash { background-image: url(skin2/cover-flash.png); }
 .cv-ring { display: none; }
 .cover.arm .orb { filter: brightness(1.12); transition: filter 350ms var(--ease); }   /* 숨 고르기: 밝아지기만 한다. 달이 커지면 안 된다 */
 .cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar, .cover.arm .cv-log { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
 .cover.go { background: transparent; }
-.cover.go .cv-slash { opacity: 1; animation: draw 650ms cubic-bezier(.45, .05, .25, 1) both, fadeout 420ms 760ms var(--ease) forwards; }
-.cover.go .cv-cut { opacity: 1; animation: draw 650ms 50ms cubic-bezier(.45, .05, .25, 1) both, fadeout 1100ms 1000ms linear forwards; }
+.cover.go .cv-slash { opacity: 1; animation: fadeout 420ms 760ms var(--ease) forwards; }
+.cover.go .cv-cut { opacity: 1; animation: fadeout 1100ms 1000ms linear forwards; }
+.cover.go .cv-slash > b { animation: drawB 650ms cubic-bezier(.45, .05, .25, 1) both; } .cover.go .cv-slash s { animation: drawS 650ms cubic-bezier(.45, .05, .25, 1) both; }
+.cover.go .cv-cut > b { animation: drawB 650ms 50ms cubic-bezier(.45, .05, .25, 1) both; } .cover.go .cv-cut s { animation: drawS 650ms 50ms cubic-bezier(.45, .05, .25, 1) both; }
 .cover.go .cv-flash { animation: flash 800ms 300ms var(--ease) forwards; }
 .cover.go .cv-half { transform: translate(var(--tx), var(--ty)) rotate(var(--rot, 0deg)); transition: transform 1100ms cubic-bezier(.7, 0, .3, 1) 780ms; }
-@keyframes draw { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
+@keyframes drawB { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes drawS { from { transform: translateX(-160%); } to { transform: none; } }
 @keyframes fadeout { to { opacity: 0; } }
 @keyframes flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.7); } }
 /* v3 그림(assets/skin3)이 오면: 핵·오러·잔광·섬광·충격파·절단면·파편 층 */
-.cover.art .cv-slash { background-image: url(skin3/slash-aura.png); height: 50vmax; margin-top: -25vmax; }
-.cover.art .cv-cut { background-image: url(skin3/slash-core.png); height: 16.67vmax; margin-top: -8.33vmax; }
+.cover.art .cv-slash { height: calc(var(--L) * .4); margin-top: calc(var(--L) * -.2); } .cover.art .cv-slash s { background-image: url(skin3/slash-aura.png); }
+.cover.art .cv-cut { height: calc(var(--L) * .1334); margin-top: calc(var(--L) * -.0667); } .cover.art .cv-cut s { background-image: url(skin3/slash-core.png); }
 .cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.png); }
 .cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.png); }
 .cover.art .cv-flash { background-image: url(skin3/flash-burst.png); transform: scale(.5) rotate(-35deg); }
@@ -205,7 +213,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cover.art.go .cv-haze { animation: fadein 500ms 550ms var(--ease) both, fadeout 1100ms 1150ms var(--ease) forwards; }
 .cover.art.go .cv-ring { animation: ring 1000ms 300ms cubic-bezier(.2, .7, .3, 1) forwards; }
 .cover.art.go .cv-dust { animation: dust 1500ms 780ms var(--ease) forwards; }
-.cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: 125vmax; height: 10vmax; margin: -5vmax 0 0 -62.5vmax; background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
+.cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: var(--L); height: calc(var(--L) * .08); margin: calc(var(--L) * -.04) 0 0 calc(var(--L) * -.5); background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
 .cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.png); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.png); transform: rotate(-35deg) translateY(50%); }
 .cover.art.go .cv-edge { animation: fadein 300ms 700ms var(--ease) both; }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
@@ -816,6 +824,9 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .pw-stack .pw-st::after { left: 32px; }
 }
 @media (max-width: 760px) {
+  /* 폰: 화면 전체를 덮는 번짐 층과 달 밝히기 필터는 뺀다(합성 부담이 크고 작은 화면에선 거의 안 보인다) */
+  .cover.art .cv-haze { display: none; }
+  .cover.arm .orb { filter: none; }
   /* 표지: 전선 로그가 아래 줄(Written by)과 겹치던 것 → 2×2로 접고 행을 따로 준다 */
   .cv-body { grid-template-rows: auto 1fr auto auto; }
   .cv-log { grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 11px; margin: 10px 0 12px; }
@@ -849,6 +860,27 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   /* 기록: 단추 둘이 한 줄에 들어가게 같은 비율로 축소(160×46 → 136×39) */
   .sc-cuts-row .btn2.sm { width: 136px; height: 39px; padding: 0 20px; font-size: 12px; }
   .v-head .attach { width: 150px; }
+}
+@media (max-width: 760px) {
+  /* 장면(폰) 배치. 높이는 화면 높이 비례(균열 띠는 가로 130% → 띠 높이 43vw), 얼굴 위치는 그림 기준(위지란 첫등장 얼굴 = 그림 높이의 28%).
+     동방 그림: 이음새(50%)에서 시작, 높이 70% → 얼굴이 화면 높이의 약 69%(띠 아래, 이름표 위). 서방 그림은 위에서 시작(아르델 얼굴 ≈ 14%) */
+  .crack { background-size: 130% auto; }
+  .plane.east .art { top: 50%; bottom: auto; height: 70%; object-position: 50% 0; transform-origin: 50% 30%; }
+  .hero::after { background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 16%), linear-gradient(to top, rgba(15, 20, 25, .88) 0%, rgba(15, 20, 25, .4) 12%, rgba(15, 20, 25, 0) 27%); }   /* 아래 어둠을 메뉴·토글 높이까지만(얼굴까지 덮던 것) */
+  .plane.east .cam::after { opacity: .1; }
+  .hero .tag.east::before { top: -8px; bottom: -10px; }
+  .hero .tag .sub { display: none; }   /* 소속 줄은 긴 기록과 장면 아래 세력 칸에 있다. 폰에서는 얼굴을 덮지 않게 뺀다 */
+  .hero .tag .hname { width: 216px; height: 48px; font-size: 17px; } .hero .tag .hname.east { padding: 0 18px 0 45px; } .hero .tag .hname.west { padding: 0 60px 0 18px; }   /* 720×160 비율 그대로 */
+  .hero .tag.west { bottom: calc(50% + 21.7vw + 6px - var(--seam, 0%)); transition: opacity var(--t-space), bottom var(--t-space) var(--ease); }   /* 진영을 고르면 균열과 같이 움직인다 */
+  .hero .tag.east { bottom: 98px; }
+  .hero .pick { bottom: 52px; } .hero .pick .toggle { width: 110px; height: 38.5px; font-size: 12px; padding: 0 22px; }   /* 320×112 비율 그대로 */
+  .hero .smenu { bottom: 8px; } .hero .smenu a { padding: 5px 0; } .hero .smenu a i { display: none; } .hero .smenu a b { font-size: 13px; }
+  .hero .smenu::before { height: 260%; }
+}
+@media (max-width: 760px) and (max-height: 620px) {
+  .hero .tag .alias { display: none; }   /* 키 작은 폰(아이폰 SE 등): 별호 줄까지 빼야 얼굴이 보인다 */
+  .hero .tag.east { bottom: 90px; }
+  .hero .pick { bottom: 46px; }
 }
 @media (max-width: 760px) and (max-height: 700px) {
   .hero .tag .sub { display: none; }   /* 키 작은 폰: 소속 줄은 긴 기록에 있다. 이름표가 얼굴을 덮지 않게 */

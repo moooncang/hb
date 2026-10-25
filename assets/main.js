@@ -130,13 +130,25 @@
   else if (cover) {
     d.body.classList.add('lock');
     var SKIN3 = ['title-ink', 'slash-core', 'slash-aura', 'slash-haze', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'seam-crack', 'seam-crack-h', 'title-v', 'title-h'];
-    var list = SKIN3.map(function (n) { return 'assets/skin3/' + n + '.png'; }).concat(COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; }))
+    var all = SKIN3.map(function (n) { return 'assets/skin3/' + n + '.png'; }).concat(COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; }))
       .concat(SKINS.map(function (n) { return 'assets/skin/' + n + '.png'; })).concat(JPGS.map(function (n) { return 'assets/skin/' + n + '.jpg'; }))
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
+    // 입장 전에는 입장 연출과 첫 장면에 쓰는 그림만 기다린다(전부 22MB를 기다리면 폰 회선에선 10초 넘게 걸리고, 갈라지는 동안 내려받기·해독이 겹쳐 버벅인다).
+    // 나머지는 장면이 열린 뒤 천천히 받는다
+    var narrowNow = matchMedia('(max-width: 760px)').matches;
+    var need = ['slash-core', 'slash-aura', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'title-ink', narrowNow ? 'seam-crack-h' : 'seam-crack', narrowNow ? 'title-h' : 'title-v'].concat(narrowNow ? [] : ['slash-haze']).map(function (n) { return 'assets/skin3/' + n + '.png'; })
+      .concat(['hero-name-east', 'hero-name-west', 'toggle-west-idle', 'toggle-east-idle', 'toggle-west-active', 'toggle-east-active'].map(function (n) { return 'assets/skin2/' + n + '.png'; }))
+      .concat(['seal-east', 'emblem-west', 'btn-round-west-idle', 'icon-menu', 'fa-gardeon', 'fa-mugan'].map(function (n) { return 'assets/skin/' + n + '.png'; }))
+      .concat(['assets/skin/tex-ink-night.jpg', large('A', 1), large('G', 1)]);
+    if (!ART.slash) need = need.concat(['cover-slash', 'cover-flash', 'cover-cut'].map(function (n) { return 'assets/skin2/' + n + '.png'; }));
+    var orbSrc = COVER.slice(0, 5).map(function (n) { return 'assets/skin2/' + n + '.png'; });
+    var list = need, rest = all.filter(function (src) { return need.indexOf(src) < 0 && orbSrc.indexOf(src) < 0; }), keep = [];
     var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0;
     var tick = function () { done++; var r = done / total; bar.style.width = Math.round(r * 100) + '%'; pct.textContent = done + ' / ' + total; logs.forEach(function (li, i) { if (r >= (i + 1) / (logs.length + 1)) li.classList.add('on'); }); if (done >= total) arm(); };
     var arm = function () { if (ready) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
-    var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); i.onload = i.onerror = tick; i.src = src; }); };
+    // 받은 뒤 해독까지 끝내 둔다(갈라지는 순간 큰 PNG를 처음 해독하면 그 자리에서 멈칫한다). 참조를 쥐고 있어 캐시에서 빠지지 않게
+    var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); keep.push(i); i.onerror = tick; i.onload = function () { if (i.decode) i.decode().then(tick, tick); else tick(); }; i.src = src; }); };
+    $$('.cv-slash, .cv-cut', cover).forEach(function (el) { el.innerHTML = '<b><s></s></b>'; });   // 합성기만 쓰는 드러내기용 창(style.css 검격 층)
     COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = 'assets/skin2/' + n + '.png'; });
     setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
     // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
@@ -145,7 +157,8 @@
       var D = (w / 2) * nx + (h / 2) * ny + Math.max(w, h) * 0.08;   // 가장 먼 모서리가 선에서 떨어진 거리 + 절단면 두께: 딱 화면을 벗어날 만큼만 밀어 1.5초를 다 쓴다
       var P = function (x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; };
       var poly = function (s) { return 'polygon(' + [P(cx - dx * R, cy - dy * R), P(cx + dx * R, cy + dy * R), P(cx + dx * R + s * nx * R, cy + dy * R + s * ny * R), P(cx - dx * R + s * nx * R, cy - dy * R + s * ny * R)].join(',') + ')'; };
-      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });
+      // 달의 회전 층을 그 자리에 멈추고 층을 합친다(조각마다 따로 노는 층 5장 → 조각 한 장). 합치는 그리기는 숨 고르기 350ms 동안 끝난다
+      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; el.style.willChange = 'auto'; });
       var body = $('.cv-body', cover), fx = $('.cv-fx', cover), clone = body.cloneNode(true);
       [[body, -1, 'a'], [clone, 1, 'b']].forEach(function (p) {
         var half = d.createElement('div'); half.className = 'cv-half';
@@ -156,7 +169,7 @@
       });
       cover.getBoundingClientRect();
     };
-    var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); };
+    var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); keep = []; var drip = function () { var n = rest.splice(0, 4); n.forEach(prefetch); if (rest.length) (window.requestIdleCallback || setTimeout)(drip, 350); }; setTimeout(drip, 1500); };   // 나머지는 조금씩(한꺼번에 받으면 장면에서 멈칫)
     // 시각표(ms, 누른 뒤): 0 숨 고르기 → 350 검격 긋기 650 → 650 섬광 → 1130 두 조각이 1.1초 동안 밀려남 → 1450 장면 등장 → 2300 표지 제거
     var enterNow = function () {
       if (!ready || going) return; going = true;
