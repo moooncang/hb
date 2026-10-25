@@ -51,30 +51,34 @@
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }) : null;
   $$('.reveal').forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); });
   ['wipe-ink-1', 'wipe-ink-2', 'wipe-ink-3', 'wipe-aura'].forEach(function (n) { prefetch('assets/skin2/' + n + '.png'); });
-  var leaving = false;
+  // 나가는 쪽: 와이프 두 장(먹 번짐·오러 날)을 페이지가 열릴 때 미리 만들어 둔다 — 누르는 순간 층을 만들며 멈칫하지 않도록
+  var leaving = false, WIPES = {};
+  function makeWipe(kind) { var w = d.createElement('i'); w.className = 'wipe ' + kind; w.setAttribute('aria-hidden', 'true'); d.body.appendChild(w); return w; }
+  if (!reduce) { WIPES.ink = makeWipe('ink' + (1 + Math.floor(Math.random() * 3))); WIPES.aura = makeWipe('aura'); }
   function go(href) {
     if (leaving) return;
     if (reduce) { location.href = href; return; }
     leaving = true;
-    var kind = /fronts|start|characters-east/.test(href) ? 'aura' : 'ink' + (1 + Math.floor(Math.random() * 3));   // 서방 페이지는 오러 쐐기, 동방 페이지(동방의 기록 포함)는 먹 번짐
-    var w = d.createElement('i'); w.className = 'wipe ' + kind;
-    d.body.appendChild(w); w.getBoundingClientRect(); w.classList.add('on');
-    try { sessionStorage.setItem('hb-wipe', kind); } catch (e) { }   // 다음 페이지가 같은 모양으로 덮인 채 시작한다
-    setTimeout(function () { location.href = href; }, 540);
+    var west = /fronts|start|characters-east/.test(href), w = west ? WIPES.aura : WIPES.ink;   // 서방 페이지는 오러 날, 동방 페이지(동방의 기록 포함)는 먹 번짐
+    w.getBoundingClientRect(); w.classList.add('on');
+    try { sessionStorage.setItem('hb-wipe', west ? 'aura' : 'ink'); } catch (e) { }   // 다음 페이지가 먹으로 덮인 채 시작한다
+    setTimeout(function () { location.href = href; }, west ? 460 : 390);   // 덮개가 거의 닫힌 뒤 이동. 새 문서가 올 때까지 이 페이지는 계속 움직인다
   }
-  addEventListener('pageshow', function (e) { if (e.persisted) { leaving = false; $$('.wipe').forEach(function (w) { w.parentNode.removeChild(w); }); try { sessionStorage.removeItem('hb-wipe'); } catch (x) { } } });
-  // 들어오는 쪽: 덮개가 그려진 채 시작했으면(html[data-wipe], 머리의 인라인 스크립트) 그림이 준비되는 대로 녹여 없앤다
-  if (d.documentElement.dataset.wipe) {
-    var wiped = false, wipeOut = function () { if (wiped) return; wiped = true; d.documentElement.classList.add('wiped'); setTimeout(function () { delete d.documentElement.dataset.wipe; d.documentElement.classList.remove('wiped'); }, 720); };
-    addEventListener('load', wipeOut); setTimeout(wipeOut, 600);
+  addEventListener('pageshow', function (e) { if (e.persisted) { leaving = false; $$('.wipe').forEach(function (w) { w.classList.remove('on'); }); try { sessionStorage.removeItem('hb-wipe'); } catch (x) { } } });
+  // 들어오는 쪽: 먹으로 덮인 채 그려졌으면 글꼴이 준비되는 대로 바로 걷는다(최대 450ms). 장면의 등장 같은 것은 걷힌 뒤에 시작한다
+  var wiped = !d.documentElement.dataset.wipe, afterWipe = [];
+  function onWiped(fn) { if (wiped) fn(); else afterWipe.push(fn); }
+  if (!wiped) {
+    var wipeOut = function () {
+      if (wiped) return; wiped = true;
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        enter(); d.documentElement.classList.add('wiped'); afterWipe.forEach(function (f) { f(); }); afterWipe = [];
+        setTimeout(function () { delete d.documentElement.dataset.wipe; d.documentElement.classList.remove('wiped'); }, 420);
+      }); });
+    };
+    var fontsReady = (d.fonts && d.fonts.ready) ? d.fonts.ready : Promise.resolve();
+    fontsReady.then(wipeOut, wipeOut); setTimeout(wipeOut, 450);
   }
-  d.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href]'); if (!a || a.target || e.metaKey || e.ctrlKey || e.shiftKey || a.getAttribute('aria-disabled') === 'true') { if (a && a.getAttribute('aria-disabled') === 'true') e.preventDefault(); return; }
-    var h = a.getAttribute('href'); if (!/^[a-z]+\.html(#.*)?$/.test(h)) return;
-    var here = location.pathname.split('/').pop() || 'index.html';
-    if (h.split('#')[0] === here && h.indexOf('#') >= 0) return;   // 같은 페이지 안의 구간 이동은 그대로
-    e.preventDefault(); go(h);
-  });
 
   // ===== 메뉴 · 단축키 =====
   var menu = $('#menu'), menuBtn = $('.menu-btn'), menuFrom = null;
@@ -112,7 +116,7 @@
   if (cover) cover.classList.toggle('art', ART.slash);
   $$('.rec, .viewer').forEach(function (el) { el.classList.toggle('art', ART.doc); });
   $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
-  function showHero() { if (hero) requestAnimationFrame(function () { hero.classList.add('in'); }); }
+  function showHero() { if (hero) onWiped(function () { requestAnimationFrame(function () { hero.classList.add('in'); }); }); }
   if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
   else if (cover) {
     d.body.classList.add('lock');
@@ -144,15 +148,15 @@
       cover.getBoundingClientRect();
     };
     var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); };
-    // 시각표(ms, 누른 뒤): 0 숨 고르기 → 450 검격 긋기 700 → 830 섬광 → 1450 두 조각이 1.5초 동안 밀려남 → 2000 장면 등장 → 3100 표지 제거
+    // 시각표(ms, 누른 뒤): 0 숨 고르기 → 350 검격 긋기 650 → 650 섬광 → 1130 두 조각이 1.1초 동안 밀려남 → 1450 장면 등장 → 2300 표지 제거
     var enterNow = function () {
       if (!ready || going) return; going = true;
       try { sessionStorage.setItem('hb-in', '1'); } catch (e) { }
       if (reduce) { finish(); showHero(); return; }
       cover.classList.add('arm'); split();
-      setTimeout(function () { cover.classList.add('go'); }, 450);
-      setTimeout(showHero, 2000);
-      setTimeout(finish, 3100);
+      setTimeout(function () { cover.classList.add('go'); }, 350);
+      setTimeout(showHero, 1450);
+      setTimeout(finish, 2300);
     };
     setTimeout(arm, 15000);   // 느린 회선: 15초 뒤에는 열어 준다
     d.addEventListener('keydown', function (e) { if (cover && !e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
@@ -246,7 +250,7 @@
 
   // ===== 인물 기록: 서방 인물 페이지 = 동방이 모아 둔 두루마리, 동방 인물 페이지 = 서방이 모아 둔 양피지 서류. 회색지대(레나타)는 양쪽 다 =====
   var REC = $('.rec'), BY = REC ? REC.dataset.by : null, LIST = REC ? C.filter(function (c) { return c.side === REC.dataset.side || c.side === 'neutral'; }) : [];
-  var HANJA_N = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  var HANJA_N = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'], ROMAN_N = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ', 'Ⅸ', 'Ⅹ'];   // 동방 기록은 한자 번호, 서방 서류는 로마 숫자
   function callOf(c) { return c.side === 'neutral' ? '' : (c.alias2 || ''); }   // 상대편이 부르는 이름(설정집: 서방 인물의 동방 별호 / 동방 인물의 서방 이명)
   function callHtml(s) { var m = /^(.+?)\((.+)\)$/.exec(s); return m ? esc(m[1]) + '<span class="hj">' + esc(m[2]) + '</span>' : esc(s); }
   // 대응 감각: 설정집 도해의 같은 행(동방 경지 ↔ 서방 기사 등급·서클). 행이 없는 단계(사제·정령·룬)는 비워 둔다
@@ -268,7 +272,8 @@
   function rowsOf(c, full) {
     var by = BY || (c.side === 'west' ? 'east' : 'west'), r = [['소속', esc(c.org)], ['직책', esc(c.role)]], cr = corr(c);
     if (c.rank) r.push(['등급', esc(c.rank) + (cr ? '<small>' + (by === 'east' ? '동방 감각 · ' : '서방 감각 · ') + esc(cr) + ' (설정집 대응)</small>' : '')]);
-    r.push(['표식', esc(c.sig), 'r-sig']);   // 세로 카드(모바일)에서는 숨기고 긴 기록에서만 보인다
+    var R = (HB.records && HB.records[c.code]) || {};
+    r.push(['표식', esc(full && R.sig ? R.sig : c.sig), 'r-sig']);   // 세로 카드(모바일)에서는 숨기고 긴 기록에서만 보인다. 긴 기록에는 설정집의 상세 표식
     if (c.alias) r.push([c.side === 'east' ? '동방 별호' : '서방 이명', aliasHtml(c)]);
     if (full) { r.push(['나이', c.sex + ' · ' + c.age]); r.push(['말', esc(c.lang)]); }
     return r;
@@ -278,16 +283,26 @@
   if (REC) {
     var jb = function (c) { return '<button type="button" data-open="' + c.code + '" aria-label="' + esc(c.name) + '"><img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '"></button>'; };
     $('.rec-jump', REC).innerHTML = '<span class="lbl ' + (BY === 'west' ? 'west' : '') + '">' + (BY === 'east' ? '<i>記</i>' : '<i class="shield"></i>') + '차례</span>' + LIST.filter(function (c) { return !c.noImage; }).map(jb).join('');
+    var THUMBS = [2, 16, 20];   // 카드의 컷 띠: 평소 · 분노 · 필살기(HB.scenes 번호)
+    var sceneName = function (n) { var s = HB.scenes.filter(function (x) { return x[1].indexOf(n) >= 0; })[0]; return s ? s[0] : ''; };
+    var obsOf = function (c) {   // 관찰 한 줄: 설정집 「성격」의 앞 두 문장(문장 단위로만 끊는다)
+      var R = HB.records && HB.records[c.code]; if (!R || !R.persona) return '';
+      var parts = R.persona.split('. '), out = [], len = 0;
+      for (var i = 0; i < parts.length && out.length < 2; i++) { out.push(parts[i]); len += parts[i].length; if (len >= 26) break; }
+      var s = out.join('. '); return s + (/[.!?」)]$/.test(s) ? '' : '.');
+    };
     $('.docs', REC).innerHTML = LIST.map(function (c, i) {
-      var call = callOf(c), fa = faOf(c);
+      var call = callOf(c), fa = faOf(c), obs = obsOf(c);
       var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
         : '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
-      return '<article class="doc ' + BY + '" role="button" tabindex="0" data-open="' + c.code + '" data-fig="' + c.code + '" aria-label="' + esc(c.name) + ' 기록 펼치기">' +
-        '<span class="pic">' + img + '</span><span class="tx">' +
-        '<span class="num">' + (BY === 'east' ? '記 · ' : '№ ') + HANJA_N[i] + '</span>' +
+      var thumbs = c.noImage ? '' : '<span class="thumbs">' + THUMBS.map(function (n) { return '<span class="th"><button type="button" data-open="' + c.code + '" data-n="' + n + '" aria-label="' + esc(c.name) + ' · ' + sceneName(n) + '"><img src="' + thumb(c.code, n) + '" alt="" loading="lazy"></button><small>' + sceneName(n) + '</small></span>'; }).join('') + '</span>';
+      return '<article class="doc ' + BY + '" role="button" tabindex="0" data-open="' + c.code + '" data-fig="' + c.code + '" aria-label="' + esc(c.name) + ' 기록 펼치기"' + '>' +
+        '<span class="num">' + (BY === 'east' ? '記 · ' + HANJA_N[i] : '№ ' + ROMAN_N[i]) + '</span>' + (fa ? '<i class="wm" aria-hidden="true" style="background-image:url(assets/skin/fa-' + (EMB[fa.id] || fa.id) + '.png)"></i>' : '') +
+        '<span class="pic">' + img + '</span>' + thumbs + '<span class="tx">' +
         '<span class="call">' + (call ? callHtml(call) : esc(c.name)) + '</span>' +
         '<span class="nm">' + (fa ? emb(fa.id) : '') + (call ? esc(c.name) : (fa ? esc(fa.name) : HB.sides[c.side])) + '</span>' +
         '<i class="stroke ' + BY + '"></i>' + dl(rowsOf(c, false), 'rows') +
+        (obs ? '<span class="obs"><b>관찰</b>' + esc(obs) + '</span>' : '') +
         '<span class="open">기록 펼치기 →</span></span></article>';
     }).join('');
     REC.addEventListener('keydown', function (e) { var t = e.target.closest('[data-open]'); if (t && t.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); t.click(); } });
@@ -325,13 +340,30 @@
     $('.v-pos', V).textContent = (by === 'east' ? '동방의 기록' : '서방의 기록') + ' · ' + (i + 1) + ' / ' + list.length;
     $('.v-prev', V).textContent = p.name; $('.v-prev', V).dataset.code = p.code;
     $('.v-next', V).textContent = nx.name; $('.v-next', V).dataset.code = nx.code;
+    var R = (HB.records && HB.records[code]) || {};
+    var attach = c.noImage ? '' : '<button type="button" class="v-card attach" aria-label="등장 카드 전체 보기"><img src="img/card/' + c.code + '.jpg" alt="" loading="lazy" width="1600" height="1103"><i class="pin" aria-hidden="true"></i></button>';   // 등장 카드를 기록에 첨부
     $('.v-head', V).innerHTML = '<div><p class="lbl ' + (by === 'west' ? 'west' : '') + '">' + recLabel(c) + '</p><h2 class="call">' + (call ? callHtml(call) : esc(c.name)) + '</h2>' +
       '<p class="nm">' + (fa ? emb(fa.id) : '') + (call ? esc(c.name) : (fa ? esc(fa.name) : HB.sides[c.side])) + '</p><i class="stroke ' + by + '"></i></div>' +
-      '<p class="meta"><span><b>' + HB.sides[c.side] + '</b> · ' + esc(c.org) + '</span><span>' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span></p>';
+      '<div class="v-right">' + attach + '<p class="meta"><span><b>' + HB.sides[c.side] + '</b> · ' + esc(c.org) + '</span><span>' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span></p></div>';
+    $('.v-wm', V).style.backgroundImage = fa ? 'url(assets/skin/fa-' + (EMB[fa.id] || fa.id) + '.png)' : 'none';   // 세력 문장 투문
     $('.kv', V).innerHTML = rowsOf(c, true).map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('');
     var rel = HB.relations.filter(function (r) { return r[0] === code || r[1] === code; });
     $('.rel', V).innerHTML = rel.length ? rel.map(function (r) { var o = r[0] === code ? r[1] : r[0]; return '<li>' + chip(o) + '<span>' + esc(r[2]) + '</span></li>'; }).join('') : '<li><span class="empty">설정집에 적힌 관계 없음</span></li>';
     $('[data-stages]', V).textContent = '같은 진영 ' + W.stages.same;
+    // 정보관의 기록 구획: 설정집 문장 그대로(관찰 = 성격·말투, 내력 = 사정·목표, 외모, 호칭의 까닭, 무공)
+    var eastName = c.side === 'east' ? (c.alias ? c.alias + (c.aliasHanja ? '(' + c.aliasHanja + ')' : '') : '') : (c.alias2 || '');
+    var westName = c.side === 'east' ? (c.alias2 || '') : (c.alias || '');
+    var nameLine = function (label, name, why, none) { if (!name && !none) return ''; return '<p><b>' + label + '</b>' + (name ? '「' + esc(name) + '」' + (why ? ' — ' + esc(why) : '') : esc(none)) + '</p>'; };
+    $$('[data-rec]', V).forEach(function (el) {
+      var k = el.dataset.rec, html = '';
+      if (k === 'persona') html = (R.persona ? '<p>' + esc(R.persona) + '</p>' : '') + (R.tone ? '<p><b>말투</b>' + esc(R.tone) + '</p>' : '');
+      else if (k === 'story') html = (R.story ? '<p>' + esc(R.story) + '</p>' : '') + (R.goal ? '<p><b>목표</b>' + esc(R.goal) + '</p>' : '');
+      else if (k === 'look') html = R.look ? '<p>' + esc(R.look) + '</p>' : '';
+      else if (k === 'names') html = c.side === 'neutral' ? '' : nameLine('동방 별호', eastName, R.eastWhy, R.eastNone) + nameLine('서방 이명', westName, R.westWhy, R.westNone);
+      else if (k === 'arts') html = R.arts ? '<p>' + esc(R.arts) + '</p>' : '';
+      el.innerHTML = html || '<p class="empty">설정집에 적힌 것 없음</p>';
+      var sec = el.closest('.v-sec'); if (sec && sec.dataset.recSec != null) sec.hidden = !html;
+    });
     // 소속 세력과 전선의 설정집 문장(원문 그대로)
     var ctx = (fa ? '<article><p class="nm">' + emb(fa.id) + esc(fa.name) + (fa.hanja ? '<span class="hj">' + fa.hanja + '</span>' : '') + '<small>소속</small></p><p>' + esc(fa.note) + '</p></article>' : '') +
       frontsOf(c).map(function (f) { return '<article><p class="nm">' + esc(f.name) + '<span class="hj">' + FRONT_HJ[f.id] + '</span><small>전선 · ' + esc(f.place) + '</small></p><p>' + esc(f.note) + '</p><p><a href="fronts.html#' + f.id + '">전선에서 보기 →</a></p></article>'; }).join('');
@@ -383,7 +415,7 @@
     cur.pushed = false; setHash('');
   }
   d.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-open]'); if (t) { if (V) open(t.dataset.open, 1, t.closest('.doc') || null, true); else go(pageOf(t.dataset.open) + '#' + t.dataset.open); return; }
+    var t = e.target.closest('[data-open]'); if (t) { if (V) open(t.dataset.open, +t.dataset.n || 1, t.closest('.doc') || null, true); else go(pageOf(t.dataset.open) + '#' + t.dataset.open); return; }
     if (!V) return;
     if (e.target.closest('.v-close')) { if (cur.pushed) history.back(); else close(); return; }
     var nv = e.target.closest('.v-prev, .v-next'); if (nv) { open(nv.dataset.code, 1, null, false); return; }
