@@ -110,6 +110,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .top { position: fixed; inset: 0 0 auto 0; height: var(--top); z-index: 50; display: flex; align-items: center; gap: 24px; padding: 0 var(--gutter); color: #fff; background: linear-gradient(to bottom, rgba(15, 20, 25, .82), rgba(15, 20, 25, 0)); }
 .top .brand { display: flex; align-items: center; gap: 9px; font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
 .top .brand .seal { font-size: 18px; }
+.p-home .top .brand { visibility: hidden; }   /* 메인 화면: 바로 아래 큰 제목과 같은 글자이고 지금 페이지로 가는 고리라 쓸모없다 */
 .top nav { display: flex; gap: 16px; font-size: 13px; font-weight: 700; letter-spacing: .06em; margin-left: auto; text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
 .top nav a { opacity: .78; padding: 6px 0; border-bottom: 2px solid transparent; transition: opacity var(--t-pick), border-color var(--t-pick); }
 .top nav a:hover { opacity: 1; }
@@ -139,7 +140,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cv-half { position: absolute; inset: 0; will-change: transform; }
 .cv-body { position: absolute; inset: 0; background: var(--ink) url(skin/tex-ink-night.jpg) center / 512px; display: grid; grid-template-rows: auto 1fr auto; padding: 22px var(--gutter) 24px; }
 .cv-body::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 42%, rgba(192, 57, 43, .09) 0%, rgba(15, 20, 25, 0) 45%, rgba(10, 13, 18, .7) 100%); pointer-events: none; }
-.cv-top, .cv-bot { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 11px; font-weight: 800; letter-spacing: .22em; color: var(--fg2-d); }
+.cv-top { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 11px; font-weight: 800; letter-spacing: .22em; color: var(--fg2-d); }
 .age { font: 800 10px/1 var(--sans); letter-spacing: .08em; padding: 4px 6px 3px; border: 1px solid var(--east); color: var(--fg-d); background: rgba(192, 57, 43, .35); font-style: normal; margin-right: 10px; vertical-align: 1px; }
 .cv-stage { position: relative; display: grid; justify-items: center; align-content: center; }
 .orb { position: relative; width: var(--ring); height: var(--ring); opacity: 0; transition: opacity 900ms var(--ease); }
@@ -164,11 +165,6 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cover.ready .cv-go { opacity: 1; animation: blink 1.6s ease-in-out infinite; }
 @keyframes blink { 50% { opacity: .45; } }
 .cv-go .rule { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .04em; color: var(--fg2-d); }
-.cv-log { position: absolute; left: var(--gutter); bottom: 52px; display: grid; gap: 5px; font-size: 12px; letter-spacing: .04em; color: var(--fg2-d); max-width: 420px; }
-.cv-log li { opacity: 0; transform: translateY(6px); transition: opacity 400ms var(--ease), transform 400ms var(--ease); display: flex; gap: 10px; align-items: baseline; }
-.cv-log li b { font-family: var(--serif); font-weight: 600; color: var(--fg-d); min-width: 3.2em; }
-.cv-log li::before { content: ''; width: 5px; height: 5px; background: var(--east); flex: none; transform: rotate(45deg); opacity: .8; }
-.cv-log li.on { opacity: 1; transform: none; }
 /* 검격 연출(누른 뒤 약 3.1초, 시각표는 design/ui-asset-order-v3.md §2):
    .arm 450ms 숨 고르기 → .go: 검격이 오른쪽 위에서 왼쪽 아래로 붓처럼 그어진다(마스크 드러내기 700ms) → 중심을 지날 때 섬광 → 멈춤 →
    1000ms부터 두 조각이 선과 수직으로 1.5초 동안 천천히 밀려나며(느리게 시작해 빨라짐) 아래의 장면이 드러난다. 그림이 납품되면 .cover.art 로 층이 바뀐다 */
@@ -187,7 +183,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cv-flash { background-image: url(skin2/cover-flash.png); }
 .cv-ring { display: none; }
 .cover.arm .orb { filter: brightness(1.12); transition: filter 350ms var(--ease); }   /* 숨 고르기: 밝아지기만 한다. 달이 커지면 안 된다 */
-.cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar, .cover.arm .cv-log { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
+.cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
 .cover.go { background: transparent; }
 .cover.go .cv-slash { opacity: 1; animation: draw 650ms cubic-bezier(.45, .05, .25, 1) both, fadeout 420ms 760ms var(--ease) forwards; }
 .cover.go .cv-cut { opacity: 1; animation: draw 650ms 50ms cubic-bezier(.45, .05, .25, 1) both, fadeout 1100ms 1000ms linear forwards; }
@@ -247,27 +243,22 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .hero.has-title .vt::after { content: ''; position: absolute; inset: 0; background: url(skin3/title-v.png) center / contain no-repeat; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .95)) drop-shadow(0 0 22px rgba(0, 0, 0, .8)); }   /* 글자는 ::after(앞), 어둠 번짐은 ::before(뒤). 글자를 배경 그림으로 두면 ::before 가 글자 위에 덮인다 */
 .hero.has-title .vt::before { left: -70%; right: -70%; top: -10%; bottom: -14%; background: radial-gradient(ellipse at 50% 50%, rgba(10, 13, 18, .72), rgba(10, 13, 18, 0) 68%); }
 .hero.has-title .vt .seal { position: absolute; left: 50%; bottom: -58px; margin: 0; font-size: 42px; transform: translateX(-50%); }
-.cover.art .orb h1 { font-size: 0; left: 18%; right: 18%; top: 46.5%; height: 14.6%; background: url(skin3/title-ink.png) center / contain no-repeat; }
-.cover.art .orb h1 .seal { position: absolute; left: 97.5%; top: 50%; margin: 0; font-size: calc(var(--ring) * .046); transform: translateY(-50%); }
+.cover.art .orb h1 { font-size: 0; left: 16.85%; right: 25.15%; top: 47.17%; height: 13.26%; background: url(skin3/title-ink.png) center / contain no-repeat; }
+/* 제목 그림 1400×320(글자는 폭 4.3~95.6%). 낙관을 글자 끝에서 띄우고, 제목+낙관 묶음을 달 가운데·달 안쪽에 둔다(예전엔 낙관이 마지막 글자에 붙어 달 가장자리에 걸렸다) */
+.cover.art .orb h1 .seal { position: absolute; left: 102%; top: 50%; margin: 0; font-size: calc(var(--ring) * .046); transform: translateY(-50%); }
 .hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 24%), linear-gradient(to top, rgba(15, 20, 25, .9) 0%, rgba(15, 20, 25, .55) 18%, rgba(15, 20, 25, 0) 42%); }
 .hero-ui { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .hero-ui > * { pointer-events: auto; }
-.hero .season { position: absolute; left: var(--gutter); top: calc(var(--top) + 14px); font-size: 11px; font-weight: 800; letter-spacing: .2em; color: var(--fg2-d); display: flex; align-items: center; gap: 10px; }
-.hero .season b { font: 700 15px var(--serif); letter-spacing: 0; color: var(--fg-d); }
 .hero .vt { position: absolute; left: 50%; top: 11%; transform: translateX(-50%); writing-mode: vertical-rl; text-orientation: upright; font-family: var(--serif); font-weight: 900; font-size: clamp(40px, 5.6vh, 66px); line-height: 1; letter-spacing: .12em; word-spacing: -0.35em; color: var(--fg-d); text-shadow: 0 2px 6px rgba(0, 0, 0, .85), 0 0 36px rgba(0, 0, 0, .55); white-space: nowrap; pointer-events: none; }
 .hero .vt .seal { font-size: .7em; margin-top: .6em; display: inline-block; vertical-align: middle; }
 .hero .vt::before { content: ''; position: absolute; left: -2.4em; right: -2.4em; top: -1.2em; bottom: -1.2em; background: radial-gradient(ellipse at 50% 50%, rgba(10, 13, 18, .55), rgba(10, 13, 18, 0) 70%); z-index: -1; }
 .hero .tag { position: absolute; bottom: 118px; display: grid; gap: 8px; opacity: .72; transition: opacity var(--t-space); }
 .hero .tag.west { left: var(--gutter); justify-items: start; } .hero .tag.east { right: var(--gutter); justify-items: end; text-align: right; }
 .hero[data-pick="west"] .tag.west, .hero[data-pick="east"] .tag.east { opacity: 1; }
-.hero .tag .alias { font-size: 13px; letter-spacing: .16em; font-weight: 700; display: flex; align-items: center; gap: 8px; text-shadow: 0 1px 4px rgba(0, 0, 0, .8); }
-.hero .tag.east .alias { color: var(--east-l); font-family: var(--serif); } .hero .tag.west .alias { color: #C9CED6; }
-.hero .tag .alias .emb { width: 24px; height: 24px; }
-.hero .tag .sub { font-size: 12px; color: var(--fg2-d); letter-spacing: .04em; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
 .hero .tag .hname { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .5)); }
-.hero .pick { position: absolute; bottom: 262px; }   /* 모서리 기둥: 토글 → 별호 → 이름표 → 소속. 아래 줄은 구간 메뉴만 */
+.hero .pick { position: absolute; bottom: 226px; }   /* 모서리 기둥: 토글 → 별호 → 이름표 → 소속. 아래 줄은 구간 메뉴만 */
 .hero .pick.west { left: var(--gutter); } .hero .pick.east { right: var(--gutter); }
-.hero .finfo { position: absolute; bottom: 220px; width: 400px; opacity: 0; transform: translateY(12px); transition: opacity var(--t-space) var(--ease), transform var(--t-space) var(--ease); pointer-events: none; }
+.hero .finfo { position: absolute; bottom: 300px; width: 400px; opacity: 0; transform: translateY(12px); transition: opacity var(--t-space) var(--ease), transform var(--t-space) var(--ease); pointer-events: none; }
 .hero .finfo.west { left: var(--gutter); } .hero .finfo.east { right: var(--gutter); text-align: right; }
 .hero[data-pick="west"] .finfo.west, .hero[data-pick="east"] .finfo.east { opacity: 1; transform: none; pointer-events: auto; }
 .hero .finfo .lbl { margin-bottom: 10px; } .hero .finfo.east .lbl { justify-content: flex-end; }
@@ -277,7 +268,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .hero .finfo .chips { margin-top: 10px; } .hero .finfo.east .chips { justify-content: flex-end; }
 .hero .finfo .chipc { font-size: 12px; padding: 2px 8px 2px 2px; } .hero .finfo .chipc img { width: 24px; height: 24px; }
 .hero .finfo .stroke { margin: 0 0 12px; width: 300px; } .hero .finfo.east .stroke { margin-left: auto; }
-.hero .finfo.west { padding: 16px 18px; background: rgba(15, 20, 25, .62); border: 1px solid rgba(184, 188, 196, .35); box-shadow: inset 0 0 0 1px rgba(15, 20, 25, .6), inset 0 0 0 2px rgba(184, 188, 196, .14); backdrop-filter: blur(6px); }
+/* 진영을 고르면 뜨는 세력 칸: 토글(아래 226~282px) 위에, 양쪽 모두 같은 어두운 판(동방 칸은 판이 없어 밝은 그림 위 글자가 안 읽혔고, 토글을 덮었다) */
+.hero .finfo.west, .hero .finfo.east { padding: 16px 18px; background: rgba(15, 20, 25, .62); border: 1px solid rgba(184, 188, 196, .35); box-shadow: inset 0 0 0 1px rgba(15, 20, 25, .6), inset 0 0 0 2px rgba(184, 188, 196, .14); backdrop-filter: blur(6px); }
+.hero .finfo.east { border-color: rgba(192, 57, 43, .45); }
 .hero .smenu { position: absolute; left: 0; right: 0; bottom: 36px; display: flex; justify-content: center; gap: clamp(24px, 4vw, 56px); align-items: flex-end; pointer-events: none; }
 /* 두 묶음이 균열 양옆에 같은 폭으로 선다(왼쪽 묶음은 균열 쪽으로 붙고, 오른쪽 묶음도 균열 쪽으로) */
 .hero .smenu .g { flex: 1 1 0; min-width: 0; display: flex; gap: inherit; align-items: flex-end; }
@@ -290,9 +283,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .hero .smenu a:nth-child(even)::after { background: var(--silver); }
 .hero .smenu kbd { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font: 700 9px/1 var(--sans); padding: 2px 4px 1px; border: 1px solid currentColor; border-radius: 2px; opacity: .35; }
 /* 등장 */
-.hero .vt, .hero .season, .hero .tag, .hero .pick, .hero .smenu a { opacity: 0; transform: translateY(14px); }
+.hero .vt, .hero .tag, .hero .pick, .hero .smenu a { opacity: 0; transform: translateY(14px); }
 .hero .vt { transform: translate(-50%, 14px); }
-.hero.in .vt, .hero.in .season, .hero.in .tag, .hero.in .pick, .hero.in .smenu a { opacity: 1; transform: none; transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+.hero.in .vt, .hero.in .tag, .hero.in .pick, .hero.in .smenu a { opacity: 1; transform: none; transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
 .hero.in .vt { transform: translateX(-50%); transition-delay: 100ms; }
 .hero.in .tag { opacity: .72; transition-delay: 300ms; } .hero.in[data-pick="west"] .tag.west, .hero.in[data-pick="east"] .tag.east { opacity: 1; }
 .hero.in .smenu a:nth-child(1) { transition-delay: 350ms; } .hero.in .smenu a:nth-child(2) { transition-delay: 430ms; } .hero.in .smenu a:nth-child(3) { transition-delay: 510ms; } .hero.in .smenu a:nth-child(4) { transition-delay: 590ms; }
@@ -377,6 +370,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 
 /* ===== 인물 기록: 서방 인물 = 동방의 기록(두루마리) / 동방 인물 = 서방의 기록(양피지 서류). 상대편이 부르는 이름으로 적는다. 그림(skin4)이 오기 전엔 질감 판 ===== */
 .p-rec main { padding-top: calc(var(--top) + 40px); min-height: 100svh; }
+/* 전선·세력·시작: 띠 위 여백(8vh)이 폰에서 머리말 높이와 같아 표제가 머리말에 붙었다 → 인물 기록과 같은 간격 */
+.p-fronts, .p-order, .p-start { padding-top: calc(var(--top) + 40px); }
+.lbl + .big { margin-top: 8px; }   /* 표제 줄과 큰 제목 사이 숨 */
 .rec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
 .rec-head .meta { font-size: 12px; letter-spacing: .1em; font-weight: 700; margin-top: 12px; opacity: .65; }
 .rec-switch { display: flex; gap: 10px; }
@@ -677,16 +673,15 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .top { gap: 12px; } .top nav { display: none; }
   .cover { --ring: min(480px, 64vw); }
   .cv-body { padding: 14px 16px 18px; }
-  .cv-top, .cv-bot { font-size: 10px; letter-spacing: .12em; }
-  .cv-log { position: static; max-width: none; margin-top: 14px; }
+
   .finfo { position: static !important; width: auto !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; display: none; padding: 24px 0 0; text-align: left !important; }
   [data-pick="west"] .finfo.west, [data-pick="east"] .finfo.east { display: block; }
-  .finfo.west { background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
+  .finfo.west, .finfo.east { background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
   .finfo.east .lbl, .finfo.east .fl, .finfo.east .chips { justify-content: flex-start !important; } .finfo.east .stroke { margin-left: 0 !important; }
   .hero-below { background: var(--ink); color: var(--fg-d); padding: 0 var(--gutter) 28px; }
   .hero-below .finfo .chipc { border-color: var(--hair-d); background: rgba(15, 20, 25, .55); color: var(--fg-d); }
   .hero .tag { bottom: auto; top: 50%; transform: translateY(-50%); } .hero .tag .hname { width: 300px; height: 67px; font-size: 22px; }
-  .hero .tag.east { top: auto; bottom: 120px; transform: none; }
+  .hero .tag.east { top: auto; bottom: 164px; transform: none; }   /* 토글(아래 100~148px) 위 16px */
   .hero .smenu { gap: 20px; bottom: 30px; } .hero .smenu a b { font-size: 17px; }
   .hero .pick { bottom: 100px; } .hero .pick .toggle { width: 136px; height: 48px; font-size: 13px; padding: 0 28px; }
   .fronts-row { grid-template-columns: 1fr 1fr; gap: 16px 0; }
@@ -766,6 +761,13 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
 /* ===== 760px 아래: 장면은 위아래로 맞물린다(서방 위, 동방 아래), 제목은 가로 ===== */
 @media (max-width: 760px) {
   .ult { grid-template-columns: 1fr; }
+  .big { font-size: 34px; }
+  .fronts-row { grid-template-columns: 1fr; } .fronts-row li { border-right: 1px solid var(--hair-d); }
+  .fronts-row a { padding: 12px 16px; }
+  .embs .side { grid-template-columns: repeat(3, 1fr); }
+  .fa-cols { gap: 20px; }
+}
+@media (max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5) {
   .hero { min-height: 560px; }
   .plane .art { width: 100%; height: 64%; }
   .plane.west .art { top: 0; object-position: 58% 22%; transform-origin: 50% 30%; }
@@ -778,12 +780,10 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .hero.has-title .vt::before { left: -12%; right: -12%; top: -90%; bottom: -90%; }
   .hero.has-title .vt .seal { left: auto; right: -44px; bottom: auto; top: 50%; transform: translateY(-50%); font-size: 32px; }
   .hero .vt { writing-mode: horizontal-tb; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(30px, 8.6vw, 40px); letter-spacing: .04em; word-spacing: normal; }
-  .big { font-size: 34px; }
   .hero .vt .seal { display: inline-block; margin: 0 0 0 .3em; }
   .hero .vt::before { left: -1em; right: -1em; top: -1.4em; bottom: -1.4em; }
   .hero.in .vt { transform: translate(-50%, -50%); }
   .hero .vt, .hero.in .vt { --x: 0; }
-  .hero .season { top: calc(var(--top) + 8px); }
   .hero .tag.west { top: auto; bottom: calc(50% + 56px); transform: none; }
   .hero .tag.east { bottom: 150px; }
   .hero .tag .hname { width: 240px; height: 53px; font-size: 18px; } .hero .tag .hname.east { padding: 0 20px 0 50px; } .hero .tag .hname.west { padding: 0 67px 0 20px; }
@@ -792,10 +792,6 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .hero .smenu .g { flex: 0 1 auto; gap: 10px; }
   .hero.has-crack .smenu .gap { width: 0; }
   .hero .tag.west { bottom: calc(50% + 110px); }
-  .fronts-row { grid-template-columns: 1fr; } .fronts-row li { border-right: 1px solid var(--hair-d); }
-  .fronts-row a { padding: 12px 16px; }
-  .embs .side { grid-template-columns: repeat(3, 1fr); }
-  .fa-cols { gap: 20px; }
 }
 /* ===== 모바일 손질(2026-10-26): 머리말·장면·표지·기록·체계 ===== */
 .cv-go .k-touch { display: none; }
@@ -826,26 +822,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .cover.art .cv-haze { display: none; }
   .cover.arm .orb { filter: none; }
   /* 표지: 전선 로그가 아래 줄(Written by)과 겹치던 것 → 2×2로 접고 행을 따로 준다 */
-  .cv-body { grid-template-rows: auto 1fr auto auto; }
-  .cv-log { grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 11px; margin: 10px 0 12px; }
-  .cv-log li b { min-width: 0; }
-  /* 장면 제목: 낙관이 화면 밖으로 잘리던 것 */
-  .hero.has-title .vt { width: 74vw; height: calc(74vw * 0.2545); }
-  .hero.has-title .vt .seal { right: -32px; font-size: 26px; }
-  /* 이름표: 양옆을 잡아 소속 줄이 화면 밖으로 나가지 않게, 그림 위에서 읽히도록 어둠 번짐을 뒤에 */
-  .hero .tag { left: 16px; right: 16px; gap: 6px; }
-  .hero.in .tag { opacity: .9; }
-  .hero .tag .sub { white-space: normal; word-break: keep-all; max-width: 21em; font-size: 11.5px; line-height: 1.5; color: #D9D6CF; text-shadow: 0 1px 2px #000, 0 0 8px rgba(0, 0, 0, .9); }
-  .hero .tag .alias { text-shadow: 0 1px 2px #000, 0 0 10px rgba(0, 0, 0, .9); }
-  .hero .tag.west { bottom: calc(50% + 66px); }   /* 이음새 바로 위: 얼굴을 덜 가린다 */
-  /* 아래 구간 메뉴: 다섯 칸 균등(가장자리에 붙던 것), 번호표는 숨김 */
-  .hero .smenu { left: 8px; right: 8px; bottom: 20px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; align-items: end; }
-  .hero .smenu .g { display: contents; }
-  .hero .smenu .gap, .hero.has-crack .smenu .gap { display: none; }
-  .hero .smenu a { white-space: normal; text-align: center; padding: 6px 0 4px; }
-  .hero .smenu a b { font-size: 13.5px; line-height: 1.25; word-break: keep-all; }
-  .hero .smenu kbd { display: none; }
-  .hero .smenu::before { content: ''; position: absolute; left: -8px; right: -8px; bottom: -20px; height: 150%; z-index: -1; background: linear-gradient(to top, rgba(10, 13, 18, .85), rgba(10, 13, 18, 0)); pointer-events: none; }
+
   /* 홈 인물 얼굴: 세 칸 균등(오른쪽이 비던 120px 고정 격자) */
   .faces .side { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 8px; }
   .faces .face { width: auto; }
@@ -856,14 +833,30 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .sc-cuts-row .btn2.sm { width: 128px; height: 36.8px; padding: 0 18px; font-size: 12px; }   /* 320×92 비율 그대로, 360폭 폰에서도 한 줄 */
   .v-head .attach { width: 150px; }
 }
-@media (max-width: 760px) {
+@media (max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5) {
+  /* 장면 제목: 낙관이 화면 밖으로 잘리던 것 */
+  .hero.has-title .vt { width: 74vw; height: calc(74vw * 0.2545); }
+  .hero.has-title .vt .seal { right: -32px; font-size: 26px; }
+  /* 이름표: 양옆을 잡아 소속 줄이 화면 밖으로 나가지 않게, 그림 위에서 읽히도록 어둠 번짐을 뒤에 */
+  .hero .tag { left: 16px; right: 16px; gap: 6px; }
+  .hero.in .tag { opacity: .9; }
+  .hero .tag.west { bottom: calc(50% + 66px); }   /* 이음새 바로 위: 얼굴을 덜 가린다 */
+  /* 아래 구간 메뉴: 다섯 칸 균등(가장자리에 붙던 것), 번호표는 숨김 */
+  .hero .smenu { left: 8px; right: 8px; bottom: 20px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; align-items: end; }
+  .hero .smenu .g { display: contents; }
+  .hero .smenu .gap, .hero.has-crack .smenu .gap { display: none; }
+  .hero .smenu a { white-space: normal; text-align: center; padding: 6px 0 4px; }
+  .hero .smenu a b { font-size: 13.5px; line-height: 1.25; word-break: keep-all; }
+  .hero .smenu kbd { display: none; }
+  .hero .smenu::before { content: ''; position: absolute; left: -8px; right: -8px; bottom: -20px; height: 150%; z-index: -1; background: linear-gradient(to top, rgba(10, 13, 18, .85), rgba(10, 13, 18, 0)); pointer-events: none; }
+}
+@media (max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5) {
   /* 장면(폰) 배치. 높이는 화면 높이 비례(균열 띠는 가로 130% → 띠 높이 43vw), 얼굴 위치는 그림 기준(위지란 첫등장 얼굴 = 그림 높이의 28%).
      동방 그림: 이음새(50%)에서 시작, 높이 70% → 얼굴이 화면 높이의 약 69%(띠 아래, 이름표 위). 서방 그림은 위에서 시작(아르델 얼굴 ≈ 14%) */
   .crack { background-size: 130% auto; }
   .plane.east .art { top: 50%; bottom: auto; height: 70%; object-position: 50% 0; transform-origin: 50% 30%; }
   .hero::after { background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 16%), linear-gradient(to top, rgba(15, 20, 25, .88) 0%, rgba(15, 20, 25, .4) 12%, rgba(15, 20, 25, 0) 27%); }   /* 아래 어둠을 메뉴·토글 높이까지만(얼굴까지 덮던 것) */
   .plane.east .cam::after { opacity: .1; }
-  .hero .tag .sub { display: none; }   /* 소속 줄은 긴 기록과 장면 아래 세력 칸에 있다. 폰에서는 얼굴을 덮지 않게 뺀다 */
   .hero .tag .hname { width: 216px; height: 48px; font-size: 17px; } .hero .tag .hname.east { padding: 0 18px 0 45px; } .hero .tag .hname.west { padding: 0 60px 0 18px; }   /* 720×160 비율 그대로 */
   .hero .tag.west { bottom: calc(50% + 21.7vw + 6px - var(--seam, 0%)); transition: opacity var(--t-space), bottom var(--t-space) var(--ease); }   /* 진영을 고르면 균열과 같이 움직인다 */
   .hero .tag.east { bottom: 98px; }
@@ -871,13 +864,18 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .hero .smenu { bottom: 8px; } .hero .smenu a { padding: 5px 0; } .hero .smenu a i { display: none; } .hero .smenu a b { font-size: 13px; }
   .hero .smenu::before { height: 260%; }
 }
+/* 세로 태블릿(쌓인 장면, 폭 761~1100): 폰 크기 그대로면 작아 보여 같은 비율로 키운다(이름표 720×160, 토글 320×112) */
+@media (min-width: 761px) and (max-width: 1100px) and (max-aspect-ratio: 4/5) {
+  .hero .tag .hname { width: 288px; height: 64px; font-size: 21px; } .hero .tag .hname.east { padding: 0 24px 0 60px; } .hero .tag .hname.west { padding: 0 80px 0 24px; }
+  .hero .tag.east { bottom: 128px; }
+  .hero .pick { bottom: 64px; } .hero .pick .toggle { width: 140px; height: 49px; font-size: 14px; padding: 0 28px; }
+  .hero .smenu { left: 24px; right: 24px; } .hero .smenu a b { font-size: 16px; }
+}
 @media (max-width: 760px) and (max-height: 620px) {
-  .hero .tag .alias { display: none; }   /* 키 작은 폰(아이폰 SE 등): 별호 줄까지 빼야 얼굴이 보인다 */
   .hero .tag.east { bottom: 90px; }
   .hero .pick { bottom: 46px; }
 }
 @media (max-width: 760px) and (max-height: 700px) {
-  .hero .tag .sub { display: none; }   /* 키 작은 폰: 소속 줄은 긴 기록에 있다. 이름표가 얼굴을 덮지 않게 */
   .hero .tag.west { bottom: calc(50% + 58px); }
 }
 /* ===== 폰·터치 기기: 스크롤에 따라 움직이거나 바뀌는 효과 없음(작가님 지시) ===== */
@@ -887,9 +885,9 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .top, .top.solid { background: rgba(15, 20, 25, .96); box-shadow: 0 6px 16px -10px rgba(0, 0, 0, .8); transition: none; }   /* 머리말은 내려도 그대로(띠가 생겼다 사라지지 않게) */
   .top.light, .top.light.solid { background: rgba(238, 234, 225, .97); box-shadow: 0 6px 14px -10px rgba(20, 22, 25, .45); }
 }
-@media (max-width: 760px) {
+@media (max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5) {
   /* 장면 글자·단추: 아래에서 떠오르지 않고 제자리에서 나타나기만 */
-  .hero .season, .hero .tag, .hero .pick, .hero .smenu a, .hero.in .season, .hero.in .tag, .hero.in .pick, .hero.in .smenu a { transform: none; }
+  .hero .tag, .hero .pick, .hero .smenu a, .hero.in .tag, .hero.in .pick, .hero.in .smenu a { transform: none; }
   .hero .vt, .hero.in .vt { transform: translate(-50%, -50%); }
 }
 @media (prefers-reduced-motion: reduce) {

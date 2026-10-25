@@ -3,6 +3,7 @@
   'use strict';
   var d = document, HB = window.HB, C = HB.chars, W = HB.world;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STACK_Q = '(max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5)';   // 장면을 위아래로 쌓는 화면(style.css 같은 조건)
   var touchy = matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)').matches;   // 폰·터치: 스크롤 움직임 효과 없음
   function $(s, r) { return (r || d).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || d).querySelectorAll(s)); }
@@ -129,7 +130,7 @@
   if (hero) { hero.classList.toggle('has-title', ART.title); hero.classList.toggle('has-crack', ART.crack); }
   if (cover) cover.classList.toggle('art', ART.slash);
   $$('.rec, .viewer').forEach(function (el) { el.classList.toggle('art', ART.doc); });
-  $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
+   // 진행 로그는 전선 넷
   function showHero() { if (hero) onWiped(function () { requestAnimationFrame(function () { hero.classList.add('in'); }); }); }
   if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
   else if (cover) {
@@ -140,7 +141,7 @@
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
     // 입장 전에는 입장 연출과 첫 장면에 쓰는 그림만 기다린다(전부 22MB를 기다리면 폰 회선에선 10초 넘게 걸리고, 갈라지는 동안 내려받기·해독이 겹쳐 버벅인다).
     // 나머지는 장면이 열린 뒤 천천히 받는다
-    var narrowNow = matchMedia('(max-width: 760px)').matches;
+    var narrowNow = matchMedia(STACK_Q).matches;
     var need = ['slash-core', 'slash-aura', 'flash-burst', 'shock-ring', 'cut-edge-a', 'cut-edge-b', 'cut-dust', 'title-ink', narrowNow ? 'seam-crack-h' : 'seam-crack', narrowNow ? 'title-h' : 'title-v'].concat(narrowNow ? [] : ['slash-haze']).map(function (n) { return skinSrc('skin3', n); })
       .concat(['hero-name-east', 'hero-name-west', 'toggle-west-idle', 'toggle-east-idle', 'toggle-west-active', 'toggle-east-active'].map(function (n) { return 'assets/skin2/' + n + '.png'; }))
       .concat(['seal-east', 'emblem-west', 'btn-round-west-idle', 'icon-menu', 'fa-gardeon', 'fa-mugan'].map(function (n) { return 'assets/skin/' + n + '.png'; }))
@@ -198,7 +199,7 @@
       return 'polygon(' + pts.concat(horizontal ? ['100% 100%', '0% 100%'] : ['100% 100%', '100% 0%']).join(',') + ')';
     };
     var layout = function () {
-      horizontal = matchMedia('(max-width: 760px)').matches;
+      horizontal = matchMedia(STACK_Q).matches;
       var s = hero.dataset.pick === 'east' ? -6 : hero.dataset.pick === 'west' ? 6 : 0;   // 조금만 넓어진다(기획서 §4). 균열(.crack)도 같이 옮겨 가고 제목은 제자리
       east.style.clipPath = poly(s, 0); light.style.clipPath = poly(s, -0.28); shade.style.clipPath = poly(s, -1.6);
       hero.style.setProperty('--seam', s + '%');
@@ -219,9 +220,7 @@
       box.innerHTML = (side === 'east' ? '<i class="stroke east r"></i>' : '') + '<p class="lbl ' + side + '"><i>勢力</i>' + HB.sides[side] + ' <small>' + fs.length + ' 세력</small></p><div class="fl">' + fs.map(function (f) { return fname(f.id); }).join('') + '</div>' + chips(lead);
     });
     $$('.tag', hero).forEach(function (tag) {
-      var c = byCode(LEAD[tag.dataset.side]), fa = faOf(c);
-      $('.alias', tag).innerHTML = (fa ? emb(fa.id) : '') + aliasHtml(c);
-      $('.sub', tag).textContent = c.org + ' · ' + c.role + ' · ' + c.rank;
+      var c = byCode(LEAD[tag.dataset.side]);
       var nm = $('.hname', tag); nm.setAttribute('data-open', c.code); $('.fit', nm).textContent = c.name;
     });
     var pick = function (side) {
