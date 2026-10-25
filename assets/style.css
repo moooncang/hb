@@ -129,7 +129,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .menu ol a { display: grid; grid-template-columns: 56px 1fr; align-items: baseline; gap: 18px; padding: 10px 0; font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; border-bottom: 1px solid var(--hair-d); transition: color var(--t-pick), padding var(--t-pick); }
 .menu ol a i { font-size: 13px; font-weight: 500; letter-spacing: .2em; opacity: .6; font-style: normal; }
 .menu ol a small { font: 700 11px var(--sans); letter-spacing: .14em; opacity: .5; margin-left: 14px; }
-.menu ol a:hover, .menu ol a[aria-current="page"] { color: var(--east-l); padding-left: 10px; }
+.menu ol a:hover, .menu ol a[aria-current="page"] { color: var(--east-l); }   /* 줄 왼쪽 끝을 흔들지 않는다(현재 페이지가 10px 밀려 정렬이 깨졌다) */
 .menu-x { position: absolute; top: 14px; right: var(--gutter); }
 .menu .credit { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-family: var(--serif); font-size: 13px; opacity: .7; }
 
@@ -145,11 +145,11 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .orb { position: relative; width: var(--ring); height: var(--ring); opacity: 0; transition: opacity 900ms var(--ease); }
 .cover.orb-on .orb { opacity: 1; }
 .orb > i { position: absolute; inset: 0; background: center / contain no-repeat; display: block; will-change: transform; }
-.orb .glow { background-image: url(skin2/cover-glow.webp); animation: breathe 6s ease-in-out infinite; }
-.orb .ring-o { background-image: url(skin2/cover-ring-outer.webp); animation: spin 60s linear infinite; }
-.orb .ring-i { background-image: url(skin2/cover-ring-inner.webp); animation: spin 40s linear infinite reverse; }
-.orb .sparks { background-image: url(skin2/cover-sparks.webp); animation: spin 90s linear infinite; }
-.orb .moon { inset: 12.5%; background-image: url(skin2/cover-moon.webp); filter: drop-shadow(0 0 40px rgba(228, 89, 74, .2)); }
+.orb .glow { background-image: url(skin2/cover-glow.png); background-image: image-set(url(skin2/cover-glow.webp) type("image/webp"), url(skin2/cover-glow.png) type("image/png")); animation: breathe 6s ease-in-out infinite; }
+.orb .ring-o { background-image: url(skin2/cover-ring-outer.png); background-image: image-set(url(skin2/cover-ring-outer.webp) type("image/webp"), url(skin2/cover-ring-outer.png) type("image/png")); animation: spin 60s linear infinite; }
+.orb .ring-i { background-image: url(skin2/cover-ring-inner.png); background-image: image-set(url(skin2/cover-ring-inner.webp) type("image/webp"), url(skin2/cover-ring-inner.png) type("image/png")); animation: spin 40s linear infinite reverse; }
+.orb .sparks { background-image: url(skin2/cover-sparks.png); background-image: image-set(url(skin2/cover-sparks.webp) type("image/webp"), url(skin2/cover-sparks.png) type("image/png")); animation: spin 90s linear infinite; }
+.orb .moon { inset: 12.5%; background-image: url(skin2/cover-moon.png); background-image: image-set(url(skin2/cover-moon.webp) type("image/webp"), url(skin2/cover-moon.png) type("image/png")); filter: drop-shadow(0 0 40px rgba(228, 89, 74, .2)); }
 .orb h1 { position: absolute; left: 0; right: 0; top: 53%; text-align: center; font-family: var(--serif); font-weight: 900; font-size: calc(var(--ring) * .072); letter-spacing: -0.02em; line-height: 1; color: #15171A; white-space: nowrap; }
 .orb h1 .seal { font-size: .6em; margin-left: .3em; vertical-align: .05em; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -177,12 +177,10 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cover { --L: min(125vmax, 147vw, 210vh); }
 /* 검격 층의 길이는 125vmax(어느 비율의 화면이든 대각선을 덮는 최소). 높이는 그림 비율 그대로(2.5:1 → 50vmax 등) */
 .cv-slash, .cv-cut, .cv-haze, .cv-dust { position: absolute; left: 50%; top: 50%; width: var(--L); background: center / 100% 100% no-repeat; opacity: 0; transform: rotate(-35deg); }
-/* 그어지는 검격: 마스크 위치를 움직이면 폰은 큰 층을 매 프레임 다시 그린다(버벅임의 원인).
-   창(b)이 오른쪽에서 밀려 들어오고 그림(s)은 같은 만큼 반대로 움직여 제자리에 있다 — 둘 다 transform이라 합성기만 쓴다. 창의 앞 0.6배 폭은 부드러운 끝 */
-.cv-slash > b, .cv-cut > b { position: absolute; top: 0; bottom: 0; left: -60%; width: 160%; overflow: hidden; transform: translateX(100%); -webkit-mask: linear-gradient(90deg, transparent, #000 37.5%); mask: linear-gradient(90deg, transparent, #000 37.5%); will-change: transform; }
-.cv-slash s, .cv-cut s { position: absolute; top: 0; bottom: 0; left: 37.5%; width: 62.5%; background: center / 100% 100% no-repeat; transform: translateX(-160%); will-change: transform; }
-.cv-slash { height: calc(var(--L) * .4); margin: calc(var(--L) * -.2) 0 0 calc(var(--L) * -.5); background: none; } .cv-slash s { background-image: url(skin2/cover-slash.png); }
-.cv-cut { height: calc(var(--L) * .0534); margin: calc(var(--L) * -.0267) 0 0 calc(var(--L) * -.5); background: none; } .cv-cut s { background-image: url(skin2/cover-cut.png); }
+/* 그어지는 검격: 마스크 드러내기(오른쪽 위 → 왼쪽 아래). 한 층만 움직이므로 어느 기기에서도 모양이 같다 */
+.cv-slash, .cv-cut { -webkit-mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 60%, #000 100%) 0% 0 / 300% 100% no-repeat; }
+.cv-slash { height: calc(var(--L) * .4); margin: calc(var(--L) * -.2) 0 0 calc(var(--L) * -.5); background-image: url(skin2/cover-slash.png); }
+.cv-cut { height: calc(var(--L) * .0534); margin: calc(var(--L) * -.0267) 0 0 calc(var(--L) * -.5); background-image: url(skin2/cover-cut.png); }
 .cv-haze { height: calc(var(--L) * .5336); margin: calc(var(--L) * -.2668) 0 0 calc(var(--L) * -.5); display: none; }
 .cv-dust { height: calc(var(--L) * .3336); margin: calc(var(--L) * -.1668) 0 0 calc(var(--L) * -.5); display: none; }
 .cv-flash, .cv-ring { position: absolute; left: 50%; top: 50%; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; background: center / contain no-repeat; opacity: 0; transform: scale(.4); }
@@ -191,30 +189,27 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .cover.arm .orb { filter: brightness(1.12); transition: filter 350ms var(--ease); }   /* 숨 고르기: 밝아지기만 한다. 달이 커지면 안 된다 */
 .cover.arm .cv-go, .cover.arm .cv-pct, .cover.arm .cv-bar, .cover.arm .cv-log { opacity: 0 !important; animation: none !important; transition: opacity 300ms var(--ease); }
 .cover.go { background: transparent; }
-.cover.go .cv-slash { opacity: 1; animation: fadeout 420ms 760ms var(--ease) forwards; }
-.cover.go .cv-cut { opacity: 1; animation: fadeout 1100ms 1000ms linear forwards; }
-.cover.go .cv-slash > b { animation: drawB 650ms cubic-bezier(.45, .05, .25, 1) both; } .cover.go .cv-slash s { animation: drawS 650ms cubic-bezier(.45, .05, .25, 1) both; }
-.cover.go .cv-cut > b { animation: drawB 650ms 50ms cubic-bezier(.45, .05, .25, 1) both; } .cover.go .cv-cut s { animation: drawS 650ms 50ms cubic-bezier(.45, .05, .25, 1) both; }
+.cover.go .cv-slash { opacity: 1; animation: draw 650ms cubic-bezier(.45, .05, .25, 1) both, fadeout 420ms 760ms var(--ease) forwards; }
+.cover.go .cv-cut { opacity: 1; animation: draw 650ms 50ms cubic-bezier(.45, .05, .25, 1) both, fadeout 1100ms 1000ms linear forwards; }
 .cover.go .cv-flash { animation: flash 800ms 300ms var(--ease) forwards; }
 .cover.go .cv-half { transform: translate(var(--tx), var(--ty)) rotate(var(--rot, 0deg)); transition: transform 1100ms cubic-bezier(.7, 0, .3, 1) 780ms; }
-@keyframes drawB { from { transform: translateX(100%); } to { transform: none; } }
-@keyframes drawS { from { transform: translateX(-160%); } to { transform: none; } }
+@keyframes draw { from { -webkit-mask-position: 0% 0; mask-position: 0% 0; } to { -webkit-mask-position: 100% 0; mask-position: 100% 0; } }
 @keyframes fadeout { to { opacity: 0; } }
 @keyframes flash { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.7); } }
 /* v3 그림(assets/skin3)이 오면: 핵·오러·잔광·섬광·충격파·절단면·파편 층 */
-.cover.art .cv-slash { height: calc(var(--L) * .4); margin-top: calc(var(--L) * -.2); } .cover.art .cv-slash s { background-image: url(skin3/slash-aura.webp); }
-.cover.art .cv-cut { height: calc(var(--L) * .1334); margin-top: calc(var(--L) * -.0667); } .cover.art .cv-cut s { background-image: url(skin3/slash-core.webp); }
-.cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.webp); }
-.cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.webp); }
-.cover.art .cv-flash { background-image: url(skin3/flash-burst.webp); transform: scale(.5) rotate(-35deg); }
+.cover.art .cv-slash { background-image: url(skin3/slash-aura.png); background-image: image-set(url(skin3/slash-aura.webp) type("image/webp"), url(skin3/slash-aura.png) type("image/png")); height: calc(var(--L) * .4); margin-top: calc(var(--L) * -.2); }
+.cover.art .cv-cut { background-image: url(skin3/slash-core.png); background-image: image-set(url(skin3/slash-core.webp) type("image/webp"), url(skin3/slash-core.png) type("image/png")); height: calc(var(--L) * .1334); margin-top: calc(var(--L) * -.0667); }
+.cover.art .cv-haze { display: block; background-image: url(skin3/slash-haze.png); background-image: image-set(url(skin3/slash-haze.webp) type("image/webp"), url(skin3/slash-haze.png) type("image/png")); }
+.cover.art .cv-dust { display: block; background-image: url(skin3/cut-dust.png); background-image: image-set(url(skin3/cut-dust.webp) type("image/webp"), url(skin3/cut-dust.png) type("image/png")); }
+.cover.art .cv-flash { background-image: url(skin3/flash-burst.png); background-image: image-set(url(skin3/flash-burst.webp) type("image/webp"), url(skin3/flash-burst.png) type("image/png")); transform: scale(.5) rotate(-35deg); }
 .cover.art.go .cv-flash { animation-name: flashArt; }
 @keyframes flashArt { 0% { opacity: 0; transform: scale(.5) rotate(-35deg); } 30% { opacity: 1; transform: scale(1.1) rotate(-35deg); } 100% { opacity: 0; transform: scale(1.7) rotate(-35deg); } }
-.cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.webp); }
+.cover.art .cv-ring { display: block; background-image: url(skin3/shock-ring.png); background-image: image-set(url(skin3/shock-ring.webp) type("image/webp"), url(skin3/shock-ring.png) type("image/png")); }
 .cover.art.go .cv-haze { animation: fadein 500ms 550ms var(--ease) both, fadeout 1100ms 1150ms var(--ease) forwards; }
 .cover.art.go .cv-ring { animation: ring 1000ms 300ms cubic-bezier(.2, .7, .3, 1) forwards; }
 .cover.art.go .cv-dust { animation: dust 1500ms 780ms var(--ease) forwards; }
 .cover.art .cv-edge { position: absolute; left: 50%; top: 50%; width: var(--L); height: calc(var(--L) * .08); margin: calc(var(--L) * -.04) 0 0 calc(var(--L) * -.5); background: center / 100% 100% no-repeat; transform: rotate(-35deg); opacity: 0; }
-.cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.webp); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.webp); transform: rotate(-35deg) translateY(50%); }
+.cover.art .cv-edge.a { background-image: url(skin3/cut-edge-a.png); background-image: image-set(url(skin3/cut-edge-a.webp) type("image/webp"), url(skin3/cut-edge-a.png) type("image/png")); transform: rotate(-35deg) translateY(-50%); } .cover.art .cv-edge.b { background-image: url(skin3/cut-edge-b.png); background-image: image-set(url(skin3/cut-edge-b.webp) type("image/webp"), url(skin3/cut-edge-b.png) type("image/png")); transform: rotate(-35deg) translateY(50%); }
 .cover.art.go .cv-edge { animation: fadein 300ms 700ms var(--ease) both; }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ring { 0% { opacity: 0; transform: scale(.2); } 20% { opacity: .9; } 100% { opacity: 0; transform: scale(2.5); } }
@@ -246,7 +241,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 /* 균열 그림이 있을 때 구간 메뉴는 균열 양옆으로 갈라선다(띠 폭 = 화면 높이 ÷ 3) */
 .hero.has-crack .smenu .gap { width: calc(33.4svh + 32px); flex: none; }
 .hero .smenu .gap { width: 0; }
-.hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.webp); }
+.hero.has-crack .crack { display: block; background-image: url(skin3/seam-crack.png); background-image: image-set(url(skin3/seam-crack.webp) type("image/webp"), url(skin3/seam-crack.png) type("image/png")); }
 /* 제목 그림(T-01): 글자 기둥이 캔버스의 44%이므로 상자 높이 60svh면 글자 폭 ≈ 72px(1080p). 균열의 밝은 종이 면 위에서도 읽히도록 그림자와 어두운 번짐을 둔다 */
 .hero.has-title .vt { font-size: 0; width: 280px; height: min(700px, 60svh); top: 13%; background: none; text-shadow: none; }
 .hero.has-title .vt::after { content: ''; position: absolute; inset: 0; background: url(skin3/title-v.png) center / contain no-repeat; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .95)) drop-shadow(0 0 22px rgba(0, 0, 0, .8)); }   /* 글자는 ::after(앞), 어둠 번짐은 ::before(뒤). 글자를 배경 그림으로 두면 ::before 가 글자 위에 덮인다 */
@@ -629,17 +624,19 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .pw-map { margin-top: 14px; font-size: 14px; color: var(--fg2-l); word-break: keep-all; max-width: 860px; }
 .pw-grid { display: grid; grid-template-columns: minmax(220px, 1fr) 2.4fr; gap: 40px; margin-top: 32px; }
 .pw-line, .pw-pillars { position: relative; height: 620px; margin-top: 16px; }
-.pw-line { background: url(skin/power-east.png) center 16.2% / auto 82.8% no-repeat; }
+/* 동방 선: 마디 일곱 개가 행(94 - 8.45×행 %)에 오도록 맞춘 그림 높이(--eh)·위치(--eo, 배경 위치 %는 --ep). 최소제곱, 오차 2px 이하 */
+.pw-line { --eo: 33.97%; --eh: 67.17%; --ep: 103.47%; background: url(skin/power-east.png) center var(--ep) / auto var(--eh) no-repeat; }
 .pw-pillars { background: url(skin/power-west.png) center top / 100% auto no-repeat; }
 .pw-st { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 15px; font-weight: 600; padding: 4px 8px; white-space: nowrap; color: var(--fg-l); transition: color var(--t-pick); }
 /* 고른 단계: 먹 덩어리 대신 세력색 밑줄(같은 페이지 세력 목록과 같은 표시) + 켜진 점 */
 .pw-st::after { content: ''; position: absolute; left: 28px; right: 8px; bottom: 1px; height: 2px; background: var(--east); opacity: 0; transition: opacity var(--t-pick); }
 .pw-pillars .pw-st::after { left: 4px; right: 4px; background: var(--west); } .pw-stack .pw-st::after { left: 36px; background: var(--west); }
 .pw-st::before { content: ''; width: 24px; height: 24px; flex: none; background: center / contain no-repeat; }
-.pw-line .pw-st { left: 50%; transform: translate(-6px, -50%); }
+.pw-line .pw-st { left: 50%; top: var(--row); transform: translate(-9px, -50%); }   /* 점(24px)이 그림 마디(17px)를 덮는다. 마디와 행의 차이는 2.5px 이하 */   /* 점 중심 = 선 그림 마디 중심(가로) */
 .pw-line .pw-st::before { background-image: url(skin/step-east-off.png); margin-left: -12px; }
 .pw-line .pw-st[aria-pressed="true"]::before { background-image: url(skin/step-east-on.png); }
-.pw-pillars .pw-st { flex-direction: column; gap: 2px; font-size: 12px; padding: 2px 4px; white-space: normal; text-align: center; max-width: 13%; line-height: 1.15; }
+/* 점 중심(위 여백 2 + 점 10px)을 행에 둔다: 이름이 두 줄이어도 같은 행의 점이 한 줄로 선다 */
+.pw-pillars .pw-st { transform: translate(-50%, -12px); flex-direction: column; gap: 2px; font-size: 12px; padding: 2px 4px; white-space: normal; text-align: center; max-width: 10.5%; line-height: 1.15; word-break: keep-all; }   /* 기둥 안쪽 흰 면 폭 안에서 줄바꿈(그랜드 소드 마스터가 기둥 테두리에 닿던 것) */
 .pw-pillars .pw-st::before { background-image: url(skin/step-west-off.png); width: 20px; height: 20px; }
 .pw-pillars .pw-st[aria-pressed="true"]::before { background-image: url(skin/step-west-on.png); }
 .pw-st small { font-family: var(--sans); font-size: 11px; opacity: .6; }
@@ -746,7 +743,8 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .fa-col[data-side="neutral"] .fa-list { justify-items: start; } .fa-col[data-side="neutral"] .fa-list button { flex-direction: row; } .fa-col[data-side="neutral"] .fa-list .emb { width: 44px; height: 44px; }
   .calls, .pw-side { grid-template-columns: 1fr; gap: 32px; }
   .pw-grid { grid-template-columns: 1fr; gap: 32px; }
-  .pw-line { height: 520px; }
+  .pw-line { height: 520px; --eo: 15.41%; --eh: 83.46%; --ep: 93.2%; }
+  .pw-line .pw-st { top: var(--node); }   /* 폰: 기둥이 없으니 선이 칸을 채운다 */
   .pw-pillars { display: none; }
   .pw-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
   .pw-stack .colm { display: grid; gap: 4px; align-content: start; }
@@ -774,7 +772,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .plane.east .art { top: auto; bottom: 0; object-position: 50% 28%; transform-origin: 50% 70%; }
   .plane.west .cam { transform-origin: 50% 30%; } .plane.east .cam { transform-origin: 50% 70%; }
   .crack { left: 0; top: 50%; width: 100%; height: 100%; transform: translateY(calc(-50% + var(--seam, 0%))); background-size: 150% auto; }
-  .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.webp); }
+  .hero.has-crack .crack { background-image: url(skin3/seam-crack-h.png); background-image: image-set(url(skin3/seam-crack-h.webp) type("image/webp"), url(skin3/seam-crack-h.png) type("image/png")); }
   .hero.has-title .vt { width: min(1100px, 84vw); height: calc(min(1100px, 84vw) * 0.2545); top: 50%; transform: translate(-50%, -50%); }
   .hero.has-title .vt::after { background-image: url(skin3/title-h.png); }
   .hero.has-title .vt::before { left: -12%; right: -12%; top: -90%; bottom: -90%; }
@@ -837,9 +835,6 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   /* 이름표: 양옆을 잡아 소속 줄이 화면 밖으로 나가지 않게, 그림 위에서 읽히도록 어둠 번짐을 뒤에 */
   .hero .tag { left: 16px; right: 16px; gap: 6px; }
   .hero.in .tag { opacity: .9; }
-  .hero .tag::before { content: ''; position: absolute; z-index: -1; top: -20px; bottom: -16px; left: -16px; right: -16px; pointer-events: none; -webkit-mask: linear-gradient(to bottom, transparent, #000 24%, #000 76%, transparent); mask: linear-gradient(to bottom, transparent, #000 24%, #000 76%, transparent); }
-  .hero .tag.west::before { background: linear-gradient(90deg, rgba(10, 13, 18, .82), rgba(10, 13, 18, .5) 58%, rgba(10, 13, 18, 0)); }
-  .hero .tag.east::before { background: linear-gradient(270deg, rgba(10, 13, 18, .82), rgba(10, 13, 18, .5) 58%, rgba(10, 13, 18, 0)); }
   .hero .tag .sub { white-space: normal; word-break: keep-all; max-width: 21em; font-size: 11.5px; line-height: 1.5; color: #D9D6CF; text-shadow: 0 1px 2px #000, 0 0 8px rgba(0, 0, 0, .9); }
   .hero .tag .alias { text-shadow: 0 1px 2px #000, 0 0 10px rgba(0, 0, 0, .9); }
   .hero .tag.west { bottom: calc(50% + 66px); }   /* 이음새 바로 위: 얼굴을 덜 가린다 */
@@ -858,7 +853,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .faces .face .pic img { width: 83.4%; height: 83.4%; margin: 8.3%; }
   .faces .mid .face { width: calc((100% - 16px) / 3); }
   /* 기록: 단추 둘이 한 줄에 들어가게 같은 비율로 축소(160×46 → 136×39) */
-  .sc-cuts-row .btn2.sm { width: 136px; height: 39px; padding: 0 20px; font-size: 12px; }
+  .sc-cuts-row .btn2.sm { width: 128px; height: 36.8px; padding: 0 18px; font-size: 12px; }   /* 320×92 비율 그대로, 360폭 폰에서도 한 줄 */
   .v-head .attach { width: 150px; }
 }
 @media (max-width: 760px) {
@@ -868,7 +863,6 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
   .plane.east .art { top: 50%; bottom: auto; height: 70%; object-position: 50% 0; transform-origin: 50% 30%; }
   .hero::after { background: linear-gradient(to bottom, rgba(15, 20, 25, .7) 0%, rgba(15, 20, 25, 0) 16%), linear-gradient(to top, rgba(15, 20, 25, .88) 0%, rgba(15, 20, 25, .4) 12%, rgba(15, 20, 25, 0) 27%); }   /* 아래 어둠을 메뉴·토글 높이까지만(얼굴까지 덮던 것) */
   .plane.east .cam::after { opacity: .1; }
-  .hero .tag.east::before { top: -8px; bottom: -10px; }
   .hero .tag .sub { display: none; }   /* 소속 줄은 긴 기록과 장면 아래 세력 칸에 있다. 폰에서는 얼굴을 덮지 않게 뺀다 */
   .hero .tag .hname { width: 216px; height: 48px; font-size: 17px; } .hero .tag .hname.east { padding: 0 18px 0 45px; } .hero .tag .hname.west { padding: 0 60px 0 18px; }   /* 720×160 비율 그대로 */
   .hero .tag.west { bottom: calc(50% + 21.7vw + 6px - var(--seam, 0%)); transition: opacity var(--t-space), bottom var(--t-space) var(--ease); }   /* 진영을 고르면 균열과 같이 움직인다 */
@@ -885,6 +879,18 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
 @media (max-width: 760px) and (max-height: 700px) {
   .hero .tag .sub { display: none; }   /* 키 작은 폰: 소속 줄은 긴 기록에 있다. 이름표가 얼굴을 덮지 않게 */
   .hero .tag.west { bottom: calc(50% + 58px); }
+}
+/* ===== 폰·터치 기기: 스크롤에 따라 움직이거나 바뀌는 효과 없음(작가님 지시) ===== */
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }   /* 구간이 내려올 때 떠오르던 것 → 처음부터 제자리 */
+  .top, .top.solid { background: rgba(15, 20, 25, .96); box-shadow: 0 6px 16px -10px rgba(0, 0, 0, .8); transition: none; }   /* 머리말은 내려도 그대로(띠가 생겼다 사라지지 않게) */
+  .top.light, .top.light.solid { background: rgba(238, 234, 225, .97); box-shadow: 0 6px 14px -10px rgba(20, 22, 25, .45); }
+}
+@media (max-width: 760px) {
+  /* 장면 글자·단추: 아래에서 떠오르지 않고 제자리에서 나타나기만 */
+  .hero .season, .hero .tag, .hero .pick, .hero .smenu a, .hero.in .season, .hero.in .tag, .hero.in .pick, .hero.in .smenu a { transform: none; }
+  .hero .vt, .hero.in .vt { transform: translate(-50%, -50%); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

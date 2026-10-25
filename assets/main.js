@@ -3,6 +3,7 @@
   'use strict';
   var d = document, HB = window.HB, C = HB.chars, W = HB.world;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touchy = matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)').matches;   // 폰·터치: 스크롤 움직임 효과 없음
   function $(s, r) { return (r || d).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || d).querySelectorAll(s)); }
   function byCode(c) { return C.filter(function (x) { return x.code === c; })[0]; }
@@ -15,7 +16,7 @@
     if (!el || !matchMedia('(max-width: 1100px)').matches) return;
     var r = el.getBoundingClientRect();
     if (r.top >= 56 && r.top < innerHeight * .7) return;
-    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: block || 'start' });
+    el.scrollIntoView({ behavior: 'auto', block: block || 'start' });   // 좁은 화면에서만 부르고, 폰에서는 스크롤 움직임 효과를 두지 않는다
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]; }); }
   function prefetch(src) { var i = new Image(); i.src = src; return i; }
@@ -110,7 +111,9 @@
 
   // ===== 입장: 공통 그림을 실제로 불러온 뒤, 검격으로 갈라 들어간다. 갈라진 두 조각이 화면 밖으로 밀려나면 아래의 장면이 드러난다 =====
   var WEBP = /^(seam-crack-h|seam-crack|slash-aura|slash-haze|slash-core|flash-burst|shock-ring|cut-edge-a|cut-edge-b|cut-dust|cover-moon|cover-ring-outer|cover-ring-inner|cover-glow|cover-sparks)$/;   // WebP 파생본이 있는 무거운 그림(tools/README 참고). 나머지는 PNG
-  function skinSrc(dir, n) { return 'assets/' + dir + '/' + n + (WEBP.test(n) ? '.webp' : '.png'); }
+  // WebP를 못 쓰는 브라우저(image-set type() 미지원 = 옛 사파리 등)는 CSS가 PNG로 내려가므로, 미리 받기도 같은 기준으로 고른다
+  var WEBP_OK = !!(window.CSS && CSS.supports && CSS.supports('background-image', 'image-set(url("a.webp") type("image/webp"))'));
+  function skinSrc(dir, n) { return 'assets/' + dir + '/' + n + (WEBP_OK && WEBP.test(n) ? '.webp' : '.png'); }
   var COVER = ['cover-moon', 'cover-ring-outer', 'cover-ring-inner', 'cover-glow', 'cover-sparks', 'cover-slash', 'cover-flash', 'cover-cut'];
   var SKIN2P = ['btn2-east-idle', 'btn2-east-hover', 'btn2-east-press', 'btn2-west-idle', 'btn2-west-hover', 'btn2-west-press', 'btn2-gray-idle', 'btn2-gray-hover', 'btn2-gray-press', 'btn2-sm-idle', 'btn2-sm-hover',
     'chip2-east-idle', 'chip2-east-active', 'chip2-west-idle', 'chip2-west-active', 'chip2-gray-idle', 'chip2-gray-active', 'toggle-west-idle', 'toggle-west-active', 'toggle-east-idle', 'toggle-east-active',
@@ -150,7 +153,6 @@
     var arm = function () { if (ready) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
     // 받은 뒤 해독까지 끝내 둔다(갈라지는 순간 큰 PNG를 처음 해독하면 그 자리에서 멈칫한다). 참조를 쥐고 있어 캐시에서 빠지지 않게
     var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); keep.push(i); i.onerror = tick; i.onload = function () { if (i.decode) i.decode().then(tick, tick); else tick(); }; i.src = src; }); };
-    $$('.cv-slash, .cv-cut', cover).forEach(function (el) { el.innerHTML = '<b><s></s></b>'; });   // 합성기만 쓰는 드러내기용 창(style.css 검격 층)
     COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = skinSrc('skin2', n); });
     setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
     // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
@@ -159,8 +161,7 @@
       var D = (w / 2) * nx + (h / 2) * ny + Math.max(w, h) * 0.08;   // 가장 먼 모서리가 선에서 떨어진 거리 + 절단면 두께: 딱 화면을 벗어날 만큼만 밀어 1.5초를 다 쓴다
       var P = function (x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; };
       var poly = function (s) { return 'polygon(' + [P(cx - dx * R, cy - dy * R), P(cx + dx * R, cy + dy * R), P(cx + dx * R + s * nx * R, cy + dy * R + s * ny * R), P(cx - dx * R + s * nx * R, cy - dy * R + s * ny * R)].join(',') + ')'; };
-      // 달의 회전 층을 그 자리에 멈추고 층을 합친다(조각마다 따로 노는 층 5장 → 조각 한 장). 합치는 그리기는 숨 고르기 350ms 동안 끝난다
-      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; el.style.willChange = 'auto'; });
+      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });
       var body = $('.cv-body', cover), fx = $('.cv-fx', cover), clone = body.cloneNode(true);
       [[body, -1, 'a'], [clone, 1, 'b']].forEach(function (p) {
         var half = d.createElement('div'); half.className = 'cv-half';
@@ -435,7 +436,7 @@
       if (!c.noImage) showCut(n, true);
       requestAnimationFrame(function () { V.classList.add('in'); flip(rect, vImg, false); });
       $('.v-close', V).focus();
-    } else { if (!c.noImage) showCut(n, false); V.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }
+    } else { if (!c.noImage) showCut(n, false); V.scrollTo({ top: 0, behavior: reduce || touchy ? 'auto' : 'smooth' }); }
   }
   function close() {
     if (!V || V.hidden) return;
@@ -511,12 +512,16 @@
 
   // ===== 힘의 체계: 동방 선 위 마디 7개, 서방 기둥 5개. 같은 행 = 설정집 「대응 감각」 =====
   var PW = $('.pw'), P = HB.power, PILLAR_X = [11.2, 30.7, 50, 69.4, 88.8];
-  function rowY(r) { return 90 - r * 10.5; }
+  function rowY(r) { return 94 - r * 8.45; }   // 행 0(삼류) 94% ~ 행 6(현경) 43.3%: 기둥 문장(폭 931px에서 높이 238px = 38.4%) 아래
+  // 동방 선 그림(power-east.png 800×1600)의 마디 중심(그림 높이 비율, 아래 삼류 → 위 현경). 그림의 위치(--eo)·높이(--eh)는 style.css .pw-line에 있고
+  // 마디 = --eo + --eh × 비율. 데스크톱은 마디가 행(rowY)에 오게, 폰은 선이 칸을 채우게 맞춘 값(오차 2px 이하)
+  var NODE_E = [0.8891, 0.7703, 0.6481, 0.5181, 0.3862, 0.2591, 0.1434];
+  function eastTop(r) { return 'calc(var(--eo) + var(--eh) * ' + NODE_E[r] + ')'; }
   if (PW) {
     $('.pw-map', PW).textContent = P.map;
     $$('.pw-note', PW)[0].textContent = P.eastNote; $$('.pw-note', PW)[1].textContent = P.westNote;
     var step = function (s, key, style) { return '<button type="button" class="pw-st" data-pw="' + key + '" aria-pressed="false"' + (style ? ' style="' + style + '"' : '') + '>' + esc(s.name) + (s.note ? '<small>' + esc(s.note) + '</small>' : '') + '</button>'; };
-    $('.pw-line', PW).innerHTML = P.east.map(function (s, i) { return step(s, 'e' + i, 'top:' + rowY(s.row) + '%'); }).join('');
+    $('.pw-line', PW).innerHTML = P.east.map(function (s, i) { return step(s, 'e' + i, '--row:' + rowY(s.row) + '%;--node:' + eastTop(s.row)); })   // 데스크톱은 행(기둥과 같은 높이), 폰은 그림 마디 위(style.css).join('');
     var pillars = '', stack = '';
     P.west.forEach(function (sys, si) {
       stack += '<div class="colm"><div class="ct">' + esc(sys.name) + '</div>' + sys.steps.slice().reverse().map(function (s, j) { return step(s, 'w' + si + '.' + (sys.steps.length - 1 - j)); }).join('') + '</div>';
