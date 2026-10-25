@@ -9,48 +9,58 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="preload" as="image" href="assets/skin/power-west.png">
 </head>
-<body class="p-order">
+<body class="p-order band stone">
 <a class="skip" href="#order">본문으로</a>
-<header class="top dark-on-light">
-  <a class="brand" href="index.html">검과 마나의 경계</a>
-  <nav aria-label="페이지"><a href="index.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html" aria-current="page">세력·체계</a><a href="start.html">시작</a></nav>
+<header class="top light">
+  <a class="brand" href="home.html"><i></i>검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="home.html"><kbd>1</kbd>장면</a><a href="characters.html"><kbd>2</kbd>인물</a><a href="fronts.html"><kbd>3</kbd>전선</a><a href="order.html" aria-current="page"><kbd>4</kbd>세력·체계</a><a href="start.html"><kbd>5</kbd>시작</a></nav>
   <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
-    <li><a class="mi west" href="index.html">장면</a></li>
-    <li><a class="mi east" href="characters.html">인물</a></li>
-    <li><a class="mi west" href="fronts.html">전선</a></li>
-    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
-    <li><a class="mi west" href="start.html">시작</a></li>
+    <li><a class="mi west" href="home.html"><span>장면</span><small>1</small></a></li>
+    <li><a class="mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
+    <li><a class="mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
+    <li><a class="mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
+    <li><a class="mi west" href="start.html"><span>시작</span><small>5</small></a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+  <p class="credit">검과 마나의 경계 · 문창놈</p>
 </div>
-<main>
+<main class="wrap order-grid" id="order">
 
-<section id="order" class="order">
-  <div class="fa">
-    <h2>세력<i class="rule west"></i></h2>
-    <div class="fa-cols">
-      <div class="fa-col" data-side="west"><h3>서방 · 성약군</h3><div class="fa-list"></div></div>
-      <div class="fa-col" data-side="neutral"><h3>회색지대</h3><div class="fa-list"></div></div>
-      <div class="fa-col" data-side="east"><h3>동방 · 중원</h3><div class="fa-list"></div></div>
-    </div>
-    <div class="fa-info panel gray"><p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
+<section class="fa">
+  <h2 class="t">세력 <i class="rule west"></i></h2>
+  <div class="fa-cols">
+    <div class="fa-col" data-side="west"><h3 class="l">서방 · 성약군</h3><div class="fa-list"></div></div>
+    <div class="fa-col" data-side="neutral"><h3 class="l">회색지대</h3><div class="fa-list"></div></div>
+    <div class="fa-col" data-side="east"><h3 class="l">동방 · 중원</h3><div class="fa-list"></div></div>
   </div>
-  <div class="pw">
-    <h2>힘의 체계<i class="rule west"></i></h2>
-    <p class="pw-map"></p>
-    <div class="pw-grid">
-      <div class="pw-east"><h3>동방 · 경지</h3><div class="pw-line"></div><p class="pw-note"></p></div>
-      <div class="pw-west"><h3>서방 · 오러 · 마법 · 신성력</h3><div class="pw-pillars"></div><div class="pw-stack"></div><p class="pw-note"></p></div>
-    </div>
-    <div class="pw-info panel gray"><p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
+  <div class="fa-info panel gray"><p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p></div>
+  <div class="calls reveal">
+    <div class="sheet west"><p class="ph">서쪽이 동쪽을 부르는 말</p><ul data-calls="west"></ul></div>
+    <div class="sheet east"><p class="ph">동쪽이 서쪽을 부르는 말</p><ul data-calls="east"></ul></div>
+  </div>
+</section>
+
+<section class="pw">
+  <h2 class="t">힘의 체계 <i class="rule west"></i></h2>
+  <p class="pw-map"></p>
+  <div class="pw-grid">
+    <div class="pw-east"><h3 class="l">동방 · 경지</h3><div class="pw-line"></div><p class="pw-note"></p></div>
+    <div class="pw-west"><h3 class="l">서방 · 오러 · 마법 · 신성력</h3><div class="pw-pillars"></div><div class="pw-stack"></div><p class="pw-note"></p></div>
+  </div>
+  <div class="pw-info panel gray"><p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p></div>
+  <div class="pw-side reveal">
+    <div class="panel front"><p class="ph">상성 <small>들판은 서방, 협곡과 밤은 동방</small></p><div class="lines" data-lines="matchup"></div></div>
+    <div class="sheet east"><p class="ph">관계 단계</p><div class="lines serif"><p>같은 진영 · <span data-stage="same"></span></p><p>적진 · <span data-stage="enemy"></span></p><p>악화 · 경계 → 적대</p></div></div>
   </div>
 </section>
 
 </main>
+<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="home.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
 <script src="assets/main.js"></script>

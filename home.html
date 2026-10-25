@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>장면 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#141A22">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" as="image" href="assets/skin/key-visual.jpg" media="(min-width: 901px)">
+<link rel="preload" as="image" href="assets/skin/key-visual-tall.jpg" media="(max-width: 900px)">
+</head>
+<body class="p-home">
+<a class="skip" href="#status">본문으로</a>
+<header class="top">
+  <a class="brand" href="home.html"><i></i>검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="home.html" aria-current="page"><kbd>1</kbd>장면</a><a href="characters.html"><kbd>2</kbd>인물</a><a href="fronts.html"><kbd>3</kbd>전선</a><a href="order.html"><kbd>4</kbd>세력·체계</a><a href="start.html"><kbd>5</kbd>시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a class="mi west" href="home.html"><span>장면</span><small>1</small></a></li>
+    <li><a class="mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
+    <li><a class="mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
+    <li><a class="mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
+    <li><a class="mi west" href="start.html"><span>시작</span><small>5</small></a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+  <p class="credit">검과 마나의 경계 · 문창놈</p>
+</div>
+<main>
+
+<section id="scene" class="hero" data-pick="">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-fig" data-side="west"><span class="framed west"><img src="img/l/G_1.jpg" alt="" decoding="async"><i class="frame"></i></span></div>
+  <div class="hero-fig" data-side="east"><span class="framed east"><img src="img/l/A_1.jpg" alt="" decoding="async"><i class="frame"></i></span></div>
+  <div class="hero-info panel west" data-side="west"></div>
+  <div class="hero-info panel east" data-side="east"></div>
+  <div class="hero-title">
+    <div class="plate"><div class="in"><h1 class="fit">검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div></div>
+    <div class="hero-pick" role="group" aria-label="진영 선택">
+      <button type="button" class="btn west" data-pick="west" aria-pressed="false"><span>서방</span></button>
+      <button type="button" class="btn east" data-pick="east" aria-pressed="false"><span>동방</span></button>
+      <span class="hint">진영을 고르면 그쪽 땅이 가까워집니다</span>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="band ink reveal">
+  <div class="wrap status">
+    <div class="season"><small>시작 시점</small><span data-season></span></div>
+    <ol class="fronts-strip"></ol>
+  </div>
+</section>
+
+<div class="seam" aria-hidden="true"></div>
+<section class="band paper reveal" style="padding-top: 0">
+  <div class="wrap">
+    <div class="band-head"><h2 class="t">인물 <i class="rule east"></i></h2><a class="more" href="characters.html">17인 전체 보기 →</a></div>
+    <div class="faces">
+      <div class="side" data-side="west"></div>
+      <div class="mid"></div>
+      <div class="side" data-side="east"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band paper reveal" style="padding-top: 0">
+  <div class="wrap world">
+    <div class="sheet east"><p class="ph">격동 <small>천붕 · 대봉합</small></p><div class="lines serif" data-lines="upheaval"></div></div>
+    <div class="sheet west"><p class="ph">회색지대 <small>전선은 전부 이 안에</small></p><div class="lines serif" data-lines="grayzone"></div></div>
+    <div class="panel front full"><p class="ph">전쟁의 이유 <small>어느 쪽도 틀리지 않았다</small></p><div class="lines" data-lines="why"></div></div>
+  </div>
+</section>
+
+<section class="band stone reveal">
+  <div class="wrap">
+    <div class="band-head"><h2 class="t">세력 · 힘의 체계 <i class="rule west"></i></h2><a class="more" href="order.html">세력 12 · 체계 전체 →</a></div>
+    <div class="embs">
+      <div class="side" data-side="west"></div>
+      <div class="mid"></div>
+      <div class="side" data-side="east"></div>
+    </div>
+    <div class="ladder"></div>
+  </div>
+</section>
+
+<section class="band ink reveal">
+  <div class="wrap">
+    <div class="band-head"><h2 class="t">시작 <i class="rule east"></i></h2><a class="more" href="start.html">모드 고르기 →</a></div>
+    <div class="modes mini-modes"></div>
+  </div>
+</section>
+
+</main>
+<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="home.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
+<script src="assets/data.js"></script>
+<script src="assets/world.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

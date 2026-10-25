@@ -4,60 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>검과 마나의 경계</title>
+<meta name="description" content="검과 마나의 경계 · 무협과 중세 판타지가 지형째 맞붙은 전면전 · 문창놈">
 <meta name="theme-color" content="#141A22">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="preload" as="image" href="assets/skin/key-visual.jpg" media="(min-width: 901px)">
-<link rel="preload" as="image" href="assets/skin/key-visual-tall.jpg" media="(max-width: 900px)">
+<link rel="preload" as="image" href="assets/skin/key-visual.jpg">
+<link rel="preload" as="image" href="assets/skin/title-plate.png">
+<link rel="preload" as="image" href="assets/skin/btn-east-idle.png">
 </head>
-<body class="p-scene">
-<a class="skip" href="#doors">문으로</a>
-<header class="top">
-  <a class="brand" href="index.html">검과 마나의 경계</a>
-  <nav aria-label="페이지"><a href="index.html" aria-current="page">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav>
-  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
-</header>
-<div class="menu" id="menu" hidden>
-  <ol>
-    <li><a class="mi west" href="index.html">장면</a></li>
-    <li><a class="mi east" href="characters.html">인물</a></li>
-    <li><a class="mi west" href="fronts.html">전선</a></li>
-    <li><a class="mi east" href="order.html">세력 · 체계</a></li>
-    <li><a class="mi west" href="start.html">시작</a></li>
-  </ol>
-  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
-</div>
+<body class="p-cover">
 <main>
-
-<section id="scene" class="hero" data-pick="">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-fig" data-side="west"><span class="framed west"><img src="img/l/G_1.jpg" alt="" decoding="async" loading="lazy"><i class="frame"></i></span></div>
-  <div class="hero-fig" data-side="east"><span class="framed east"><img src="img/l/A_1.jpg" alt="" decoding="async" loading="lazy"><i class="frame"></i></span></div>
-  <div class="hero-info panel west" data-side="west"></div>
-  <div class="hero-info panel east" data-side="east"></div>
-  <div class="hero-title">
-    <div class="plate"><h1>검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div>
-    <div class="hero-pick" role="group" aria-label="진영 선택">
-      <button type="button" class="btn west" data-pick="west" aria-pressed="false">서방</button>
-      <button type="button" class="btn east" data-pick="east" aria-pressed="false">동방</button>
+<section class="cover">
+  <p class="eyebrow"><span class="age">19+</span>무협 × 중세 판타지 · 전면전</p>
+  <div class="plate"><div class="in"><h1 class="fit">검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div></div>
+  <p class="sub">세 해 전, 동쪽의 천하와 서쪽의 대륙이 맞붙었다 <small>설정집 · 한 줄</small></p>
+  <div class="enter">
+    <div class="load" aria-live="polite"><div class="bar"><i></i></div><span class="txt">그림을 불러오는 중 · 0 / 0</span></div>
+    <div class="row">
+      <a class="btn east" href="home.html" aria-disabled="true">입장하기</a>
+      <span class="hint">Enter 로도 들어갈 수 있습니다</span>
     </div>
   </div>
+  <p class="credit">Written by 문창놈</p>
 </section>
-
-<!-- 각 페이지로 가는 문. 문구는 설정의 구성 요소만 -->
-<section id="doors" class="doors">
-  <div class="seam" aria-hidden="true"></div>
-  <div class="door-grid">
-    <a class="door" href="characters.html" style="background-image:url(img/l/B_1.jpg)"><span class="nameplate east"><span class="alias">동방 8 · 서방 8 · 중립 1</span><span class="name">인물</span></span></a>
-    <a class="door" href="fronts.html" style="background-image:url(assets/skin/front-map.jpg);background-position:50% 42%"><span class="nameplate gray"><span class="alias">북부 · 중앙 · 단층곡 · 남부</span><span class="name">전선</span></span></a>
-    <a class="door" href="order.html" style="background-image:url(img/l/L_1.jpg)"><span class="nameplate west"><span class="alias">세력 12 · 경지 7단 · 다섯 체계</span><span class="name">세력 · 체계</span></span></a>
-    <a class="door" href="start.html" style="background-image:url(assets/skin/mode-free-idle.jpg)"><span class="nameplate gray"><span class="alias">무림 측 · 서방 측 · 자유모드</span><span class="name">시작</span></span></a>
-  </div>
-  <p class="slot hero-slot">슬롯 · 홈 보조 원고</p>
-</section>
-
 </main>
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
