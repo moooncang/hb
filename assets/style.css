@@ -533,6 +533,15 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .v-end::before, .v-end::after { content: ''; flex: 1; border-top: 1px solid var(--hair-l); }
 .v-end i { width: 36px; height: 36px; background: center / contain no-repeat; opacity: .9; }
 .viewer.east .v-end i { background-image: url(skin/seal-east.png); } .viewer.west .v-end i { background-image: url(skin/emblem-west.png); }
+/* 필살기: 글자 넣은 20·21컷 두 장(필살기 카드 자료), 액자는 기록한 쪽의 재질, 누르면 그 컷으로 */
+.ult { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; margin: 0; }
+.ult .ult-pic { position: relative; display: block; aspect-ratio: 1856 / 1280; background: var(--paper-2); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .5); transition: transform var(--t-space) var(--ease); }
+.ult .ult-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ult .ult-pic::after { content: ''; position: absolute; inset: -3.125% -2.155%; background: center / 100% 100% no-repeat; pointer-events: none; }
+.viewer.east .ult .ult-pic::after { background-image: url(skin/frame-east.png); } .viewer.west .ult .ult-pic::after { background-image: url(skin/frame-west.png); }
+.ult .ult-pic:hover { transform: translateY(-3px); }
+.ult figcaption { grid-column: 1 / -1; font-family: var(--serif); font-size: 18px; font-weight: 700; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.ult figcaption small { font: 700 11px var(--sans); letter-spacing: .14em; opacity: .55; }
 .lightbox { position: fixed; inset: 0; z-index: 70; background: rgba(15, 20, 25, .97); display: grid; place-items: center; padding: var(--gutter); }
 .lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
 .lightbox .x { position: absolute; top: 16px; right: var(--gutter); }
@@ -740,6 +749,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
 }
 /* ===== 760px 아래: 장면은 위아래로 맞물린다(서방 위, 동방 아래), 제목은 가로 ===== */
 @media (max-width: 760px) {
+  .ult { grid-template-columns: 1fr; }
   .hero { min-height: 560px; }
   .plane .art { width: 100%; height: 64%; }
   .plane.west .art { top: 0; object-position: 58% 22%; transform-origin: 50% 30%; }

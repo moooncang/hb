@@ -108,7 +108,7 @@
     'btn-round-east-idle', 'btn-round-east-hover', 'btn-round-west-idle', 'btn-round-west-hover', 'icon-menu', 'icon-close', 'icon-arrow-left', 'icon-arrow-right',
     'pin-gray-idle', 'pin-gray-active', 'step-east-off', 'step-east-on', 'step-west-off', 'step-west-on', 'thumb-east-idle', 'thumb-east-active', 'thumb-west-idle', 'thumb-west-active',
     'fa-daehwi', 'fa-murim', 'fa-taeheo', 'fa-ungak', 'fa-mugan', 'fa-sagal', 'fa-inn', 'fa-gardeon', 'fa-selbar', 'fa-tower', 'fa-church', 'fa-isbel', 'fa-bardun'];
-  var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
+  var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
   var ART = { title: true, crack: true, slash: true, doc: true };   // v3 그림(assets/skin3)과 v4 기록 그림(assets/skin4, design/ui-asset-order-v4.md). 끄면 글꼴 제목·빛선·v2 검격·질감 판으로 돌아간다
@@ -293,8 +293,7 @@
     };
     $('.docs', REC).innerHTML = LIST.map(function (c, i) {
       var call = callOf(c), fa = faOf(c), obs = obsOf(c);
-      var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
-        : '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
+      var img = '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
       var thumbs = c.noImage ? '' : '<span class="thumbs">' + THUMBS.map(function (n) { return '<span class="th"><button type="button" data-open="' + c.code + '" data-n="' + n + '" aria-label="' + esc(c.name) + ' · ' + sceneName(n) + '"><img src="' + thumb(c.code, n) + '" alt="" loading="lazy"></button><small>' + sceneName(n) + '</small></span>'; }).join('') + '</span>';
       return '<article class="doc ' + BY + '" role="button" tabindex="0" data-open="' + c.code + '" data-fig="' + c.code + '" aria-label="' + esc(c.name) + ' 기록 펼치기"' + '>' +
         '<span class="num">' + (BY === 'east' ? '記 · ' + HANJA_N[i] : '№ ' + ROMAN_N[i]) + '</span>' + (fa ? '<i class="wm" aria-hidden="true" style="background-image:url(assets/skin/fa-' + (EMB[fa.id] || fa.id) + '.png)"></i>' : '') +
@@ -317,7 +316,7 @@
     n = Math.max(1, Math.min(25, n)); cur.n = n;
     var c = byCode(cur.code), k = catOf(n), s = HB.scenes[k], my = ++token;
     vImg.style.setProperty('--ar', ar(n));
-    vImg.classList.toggle('first', n === 1); vImg.classList.toggle('wide', n !== 1);   // 첫등장 컷은 v1 액자, 나머지는 무대 틀
+    var tall = ar(n) < 2; vImg.classList.toggle('first', tall); vImg.classList.toggle('wide', !tall);   // 첫등장·필살기 컷(1856×1280)은 액자, 나머지(2304×960)는 무대 틀
     $$('.sc-cats button', V).forEach(function (b) { b.setAttribute('aria-selected', +b.dataset.k === k); });
     $('.sc-cuts', V).innerHTML = s[1].map(function (m) { return '<button type="button" data-n="' + m + '" aria-selected="' + (m === n) + '" aria-label="' + s[0] + ' ' + (s[1].indexOf(m) + 1) + '"><img src="' + thumb(c.code, m) + '" alt=""></button>'; }).join('');
     $('.sc-cnt', V).textContent = n + ' / 25';
@@ -341,7 +340,7 @@
     $('.v-prev', V).textContent = p.name; $('.v-prev', V).dataset.code = p.code;
     $('.v-next', V).textContent = nx.name; $('.v-next', V).dataset.code = nx.code;
     var R = (HB.records && HB.records[code]) || {};
-    var attach = c.noImage ? '' : '<button type="button" class="v-card attach" aria-label="등장 카드 전체 보기"><img src="img/card/' + c.code + '.jpg" alt="" loading="lazy" width="1600" height="1103"><i class="pin" aria-hidden="true"></i></button>';   // 등장 카드를 기록에 첨부
+    var attach = c.noImage || c.noCard ? '' : '<button type="button" class="v-card attach" aria-label="등장 카드 전체 보기"><img src="img/card/' + c.code + '.jpg" alt="" loading="lazy" width="1600" height="1103"><i class="pin" aria-hidden="true"></i></button>';   // 등장 카드를 기록에 첨부
     $('.v-head', V).innerHTML = '<div><p class="lbl ' + (by === 'west' ? 'west' : '') + '">' + recLabel(c) + '</p><h2 class="call">' + (call ? callHtml(call) : esc(c.name)) + '</h2>' +
       '<p class="nm">' + (fa ? emb(fa.id) : '') + (call ? esc(c.name) : (fa ? esc(fa.name) : HB.sides[c.side])) + '</p><i class="stroke ' + by + '"></i></div>' +
       '<div class="v-right">' + attach + '<p class="meta"><span><b>' + HB.sides[c.side] + '</b> · ' + esc(c.org) + '</span><span>' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span></p></div>';
@@ -353,6 +352,12 @@
     // 정보관의 기록 구획: 설정집 문장 그대로(관찰 = 성격·말투, 내력 = 사정·목표, 외모, 호칭의 까닭, 무공)
     var eastName = c.side === 'east' ? (c.alias ? c.alias + (c.aliasHanja ? '(' + c.aliasHanja + ')' : '') : '') : (c.alias2 || '');
     var westName = c.side === 'east' ? (c.alias2 || '') : (c.alias || '');
+    // 필살기: 글자 넣은 20·21컷(필살기 카드 자료). 동방은 한자 초식명이 그림에 있으므로 「무공명 · 독음」만, 서방·회색지대는 기술명과 서브
+    var ultHtml = function () {
+      if (c.noImage || !R.ult) return '';
+      var cap = c.side === 'east' ? '「' + esc(R.ult.sub) + '」' : esc(R.ult.name) + ' <small>' + esc(R.ult.sub) + '</small>';
+      return [20, 21].map(function (n) { return '<button type="button" class="ult-pic" data-open="' + c.code + '" data-n="' + n + '" aria-label="' + esc(c.name) + ' 필살기 ' + (n - 19) + '"><img src="' + large(c.code, n) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280"></button>'; }).join('') + '<figcaption>' + cap + '</figcaption>';
+    };
     var nameLine = function (label, name, why, none) { if (!name && !none) return ''; return '<p><b>' + label + '</b>' + (name ? '「' + esc(name) + '」' + (why ? ' — ' + esc(why) : '') : esc(none)) + '</p>'; };
     $$('[data-rec]', V).forEach(function (el) {
       var k = el.dataset.rec, html = '';
@@ -361,6 +366,7 @@
       else if (k === 'look') html = R.look ? '<p>' + esc(R.look) + '</p>' : '';
       else if (k === 'names') html = c.side === 'neutral' ? '' : nameLine('동방 별호', eastName, R.eastWhy, R.eastNone) + nameLine('서방 이명', westName, R.westWhy, R.westNone);
       else if (k === 'arts') html = R.arts ? '<p>' + esc(R.arts) + '</p>' : '';
+      else if (k === 'ult') html = ultHtml();
       el.innerHTML = html || '<p class="empty">설정집에 적힌 것 없음</p>';
       var sec = el.closest('.v-sec'); if (sec && sec.dataset.recSec != null) sec.hidden = !html;
     });

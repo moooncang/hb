@@ -29,5 +29,5 @@
 ## 파일
 - `assets/data.js` 17인 / `assets/world.js` 세력·전선·체계·시작 모드·세계 문장·인물 관계 / `assets/records.js` 인물 기록 본문(표식 상세·성격·말투·사정·목표·외형·무공·별호와 이명의 까닭 — 설정집 §5 그대로, 인물 페이지에서만 읽는다) (설정집 문장 그대로, 원고는 슬롯)
 - `assets/style.css`, `assets/main.js` (페이지에 있는 구간만 초기화한다)
-- `img/l` 큰 이미지(가로 1600) · `img/t` 썸네일(400) · `img/card` 등장 카드 — `tools/build-images.ps1`로 원본에서 생성
+- `img/l` 큰 이미지(가로 1600) · `img/t` 썸네일(400) · `img/card` 등장 카드 — `tools/build-images.ps1`로 원본에서 생성. 20·21(필살기)은 `tools/build-ult.ps1`이 `../필살기 카드/`의 글자 넣은 판으로 덮어쓴다(그 뒤에 돌린다). 1·20·21번은 1856×1280, 나머지 2304×960
 - `tools/serve.js` 로컬 확인용 정적 서버 (`node tools/serve.js`)
