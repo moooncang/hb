@@ -118,6 +118,10 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .top.light { color: var(--fg-l); background: linear-gradient(to bottom, rgba(238, 234, 225, .94), rgba(238, 234, 225, 0)); }
 .top { transition: opacity var(--t-img); }
 .viewing .top { opacity: 0; pointer-events: none; }
+/* 내려 읽는 동안 머리말이 본문 글자 위에 겹치던 것 → 내리면 띠(어두운 페이지 먹색, 밝은 페이지 종이색). 맨 위에서는 원래 번짐 */
+.top { transition: opacity var(--t-img), background-color var(--t-pick), box-shadow var(--t-pick); }
+.top.solid { background: rgba(15, 20, 25, .96); box-shadow: 0 6px 16px -10px rgba(0, 0, 0, .8); }
+.top.light.solid { background: rgba(238, 234, 225, .97); box-shadow: 0 6px 14px -10px rgba(20, 22, 25, .45); }   /* 가운데 메뉴가 숨으면 둥근 단추가 제목 옆에 붙던 것 → 오른쪽 끝 */
 .top.light .brand, .top.light nav { text-shadow: none; }
 .menu { position: fixed; inset: 0; z-index: 55; background: var(--ink) url(skin/menu-backdrop.jpg) center / cover; display: grid; place-items: center; color: var(--fg-d); }
 .menu::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(15, 20, 25, .35), rgba(15, 20, 25, .88) 75%); }
@@ -792,10 +796,6 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
 @media (hover: none) { .cv-go .k-key { display: none; } .cv-go .k-touch { display: inline; } }
 @media (max-width: 1100px) {
   .top .menu-btn { margin-left: auto; }
-  /* 내려 읽는 동안 머리말이 본문 글자 위에 겹치던 것 → 내리면 먹색 띠 */
-  .top { transition: opacity var(--t-img), background-color var(--t-pick), box-shadow var(--t-pick); }
-  .top.solid { background: rgba(15, 20, 25, .96); box-shadow: 0 6px 16px -10px rgba(0, 0, 0, .8); }
-  .top.light.solid { background: rgba(238, 234, 225, .97); box-shadow: 0 6px 14px -10px rgba(20, 22, 25, .45); }   /* 가운데 메뉴가 숨으면 둥근 단추가 제목 옆에 붙던 것 → 오른쪽 끝 */
   .fr-info, .fa-info, .pw-info, .mode-info, .hero-below { scroll-margin-top: calc(var(--top) + 12px); }
   /* 장면 아래로 옮겨진 세력 칸: .hero .finfo 규칙이 닿지 않아 맨몸이던 것(세력 이름이 글자 중간에서 꺾였다) */
   .hero-below .finfo .lbl { margin-bottom: 14px; }
