@@ -98,19 +98,29 @@
     cover.addEventListener('click', function (e) { e.preventDefault(); enterNow(); });
   }
 
-  // ===== 홈: 대표 장면 =====
+  // ===== 홈: 타이틀 화면. 진영을 고르면 원화·이름표·세력 판이 바뀐다 =====
   var hero = $('.hero');
   if (hero) {
+    var LEAD = { west: 'G', east: 'A' };
     $$('.hero-info', hero).forEach(function (box) {
       var side = box.dataset.side, fs = HB.factions.filter(function (f) { return f.side === side; });
-      var lead = [].concat.apply([], fs.map(function (f) { return f.chars; })).filter(function (c) { return !byCode(c).noImage; }).slice(0, 4);
+      var lead = [].concat.apply([], fs.map(function (f) { return f.chars; })).filter(function (c) { return !byCode(c).noImage; }).slice(0, 6);
       box.innerHTML = '<p class="ph">' + HB.sides[side] + ' <small>' + fs.length + ' 세력</small></p><div class="fl">' + fs.map(function (f) { return fname(f.id); }).join('') + '</div>' + chips(lead);
     });
+    $$('.art-tag', hero).forEach(function (tag) {
+      var c = byCode(LEAD[tag.dataset.side]), fa = HB.factions.filter(function (f) { return f.chars.indexOf(c.code) >= 0; })[0];
+      $('.alias', tag).innerHTML = (fa ? emb(fa.id) : '') + aliasHtml(c);
+      $('.sub', tag).textContent = c.org + ' · ' + c.role + ' · ' + c.rank;
+      $('.nameplate', tag).setAttribute('data-open', c.code);
+    });
     var pick = function (side) {
-      hero.dataset.pick = hero.dataset.pick === side ? '' : side;
-      $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === hero.dataset.pick); });
+      if (!side || hero.dataset.pick === side) return;
+      hero.dataset.pick = side;
+      $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === side); });
+      $$('.art, .art-tag', hero).forEach(function (el) { el.classList.toggle('on', el.dataset.side === side); });
     };
-    $$('[data-pick]', hero).forEach(function (b) { if (b !== hero) b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+    $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+    prefetch(large('G', 1));
   }
   // 홈·공통: 설정 문장 슬롯
   $$('[data-season]').forEach(function (el) { el.textContent = W.season; });

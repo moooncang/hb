@@ -32,29 +32,30 @@
 </div>
 <main>
 
-<section id="scene" class="hero" data-pick="">
+<section id="scene" class="hero" data-pick="east">
+  <div class="hero-art" aria-hidden="true">
+    <img class="art" data-side="west" src="img/l/G_1.jpg" alt="" decoding="async">
+    <img class="art on" data-side="east" src="img/l/A_1.jpg" alt="" decoding="async" fetchpriority="high">
+    <div class="art-tag" data-side="west"><span class="alias"></span><span class="nameplate west">아르델 레인홀트</span><span class="sub"></span></div>
+    <div class="art-tag on" data-side="east"><span class="alias"></span><span class="nameplate east">위지란</span><span class="sub"></span></div>
+  </div>
   <div class="wrap hero-grid">
     <div class="hero-left">
       <div class="plate"><div class="in"><h1 class="fit">검과 마나의 경계</h1><i class="seal" aria-hidden="true"></i></div></div>
-      <p class="season"><span>시작 시점</span><b data-season></b></p>
+      <p class="season"><i class="age">19+</i><span>시작 시점</span><b data-season></b></p>
       <nav class="tmenu" aria-label="타이틀 메뉴">
         <a class="mi east" href="characters.html"><kbd>2</kbd><span>인물</span></a>
-        <a class="mi west" href="fronts.html"><span>전선</span><kbd>3</kbd></a>
+        <a class="mi west" href="fronts.html"><kbd>3</kbd><span>전선</span></a>
         <a class="mi east" href="order.html"><kbd>4</kbd><span>세력 · 체계</span></a>
-        <a class="mi west" href="start.html"><span>시작</span><kbd>5</kbd></a>
+        <a class="mi west" href="start.html"><kbd>5</kbd><span>시작</span></a>
       </nav>
       <div class="hero-pick" role="group" aria-label="진영 선택">
         <button type="button" class="btn west" data-pick="west" aria-pressed="false"><span>서방</span></button>
-        <button type="button" class="btn east" data-pick="east" aria-pressed="false"><span>동방</span></button>
-        <span class="hint">그림을 눌러도 됩니다</span>
+        <button type="button" class="btn east" data-pick="east" aria-pressed="true"><span>동방</span></button>
+        <span class="hint">진영을 고르면 그 진영의 대표 인물과 세력이 바뀝니다</span>
       </div>
-      <div class="hero-info-slot"></div>
-    </div>
-    <div class="duel">
-      <button type="button" class="hero-fig" data-side="west" data-pick="west" aria-label="서방 · 아르델 레인홀트"><span class="framed west"><img src="img/l/G_1.jpg" alt="" decoding="async"><i class="frame"></i></span><span class="np west tag"><span class="alias">새벽검</span><span class="nameplate west">아르델 레인홀트</span></span></button>
-      <button type="button" class="hero-fig" data-side="east" data-pick="east" aria-label="동방 · 위지란"><span class="framed east"><img src="img/l/A_1.jpg" alt="" decoding="async"><i class="frame"></i></span><span class="np east tag"><span class="alias">월마 <span class="hj">月魔</span></span><span class="nameplate east">위지란</span></span></button>
-      <div class="hero-info panel west" data-side="west"></div>
-      <div class="hero-info panel east" data-side="east"></div>
+      <div class="hero-info" data-side="west"></div>
+      <div class="hero-info" data-side="east"></div>
     </div>
   </div>
 </section>
