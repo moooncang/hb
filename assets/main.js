@@ -29,6 +29,7 @@
   function faOf(c) { return HB.factions.filter(function (f) { return f.chars.indexOf(c.code) >= 0; })[0]; }
   function frontsOf(c) { return HB.fronts.filter(function (f) { return f.chars.indexOf(c.code) >= 0; }); }
   function orgLine(c) { return esc(c.org) + ' · ' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : ''); }
+  function pageOf(code) { var c = byCode(code); return c && c.side === 'east' ? 'characters-east.html' : 'characters-west.html'; }   // 동방 인물은 서방의 기록에, 서방·회색지대 인물은 동방의 기록에
 
   // ===== 글자 맞춤: .fit 은 부모 content 폭에 맞춰 글자 크기를 줄인다(대표 이름표) =====
   function fit() {
@@ -55,10 +56,17 @@
     if (leaving) return;
     if (reduce) { location.href = href; return; }
     leaving = true;
-    var w = d.createElement('i');
-    w.className = 'wipe ' + (/fronts|start/.test(href) ? 'aura' : 'ink' + (1 + Math.floor(Math.random() * 3)));
+    var kind = /fronts|start|characters-east/.test(href) ? 'aura' : 'ink' + (1 + Math.floor(Math.random() * 3));   // 서방 페이지는 오러 쐐기, 동방 페이지(동방의 기록 포함)는 먹 번짐
+    var w = d.createElement('i'); w.className = 'wipe ' + kind;
     d.body.appendChild(w); w.getBoundingClientRect(); w.classList.add('on');
-    setTimeout(function () { location.href = href; }, 500);
+    try { sessionStorage.setItem('hb-wipe', kind); } catch (e) { }   // 다음 페이지가 같은 모양으로 덮인 채 시작한다
+    setTimeout(function () { location.href = href; }, 540);
+  }
+  addEventListener('pageshow', function (e) { if (e.persisted) { leaving = false; $$('.wipe').forEach(function (w) { w.parentNode.removeChild(w); }); try { sessionStorage.removeItem('hb-wipe'); } catch (x) { } } });
+  // 들어오는 쪽: 덮개가 그려진 채 시작했으면(html[data-wipe], 머리의 인라인 스크립트) 그림이 준비되는 대로 녹여 없앤다
+  if (d.documentElement.dataset.wipe) {
+    var wiped = false, wipeOut = function () { if (wiped) return; wiped = true; d.documentElement.classList.add('wiped'); setTimeout(function () { delete d.documentElement.dataset.wipe; d.documentElement.classList.remove('wiped'); }, 720); };
+    addEventListener('load', wipeOut); setTimeout(wipeOut, 600);
   }
   d.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]'); if (!a || a.target || e.metaKey || e.ctrlKey || e.shiftKey || a.getAttribute('aria-disabled') === 'true') { if (a && a.getAttribute('aria-disabled') === 'true') e.preventDefault(); return; }
@@ -81,10 +89,10 @@
     var here = location.pathname.split('/').pop() || 'index.html';
     $$('ol a', menu).forEach(function (a) { if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page'); });
   }
-  var PAGES = ['index.html', 'characters.html', 'fronts.html', 'order.html', 'start.html'];
+  var PAGES = ['index.html', 'characters-west.html', 'characters-east.html', 'fronts.html', 'order.html', 'start.html'];
   d.addEventListener('keydown', function (e) {
     if (/INPUT|TEXTAREA|SELECT/.test(d.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/^[1-5]$/.test(e.key) && (!V || V.hidden) && !(cover && cover.parentNode)) { var p = PAGES[+e.key - 1], cur = location.pathname.split('/').pop() || 'index.html'; if (cur !== p) go(p); }
+    if (/^[1-6]$/.test(e.key) && (!V || V.hidden) && !(cover && cover.parentNode)) { var p = PAGES[+e.key - 1], cur = location.pathname.split('/').pop() || 'index.html'; if (cur !== p) go(p); }
   });
 
   // ===== 입장: 공통 그림을 실제로 불러온 뒤, 검격으로 갈라 들어간다. 갈라진 두 조각이 화면 밖으로 밀려나면 아래의 장면이 드러난다 =====
@@ -99,9 +107,10 @@
   var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
-  var ART = { title: true, crack: true, slash: true };   // v3 그림(design/ui-asset-order-v3.md, assets/skin3). 끄면 글꼴 제목·빛선·v2 검격으로 돌아간다
+  var ART = { title: true, crack: true, slash: true, doc: false };   // v3 그림(assets/skin3)과 v4 기록 그림(assets/skin4, design/ui-asset-order-v4.md). 끄면 글꼴 제목·빛선·v2 검격·질감 판으로 돌아간다
   if (hero) { hero.classList.toggle('has-title', ART.title); hero.classList.toggle('has-crack', ART.crack); }
   if (cover) cover.classList.toggle('art', ART.slash);
+  $$('.rec, .viewer').forEach(function (el) { el.classList.toggle('art', ART.doc); });
   $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
   function showHero() { if (hero) requestAnimationFrame(function () { hero.classList.add('in'); }); }
   if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
@@ -214,7 +223,7 @@
   if (faces) {
     var face = function (c) {
       var fr = c.side === 'neutral' ? 'east' : c.side;
-      return '<a class="face" href="characters.html#' + c.code + '"><span class="pic' + (c.noImage ? ' none' : '') + '">' + (c.noImage ? '<i class="ph2">그림 없음</i>' : '<img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '" loading="lazy">') + '<i class="fframe ' + fr + '"></i></span><b>' + esc(c.name) + '</b><small>' + (c.alias ? esc(c.alias) : HB.sides[c.side]) + '</small></a>';
+      return '<a class="face" href="' + pageOf(c.code) + '#' + c.code + '"><span class="pic' + (c.noImage ? ' none' : '') + '">' + (c.noImage ? '<i class="ph2">그림 없음</i>' : '<img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '" loading="lazy">') + '<i class="fframe ' + fr + '"></i></span><b>' + esc(c.name) + '</b><small>' + (c.alias ? esc(c.alias) : HB.sides[c.side]) + '</small></a>';
     };
     $$('.side', faces).forEach(function (col) { col.innerHTML = C.filter(function (c) { return c.side === col.dataset.side; }).map(face).join(''); });
     $('.mid', faces).innerHTML = C.filter(function (c) { return c.side === 'neutral'; }).map(face).join('');
@@ -235,26 +244,53 @@
   }).join('');
   // 입장에서 베인 틈의 잔광은 조각이 밀려나는 동안 함께 사라진다(별도 잔상 없음)
 
-  // ===== 인물 군상 =====
-  var cast = $('.cast');
-  if (cast) {
-    var jb = function (c) { return '<button type="button" data-open="' + c.code + '" data-side="' + c.side + '" aria-label="' + esc(c.name) + '"><img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '"></button>'; };
-    $('.jump', cast).innerHTML = '<span class="lbl west"><i>西</i>서방</span>' + C.filter(function (c) { return c.side === 'west'; }).map(jb).join('') + '<span class="sep"></span><span class="lbl"><i>東</i>동방</span>' + C.filter(function (c) { return c.side === 'east'; }).map(jb).join('');
-    $$('.cast-col', cast).forEach(function (col) {
-      var side = col.dataset.side, sk = side === 'neutral' ? 'gray' : side;
-      col.innerHTML = C.filter(function (c) { return c.side === side; }).map(function (c) {
-        var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
-          : '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
-        var fa = faOf(c);
-        return '<button type="button" class="fig" data-open="' + c.code + '" data-fig="' + c.code + '">' +
-          '<span class="pic">' + img + '</span>' +
-          '<span class="cap"><span class="alias">' + (fa ? emb(fa.id) : '') + aliasHtml(c) + '</span><span class="nm"><span>' + esc(c.name) + '</span><i class="mark"></i></span><i class="stroke ' + (sk === 'gray' ? 'east' : sk) + '"></i>' +
-          '<span class="sub">' + orgLine(c) + '</span><span class="sig">' + esc(c.sig) + '</span></span></button>';
-      }).join('');
-    });
-    $$('.filters button', cast).forEach(function (b) {
-      b.addEventListener('click', function () { cast.dataset.f = b.dataset.f; $$('.filters button', cast).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); });
-    });
+  // ===== 인물 기록: 서방 인물 페이지 = 동방이 모아 둔 두루마리, 동방 인물 페이지 = 서방이 모아 둔 양피지 서류. 회색지대(레나타)는 양쪽 다 =====
+  var REC = $('.rec'), BY = REC ? REC.dataset.by : null, LIST = REC ? C.filter(function (c) { return c.side === REC.dataset.side || c.side === 'neutral'; }) : [];
+  var HANJA_N = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  function callOf(c) { return c.side === 'neutral' ? '' : (c.alias2 || ''); }   // 상대편이 부르는 이름(설정집: 서방 인물의 동방 별호 / 동방 인물의 서방 이명)
+  function callHtml(s) { var m = /^(.+?)\((.+)\)$/.exec(s); return m ? esc(m[1]) + '<span class="hj">' + esc(m[2]) + '</span>' : esc(s); }
+  // 대응 감각: 설정집 도해의 같은 행(동방 경지 ↔ 서방 기사 등급·서클). 행이 없는 단계(사제·정령·룬)는 비워 둔다
+  function corr(c) {
+    var P0 = HB.power, rank = c.rank || '', best = null;
+    if (c.side === 'east') {
+      P0.east.forEach(function (s) { if (rank.indexOf(s.name) === 0 && (!best || s.name.length > best.name.length)) best = s; });
+      if (!best || best.row == null) return '';
+      var ks = P0.west[0].steps.filter(function (s) { return s.row === best.row; })[0], mg = P0.west[1].steps.filter(function (s) { return s.row === best.row; })[0];
+      return [ks && ks.name, mg && mg.name].filter(Boolean).join(' · ');
+    }
+    if (c.side === 'west') {
+      P0.west.forEach(function (sys) { sys.steps.forEach(function (s) { if (rank.indexOf(s.name) >= 0 && (!best || s.name.length > best.name.length)) best = s; }); });
+      if (!best || best.row == null) return '';
+      var e = P0.east.filter(function (s) { return s.row === best.row; })[0]; return e ? e.name : '';
+    }
+    return '';
+  }
+  function rowsOf(c, full) {
+    var by = BY || (c.side === 'west' ? 'east' : 'west'), r = [['소속', esc(c.org)], ['직책', esc(c.role)]], cr = corr(c);
+    if (c.rank) r.push(['등급', esc(c.rank) + (cr ? '<small>' + (by === 'east' ? '동방 감각 · ' : '서방 감각 · ') + esc(cr) + ' (설정집 대응)</small>' : '')]);
+    r.push(['표식', esc(c.sig)]);
+    if (c.alias) r.push([c.side === 'east' ? '동방 별호' : '서방 이명', aliasHtml(c)]);
+    if (full) { r.push(['나이', c.sex + ' · ' + c.age]); r.push(['말', esc(c.lang)]); }
+    return r;
+  }
+  function recLabel(c) { var by = BY || (c.side === 'west' ? 'east' : 'west'); return '<i>' + (by === 'east' ? '東方記錄' : '西方記錄') + '</i>' + (c.side === 'neutral' ? '회색지대 · ' + (by === 'east' ? '동방의 기록' : '서방의 기록') : (by === 'east' ? '동방이 부르는 이름' : '서방이 부르는 이름')); }
+  function dl(rows, cls) { return '<dl class="' + cls + '">' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>'; }
+  if (REC) {
+    var jb = function (c) { return '<button type="button" data-open="' + c.code + '" aria-label="' + esc(c.name) + '"><img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '"></button>'; };
+    $('.rec-jump', REC).innerHTML = '<span class="lbl ' + (BY === 'west' ? 'west' : '') + '">' + (BY === 'east' ? '<i>記</i>' : '<i class="shield"></i>') + '차례</span>' + LIST.filter(function (c) { return !c.noImage; }).map(jb).join('');
+    $('.docs', REC).innerHTML = LIST.map(function (c, i) {
+      var call = callOf(c), fa = faOf(c);
+      var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
+        : '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
+      return '<article class="doc ' + BY + '" role="button" tabindex="0" data-open="' + c.code + '" data-fig="' + c.code + '" aria-label="' + esc(c.name) + ' 기록 펼치기">' +
+        '<span class="pic">' + img + '</span><span class="tx">' +
+        '<span class="num">' + (BY === 'east' ? '記 · ' : '№ ') + HANJA_N[i] + '</span>' +
+        '<span class="call">' + (call ? callHtml(call) : esc(c.name)) + '</span>' +
+        '<span class="nm">' + (fa ? emb(fa.id) : '') + (call ? esc(c.name) : (fa ? esc(fa.name) : HB.sides[c.side])) + '</span>' +
+        '<i class="stroke ' + BY + '"></i>' + dl(rowsOf(c, false), 'rows') +
+        '<span class="open">기록 펼치기 →</span></span></article>';
+    }).join('');
+    REC.addEventListener('keydown', function (e) { var t = e.target.closest('[data-open]'); if (t && t.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); t.click(); } });
   }
 
   // ===== 인물 확장 감상 =====
@@ -284,17 +320,15 @@
   }
   function render(code) {
     var c = byCode(code); cur.code = code;
-    var i = C.indexOf(c), p = C[(i + C.length - 1) % C.length], nx = C[(i + 1) % C.length], sk = sideOf(c), fa = faOf(c);
-    V.dataset.side = c.side === 'neutral' ? 'east' : c.side; vImg.dataset.side = V.dataset.side;
-    $('.v-pos', V).textContent = HB.sides[c.side] + ' · ' + (i + 1) + ' / ' + C.length;
+    var list = LIST.length ? LIST : C, i = list.indexOf(c), p = list[(i + list.length - 1) % list.length], nx = list[(i + 1) % list.length], fa = faOf(c), by = BY || (c.side === 'west' ? 'east' : 'west'), call = callOf(c);
+    V.classList.remove('east', 'west'); V.classList.add(by); V.dataset.side = by; vImg.dataset.side = by;   // 틀·칩·종이는 기록한 쪽의 재질
+    $('.v-pos', V).textContent = (by === 'east' ? '동방의 기록' : '서방의 기록') + ' · ' + (i + 1) + ' / ' + list.length;
     $('.v-prev', V).textContent = p.name; $('.v-prev', V).dataset.code = p.code;
     $('.v-next', V).textContent = nx.name; $('.v-next', V).dataset.code = nx.code;
-    var id = $('.v-id', V); id.className = 'v-id ' + sk;
-    $('.v-name', id).innerHTML = '<p class="alias">' + (fa ? emb(fa.id) : '') + aliasHtml(c) + '</p><h2>' + esc(c.name) + '</h2><i class="stroke ' + (sk === 'gray' ? 'east' : sk) + (sk === 'east' ? '' : '') + '"></i>' +
-      '<p class="meta"><span><b>' + HB.sides[c.side] + '</b></span><span>' + esc(c.org) + '</span><span>' + esc(c.role) + '</span>' + (c.rank ? '<span>' + esc(c.rank) + '</span>' : '') + '</p>';
-    var a1 = c.side === 'east' ? '동방 별호' : '서방 이명', a2 = c.side === 'east' ? '서방 이명' : '동방 별호';
-    var kv = [[a1, c.alias ? aliasHtml(c) : ''], [a2, esc(c.alias2)], ['나이', c.sex + ' · ' + c.age], ['시그니처', esc(c.sig)], ['말', esc(c.lang)]];
-    $('.kv', V).innerHTML = kv.filter(function (r) { return r[1]; }).map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('');
+    $('.v-head', V).innerHTML = '<div><p class="lbl ' + (by === 'west' ? 'west' : '') + '">' + recLabel(c) + '</p><h2 class="call">' + (call ? callHtml(call) : esc(c.name)) + '</h2>' +
+      '<p class="nm">' + (fa ? emb(fa.id) : '') + (call ? esc(c.name) : (fa ? esc(fa.name) : HB.sides[c.side])) + '</p><i class="stroke ' + by + '"></i></div>' +
+      '<p class="meta"><span><b>' + HB.sides[c.side] + '</b> · ' + esc(c.org) + '</span><span>' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span></p>';
+    $('.kv', V).innerHTML = rowsOf(c, true).map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('');
     var rel = HB.relations.filter(function (r) { return r[0] === code || r[1] === code; });
     $('.rel', V).innerHTML = rel.length ? rel.map(function (r) { var o = r[0] === code ? r[1] : r[0]; return '<li>' + chip(o) + '<span>' + esc(r[2]) + '</span></li>'; }).join('') : '<li><span class="empty">설정집에 적힌 관계 없음</span></li>';
     $('[data-stages]', V).textContent = '같은 진영 ' + W.stages.same;
@@ -302,15 +336,15 @@
     var ctx = (fa ? '<article><p class="nm">' + emb(fa.id) + esc(fa.name) + (fa.hanja ? '<span class="hj">' + fa.hanja + '</span>' : '') + '<small>소속</small></p><p>' + esc(fa.note) + '</p></article>' : '') +
       frontsOf(c).map(function (f) { return '<article><p class="nm">' + esc(f.name) + '<span class="hj">' + FRONT_HJ[f.id] + '</span><small>전선 · ' + esc(f.place) + '</small></p><p>' + esc(f.note) + '</p><p><a href="fronts.html#' + f.id + '">전선에서 보기 →</a></p></article>'; }).join('');
     $('.ctx', V).innerHTML = ctx || '<p class="empty">설정집에 지정된 세력·전선 없음</p>';
-    var groups = [['등장 · 평소', 0, 2], ['감정', 2, 9], ['전투', 9, 13]], ck = sk === 'gray' ? 'east' : sk;
+    var groups = [['등장 · 평소', 0, 2], ['감정', 2, 9], ['전투', 9, 13]];
     $('.sc-cats', V).innerHTML = groups.map(function (g) {
-      return '<span class="g">' + g[0] + '</span>' + HB.scenes.slice(g[1], g[2]).map(function (s, j) { return '<button type="button" class="sk chip2 ' + ck + '" role="tab" data-k="' + (g[1] + j) + '" aria-selected="false"><span>' + s[0] + '</span></button>'; }).join('');
+      return '<span class="g">' + g[0] + '</span>' + HB.scenes.slice(g[1], g[2]).map(function (s, j) { return '<button type="button" class="sk chip2 ' + by + '" role="tab" data-k="' + (g[1] + j) + '" aria-selected="false"><span>' + s[0] + '</span></button>'; }).join('');
     }).join('');
     var has = !c.noImage;
     $('.v-stage', V).hidden = !has; $('.v-scenes', V).hidden = !has;
     [p, nx].forEach(function (x) { if (!x.noImage) prefetch(large(x.code, 1)); });
   }
-  function figOf(code) { var f = cast && $('[data-fig="' + code + '"]', cast); return f && f.offsetParent ? f : null; }
+  function figOf(code) { var f = REC && $('[data-fig="' + code + '"]', REC); return f && f.offsetParent ? f : null; }
   function flip(fromRect, toEl, reverse, done) {
     if (reduce || !fromRect) { if (done) done(); return; }
     var to = toEl.getBoundingClientRect(), dx = fromRect.left - to.left, dy = fromRect.top - to.top, sx = fromRect.width / to.width, sy = fromRect.height / to.height;
@@ -325,12 +359,13 @@
   }
   function open(code, n, fromEl, push) {
     var c = byCode(code); if (!c) return;
+    if (LIST.length && LIST.indexOf(c) < 0) { go(pageOf(code) + '#' + code + (n > 1 ? '/' + n : '')); return; }   // 상대편 인물은 그쪽 기록 페이지에서
     var wasOpen = !V.hidden;
     cur.from = fromEl || figOf(code);
     render(code);
     if (push && !cur.pushed) { history.pushState({ hb: 'char' }, '', '#' + code + (n > 1 ? '/' + n : '')); cur.pushed = true; }
     if (!wasOpen) {
-      V.hidden = false; d.body.classList.add('lock'); V.scrollTop = 0;
+      V.hidden = false; d.body.classList.add('lock'); d.body.classList.add('viewing'); V.scrollTop = 0;
       var pic = cur.from && $('.pic img', cur.from), rect = pic && !c.noImage ? pic.getBoundingClientRect() : null;
       if (rect && (rect.bottom < 0 || rect.top > innerHeight)) rect = null;
       vImg.style.setProperty('--ar', ar(n));
@@ -342,13 +377,13 @@
   function close() {
     if (!V || V.hidden) return;
     var fig = figOf(cur.code), pic = fig && $('.pic img', fig), rect = pic && !byCode(cur.code).noImage && V.scrollTop < 40 ? pic.getBoundingClientRect() : null;
-    var finish = function () { V.hidden = true; V.classList.remove('in'); d.body.classList.remove('lock'); layers.forEach(function (l) { l.classList.remove('on'); l.removeAttribute('src'); }); if (fig) fig.focus({ preventScroll: true }); };
+    var finish = function () { V.hidden = true; V.classList.remove('in'); d.body.classList.remove('lock'); d.body.classList.remove('viewing'); layers.forEach(function (l) { l.classList.remove('on'); l.removeAttribute('src'); }); if (fig) fig.focus({ preventScroll: true }); };
     V.classList.remove('in');
     flip(rect, vImg, true, finish);
     cur.pushed = false; setHash('');
   }
   d.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-open]'); if (t) { if (V) open(t.dataset.open, 1, t.closest('.fig') || null, true); else go('characters.html#' + t.dataset.open); return; }
+    var t = e.target.closest('[data-open]'); if (t) { if (V) open(t.dataset.open, 1, t.closest('.doc') || null, true); else go(pageOf(t.dataset.open) + '#' + t.dataset.open); return; }
     if (!V) return;
     if (e.target.closest('.v-close')) { if (cur.pushed) history.back(); else close(); return; }
     var nv = e.target.closest('.v-prev, .v-next'); if (nv) { open(nv.dataset.code, 1, null, false); return; }
@@ -458,7 +493,13 @@
   // ===== 주소 상태: characters #A/16 · fronts #north · order #murim · start #east =====
   function route(push) {
     var h = decodeURIComponent(location.hash.slice(1)), m = /^([A-Q])(?:\/(\d+))?$/.exec(h);
-    if (V) { if (m && byCode(m[1])) { open(m[1], +m[2] || 1, null, false); cur.pushed = push; return; } if (!V.hidden) close(); }
+    if (V) {
+      if (m && byCode(m[1])) {
+        if (LIST.length && LIST.indexOf(byCode(m[1])) < 0) { location.replace(pageOf(m[1]) + location.hash); return; }   // 예전 주소·상대편 부호는 그쪽 페이지로
+        open(m[1], +m[2] || 1, null, false); cur.pushed = push; return;
+      }
+      if (!V.hidden) close();
+    }
     if (FR) { var fid = h.replace(/^f-/, ''); if (front(fid) && FR.dataset.front !== fid) pickFront(fid, true); }
     if (FA && faction(h) && FA.dataset.pick !== h) { pickFaction(h); $('.fa-info', FA).scrollIntoView({ block: 'center' }); }
     if (ST && HB.modes.some(function (x) { return x.id === h; }) && ST.dataset.mode !== h) pickMode(h, true);

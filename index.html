@@ -7,6 +7,7 @@
 <meta name="description" content="검과 마나의 경계 · 무협과 중세 판타지가 지형째 맞붙은 전면전 · 문창놈">
 <meta name="theme-color" content="#0F1419">
 <script>try{if(sessionStorage.getItem('hb-in')||/[?&]in\b/.test(location.search))document.documentElement.classList.add('entered')}catch(e){}</script>
+<script>try{var k=sessionStorage.getItem('hb-wipe');if(k){sessionStorage.removeItem('hb-wipe');document.documentElement.dataset.wipe=k}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -38,16 +39,17 @@
 <a class="skip" href="#status">본문으로</a>
 <header class="top">
   <a class="brand" href="index.html"><i class="seal" aria-hidden="true"></i>검과 마나의 경계</a>
-  <nav aria-label="페이지"><a href="index.html" aria-current="page"><kbd>1</kbd>장면</a><a href="characters.html"><kbd>2</kbd>인물</a><a href="fronts.html"><kbd>3</kbd>전선</a><a href="order.html"><kbd>4</kbd>세력·체계</a><a href="start.html"><kbd>5</kbd>시작</a></nav>
+  <nav aria-label="페이지"><a href="index.html" aria-current="page"><kbd>1</kbd>장면</a><a href="characters-west.html"><kbd>2</kbd>서방 인물</a><a href="characters-east.html"><kbd>3</kbd>동방 인물</a><a href="fronts.html"><kbd>4</kbd>전선</a><a href="order.html"><kbd>5</kbd>세력·체계</a><a href="start.html"><kbd>6</kbd>시작</a></nav>
   <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
     <li><a href="index.html"><i>場面</i><span>장면<small>1</small></span></a></li>
-    <li><a href="characters.html"><i>人物</i><span>인물<small>2</small></span></a></li>
-    <li><a href="fronts.html"><i>戰線</i><span>전선<small>3</small></span></a></li>
-    <li><a href="order.html"><i>勢力</i><span>세력 · 체계<small>4</small></span></a></li>
-    <li><a href="start.html"><i>始作</i><span>시작<small>5</small></span></a></li>
+    <li><a href="characters-west.html"><i>西方</i><span>서방 인물<small>2 · 동방의 기록</small></span></a></li>
+    <li><a href="characters-east.html"><i>東方</i><span>동방 인물<small>3 · 서방의 기록</small></span></a></li>
+    <li><a href="fronts.html"><i>戰線</i><span>전선<small>4</small></span></a></li>
+    <li><a href="order.html"><i>勢力</i><span>세력 · 체계<small>5</small></span></a></li>
+    <li><a href="start.html"><i>始作</i><span>시작<small>6</small></span></a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
   <p class="credit">검과 마나의 경계 · 문창놈</p>
@@ -67,11 +69,9 @@
     <div class="pick west"><button type="button" class="sk toggle west" data-pick="west" aria-pressed="false"><span>서방</span></button></div>
     <div class="pick east"><button type="button" class="sk toggle east" data-pick="east" aria-pressed="false"><span>동방</span></button></div>
     <nav class="smenu" aria-label="구간">
-      <a href="characters.html"><kbd>2</kbd><i>人物</i><b>인물</b></a>
-      <a href="fronts.html"><kbd>3</kbd><i>戰線</i><b>전선</b></a>
+      <span class="g l"><a href="characters-west.html"><kbd>2</kbd><i>西方</i><b>서방 인물</b></a><a href="fronts.html"><kbd>4</kbd><i>戰線</i><b>전선</b></a></span>
       <i class="gap" aria-hidden="true"></i>
-      <a href="order.html"><kbd>4</kbd><i>勢力</i><b>세력 · 체계</b></a>
-      <a href="start.html"><kbd>5</kbd><i>始作</i><b>시작</b></a>
+      <span class="g r"><a href="characters-east.html"><kbd>3</kbd><i>東方</i><b>동방 인물</b></a><a href="order.html"><kbd>5</kbd><i>勢力</i><b>세력 · 체계</b></a><a href="start.html"><kbd>6</kbd><i>始作</i><b>시작</b></a></span>
     </nav>
   </div>
   <div class="finfo west" data-side="west"></div>
@@ -89,7 +89,7 @@
 <div class="seam" aria-hidden="true"></div>
 <section id="people" class="band paper reveal" style="padding-top: 0">
   <div class="wrap">
-    <div class="bh"><p class="lbl"><i>人物</i>인물<small>서방 8 · 동방 8 · 중립 1</small></p><a class="more" href="characters.html">17인 전체 보기 →</a></div>
+    <div class="bh"><p class="lbl"><i>人物</i>인물<small>서방 8 · 동방 8 · 중립 1 · 상대편이 모아 둔 기록으로 본다</small></p><span class="rec-switch"><a class="more" href="characters-west.html">서방 인물 · 동방의 기록 →</a><a class="more" href="characters-east.html">동방 인물 · 서방의 기록 →</a></span></div>
     <div class="faces">
       <div class="side" data-side="west"></div>
       <div class="mid"></div>
@@ -129,7 +129,7 @@
 </section>
 
 </main>
-<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="index.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
+<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="index.html">장면</a><a href="characters-west.html">서방 인물</a><a href="characters-east.html">동방 인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
 <script src="assets/main.js"></script>

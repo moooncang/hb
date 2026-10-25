@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>서방 인물 · 동방의 기록 · 검과 마나의 경계</title>
+<meta name="theme-color" content="#0F1419">
+<script>try{var k=sessionStorage.getItem('hb-wipe');if(k){sessionStorage.removeItem('hb-wipe');document.documentElement.dataset.wipe=k}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" as="image" href="assets/skin/divider-east.png">
+</head>
+<body class="p-rec band ink">
+<a class="skip" href="#rec">본문으로</a>
+<header class="top">
+  <a class="brand" href="index.html"><i class="seal" aria-hidden="true"></i>검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html"><kbd>1</kbd>장면</a><a href="characters-west.html" aria-current="page"><kbd>2</kbd>서방 인물</a><a href="characters-east.html"><kbd>3</kbd>동방 인물</a><a href="fronts.html"><kbd>4</kbd>전선</a><a href="order.html"><kbd>5</kbd>세력·체계</a><a href="start.html"><kbd>6</kbd>시작</a></nav>
+  <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <ol>
+    <li><a href="index.html"><i>場面</i><span>장면<small>1</small></span></a></li>
+    <li><a href="characters-west.html"><i>西方</i><span>서방 인물<small>2 · 동방의 기록</small></span></a></li>
+    <li><a href="characters-east.html"><i>東方</i><span>동방 인물<small>3 · 서방의 기록</small></span></a></li>
+    <li><a href="fronts.html"><i>戰線</i><span>전선<small>4</small></span></a></li>
+    <li><a href="order.html"><i>勢力</i><span>세력 · 체계<small>5</small></span></a></li>
+    <li><a href="start.html"><i>始作</i><span>시작<small>6</small></span></a></li>
+  </ol>
+  <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
+  <p class="credit">검과 마나의 경계 · 문창놈</p>
+</div>
+<main class="wrap">
+
+<section id="rec" class="rec" data-side="west" data-by="east">
+  <div class="rec-head">
+    <div><p class="lbl"><i>東方記錄</i>동방의 기록<small>서방 인물에 관하여 · 호칭은 동방이 부르는 대로</small></p><h2 class="big">서방 인물</h2><p class="meta">서방 8 · 회색지대 1 · 한 사람마다 25컷</p></div>
+    <div class="rec-switch" role="group" aria-label="기록 고르기"><a class="sk toggle west" href="characters-west.html" aria-pressed="true"><span>서방 인물</span></a><a class="sk toggle east" href="characters-east.html" aria-pressed="false"><span>동방 인물</span></a></div>
+  </div>
+  <div class="rec-jump" aria-label="바로 가기"></div>
+  <div class="docs"></div>
+</section>
+
+</main>
+
+<div class="viewer" hidden role="dialog" aria-modal="true" aria-label="인물 기록">
+  <div class="v-bar">
+    <button type="button" class="rb east ic-close v-close" aria-label="닫기 (Esc)"></button>
+    <span class="v-pos"></span>
+    <span class="v-nav"><button type="button" class="v-prev"></button><button type="button" class="v-next"></button></span>
+  </div>
+  <div class="v-col">
+    <i class="v-top" aria-hidden="true"></i>
+    <div class="v-paper">
+      <div class="v-head"></div>
+      <div class="v-stage">
+        <div class="v-img first"><img alt="" decoding="async"><img alt="" decoding="async"><i class="sframe" aria-hidden="true"></i></div>
+        <button type="button" class="rb west ic-left v-arrow prev" aria-label="이전 컷"></button>
+        <button type="button" class="rb west ic-right v-arrow next" aria-label="다음 컷"></button>
+      </div>
+      <div class="v-scenes">
+        <div class="sc-cats" role="tablist" aria-label="상태 분류"></div>
+        <div class="sc-cuts-row"><div class="sc-cuts"></div><span class="sc-cnt"></span><button type="button" class="sk btn2 sm v-full"><span>원본 전체</span></button><button type="button" class="sk btn2 sm v-card"><span>등장 카드</span></button></div>
+      </div>
+      <div class="v-body">
+        <section class="v-sec"><p class="lbl"><i>記錄</i>기록</p><dl class="kv"></dl></section>
+        <section class="v-sec"><p class="lbl"><i>關係</i>관계<small data-stages></small></p><ul class="rel"></ul></section>
+        <section class="v-sec full"><p class="lbl"><i>所屬</i>소속 · 전선<small>설정집 그대로</small></p><div class="ctx"></div></section>
+        <section class="v-sec full"><p class="lbl"><i>原稿</i>원고</p><div class="slot">슬롯 · 인물 원고</div></section>
+      </div>
+    </div>
+    <i class="v-bottom" aria-hidden="true"></i>
+  </div>
+</div>
+<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="원본 전체"><img alt=""><button type="button" class="rb east ic-close x" aria-label="닫기 (Esc)"></button></div>
+
+<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="index.html">장면</a><a href="characters-west.html">서방 인물</a><a href="characters-east.html">동방 인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
+<script src="assets/data.js"></script>
+<script src="assets/world.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
