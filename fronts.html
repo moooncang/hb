@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>전선 · 검과 마나의 경계</title>
-<meta name="theme-color" content="#0F1216">
+<meta name="theme-color" content="#0F1419">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="preload" as="image" href="assets/skin/front-map.jpg">
@@ -14,17 +14,17 @@
 <body class="p-fronts band ink">
 <a class="skip" href="#fronts">본문으로</a>
 <header class="top">
-  <a class="brand" href="home.html"><i></i>검과 마나의 경계</a>
-  <nav aria-label="페이지"><a href="home.html"><kbd>1</kbd>장면</a><a href="characters.html"><kbd>2</kbd>인물</a><a href="fronts.html" aria-current="page"><kbd>3</kbd>전선</a><a href="order.html"><kbd>4</kbd>세력·체계</a><a href="start.html"><kbd>5</kbd>시작</a></nav>
+  <a class="brand" href="index.html"><i class="seal" aria-hidden="true"></i>검과 마나의 경계</a>
+  <nav aria-label="페이지"><a href="index.html"><kbd>1</kbd>장면</a><a href="characters.html"><kbd>2</kbd>인물</a><a href="fronts.html" aria-current="page"><kbd>3</kbd>전선</a><a href="order.html"><kbd>4</kbd>세력·체계</a><a href="start.html"><kbd>5</kbd>시작</a></nav>
   <button type="button" class="rb west ic-menu menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"></button>
 </header>
 <div class="menu" id="menu" hidden>
   <ol>
-    <li><a class="sk mi west" href="home.html"><span>장면</span><small>1</small></a></li>
-    <li><a class="sk mi east" href="characters.html"><small>2</small><span>인물</span></a></li>
-    <li><a class="sk mi west" href="fronts.html"><span>전선</span><small>3</small></a></li>
-    <li><a class="sk mi east" href="order.html"><small>4</small><span>세력 · 체계</span></a></li>
-    <li><a class="sk mi west" href="start.html"><span>시작</span><small>5</small></a></li>
+    <li><a href="index.html"><i>場面</i><span>장면<small>1</small></span></a></li>
+    <li><a href="characters.html"><i>人物</i><span>인물<small>2</small></span></a></li>
+    <li><a href="fronts.html"><i>戰線</i><span>전선<small>3</small></span></a></li>
+    <li><a href="order.html"><i>勢力</i><span>세력 · 체계<small>4</small></span></a></li>
+    <li><a href="start.html"><i>始作</i><span>시작<small>5</small></span></a></li>
   </ol>
   <button type="button" class="rb east ic-close menu-x" aria-label="메뉴 닫기"></button>
   <p class="credit">검과 마나의 경계 · 문창놈</p>
@@ -32,7 +32,7 @@
 <main class="wrap">
 
 <section id="fronts" class="fronts" data-front="">
-  <div class="fr-head"><h2 class="t">전선 <i class="rule east"></i></h2><p class="fr-note">개념도 · 상대 위치만 표시 · <span data-season></span></p></div>
+  <div class="fr-head"><div><p class="lbl"><i>戰線</i>전선<small>개념도 · 상대 위치만 표시</small></p><h2 class="big">전선</h2></div><p class="fr-note" data-season></p></div>
   <div class="fr-body">
     <div class="map-wrap">
       <div class="map-world">
@@ -42,18 +42,20 @@
     </div>
     <div class="fr-side">
       <div class="fr-list" role="group" aria-label="전선 선택"></div>
-      <div class="fr-info p2 front-tall"><div class="bd"><p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div></div>
+      <div class="fr-info"><p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p></div>
     </div>
   </div>
   <div class="fr-more reveal">
-    <div class="p2 mid east"><p class="ph">붉은 천 <small>결투의 예</small></p><div class="bd lines serif" data-lines="redcloth"></div></div>
-    <div class="p2 mid west"><p class="ph">전쟁 일감 <small>전선은 ⓤ가 없는 곳에서도 움직인다</small></p><div class="bd"><div class="jobs" data-jobs></div><p class="note" style="margin-top:14px">어느 쪽도 정의가 아니다. 양쪽 다 학살하고, 양쪽 다 적의 아이를 숨겨 준다</p></div></div>
-    <div class="p2 mid front"><p class="ph">포로 · 투항 <small>쌍등객잔</small></p><div class="bd lines" data-lines="prisoners"></div></div>
+    <div class="cols3">
+      <article class="col east"><i class="stroke east"></i><p class="lbl"><i>紅布</i>붉은 천<small>결투의 예</small></p><div class="lines" data-lines="redcloth"></div></article>
+      <article class="col west"><p class="lbl west"><i class="shield"></i>전쟁 일감<small>전선은 ⓤ가 없는 곳에서도 움직인다</small></p><div class="jobs" data-jobs></div><div class="lines"><p>어느 쪽도 정의가 아니다. 양쪽 다 학살하고, 양쪽 다 적의 아이를 숨겨 준다</p></div></article>
+      <article class="col gray"><p class="lbl gray"><i>捕虜</i>포로 · 투항<small>쌍등객잔</small></p><div class="lines" data-lines="prisoners"></div></article>
+    </div>
   </div>
 </section>
 
 </main>
-<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="home.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
+<footer class="foot"><div class="wrap"><span>검과 마나의 경계 · Written by 문창놈</span><nav><a href="index.html">장면</a><a href="characters.html">인물</a><a href="fronts.html">전선</a><a href="order.html">세력·체계</a><a href="start.html">시작</a></nav></div></footer>
 <script src="assets/data.js"></script>
 <script src="assets/world.js"></script>
 <script src="assets/main.js"></script>

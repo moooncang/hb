@@ -12,8 +12,9 @@ function Resize($img, $w) {
   $g = [System.Drawing.Graphics]::FromImage($bmp); $g.InterpolationMode = 'HighQualityBicubic'; $g.CompositingMode = 'SourceCopy'
   $g.DrawImage($img, 0, 0, $w, $h); $g.Dispose(); return $bmp
 }
+$skip = '^(tmenu-|hero-panel-|status-cell|name2-|list2-|panel2-|sheet2-|paper2-|slab2-)'   # v3에서 쓰지 않는 판·명패·목록 띠는 변환하지 않는다
 $n = 0
-Get-ChildItem (Join-Path $in '*.png') | ForEach-Object {
+Get-ChildItem (Join-Path $in '*.png') | Where-Object { $_.BaseName -notmatch $skip } | ForEach-Object {
   $name = $_.BaseName; $img = [System.Drawing.Image]::FromFile($_.FullName)
   if ($opaque -contains $name) {
     $flat = New-Object System.Drawing.Bitmap $img.Width, $img.Height, ([System.Drawing.Imaging.PixelFormat]::Format24bppRgb)

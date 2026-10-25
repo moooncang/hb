@@ -14,6 +14,7 @@
   function prefetch(src) { var i = new Image(); i.src = src; return i; }
   function aliasHtml(c) { return c.alias ? esc(c.alias) + (c.aliasHanja ? '<span class="hj">' + c.aliasHanja + '</span>' : '') : HB.sides[c.side]; }
   var EMB = { daehwi: 'daehwi', murim: 'murim', mugan: 'mugan', sagal: 'sagal', gardeon: 'gardeon', selbar: 'selbar', tower: 'tower', church: 'church', isbel: 'isbel', bardun: 'bardun', crow: 'gardeon', inn: 'inn' };
+  var FRONT_HJ = { north: '北部', center: '中央', fault: '斷層谷', south: '南部' };   // 표제용 한자(지명 뜻 그대로)
   function emb(id) { return '<i class="emb" style="background-image:url(assets/skin/fa-' + (EMB[id] || id) + '.png)" aria-hidden="true"></i>'; }
   function fname(id) { var f = faction(id); return '<span>' + emb(id) + esc(f.name) + '</span>'; }
   function chip(code) {
@@ -26,20 +27,17 @@
   function setHash(h) { history.replaceState(history.state, '', h ? '#' + h : location.pathname); }
   function sideOf(c) { return c.side === 'neutral' ? 'gray' : c.side; }
   function faOf(c) { return HB.factions.filter(function (f) { return f.chars.indexOf(c.code) >= 0; })[0]; }
-  // 이름패: 그림은 동·서 두 종류. 중립은 동방 종이패를 쓰고 글자색만 회색(.np.gray)
-  function name2(c, base) { var sk = sideOf(c); return '<span class="np ' + sk + '"><span class="alias">' + (faOf(c) ? emb(faOf(c).id) : '') + aliasHtml(c) + '</span><span class="sk name2 ' + (sk === 'gray' ? 'east' : sk) + '"><span class="fit" data-base="' + (base || 24) + '">' + esc(c.name) + '</span></span></span>'; }
+  function frontsOf(c) { return HB.fronts.filter(function (f) { return f.chars.indexOf(c.code) >= 0; }); }
+  function orgLine(c) { return esc(c.org) + ' · ' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : ''); }
 
-  // ===== 글자 맞춤: .fit 은 부모 content 폭에 맞춰 크기를 줄이거나(이름) 채운다(타이틀 .in 안) =====
+  // ===== 글자 맞춤: .fit 은 부모 content 폭에 맞춰 글자 크기를 줄인다(대표 이름표) =====
   function fit() {
     $$('.fit').forEach(function (el) {
-      var box = el.parentElement, fill = box.classList.contains('in');
-      var cs = getComputedStyle(box), avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-      if (fill) { var seal = $('.seal', box); if (seal) avail -= seal.offsetWidth + box.clientWidth * 0.025; }
+      var box = el.parentElement, cs = getComputedStyle(box), avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       if (avail <= 0) return;
       el.style.fontSize = '100px';
-      var w = el.getBoundingClientRect().width, ratio = avail / w;
-      if (fill) { var maxH = (box.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)) * 0.92; ratio = Math.min(ratio, maxH / 100); el.style.fontSize = (100 * ratio * 0.98) + 'px'; }
-      else { var base = parseFloat(el.dataset.base || 24); el.style.fontSize = Math.min(base, 100 * ratio * 0.96) + 'px'; }
+      var w = el.getBoundingClientRect().width, base = parseFloat(el.dataset.base || 24);
+      el.style.fontSize = Math.min(base, 100 * avail / w * 0.96) + 'px';
     });
   }
   var fitT; addEventListener('resize', function () { clearTimeout(fitT); fitT = setTimeout(fit, 80); });
@@ -65,15 +63,10 @@
   d.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]'); if (!a || a.target || e.metaKey || e.ctrlKey || e.shiftKey || a.getAttribute('aria-disabled') === 'true') { if (a && a.getAttribute('aria-disabled') === 'true') e.preventDefault(); return; }
     var h = a.getAttribute('href'); if (!/^[a-z]+\.html(#.*)?$/.test(h)) return;
+    var here = location.pathname.split('/').pop() || 'index.html';
+    if (h.split('#')[0] === here && h.indexOf('#') >= 0) return;   // 같은 페이지 안의 구간 이동은 그대로
     e.preventDefault(); go(h);
   });
-  // 입장에서 베인 틈의 금빛이 장면 페이지까지 남는다
-  try {
-    if (sessionStorage.getItem('hb-cut')) {
-      sessionStorage.removeItem('hb-cut');
-      if (!reduce && $('.hero')) { var ca = d.createElement('i'); ca.className = 'cut-after'; d.body.appendChild(ca); setTimeout(function () { ca.parentNode && ca.parentNode.removeChild(ca); }, 1600); }
-    }
-  } catch (e) { }
 
   // ===== 메뉴 · 단축키 =====
   var menu = $('#menu'), menuBtn = $('.menu-btn'), menuFrom = null;
@@ -85,102 +78,120 @@
   if (menu) {
     menuBtn.addEventListener('click', function () { openMenu(menu.hidden); });
     $('.menu-x', menu).addEventListener('click', function () { openMenu(false); });
-    var here = location.pathname.split('/').pop() || 'home.html';
-    $$('.mi', menu).forEach(function (a) { if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page'); });
+    var here = location.pathname.split('/').pop() || 'index.html';
+    $$('ol a', menu).forEach(function (a) { if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page'); });
   }
-  var PAGES = ['home.html', 'characters.html', 'fronts.html', 'order.html', 'start.html'];
+  var PAGES = ['index.html', 'characters.html', 'fronts.html', 'order.html', 'start.html'];
   d.addEventListener('keydown', function (e) {
     if (/INPUT|TEXTAREA|SELECT/.test(d.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/^[1-5]$/.test(e.key) && (!V || V.hidden) && !d.body.classList.contains('p-cover')) { var p = PAGES[+e.key - 1]; if (!location.pathname.endsWith(p)) go(p); }
+    if (/^[1-5]$/.test(e.key) && (!V || V.hidden) && !(cover && cover.parentNode)) { var p = PAGES[+e.key - 1], cur = location.pathname.split('/').pop() || 'index.html'; if (cur !== p) go(p); }
   });
 
-  // ===== 입장: 공통 그림을 실제로 불러온 뒤, 검격으로 갈라 들어간다 =====
+  // ===== 입장: 공통 그림을 실제로 불러온 뒤, 검격으로 갈라 들어간다. 갈라진 두 조각이 화면 밖으로 밀려나면 아래의 장면이 드러난다 =====
   var COVER = ['cover-moon', 'cover-ring-outer', 'cover-ring-inner', 'cover-glow', 'cover-sparks', 'cover-slash', 'cover-flash', 'cover-cut'];
   var SKIN2P = ['btn2-east-idle', 'btn2-east-hover', 'btn2-east-press', 'btn2-west-idle', 'btn2-west-hover', 'btn2-west-press', 'btn2-gray-idle', 'btn2-gray-hover', 'btn2-gray-press', 'btn2-sm-idle', 'btn2-sm-hover',
-    'chip2-east-idle', 'chip2-east-active', 'chip2-west-idle', 'chip2-west-active', 'chip2-gray-idle', 'chip2-gray-active', 'tmenu-east-idle', 'tmenu-east-hover', 'tmenu-west-idle', 'tmenu-west-hover',
-    'toggle-west-idle', 'toggle-west-active', 'toggle-east-idle', 'toggle-east-active', 'hero-name-east', 'hero-name-west', 'name2-east', 'name2-west', 'list2-east-idle', 'list2-east-active', 'list2-west-idle', 'list2-west-active',
-    'face-frame-east', 'face-frame-west', 'stage-frame-east', 'stage-frame-west', 'wipe-ink-1', 'wipe-ink-2', 'wipe-ink-3', 'wipe-aura'];
-  var SKIN2J = ['hero-panel-east', 'hero-panel-west', 'status-cell', 'panel2-front-tall', 'panel2-east-wide', 'panel2-west-wide', 'panel2-gray-wide', 'sheet2-east', 'sheet2-west', 'paper2-east', 'slab2-west',
-    'panel2-east-mid', 'panel2-west-mid', 'panel2-front-mid', 'panel2-west-short', 'panel2-east-short', 'panel2-front-box', 'panel2-east-box', 'panel2-front-wide'];
-  var SKINS = ['title-plate', 'seal-east', 'frame-east', 'frame-west', 'divider-east', 'divider-west', 'mark-east', 'mark-west', 'seam-band', 'power-east', 'power-west',
+    'chip2-east-idle', 'chip2-east-active', 'chip2-west-idle', 'chip2-west-active', 'chip2-gray-idle', 'chip2-gray-active', 'toggle-west-idle', 'toggle-west-active', 'toggle-east-idle', 'toggle-east-active',
+    'hero-name-east', 'hero-name-west', 'face-frame-east', 'face-frame-west', 'stage-frame-east', 'stage-frame-west', 'wipe-ink-1', 'wipe-ink-2', 'wipe-ink-3', 'wipe-aura'];
+  var SKINS = ['seal-east', 'emblem-west', 'frame-east', 'frame-west', 'divider-east', 'divider-west', 'mark-east', 'mark-west', 'seam-band', 'power-east', 'power-west',
     'btn-round-east-idle', 'btn-round-east-hover', 'btn-round-west-idle', 'btn-round-west-hover', 'icon-menu', 'icon-close', 'icon-arrow-left', 'icon-arrow-right',
-    'menu-east-idle', 'menu-east-current', 'menu-west-idle', 'menu-west-current', 'pin-gray-idle', 'pin-gray-active', 'step-east-off', 'step-east-on', 'step-west-off', 'step-west-on',
-    'thumb-east-idle', 'thumb-east-active', 'thumb-west-idle', 'thumb-west-active',
+    'pin-gray-idle', 'pin-gray-active', 'step-east-off', 'step-east-on', 'step-west-off', 'step-west-on', 'thumb-east-idle', 'thumb-east-active', 'thumb-west-idle', 'thumb-west-active',
     'fa-daehwi', 'fa-murim', 'fa-taeheo', 'fa-ungak', 'fa-mugan', 'fa-sagal', 'fa-inn', 'fa-gardeon', 'fa-selbar', 'fa-tower', 'fa-church', 'fa-isbel', 'fa-bardun'];
   var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'neutral-placeholder', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
-  var cover = $('.cover');
-  if (cover) {
-    var list = COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; }).concat(SKIN2J.map(function (n) { return 'assets/skin2/' + n + '.jpg'; }))
+  var cover = $('.cover'), hero = $('.hero');
+  $$('.cv-log[data-fronts]').forEach(function (ol) { ol.innerHTML = HB.fronts.map(function (f) { return '<li><b>' + f.name + '</b>' + esc(f.place) + '</li>'; }).join(''); });   // 진행 로그는 전선 넷
+  function showHero() { if (hero) requestAnimationFrame(function () { hero.classList.add('in'); }); }
+  if (cover && d.documentElement.classList.contains('entered')) { cover.parentNode.removeChild(cover); cover = null; showHero(); }
+  else if (cover) {
+    d.body.classList.add('lock');
+    var list = COVER.concat(SKIN2P).map(function (n) { return 'assets/skin2/' + n + '.png'; })
       .concat(SKINS.map(function (n) { return 'assets/skin/' + n + '.png'; })).concat(JPGS.map(function (n) { return 'assets/skin/' + n + '.jpg'; }))
       .concat(C.filter(function (c) { return !c.noImage; }).map(function (c) { return thumb(c.code, 1); })).concat([large('A', 1), large('G', 1)]);
     var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0;
     var tick = function () { done++; var r = done / total; bar.style.width = Math.round(r * 100) + '%'; pct.textContent = done + ' / ' + total; logs.forEach(function (li, i) { if (r >= (i + 1) / (logs.length + 1)) li.classList.add('on'); }); if (done >= total) arm(); };
     var arm = function () { if (ready) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
-    // 달·고리 다섯 장을 먼저 받아 한 번에 켠다(한 장씩 뚝뚝 뜨지 않게). 나머지 그림은 그 뒤에 받기 시작한다
     var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); i.onload = i.onerror = tick; i.src = src; }); };
     COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = 'assets/skin2/' + n + '.png'; });
     setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
-    // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각
+    // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
     var split = function () {
-      var w = innerWidth, h = innerHeight, a = 35 * Math.PI / 180, dx = Math.cos(a), dy = -Math.sin(a), nx = Math.sin(a), ny = Math.cos(a), R = Math.max(w, h) * 2, cx = w / 2, cy = h / 2;
+      var w = innerWidth, h = innerHeight, a = 35 * Math.PI / 180, dx = Math.cos(a), dy = -Math.sin(a), nx = Math.sin(a), ny = Math.cos(a), R = Math.max(w, h) * 2, cx = w / 2, cy = h / 2, D = Math.max(w, h) * 1.15;
       var P = function (x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; };
       var poly = function (s) { return 'polygon(' + [P(cx - dx * R, cy - dy * R), P(cx + dx * R, cy + dy * R), P(cx + dx * R + s * nx * R, cy + dy * R + s * ny * R), P(cx - dx * R + s * nx * R, cy - dy * R + s * ny * R)].join(',') + ')'; };
-      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });   // 두 조각의 고리가 같은 각도에서 멈춘다
+      $$('.orb > i', cover).forEach(function (el) { var cs = getComputedStyle(el); el.style.transform = cs.transform; el.style.opacity = cs.opacity; el.style.animation = 'none'; });
       var body = $('.cv-body', cover), fx = $('.cv-fx', cover), clone = body.cloneNode(true);
       [[body, -1], [clone, 1]].forEach(function (p) {
         var half = d.createElement('div'); half.className = 'cv-half';
         half.style.clipPath = half.style.webkitClipPath = poly(p[1]);
-        half.style.setProperty('--tx', (p[1] * nx * 44) + 'px'); half.style.setProperty('--ty', (p[1] * ny * 44) + 'px');
+        half.style.setProperty('--tx', (p[1] * nx * D) + 'px'); half.style.setProperty('--ty', (p[1] * ny * D) + 'px');
         half.appendChild(p[0]); cover.insertBefore(half, fx);
       });
       cover.getBoundingClientRect();
     };
+    var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); };
     var enterNow = function () {
       if (!ready || going) return; going = true;
-      try { sessionStorage.setItem('hb-cut', '1'); } catch (e) { }
-      if (reduce) { location.href = 'home.html'; return; }
+      try { sessionStorage.setItem('hb-in', '1'); } catch (e) { }
+      if (reduce) { finish(); showHero(); return; }
       split(); cover.classList.add('go');
-      setTimeout(function () { location.href = 'home.html'; }, 980);
+      setTimeout(showHero, 520);
+      setTimeout(finish, 1500);
     };
     setTimeout(arm, 15000);   // 느린 회선: 15초 뒤에는 열어 준다
-    d.addEventListener('keydown', function (e) { if (!e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
+    d.addEventListener('keydown', function (e) { if (cover && !e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
     cover.addEventListener('click', function (e) { e.preventDefault(); enterNow(); });
-  }
+  } else showHero();
 
-  // ===== 홈: 타이틀 화면. 진영을 고르면 원화·이름표·세력 판이 바뀐다 =====
-  var hero = $('.hero');
+  // ===== 장면: 두 면이 맞물린 화면. 진영을 고르면 그쪽 면이 넓어지고 중심이 옮겨 간다 =====
   if (hero) {
     var LEAD = { west: 'G', east: 'A' };
-    $$('.hero-info', hero).forEach(function (box) {
+    var SEAM = [48, 52, 46, 53, 47, 54, 48, 52, 47], YS = [0, 13, 25, 38, 50, 62, 75, 88, 100];   // 이음새: 손가락처럼 엇갈린 톱니(%)
+    var east = $('.plane.east', hero), shade = $('.seam-shade', hero), light = $('.seam-light', hero), horizontal = false;
+    var poly = function (shift, off) {
+      var pts = SEAM.map(function (x, i) { return horizontal ? (YS[i] + '% ' + (x + shift + off) + '%') : ((x + shift + off) + '% ' + YS[i] + '%'); });
+      return 'polygon(' + pts.concat(horizontal ? ['100% 100%', '0% 100%'] : ['100% 100%', '100% 0%']).join(',') + ')';
+    };
+    var layout = function () {
+      horizontal = matchMedia('(max-width: 760px)').matches;
+      var s = hero.dataset.pick === 'east' ? -13 : hero.dataset.pick === 'west' ? 13 : 0;
+      east.style.clipPath = poly(s, 0); light.style.clipPath = poly(s, -0.28); shade.style.clipPath = poly(s, -1.6);
+      var below = $('#hero-below'), narrow = matchMedia('(max-width: 1100px)').matches;
+      $$('.finfo', d).forEach(function (f) { var want = narrow ? below : hero; if (f.parentNode !== want) want.appendChild(f); });
+    };
+    $$('.finfo', hero).forEach(function (box) {
       var side = box.dataset.side, fs = HB.factions.filter(function (f) { return f.side === side; });
       var lead = [].concat.apply([], fs.map(function (f) { return f.chars; })).filter(function (c) { return !byCode(c).noImage; }).slice(0, 6);
-      box.innerHTML = '<p class="ph">' + HB.sides[side] + ' <small>' + fs.length + ' 세력</small></p><div class="bd"><div class="fl">' + fs.map(function (f) { return fname(f.id); }).join('') + '</div>' + chips(lead) + '</div>';
+      box.innerHTML = (side === 'east' ? '<i class="stroke east r"></i>' : '') + '<p class="lbl ' + side + '"><i>勢力</i>' + HB.sides[side] + ' <small>' + fs.length + ' 세력</small></p><div class="fl">' + fs.map(function (f) { return fname(f.id); }).join('') + '</div>' + chips(lead);
     });
-    $$('.art-tag', hero).forEach(function (tag) {
+    $$('.tag', hero).forEach(function (tag) {
       var c = byCode(LEAD[tag.dataset.side]), fa = faOf(c);
       $('.alias', tag).innerHTML = (fa ? emb(fa.id) : '') + aliasHtml(c);
       $('.sub', tag).textContent = c.org + ' · ' + c.role + ' · ' + c.rank;
       var nm = $('.hname', tag); nm.setAttribute('data-open', c.code); $('.fit', nm).textContent = c.name;
     });
     var pick = function (side) {
-      if (!side || hero.dataset.pick === side) return;
-      hero.dataset.pick = side;
-      $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === side); });
-      $$('.art, .art-tag', hero).forEach(function (el) { el.classList.toggle('on', el.dataset.side === side); });
+      side = hero.dataset.pick === side ? '' : side; hero.dataset.pick = side;
+      $$('.pick .toggle', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === side); });
+      layout();
     };
-    $$('.hero-pick [data-pick]', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+    $$('.pick .toggle', hero).forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
+    $$('.plane', hero).forEach(function (p) {
+      p.addEventListener('click', function () { pick(p.dataset.side); });
+      p.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p.dataset.side); } });
+    });
+    layout(); addEventListener('resize', layout);
     prefetch(large('G', 1));
   }
   // 홈·공통: 설정 문장 슬롯
   $$('[data-season]').forEach(function (el) { el.textContent = W.season; });
+  $$('[data-line]').forEach(function (el) { var p = el.dataset.line.split('.'); el.textContent = W[p[0]][+p[1]]; });
   $$('[data-lines]').forEach(function (el) { el.innerHTML = lines(W[el.dataset.lines]); });
   $$('[data-jobs]').forEach(function (el) { el.innerHTML = W.jobs.map(function (j) { return '<span>' + esc(j) + '</span>'; }).join(''); });
   $$('[data-calls]').forEach(function (el) { el.innerHTML = W.names[el.dataset.calls].map(function (n) { return '<li>' + esc(n) + '</li>'; }).join(''); });
   $$('[data-stage]').forEach(function (el) { el.textContent = W.stages[el.dataset.stage]; });
-  var strip = $('.fronts-strip');
-  if (strip) strip.innerHTML = HB.fronts.map(function (f) {
-    return '<li><a class="p2 cell" href="fronts.html#' + f.id + '"><i class="pin-i"></i><span class="tx"><b>' + f.name + '</b><small>' + esc(f.place) + '</small><span class="vsm">' + f.west.map(emb).join('') + '<i class="x">대치</i>' + f.east.map(emb).join('') + '</span></span></a></li>';
+  var row = $('.fronts-row');
+  if (row) row.innerHTML = HB.fronts.map(function (f, i) {
+    return '<li><a href="fronts.html#' + f.id + '"><small>0' + (i + 1) + ' · ' + esc(f.place) + '</small><b>' + f.name + '<i>' + FRONT_HJ[f.id] + '</i></b><span class="vs">' + f.west.map(emb).join('') + '<i>대치</i>' + f.east.map(emb).join('') + '</span><p>' + esc(f.note) + '</p></a></li>';
   }).join('');
   var faces = $('.faces');
   if (faces) {
@@ -196,33 +207,36 @@
     var embl = function (f) { return '<a class="embl" href="order.html#' + f.id + '">' + emb(f.id) + '<b>' + esc(f.name) + '</b></a>'; };
     $$('.side', embs).forEach(function (col) { col.innerHTML = HB.factions.filter(function (f) { return f.side === col.dataset.side; }).map(embl).join(''); });
     $('.mid', embs).innerHTML = HB.factions.filter(function (f) { return f.side === 'neutral'; }).map(embl).join('');
-    var P0 = HB.power, st = function (s) { return '<span class="st">' + esc(s.name) + (s.note ? '<small>' + esc(s.note) + '</small>' : '') + '</span>'; };
-    $('.ladder').innerHTML = '<div class="col east"><h4>동방 · 경지</h4>' + P0.east.slice().reverse().map(st).join('') + '</div>' +
-      '<div class="col west"><h4>서방 · 기사</h4>' + P0.west[0].steps.slice().reverse().map(st).join('') + '</div><p class="map">' + esc(P0.map) + '</p>';
+    var P0 = HB.power, who = function (s) { return s.chars ? '<span class="who">' + s.chars.map(function (k) { var c = byCode(k); return '<img src="' + thumb(k, 1) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" style="object-position:' + c.focal + '" loading="lazy">'; }).join('') + '</span>' : ''; };
+    var st = function (s) { return '<span class="st">' + esc(s.name) + (s.note ? '<small>' + esc(s.note) + '</small>' : '') + who(s) + '</span>'; };
+    $('.ladder').innerHTML = '<div class="colm east"><h4>동방 · 경지</h4>' + P0.east.slice().reverse().map(st).join('') + '</div>' +
+      '<div class="colm west"><h4>서방 · 기사</h4>' + P0.west[0].steps.slice().reverse().map(st).join('') + '</div><p class="map">' + esc(P0.map) + '</p>';
   }
   var mini = $('.mini-modes');
   if (mini) mini.innerHTML = HB.modes.map(function (m) {
     return '<a class="mode mini" href="start.html#' + m.id + '" style="background-image:url(assets/skin/mode-' + m.id + '-idle.jpg)"><small>' + (m.id === 'free' ? '소속 · 위치 자유' : '시작 장소 ' + (m.id === 'east' ? '천문관' : '발트로크 성채')) + '</small><b>' + esc(m.name) + '</b></a>';
   }).join('');
+  // 입장에서 베인 틈의 잔광은 조각이 밀려나는 동안 함께 사라진다(별도 잔상 없음)
 
   // ===== 인물 군상 =====
   var cast = $('.cast');
   if (cast) {
     var jb = function (c) { return '<button type="button" data-open="' + c.code + '" data-side="' + c.side + '" aria-label="' + esc(c.name) + '"><img src="' + thumb(c.code, 1) + '" alt="" style="object-position:' + c.focal + '"></button>'; };
-    $('.jump', cast).innerHTML = '<span class="lbl">서방</span>' + C.filter(function (c) { return c.side === 'west'; }).map(jb).join('') + '<span class="sep"></span><span class="lbl">동방</span>' + C.filter(function (c) { return c.side === 'east'; }).map(jb).join('');
+    $('.jump', cast).innerHTML = '<span class="lbl west"><i>西</i>서방</span>' + C.filter(function (c) { return c.side === 'west'; }).map(jb).join('') + '<span class="sep"></span><span class="lbl"><i>東</i>동방</span>' + C.filter(function (c) { return c.side === 'east'; }).map(jb).join('');
     $$('.cast-col', cast).forEach(function (col) {
-      var side = col.dataset.side;
+      var side = col.dataset.side, sk = side === 'neutral' ? 'gray' : side;
       col.innerHTML = C.filter(function (c) { return c.side === side; }).map(function (c) {
         var img = c.noImage ? '<img src="assets/skin/neutral-placeholder.jpg" alt="쌍등객잔 문 앞. 레나타의 그림은 아직 없다" loading="lazy" decoding="async">'
           : '<img src="' + large(c.code, 1) + '" alt="" loading="lazy" decoding="async" width="1856" height="1280">';
-        var np = name2(c, 24), cap = side === 'west' ? '<span class="mark"></span>' + np : np + '<span class="mark"></span>';
+        var fa = faOf(c);
         return '<button type="button" class="fig" data-open="' + c.code + '" data-fig="' + c.code + '">' +
-          '<span class="pic"><span class="framed ' + (side === 'neutral' ? '' : side) + '">' + img + (side === 'neutral' ? '' : '<i class="frame"></i>') + '</span></span>' +
-          '<span class="cap">' + cap + '</span><span class="sub"><span>' + esc(c.org) + ' · ' + esc(c.role) + (c.rank ? ' · ' + esc(c.rank) : '') + '</span><span class="sig">' + esc(c.sig) + '</span></span></button>';
+          '<span class="pic">' + img + '</span>' +
+          '<span class="cap"><span class="alias">' + (fa ? emb(fa.id) : '') + aliasHtml(c) + '</span><span class="nm"><span>' + esc(c.name) + '</span><i class="mark"></i></span><i class="stroke ' + (sk === 'gray' ? 'east' : sk) + '"></i>' +
+          '<span class="sub">' + orgLine(c) + '</span><span class="sig">' + esc(c.sig) + '</span></span></button>';
       }).join('');
     });
     $$('.filters button', cast).forEach(function (b) {
-      b.addEventListener('click', function () { cast.dataset.f = b.dataset.f; $$('.filters button', cast).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); fit(); });
+      b.addEventListener('click', function () { cast.dataset.f = b.dataset.f; $$('.filters button', cast).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); });
     });
   }
 
@@ -253,20 +267,24 @@
   }
   function render(code) {
     var c = byCode(code); cur.code = code;
-    var i = C.indexOf(c), p = C[(i + C.length - 1) % C.length], nx = C[(i + 1) % C.length], sk = sideOf(c);
+    var i = C.indexOf(c), p = C[(i + C.length - 1) % C.length], nx = C[(i + 1) % C.length], sk = sideOf(c), fa = faOf(c);
     V.dataset.side = c.side === 'neutral' ? 'east' : c.side; vImg.dataset.side = V.dataset.side;
     $('.v-pos', V).textContent = HB.sides[c.side] + ' · ' + (i + 1) + ' / ' + C.length;
     $('.v-prev', V).textContent = p.name; $('.v-prev', V).dataset.code = p.code;
     $('.v-next', V).textContent = nx.name; $('.v-next', V).dataset.code = nx.code;
-    $('.v-id .npw', V).innerHTML = name2(c, 30);
-    $('.v-id .meta', V).innerHTML = '<span>' + HB.sides[c.side] + '</span><span>' + esc(c.org) + '</span><span>' + esc(c.role) + '</span>' + (c.rank ? '<span>' + esc(c.rank) + '</span>' : '');
+    var id = $('.v-id', V); id.className = 'v-id ' + sk;
+    $('.v-name', id).innerHTML = '<p class="alias">' + (fa ? emb(fa.id) : '') + aliasHtml(c) + '</p><h2>' + esc(c.name) + '</h2><i class="stroke ' + (sk === 'gray' ? 'east' : sk) + (sk === 'east' ? '' : '') + '"></i>' +
+      '<p class="meta"><span><b>' + HB.sides[c.side] + '</b></span><span>' + esc(c.org) + '</span><span>' + esc(c.role) + '</span>' + (c.rank ? '<span>' + esc(c.rank) + '</span>' : '') + '</p>';
     var a1 = c.side === 'east' ? '동방 별호' : '서방 이명', a2 = c.side === 'east' ? '서방 이명' : '동방 별호';
-    var kv = [['진영', HB.sides[c.side]], ['소속', esc(c.org)], ['직책', esc(c.role)], ['경지', esc(c.rank)], ['나이', c.sex + ' · ' + c.age], [a1, c.alias ? aliasHtml(c) : ''], [a2, esc(c.alias2)], ['시그니처', esc(c.sig)], ['말', esc(c.lang)]];
-    $$('.v-body .p2', V).forEach(function (el) { el.classList.remove('paper', 'slab'); el.classList.add(sk === 'west' ? 'slab' : 'paper'); });
+    var kv = [[a1, c.alias ? aliasHtml(c) : ''], [a2, esc(c.alias2)], ['나이', c.sex + ' · ' + c.age], ['시그니처', esc(c.sig)], ['말', esc(c.lang)]];
     $('.kv', V).innerHTML = kv.filter(function (r) { return r[1]; }).map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('');
     var rel = HB.relations.filter(function (r) { return r[0] === code || r[1] === code; });
     $('.rel', V).innerHTML = rel.length ? rel.map(function (r) { var o = r[0] === code ? r[1] : r[0]; return '<li>' + chip(o) + '<span>' + esc(r[2]) + '</span></li>'; }).join('') : '<li><span class="empty">설정집에 적힌 관계 없음</span></li>';
     $('[data-stages]', V).textContent = '같은 진영 ' + W.stages.same;
+    // 소속 세력과 전선의 설정집 문장(원문 그대로)
+    var ctx = (fa ? '<article><p class="nm">' + emb(fa.id) + esc(fa.name) + (fa.hanja ? '<span class="hj">' + fa.hanja + '</span>' : '') + '<small>소속</small></p><p>' + esc(fa.note) + '</p></article>' : '') +
+      frontsOf(c).map(function (f) { return '<article><p class="nm">' + esc(f.name) + '<span class="hj">' + FRONT_HJ[f.id] + '</span><small>전선 · ' + esc(f.place) + '</small></p><p>' + esc(f.note) + '</p><p><a href="fronts.html#' + f.id + '">전선에서 보기 →</a></p></article>'; }).join('');
+    $('.ctx', V).innerHTML = ctx || '<p class="empty">설정집에 지정된 세력·전선 없음</p>';
     var groups = [['등장 · 평소', 0, 2], ['감정', 2, 9], ['전투', 9, 13]], ck = sk === 'gray' ? 'east' : sk;
     $('.sc-cats', V).innerHTML = groups.map(function (g) {
       return '<span class="g">' + g[0] + '</span>' + HB.scenes.slice(g[1], g[2]).map(function (s, j) { return '<button type="button" class="sk chip2 ' + ck + '" role="tab" data-k="' + (g[1] + j) + '" aria-selected="false"><span>' + s[0] + '</span></button>'; }).join('');
@@ -274,7 +292,6 @@
     var has = !c.noImage;
     $('.v-stage', V).hidden = !has; $('.v-scenes', V).hidden = !has;
     [p, nx].forEach(function (x) { if (!x.noImage) prefetch(large(x.code, 1)); });
-    fit();
   }
   function figOf(code) { var f = cast && $('[data-fig="' + code + '"]', cast); return f && f.offsetParent ? f : null; }
   function flip(fromRect, toEl, reverse, done) {
@@ -283,11 +300,11 @@
     var t = 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ',' + sy + ')';
     toEl.style.transition = 'none'; toEl.style.transform = reverse ? 'none' : t;
     toEl.getBoundingClientRect();
-    toEl.style.transition = 'transform ' + (reverse ? 420 : 520) + 'ms cubic-bezier(.2,.7,.15,1)';
+    toEl.style.transition = 'transform ' + (reverse ? 420 : 560) + 'ms cubic-bezier(.2,.7,.15,1)';
     toEl.style.transform = reverse ? t : 'none';
     var end = function () { toEl.removeEventListener('transitionend', end); toEl.style.transition = ''; if (!reverse) toEl.style.transform = ''; if (done) done(); };
     toEl.addEventListener('transitionend', end);
-    setTimeout(end, reverse ? 480 : 580);
+    setTimeout(end, reverse ? 480 : 620);
   }
   function open(code, n, fromEl, push) {
     var c = byCode(code); if (!c) return;
@@ -301,7 +318,7 @@
       if (rect && (rect.bottom < 0 || rect.top > innerHeight)) rect = null;
       vImg.style.setProperty('--ar', ar(n));
       if (!c.noImage) showCut(n, true);
-      requestAnimationFrame(function () { V.classList.add('in'); flip(rect, vImg, false); fit(); });
+      requestAnimationFrame(function () { V.classList.add('in'); flip(rect, vImg, false); });
       $('.v-close', V).focus();
     } else { if (!c.noImage) showCut(n, false); V.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }
   }
@@ -341,20 +358,19 @@
   var pos = { north: [53, 12], fault: [56, 28], center: [52, 44], south: [51, 79] };   // 지도 그림 기준 %
   if (FR) {
     $('.pins', FR).innerHTML = HB.fronts.map(function (f) { var p = pos[f.id]; return '<button type="button" class="pin" data-front="' + f.id + '" aria-pressed="false" style="left:' + p[0] + '%;top:' + p[1] + '%" aria-label="' + f.name + ' ' + esc(f.place) + '"><span>' + f.name + '</span></button>'; }).join('');
-    $('.fr-list', FR).innerHTML = HB.fronts.map(function (f) { return '<button type="button" class="sk btn2 gray" data-front="' + f.id + '" aria-pressed="false"><span class="two"><b>' + f.name + '</b><small>' + esc(f.place) + '</small></span></button>'; }).join('');
+    $('.fr-list', FR).innerHTML = HB.fronts.map(function (f, i) { return '<button type="button" data-front="' + f.id + '" aria-pressed="false"><span><small>0' + (i + 1) + ' · ' + esc(f.place) + '</small><b>' + f.name + '<i>' + FRONT_HJ[f.id] + '</i></b></span><span class="vs">' + f.west.map(emb).join('') + '<i>대치</i>' + f.east.map(emb).join('') + '</span></button>'; }).join('');
     FR.addEventListener('click', function (e) { var b = e.target.closest('[data-front]'); if (b && b !== FR) pickFront(b.dataset.front); });
   }
   function names(ids) { return ids.length ? ids.map(fname).join('') : '<span>—</span>'; }
   function pickFront(id, keepHash) {
     id = FR.dataset.front === id ? '' : id; FR.dataset.front = id;
     $$('[data-front]', FR).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.front === id); });
-    var f = front(id);
-    var cl = function (v) { return Math.max(-50, Math.min(50, v)); };   // 2배 확대에서 지도 가장자리 밖이 드러나지 않는 한계
+    var f = front(id), cl = function (v) { return Math.max(-50, Math.min(50, v)); };   // 2배 확대에서 지도 밖이 드러나지 않는 한계
     if (f) { var p = pos[id]; world.style.transform = 'translate(' + cl(2 * (50 - p[0])) + '%,' + cl(2 * (50 - p[1])) + '%) scale(2)'; wrap.classList.add('zoom'); }
     else { world.style.transform = ''; wrap.classList.remove('zoom'); }
-    $('.fr-info', FR).innerHTML = '<div class="bd">' + (f ? '<div><p class="place">' + esc(f.place) + '</p><h4>' + f.name + '</h4></div><p class="note">' + esc(f.note) + '</p>' +
-      '<div class="vs"><div class="w">' + names(f.west) + '</div><i>대치</i><div class="e">' + names(f.east) + '</div></div>' +
-      (f.chars.length ? chips(f.chars) : '<p class="empty">설정에 지정된 인물 없음</p>') : '<p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p>') + '</div>';
+    $('.fr-info', FR).innerHTML = f ? '<p class="place">' + esc(f.place) + '</p><h4>' + f.name + ' <span class="hj">' + FRONT_HJ[f.id] + '</span></h4><p class="note">' + esc(f.note) + '</p>' +
+      '<div class="vs2"><div class="w">' + names(f.west) + '</div><i>대치</i><div class="e">' + names(f.east) + '</div></div>' +
+      (f.chars.length ? chips(f.chars) : '<p class="empty">설정에 지정된 인물 없음</p>') : '<p class="empty">전선을 고르면 대치 세력과 관련 인물이 나타납니다.</p>';
     if (!keepHash) setHash(id || '');
   }
 
@@ -363,8 +379,7 @@
   if (FA) {
     $$('.fa-col', FA).forEach(function (col) {
       $('.fa-list', col).innerHTML = HB.factions.filter(function (f) { return f.side === col.dataset.side; }).map(function (f) {
-        var gray = f.side === 'neutral';   // 회색지대(쌍등객잔)는 회색 주 버튼, 동·서는 문장 자리가 있는 목록 띠
-        return '<button type="button" class="sk ' + (gray ? 'btn2 gray' : 'list2 ' + f.side) + '" data-fa="' + f.id + '" aria-pressed="false">' + (gray ? '' : emb(f.id)) + '<span>' + esc(f.name) + (f.hanja ? '<small>' + f.hanja + '</small>' : '') + '</span></button>';
+        return '<button type="button" data-fa="' + f.id + '" aria-pressed="false">' + emb(f.id) + '<span>' + esc(f.name) + (f.hanja ? '<small class="hj">' + f.hanja + '</small>' : '') + '</span></button>';
       }).join('');
     });
     FA.addEventListener('click', function (e) { var b = e.target.closest('[data-fa]'); if (b) pickFaction(b.dataset.fa); });
@@ -374,10 +389,9 @@
     if (id) FA.dataset.pick = id; else delete FA.dataset.pick;
     $$('[data-fa]', FA).forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.fa === id); });
     var f = faction(id), info = $('.fa-info', FA);
-    info.className = 'fa-info p2 wide ' + (f ? (f.side === 'neutral' ? 'gray' : f.side) : 'gray');
-    info.innerHTML = '<div class="bd">' + (f ? '<h4>' + emb(f.id) + esc(f.name) + '</h4><p class="note">' + esc(f.note) + '</p>' +
+    info.innerHTML = f ? '<h4>' + emb(f.id) + esc(f.name) + (f.hanja ? '<span class="hj">' + f.hanja + '</span>' : '') + '</h4><p class="note">' + esc(f.note) + '</p>' +
       '<p class="fronts-rel">관련 전선 · ' + (f.fronts.length ? f.fronts.map(function (x) { return '<a href="fronts.html#' + x + '">' + front(x).name + ' ' + esc(front(x).place) + '</a>'; }).join(' / ') : '지정 없음') + '</p>' + chips(f.chars)
-      : '<p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p>') + '</div>';
+      : '<p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p>';
   }
 
   // ===== 힘의 체계: 동방 선 위 마디 7개, 서방 기둥 5개. 같은 행 = 설정집 「대응 감각」 =====
@@ -390,7 +404,7 @@
     $('.pw-line', PW).innerHTML = P.east.map(function (s, i) { return step(s, 'e' + i, 'top:' + rowY(s.row) + '%'); }).join('');
     var pillars = '', stack = '';
     P.west.forEach(function (sys, si) {
-      stack += '<div class="col"><div class="ct">' + esc(sys.name) + '</div>' + sys.steps.slice().reverse().map(function (s, j) { return step(s, 'w' + si + '.' + (sys.steps.length - 1 - j)); }).join('') + '</div>';
+      stack += '<div class="colm"><div class="ct">' + esc(sys.name) + '</div>' + sys.steps.slice().reverse().map(function (s, j) { return step(s, 'w' + si + '.' + (sys.steps.length - 1 - j)); }).join('') + '</div>';
       sys.steps.forEach(function (s, j) { var r = s.row != null ? s.row : j * 1.6; pillars += step(s, 'w' + si + '.' + j, 'left:' + PILLAR_X[si] + '%;top:' + rowY(r) + '%'); });
     });
     $('.pw-pillars', PW).innerHTML = pillars; $('.pw-stack', PW).innerHTML = stack;
@@ -400,10 +414,9 @@
       var on = b.getAttribute('aria-pressed') !== 'true', key = b.dataset.pw;
       $$('[data-pw]', PW).forEach(function (x) { x.setAttribute('aria-pressed', on && x.dataset.pw === key); });
       var s = on ? stepOf(key) : null, east = key[0] === 'e', sys = on && !east ? P.west[+key.slice(1).split('.')[0]].name : '동방 · 경지', info = $('.pw-info', PW);
-      info.className = 'pw-info p2 wide ' + (s ? (east ? 'east' : 'west') : 'gray');
-      info.innerHTML = '<div class="bd">' + (s ? '<h4>' + esc(s.name) + '<small>' + esc(sys) + '</small></h4>' +
+      info.innerHTML = s ? '<h4>' + esc(s.name) + '<small>' + esc(sys) + '</small></h4>' +
         (s.note ? '<p class="note">' + esc(s.note) + '</p>' : '') + (s.chars ? chips(s.chars) : '<p class="empty">이 단계에 해당하는 등록 인물 없음</p>')
-        : '<p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p>') + '</div>';
+        : '<p class="empty">단계를 고르면 설명과 해당 인물이 연결됩니다.</p>';
     });
   }
 
@@ -421,7 +434,7 @@
     var id = ST.dataset.mode === id0 ? '' : id0; ST.dataset.mode = id;
     $$('.mode[data-mode]', ST).forEach(function (x) { var on = x.dataset.mode === id; x.setAttribute('aria-pressed', on); x.style.backgroundImage = 'url(assets/skin/mode-' + x.dataset.mode + (on ? '-selected' : '-idle') + '.jpg)'; });
     var m = HB.modes.filter(function (x) { return x.id === id; })[0];
-    $('.mode-info', ST).innerHTML = m ? '<p class="note">' + esc(m.note) + '</p><div class="pro2 ' + m.id + '"><div class="slot">슬롯 · ' + esc(m.name) + ' 프롤로그</div></div><div class="links"><button type="button" class="sk btn2 gray" aria-disabled="true"><span class="two"><b>작품으로 이동</b><small>미연결</small></span></button></div>' : '';
+    $('.mode-info', ST).innerHTML = m ? '<p class="lbl"><i>始作</i>' + esc(m.name) + '</p><p class="note">' + esc(m.note) + '</p><div class="pro2 ' + m.id + '"><div class="slot">슬롯 · ' + esc(m.name) + ' 프롤로그</div></div><div class="links"><button type="button" class="sk btn2 gray" aria-disabled="true"><span class="two"><b>작품으로 이동</b><small>미연결</small></span></button></div>' : '';
     if (!keepHash) setHash(id || '');
   }
 
