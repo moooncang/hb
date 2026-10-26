@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var d = document, HB = window.HB, C = HB.chars, W = HB.world;
+  function sound(action, value) { if (HB.sound) HB.sound[action](value); }
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STACK_Q = '(max-width: 760px), (max-width: 1100px) and (max-aspect-ratio: 4/5)';   // 장면을 위아래로 쌓는 화면(style.css 같은 조건)
   var touchy = matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)').matches;   // 폰·터치: 스크롤 움직임 효과 없음
@@ -66,13 +67,22 @@
   if (!reduce) { WIPES.ink = makeWipe('ink' + (1 + Math.floor(Math.random() * 3))); WIPES.aura = makeWipe('aura'); }
   function go(href) {
     if (leaving) return;
-    if (reduce) { location.href = href; return; }
     leaving = true;
     var west = /fronts|start|characters-east/.test(href), w = west ? WIPES.aura : WIPES.ink;   // 서방 페이지는 오러 날, 동방 페이지(동방의 기록 포함)는 먹 번짐
+    sound('cue', reduce ? 'page' : west ? 'page-aura' : 'page-ink'); sound('leave');
+    if (reduce) { setTimeout(function () { location.href = href; }, 120); return; }
     w.getBoundingClientRect(); w.classList.add('on');
     try { sessionStorage.setItem('hb-wipe', west ? 'aura' : 'ink'); } catch (e) { }   // 다음 페이지가 먹으로 덮인 채 시작한다
     setTimeout(function () { location.href = href; }, west ? 460 : 390);   // 덮개가 거의 닫힌 뒤 이동. 새 문서가 올 때까지 이 페이지는 계속 움직인다
   }
+  // 일반 메뉴·본문·푸터 링크도 같은 전환과 효과음을 통과한다.
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.hasAttribute('download') || (a.target && a.target !== '_self') || a.closest('#cover')) return;
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || !/\.html$/.test(url.pathname) || (url.pathname === location.pathname && url.search === location.search)) return;
+    e.preventDefault(); go(url.pathname + url.search + url.hash);
+  });
   addEventListener('pageshow', function (e) { if (e.persisted) { leaving = false; $$('.wipe').forEach(function (w) { w.classList.remove('on'); }); try { sessionStorage.removeItem('hb-wipe'); } catch (x) { } } });
   // 들어오는 쪽: 먹으로 덮인 채 그려졌으면 글꼴이 준비되는 대로 바로 걷는다(최대 450ms). 장면의 등장 같은 것은 걷힌 뒤에 시작한다
   var wiped = !d.documentElement.dataset.wipe, afterWipe = [];
@@ -95,6 +105,7 @@
   var menu = $('#menu'), menuBtn = $('.menu-btn'), menuFrom = null;
   function openMenu(on) {
     if (!menu) return;
+    sound('cue', on ? 'menu' : 'close');
     menu.hidden = !on; menuBtn.setAttribute('aria-expanded', on); d.body.classList.toggle('lock', on);
     if (on) { menuFrom = d.activeElement; $('.menu-x', menu).focus(); } else if (menuFrom) menuFrom.focus();
   }
@@ -149,13 +160,15 @@
     if (!ART.slash) need = need.concat(['cover-slash', 'cover-flash', 'cover-cut'].map(function (n) { return 'assets/skin2/' + n + '.png'; }));
     var orbSrc = COVER.slice(0, 5).map(function (n) { return skinSrc('skin2', n); });
     var list = need, rest = all.filter(function (src) { return need.indexOf(src) < 0 && orbSrc.indexOf(src) < 0; }), keep = [];
-    var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0;
+    var done = 0, total = list.length, bar = $('.cv-bar i', cover), pct = $('[data-pct]', cover), logs = $$('.cv-log li', cover), ready = false, going = false, orbN = 0, entryPrepared = reduce || !HB.sound, loadTimedOut = false;
     var tick = function () { done++; var r = done / total; bar.style.width = Math.round(r * 100) + '%'; pct.textContent = done + ' / ' + total; logs.forEach(function (li, i) { if (r >= (i + 1) / (logs.length + 1)) li.classList.add('on'); }); if (done >= total) arm(); };
-    var arm = function () { if (ready) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
+    var arm = function () { if (ready || !entryPrepared || !cover) return; ready = true; logs.forEach(function (li) { li.classList.add('on'); }); $('.cv-pct span', cover).textContent = '등을 켰다'; cover.classList.add('ready'); };
+    if (!entryPrepared) HB.sound.prepareEntry().then(function () { entryPrepared = true; if (done >= total || loadTimedOut) arm(); });
     // 받은 뒤 해독까지 끝내 둔다(갈라지는 순간 큰 PNG를 처음 해독하면 그 자리에서 멈칫한다). 참조를 쥐고 있어 캐시에서 빠지지 않게
     var started = false, startAll = function () { if (started) return; started = true; list.forEach(function (src) { var i = new Image(); keep.push(i); i.onerror = tick; i.onload = function () { if (i.decode) i.decode().then(tick, tick); else tick(); }; i.src = src; }); };
-    COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) { cover.classList.add('orb-on'); startAll(); } }; i.src = skinSrc('skin2', n); });
-    setTimeout(function () { cover.classList.add('orb-on'); startAll(); }, 4000);
+    var revealOrb = function () { if (!cover) return; cover.classList.add('orb-on'); startAll(); };
+    COVER.slice(0, 5).forEach(function (n) { var i = new Image(); i.onload = i.onerror = function () { if (++orbN === 5) revealOrb(); }; i.src = skinSrc('skin2', n); });
+    setTimeout(revealOrb, 4000);
     // 화면을 검격 선(35°)으로 두 조각으로 자른다. 원본은 왼쪽 위 조각, 복제는 오른쪽 아래 조각. 각 조각은 선과 수직인 방향으로 화면 밖까지 밀려난다
     var split = function () {
       var w = innerWidth, h = innerHeight, a = 35 * Math.PI / 180, dx = Math.cos(a), dy = -Math.sin(a), nx = Math.sin(a), ny = Math.cos(a), R = Math.max(w, h) * 2, cx = w / 2, cy = h / 2;
@@ -173,10 +186,20 @@
       });
       cover.getBoundingClientRect();
     };
-    var finish = function () { if (cover && cover.parentNode) cover.parentNode.removeChild(cover); cover = null; d.body.classList.remove('lock'); keep = []; var drip = function () { var n = rest.splice(0, 4); n.forEach(prefetch); if (rest.length) (window.requestIdleCallback || setTimeout)(drip, 350); }; setTimeout(drip, 1500); };   // 나머지는 조금씩(한꺼번에 받으면 장면에서 멈칫)
+    var finish = function () {
+      if (cover && cover.parentNode) cover.parentNode.removeChild(cover);
+      cover = null; d.body.classList.remove('lock'); keep = [];
+      // 나머지는 조금씩(한꺼번에 받으면 장면에서 멈칫).
+      var drip = function () {
+        var n = rest.splice(0, 4); n.forEach(prefetch);
+        if (rest.length) { if (window.requestIdleCallback) window.requestIdleCallback(drip, { timeout: 350 }); else setTimeout(drip, 350); }
+      };
+      setTimeout(drip, 1500);
+    };
     // 시각표(ms, 누른 뒤): 0 숨 고르기 → 350 검격 긋기 650 → 650 섬광 → 1130 두 조각이 1.1초 동안 밀려남 → 1450 장면 등장 → 2300 표지 제거
     var enterNow = function () {
       if (!ready || going) return; going = true;
+      sound('activate'); sound('cue', reduce ? 'entry-soft' : 'entry');
       try { sessionStorage.setItem('hb-in', '1'); } catch (e) { }
       if (reduce) { finish(); showHero(); return; }
       cover.classList.add('arm'); split();
@@ -184,8 +207,8 @@
       setTimeout(showHero, 1450);
       setTimeout(finish, 2300);
     };
-    setTimeout(arm, 15000);   // 느린 회선: 15초 뒤에는 열어 준다
-    d.addEventListener('keydown', function (e) { if (cover && !e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
+    setTimeout(function () { loadTimedOut = true; arm(); }, 15000);   // 느린 회선: 15초 뒤에는 열어 준다
+    d.addEventListener('keydown', function (e) { if (cover && !e.target.closest('.sound') && !/^(Tab|Escape|Shift|Control|Alt|Meta)$/.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) enterNow(); });
     cover.addEventListener('click', function (e) { e.preventDefault(); enterNow(); });
   } else showHero();
 
@@ -225,6 +248,7 @@
     });
     var pick = function (side) {
       side = hero.dataset.pick === side ? '' : side; hero.dataset.pick = side;
+      sound('scene', side); sound('cue', 'select');
       $$('.pick .toggle', hero).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pick === side); });
       layout();
       if (side) bring($('#hero-below'));   // 좁은 화면: 세력·인물 칸은 장면 아래에 있다
@@ -337,7 +361,8 @@
   var cur = { code: null, n: 1, from: null, pushed: false }, layer = 0, token = 0;
   function catOf(n) { return HB.scenes.findIndex(function (s) { return s[1].indexOf(n) >= 0; }); }
   function ar(n) { var dm = HB.dim(n); return dm[0] / dm[1]; }
-  function showCut(n, instant) {
+  function showCut(n, instant, quiet) {
+    if (!instant && !quiet) sound('cue', n === 20 || n === 21 ? 'ultimate' : 'cut');
     n = Math.max(1, Math.min(25, n)); cur.n = n;
     var c = byCode(cur.code), k = catOf(n), s = HB.scenes[k], my = ++token;
     vImg.style.setProperty('--ar', ar(n));
@@ -424,6 +449,7 @@
     var c = byCode(code); if (!c) return;
     if (LIST.length && LIST.indexOf(c) < 0) { go(pageOf(code) + '#' + code + (n > 1 ? '/' + n : '')); return; }   // 상대편 인물은 그쪽 기록 페이지에서
     var wasOpen = !V.hidden;
+    sound('scene', c.side); sound('cue', n === 20 || n === 21 ? 'ultimate' : 'paper');
     cur.from = fromEl || figOf(code);
     render(code);
     if (push && !cur.pushed) { history.pushState({ hb: 'char' }, '', '#' + code + (n > 1 ? '/' + n : '')); cur.pushed = true; }
@@ -435,10 +461,11 @@
       if (!c.noImage) showCut(n, true);
       requestAnimationFrame(function () { V.classList.add('in'); flip(rect, vImg, false); });
       $('.v-close', V).focus();
-    } else { if (!c.noImage) showCut(n, false); V.scrollTo({ top: 0, behavior: reduce || touchy ? 'auto' : 'smooth' }); }
+    } else { if (!c.noImage) showCut(n, false, true); V.scrollTo({ top: 0, behavior: reduce || touchy ? 'auto' : 'smooth' }); }
   }
   function close() {
     if (!V || V.hidden) return;
+    sound('scene', ''); sound('cue', 'close');
     var fig = figOf(cur.code), pic = fig && $('.pic img', fig), rect = pic && !byCode(cur.code).noImage && V.scrollTop < 40 ? pic.getBoundingClientRect() : null;
     var finish = function () { V.hidden = true; V.classList.remove('in'); d.body.classList.remove('lock'); d.body.classList.remove('viewing'); layers.forEach(function (l) { l.classList.remove('on'); l.removeAttribute('src'); }); if (fig) fig.focus({ preventScroll: true }); };
     V.classList.remove('in');
@@ -459,8 +486,8 @@
     if (e.target.closest('.lightbox .x') || e.target === lb) { closeLb(); }
   });
   var lbFrom = null;
-  function openLb(src, from) { lbFrom = from; $('img', lb).src = src; lb.hidden = false; $('.x', lb).focus(); }
-  function closeLb() { lb.hidden = true; $('img', lb).removeAttribute('src'); if (lbFrom) lbFrom.focus(); }
+  function openLb(src, from) { sound('cue', 'zoom'); lbFrom = from; $('img', lb).src = src; lb.hidden = false; $('.x', lb).focus(); }
+  function closeLb() { sound('cue', 'close'); lb.hidden = true; $('img', lb).removeAttribute('src'); if (lbFrom) lbFrom.focus(); }
   d.addEventListener('keydown', function (e) {
     if (/INPUT|TEXTAREA|SELECT/.test(d.activeElement.tagName)) return;
     if (e.key === 'Escape') { if (lb && !lb.hidden) closeLb(); else if (menu && !menu.hidden) openMenu(false); else if (V && !V.hidden) { if (cur.pushed) history.back(); else close(); } return; }
@@ -478,6 +505,7 @@
   }
   function names(ids) { return ids.length ? ids.map(fname).join('') : '<span>—</span>'; }
   function pickFront(id, keepHash) {
+    sound('cue', 'map');
     id = FR.dataset.front === id ? '' : id; FR.dataset.front = id;
     $$('[data-front]', FR).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.front === id); });
     var f = front(id), cl = function (v) { return Math.max(-50, Math.min(50, v)); };   // 2배 확대에서 지도 밖이 드러나지 않는 한계
@@ -500,10 +528,12 @@
     FA.addEventListener('click', function (e) { var b = e.target.closest('[data-fa]'); if (b) { pickFaction(b.dataset.fa); if (FA.dataset.pick) bring($('.fa-info', FA)); } });
   }
   function pickFaction(id0) {
+    sound('cue', 'select');
     var id = FA.dataset.pick === id0 ? '' : id0;
     if (id) FA.dataset.pick = id; else delete FA.dataset.pick;
     $$('[data-fa]', FA).forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.fa === id); });
     var f = faction(id), info = $('.fa-info', FA);
+    sound('scene', f ? f.side : '');
     info.innerHTML = f ? '<h4>' + emb(f.id) + esc(f.name) + (f.hanja ? '<span class="hj">' + f.hanja + '</span>' : '') + '</h4><p class="note">' + esc(f.note) + '</p>' +
       '<p class="fronts-rel">관련 전선 · ' + (f.fronts.length ? f.fronts.map(function (x) { return '<a href="fronts.html#' + x + '">' + front(x).name + ' ' + esc(front(x).place) + '</a>'; }).join(' / ') : '지정 없음') + '</p>' + chips(f.chars)
       : '<p class="empty">세력을 고르면 소속 인물과 관련 전선이 강조됩니다.</p>';
@@ -529,6 +559,7 @@
     $('.pw-pillars', PW).innerHTML = pillars; $('.pw-stack', PW).innerHTML = stack;
     var stepOf = function (key) { if (key[0] === 'e') return P.east[+key.slice(1)]; var p = key.slice(1).split('.'); return P.west[+p[0]].steps[+p[1]]; };
     PW.addEventListener('click', function (e) {
+      if (e.target.closest('[data-pw]')) sound('cue', 'power');
       var b = e.target.closest('[data-pw]'); if (!b) return;
       var on = b.getAttribute('aria-pressed') !== 'true', key = b.dataset.pw;
       $$('[data-pw]', PW).forEach(function (x) { x.setAttribute('aria-pressed', on && x.dataset.pw === key); });
@@ -551,7 +582,9 @@
     ST.addEventListener('click', function (e) { var b = e.target.closest('.mode[data-mode]'); if (b) { pickMode(b.dataset.mode); if (ST.dataset.mode) bring($('.mode-info', ST)); } });
   }
   function pickMode(id0, keepHash) {
+    sound('cue', 'confirm');
     var id = ST.dataset.mode === id0 ? '' : id0; ST.dataset.mode = id;
+    sound('scene', id);
     $$('.mode[data-mode]', ST).forEach(function (x) { var on = x.dataset.mode === id; x.setAttribute('aria-pressed', on); x.style.backgroundImage = 'url(assets/skin/mode-' + x.dataset.mode + (on ? '-selected' : '-idle') + '.jpg)'; });
     var m = HB.modes.filter(function (x) { return x.id === id; })[0];
     $('.mode-info', ST).innerHTML = m ? '<p class="lbl"><i>始作</i>' + esc(m.name) + '</p><p class="note">' + esc(m.note) + '</p><div class="pro2 ' + m.id + '"><div class="slot">슬롯 · ' + esc(m.name) + ' 프롤로그</div></div><div class="links"><button type="button" class="sk btn2 gray" aria-disabled="true"><span class="two"><b>작품으로 이동</b><small>미연결</small></span></button></div>' : '';

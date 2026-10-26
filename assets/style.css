@@ -106,6 +106,34 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .dark .chipc, .band.ink .chipc, .hero .chipc { border-color: var(--hair-d); background: rgba(15, 20, 25, .55); color: var(--fg-d); }
 .dark .chipc:hover, .band.ink .chipc:hover, .hero .chipc:hover { background: rgba(15, 20, 25, .9); border-color: rgba(242, 239, 233, .4); }
 
+/* ===== 사운드: 헤더 오른쪽의 작은 조작부, 입장 표지 위에서도 접근 가능 ===== */
+.sound { position: fixed; top: calc((var(--top) - 44px) / 2); right: calc(var(--gutter) + 60px); z-index: 110; color: var(--fg-d); font-size: 13px; }
+.sound-button { width: 44px; height: 44px; display: grid; place-items: center; background: rgba(15, 20, 25, .78); border: 1px solid var(--hair-d); }
+.sound-button span { width: 22px; height: 22px; background: url(skin/icon-sound.png) center / contain no-repeat; opacity: .45; transition: opacity 180ms; }
+.sound-button[data-on="true"] span, .sound-button:hover span, .sound-button:focus-visible span { opacity: 1; }
+.sound-button[data-on="true"] { border-color: var(--silver); }
+.sound-panel { position: absolute; top: 52px; right: -60px; width: min(292px, calc(100vw - 32px)); padding: 18px 20px 20px; background: #151B23; border: 1px solid var(--hair-d); max-height: calc(100dvh - var(--top) - 28px); overflow-y: auto; }
+.sound-head { display: flex; align-items: center; justify-content: space-between; margin: -8px -8px 10px 0; }
+.sound-head b { font-weight: 600; letter-spacing: .08em; }
+.sound-close { width: 44px; height: 44px; text-align: center; font-size: 25px; color: var(--fg2-d); }
+.sound-track { font-family: var(--serif); font-size: 16px; }
+.sound-status { color: var(--fg2-d); font-size: 12px; margin: 4px 0 14px; min-height: 20px; }
+.sound-power { width: 100%; min-height: 44px; text-align: center; border: 1px solid var(--silver); color: var(--fg-d); }
+.sound-power:hover { background: rgba(242, 239, 233, .08); }
+.sound-retry { width: 100%; min-height: 40px; margin-top: 6px; text-align: center; color: var(--fg2-d); text-decoration: underline; text-underline-offset: 3px; }
+.sound-fx-field { margin-top: 4px; }
+.sound-field { display: grid; gap: 8px; margin-top: 18px; color: var(--fg2-d); }
+.sound-field > span { display: flex; justify-content: space-between; }
+.sound-field select { width: 100%; min-height: 44px; padding: 6px 8px; font: inherit; color: var(--fg-d); background: #1D2530; border: 1px solid var(--hair-d); border-radius: 0; }
+.sound-field input { width: 100%; margin: 0; min-height: 32px; accent-color: var(--silver); }
+.sound-effects { display: flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 6px; }
+.sound-effects input { width: 17px; height: 17px; accent-color: var(--silver); }
+body:has(.sound) .top nav { margin-right: 52px; }
+@media (max-width: 760px) {
+  body:has(.sound) .top .brand { max-width: calc(100% - 120px); white-space: normal; font-size: 13px; line-height: 1.3; }
+  .sound-panel { right: -60px; }
+}
+
 /* ===== 머리 · 전체 메뉴 ===== */
 .top { position: fixed; inset: 0 0 auto 0; height: var(--top); z-index: 50; display: flex; align-items: center; gap: 24px; padding: 0 var(--gutter); color: #fff; background: linear-gradient(to bottom, rgba(15, 20, 25, .82), rgba(15, 20, 25, 0)); }
 .top .brand { display: flex; align-items: center; gap: 9px; font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }

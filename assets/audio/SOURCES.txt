@@ -1,0 +1,38 @@
+사이트 사운드트랙 · 2026-10-27
+
+사용자가 작업 폴더에 준비한 MP3를 변환 없이 복사했다.
+
+red-cloth.mp3 ← ../../../사운드트랙/Lay Down the Red Cloth.mp3
+표시: RED CLOTH · 메인 테마
+
+tianmen.mp3 ← ../../../사운드트랙/营门暮色.mp3
+표시: 천문관 · 동방 전선
+
+valtrock.mp3 ← ../../../사운드트랙/Citadel at Dawn.mp3
+표시: 발트로크 · 서방 성채
+
+표시 이름은 사운드트랙/파일 안내.txt 기준.
+일반 UI 효과음은 assets/audio.js에서 Web Audio로 합성한다.
+
+입장 검격 · entry-slash.wav
+2026-10-27 / 44.1kHz stereo PCM16 / 2.5초 / 441,044 bytes
+Mixkit 무료 효과음 4종을 자르고 피치·EQ·좌우 이동·다이내믹을 편집해,
+이 사이트의 검격·충격·화면 분리 시각표에 맞춘 8개 층의 마스터로 제작했다.
+재제작: tools/build-entry-audio.cjs. 소스 원본은 임시 작업 폴더에만 보관한다.
+
+2792 · Fast sword whoosh
+2789 · Samurai Sword Impact
+2795 · Heavy sword smashes metal
+출처: https://mixkit.co/free-sound-effects/fight/
+원본: https://assets.mixkit.co/active_storage/sfx/{id}/{id}.wav
+
+3208 · Breaking apart
+출처: https://mixkit.co/free-sound-effects/break/
+원본: https://assets.mixkit.co/active_storage/sfx/3208/3208.wav
+
+라이선스: Mixkit Sound Effects Free License (2026-10-27 확인)
+https://mixkit.co/license/#sfxFree
+https://mixkit.co/license/modal/sfxFree/
+웹사이트 등 최종 작품에 통합해 무료로 수정·사용할 수 있다.
+소스 음원 자체의 재배포, 스톡·템플릿화, 자체 저작권·권리관리 등록은 금지된다.
+이 파일은 이 사이트 입장 연출에 통합하는 용도이며, 스톡 효과음으로 제공하지 않는다.
