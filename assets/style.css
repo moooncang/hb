@@ -676,9 +676,17 @@ body:has(.sound) .top nav { margin-right: 52px; }
 .mode-info { display: grid; gap: 24px; max-width: 900px; margin-top: 24px; }
 .mode-info .note { font-family: var(--serif); font-size: clamp(18px, 1.8vw, 22px); line-height: 1.7; word-break: keep-all; }
 .mode-info .links { display: flex; gap: 12px; flex-wrap: wrap; }
-.pro2 { width: 100%; max-width: 700px; aspect-ratio: 1400 / 400; display: grid; align-content: center; padding: 0 5%; background: center / 100% 100% no-repeat; color: var(--fg-l); }
-.pro2.east { background-image: url(skin/prologue-east.jpg); } .pro2.west { background-image: url(skin/prologue-west.jpg); }
-.pro2.free { background: var(--ink-3); border: 1px solid var(--hair-d); color: var(--fg-d); aspect-ratio: auto; padding: 40px 5%; }
+/* 시작 대화(프롤로그): 작품 첫 화면을 그대로 읽게 — 배경 띠(5:1) → 지문(흐린 명조) · 인물 컷 · 대사(이름 + 말) → 상태창(고정폭) */
+.pro { display: grid; gap: 18px; max-width: 760px; padding-top: 8px; }
+.pro .lbl { margin-bottom: 2px; }
+.pro-bg { display: block; width: 100%; height: auto; box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .8); }
+.pro-n { font-family: var(--serif); font-size: 16px; line-height: 1.85; color: var(--fg2-d); word-break: keep-all; }
+.pro-cut { display: block; width: 100%; height: auto; border: 1px solid var(--hair-d); box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .8); }
+.pro-say { display: grid; grid-template-columns: 7.5em 1fr; gap: 4px 16px; align-items: baseline; font-family: var(--serif); font-size: 17px; line-height: 1.75; color: var(--fg-d); word-break: keep-all; }
+.pro-say b { font: 800 13px/1.75 var(--sans); letter-spacing: .04em; color: var(--east-l); }
+.pro.west .pro-say b { color: #9DB4D8; }
+.pro-st { margin: 6px 0 0; padding: 14px 16px; font: 12.5px/1.75 Consolas, 'D2Coding', ui-monospace, monospace; white-space: pre-wrap; word-break: keep-all; color: var(--fg2-d); background: rgba(10, 13, 18, .72); border: 1px solid var(--hair-d); border-left: 2px solid var(--east); }
+.pro.west .pro-st { border-left-color: var(--west-l); } .pro.free .pro-st { border-left-color: var(--gray); }
 
 /* ===== 페이지 전환: 나가는 쪽은 먹 번짐(동방 페이지)이 가운데서 자라 덮거나 오러 날(서방 페이지)이 비스듬히 쓸고 지나가고,
    들어오는 쪽은 먹으로 덮인 채 그려져(html[data-wipe], 머리의 인라인 스크립트) 글꼴이 준비되는 대로 걷힌다. 변형·투명도만 움직인다(합성기) ===== */
@@ -789,6 +797,7 @@ html[data-wipe].wiped body::before { opacity: 0; transition: opacity 380ms var(-
 /* ===== 760px 아래: 장면은 위아래로 맞물린다(서방 위, 동방 아래), 제목은 가로 ===== */
 @media (max-width: 760px) {
   .ult { grid-template-columns: 1fr; }
+  .pro-say { grid-template-columns: 1fr; gap: 0; } .pro-n { font-size: 15px; } .pro-say { font-size: 16px; } .pro-st { font-size: 11.5px; padding: 12px; }
   .big { font-size: 34px; }
   .fronts-row { grid-template-columns: 1fr; } .fronts-row li { border-right: 1px solid var(--hair-d); }
   .fronts-row a { padding: 12px 16px; }

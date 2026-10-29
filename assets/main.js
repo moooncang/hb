@@ -134,7 +134,7 @@
     'btn-round-east-idle', 'btn-round-east-hover', 'btn-round-west-idle', 'btn-round-west-hover', 'icon-menu', 'icon-close', 'icon-arrow-left', 'icon-arrow-right',
     'pin-gray-idle', 'pin-gray-active', 'step-east-off', 'step-east-on', 'step-west-off', 'step-west-on', 'thumb-east-idle', 'thumb-east-active', 'thumb-west-idle', 'thumb-west-active',
     'fa-daehwi', 'fa-murim', 'fa-taeheo', 'fa-ungak', 'fa-mugan', 'fa-sagal', 'fa-inn', 'fa-gardeon', 'fa-selbar', 'fa-tower', 'fa-church', 'fa-isbel', 'fa-bardun'];
-  var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'tex-paper', 'tex-stone', 'tex-ink-night', 'prologue-east', 'prologue-west',
+  var JPGS = ['menu-backdrop', 'viewer-backdrop', 'front-map', 'tex-paper', 'tex-stone', 'tex-ink-night',
     'mode-east-idle', 'mode-west-idle', 'mode-free-idle', 'mode-east-selected', 'mode-west-selected', 'mode-free-selected'];
   var cover = $('.cover'), hero = $('.hero');
   var ART = { title: true, crack: true, slash: true, doc: true };   // v3 그림(assets/skin3)과 v4 기록 그림(assets/skin4, design/ui-asset-order-v4.md). 끄면 글꼴 제목·빛선·v2 검격·질감 판으로 돌아간다
@@ -581,13 +581,24 @@
     HB.modes.forEach(function (m) { prefetch('assets/skin/mode-' + m.id + '-selected.jpg'); });
     ST.addEventListener('click', function (e) { var b = e.target.closest('.mode[data-mode]'); if (b) { pickMode(b.dataset.mode); if (ST.dataset.mode) bring($('.mode-info', ST)); } });
   }
+  // 시작 대화(assets/prologues.js, 원고 그대로): 배경 → 지문 · 인물 컷 · 대사 → 상태창
+  function prologue(m) {
+    var P = HB.prologues && HB.prologues[m.id]; if (!P) return '';
+    return '<article class="pro ' + m.id + '" aria-label="' + esc(m.name) + ' 시작 대화"><p class="lbl"><i>序章</i>시작 대화<small>프롤로그 · 작품 첫 화면 그대로</small></p>' + P.map(function (b) {
+      if (b.bg) return '<img class="pro-bg" src="img/bg/' + b.bg + '.jpg" alt="" width="1600" height="320" loading="lazy" decoding="async">';
+      if (b.cut) { var dm = HB.dim(b.cut[1]); return '<img class="pro-cut" src="' + large(b.cut[0], b.cut[1]) + '" alt="" width="' + dm[0] + '" height="' + dm[1] + '" loading="lazy" decoding="async">'; }
+      if (b.who) return '<p class="pro-say"><b>' + esc(b.who) + '</b><span>' + esc(b.say) + '</span></p>';
+      if (b.st) return '<pre class="pro-st">' + esc(b.st) + '</pre>';
+      return '<p class="pro-n">' + esc(b.n) + '</p>';
+    }).join('') + '</article>';
+  }
   function pickMode(id0, keepHash) {
     sound('cue', 'confirm');
     var id = ST.dataset.mode === id0 ? '' : id0; ST.dataset.mode = id;
     sound('scene', id);
     $$('.mode[data-mode]', ST).forEach(function (x) { var on = x.dataset.mode === id; x.setAttribute('aria-pressed', on); x.style.backgroundImage = 'url(assets/skin/mode-' + x.dataset.mode + (on ? '-selected' : '-idle') + '.jpg)'; });
     var m = HB.modes.filter(function (x) { return x.id === id; })[0];
-    $('.mode-info', ST).innerHTML = m ? '<p class="lbl"><i>始作</i>' + esc(m.name) + '</p><p class="note">' + esc(m.note) + '</p><div class="pro2 ' + m.id + '"><div class="slot">슬롯 · ' + esc(m.name) + ' 프롤로그</div></div><div class="links"><button type="button" class="sk btn2 gray" aria-disabled="true"><span class="two"><b>작품으로 이동</b><small>미연결</small></span></button></div>' : '';
+    $('.mode-info', ST).innerHTML = m ? '<p class="lbl"><i>始作</i>' + esc(m.name) + '</p><p class="note">' + esc(m.note) + '</p>' + prologue(m) + '<div class="links"><button type="button" class="sk btn2 gray" aria-disabled="true"><span class="two"><b>작품으로 이동</b><small>미연결</small></span></button></div>' : '';
     if (!keepHash) setHash(id || '');
   }
 

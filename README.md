@@ -40,5 +40,6 @@
 - `assets/data.js` 17인 / `assets/world.js` 세력·전선·체계·시작 모드·세계 문장·인물 관계 / `assets/records.js` 인물 기록 본문(표식 상세·성격·말투·사정·목표·외형·무공·별호와 이명의 까닭 — 설정집 §5 그대로, 인물 페이지에서만 읽는다) (설정집 문장 그대로, 원고는 슬롯)
 - `assets/style.css`, `assets/main.js` (페이지에 있는 구간만 초기화한다)
 - `img/l` 큰 이미지(가로 1600) · `img/t` 썸네일(400) · `img/card` 등장 카드 — `tools/build-images.ps1`로 원본에서 생성. 20·21(필살기)은 `tools/build-ult.ps1`이 `../필살기 카드/`의 글자 넣은 판으로 덮어쓴다(그 뒤에 돌린다). 1·20·21번은 1856×1280, 나머지 2304×960
+- 시작 대화(프롤로그): 원고 `../캐릭터 챗/시작 설정/프롤로그(*).md` → `node tools/build-prologues.cjs`가 `assets/prologues.js`로 그대로 옮긴다(모르는 줄이 있으면 멈춤). 배경 그림은 `tools/build-bg.ps1`이 `../배경/*.png` → `img/bg/*.jpg`(가로 1600). 히든 시작 프롬은 공개하지 않는다
 - 무거운 입장·첫 화면 그림 15장(`assets/skin2/cover-*`, `assets/skin3/` 검격·균열)은 같은 크기 WebP 파생본을 쓴다(PNG 원본은 그대로). 목록은 main.js `WEBP`. 다시 만들 때는 Edge 캔버스 인코더(품질 0.86)로
 - `tools/serve.js` 로컬 확인용 정적 서버 (`node tools/serve.js`)
